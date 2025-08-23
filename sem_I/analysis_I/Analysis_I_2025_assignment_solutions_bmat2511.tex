@@ -1,77 +1,46 @@
 \documentclass[12pt,a4paper]{article}
-
-% Encoding & fonts
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
-
-% Math & theorem environments
 \usepackage{amsmath, amssymb, amsthm, graphicx}
-
-% Lists & references
 \usepackage{enumitem}
-
-% Page geometry
 \usepackage{geometry}
 \geometry{margin=1in}
-
-% Colors and hyperlinks
 \usepackage[dvipsnames]{xcolor}
 \definecolor{EvanPink}{rgb}{0.85, 0.13, 0.55}
-
 \usepackage[colorlinks=true,
             linkcolor=OliveGreen,
             urlcolor=EvanPink,
             citecolor=OliveGreen]{hyperref}
-
 \usepackage{cleveref}
 \usepackage{etoolbox}
-
-% ========================
-% Theorem-style environments
 \newenvironment{solution}{%
   \par\noindent\textit{Solution.}\ }{\qed}
 \newtheoremstyle{problemstyle}
-  {1em}   % space above
-  {1em}   % space below
-  {}      % body font
-  {}      % indent amount
-  {\bfseries} % head font
-  {.}     % punctuation after head
-  {0.5em} % space after head
-  {}      % head spec
-
+  {1em}   
+  {1em}   
+  {}      
+  {}      
+  {\bfseries} 
+  {.}     
+  {0.5em} 
+  {}      
 \theoremstyle{problemstyle}
 \newtheorem{problem}{Problem}[section]
-
-% Automatically add problems to TOC
 \apptocmd{\problem}{%
   \addcontentsline{toc}{subsection}{Problem~\thesection.\arabic{problem}}%
 }{}{}
-
-
-% Tell cleveref how to format references to problems
 \crefname{problem}{Problem}{Problems}
 \Crefname{problem}{Problem}{Problems}
-
-% TOC depth
 \setcounter{tocdepth}{2}
-
-% ========================
-% Title info
-
 \title{\textbf{Analysis I} \\ \large Home Assignments}
 \author{Arkaraj Mukherjee \\ B.Math., First Year, ISI Bangalore}
 \date{\today}
-
 \begin{document}
-  
 \maketitle
 \newpage
 \tableofcontents
 \newpage
-
-% ========================
 \section{Home Assignment I (Due: Aug 19, 2025)}
 \textit{Here, the set of all natural numbers $\mathbb N$ contains zero as an element. It was confirmed with the professor that "countable" means "either finite or countably infinite."}$\\ \\$
 \textbf{Lemma :} A set $A$ is countable if there exists a surjection $f:\mathbb N\to A$.
@@ -184,29 +153,13 @@ Suppose a rabbit moves along a straight line on the lattice points of the plane,
 
 \begin{solution}
 Each rabbit path is determined by an initial position $X \in \mathbb{Z}^2$ and a jump vector $Y \in \mathbb{Z}^2$, and can be written as
-\[
-w(X,Y) = \{X + Yt : t \in \mathbb{N} \cup \{0\}\}.
-\]
+$$w(X,Y) = \{X + Yt : t \in \mathbb{N} \cup \{0\}\}$$
 This gives an injective map from the set of paths to $(\mathbb{Z}^2)^2$, so the set of possible paths is countable. Hence we can enumerate them as $\{w(n) : n \in \mathbb{N}\}$.
-
 We place traps as follows. At stage $1$, place a trap at the point $X+Y \cdot 2^1$ on path $w(1)$. At stage $2$, place traps at $X+Y \cdot 2^2$ for both $w(1)$ and $w(2)$. At stage $3$, place traps at $X+Y \cdot 2^3$ for $w(1), w(2), w(3)$, and so on. In general, at stage $n$ we place traps at $X+Y \cdot 2^n$ for each of $w(1),\dots,w(n)$.
-
 Let $P>0$ denote the number of rabbit jumps that occur in the time it takes us to place one trap. In the problem $P=60$, but the argument works for any positive $P$. By stage $n$, we have placed traps at $2^n$ jumps along each of $w(1),\dots,w(n)$. The total time elapsed is
-\[
-T(n) = P \cdot \frac{n(n+1)}{2}.
-\]
-
+$$T(n) = P \cdot \frac{n(n+1)}{2}$$
 Suppose the rabbit is traveling along path $w(h)$ for some $h \in \mathbb{N}$. By time $T(m)$, it has made at most $Pm(m+1)/2$ jumps. If $m \geq h$, then a trap has been placed at $2^m$ jumps along $w(h)$. If in addition
-\[
-2^m > \frac{Pm(m+1)}{2},
-\]
-then the trap lies ahead of the rabbit on its path and the rabbit will eventually reach it. Since $2^m$ grows exponentially while $\tfrac{Pm(m+1)}{2}$ grows quadratically, this inequality holds for all sufficiently large $m$. Therefore for large enough $m \geq h$, the rabbit is guaranteed to be caught.
-
-Thus the rabbit will always be captured in finite time.
+$$2^m > \frac{Pm(m+1)}{2}$$
+then the trap lies ahead of the rabbit on its path and the rabbit will eventually reach it. Since $2^m$ grows exponentially while $\tfrac{Pm(m+1)}{2}$ grows quadratically, this inequality holds for all sufficiently large $m$. Therefore for large enough $m \geq h$, the rabbit is guaranteed to be caught. Thus the rabbit will always be captured in finite time.
 \end{solution}
-
-% ========================
-%\section{Home Assignment II}
-% Add problems here
-
 \end{document}
