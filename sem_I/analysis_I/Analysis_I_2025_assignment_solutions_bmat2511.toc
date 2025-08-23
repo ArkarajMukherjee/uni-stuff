@@ -1,0 +1,13 @@
+\contentsline {section}{\numberline {1}Home Assignment I (Due: Aug 19, 2025)}{3}{section.1}%
+\contentsline {subsection}{Problem~1.1}{3}{problem.1.1}%
+\contentsline {subsection}{Problem~1.2}{3}{problem.1.2}%
+\contentsline {subsection}{Problem~1.3}{4}{problem.1.3}%
+\contentsline {subsection}{Problem~1.4}{4}{problem.1.4}%
+\contentsline {subsection}{Problem~1.5}{4}{problem.1.5}%
+\contentsline {subsection}{Problem~1.6}{4}{problem.1.6}%
+\contentsline {subsection}{Problem~1.7}{5}{problem.1.7}%
+\contentsline {subsection}{Problem~1.8}{5}{problem.1.8}%
+\contentsline {subsection}{Problem~1.9}{6}{problem.1.9}%
+\contentsline {subsection}{Problem~1.10}{7}{problem.1.10}%
+\contentsline {subsection}{Problem~1.11}{7}{problem.1.11}%
+\contentsline {subsection}{Problem~1.12}{7}{problem.1.12}%

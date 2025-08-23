@@ -1,0 +1,212 @@
+\documentclass[12pt,a4paper]{article}
+
+% Encoding & fonts
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+% Math & theorem environments
+\usepackage{amsmath, amssymb, amsthm, graphicx}
+
+% Lists & references
+\usepackage{enumitem}
+
+% Page geometry
+\usepackage{geometry}
+\geometry{margin=1in}
+
+% Colors and hyperlinks
+\usepackage[dvipsnames]{xcolor}
+\definecolor{EvanPink}{rgb}{0.85, 0.13, 0.55}
+
+\usepackage[colorlinks=true,
+            linkcolor=OliveGreen,
+            urlcolor=EvanPink,
+            citecolor=OliveGreen]{hyperref}
+
+\usepackage{cleveref}
+\usepackage{etoolbox}
+
+% ========================
+% Theorem-style environments
+\newenvironment{solution}{%
+  \par\noindent\textit{Solution.}\ }{\qed}
+\newtheoremstyle{problemstyle}
+  {1em}   % space above
+  {1em}   % space below
+  {}      % body font
+  {}      % indent amount
+  {\bfseries} % head font
+  {.}     % punctuation after head
+  {0.5em} % space after head
+  {}      % head spec
+
+\theoremstyle{problemstyle}
+\newtheorem{problem}{Problem}[section]
+
+% Automatically add problems to TOC
+\apptocmd{\problem}{%
+  \addcontentsline{toc}{subsection}{Problem~\thesection.\arabic{problem}}%
+}{}{}
+
+
+% Tell cleveref how to format references to problems
+\crefname{problem}{Problem}{Problems}
+\Crefname{problem}{Problem}{Problems}
+
+% TOC depth
+\setcounter{tocdepth}{2}
+
+% ========================
+% Title info
+
+\title{\textbf{Analysis I} \\ \large Home Assignments}
+\author{Arkaraj Mukherjee \\ B.Math., First Year, ISI Bangalore}
+\date{\today}
+
+\begin{document}
+  
+\maketitle
+\newpage
+\tableofcontents
+\newpage
+
+% ========================
+\section{Home Assignment I (Due: Aug 19, 2025)}
+\textit{Here, the set of all natural numbers $\mathbb N$ contains zero as an element. It was confirmed with the professor that "countable" means "either finite or countably infinite."}$\\ \\$
+\textbf{Lemma :} A set $A$ is countable if there exists a surjection $f:\mathbb N\to A$.
+\begin{proof}
+If $A$ is finite then we are done as its countable by definition. Now assume that $A$ is infinite. For each $a\in A$ define $m(a)=\min\{n\in\mathbb{N}:f(n)=a\}$, which exists since $f$ is surjective and the minimum of a nonempty subset of $\mathbb{N}$ exists. Then the function $g:\{m(a):a\in A\}\to A$ with $g(m(a))=a$, is well defined and injective because each $m(a)$ is unique for each $a$ as previously shown and surjective because every $a\in A$ is clearly reached. The domain of $g$ is an infinite subset of $\mathbb{N}$, hence equipotent with $\mathbb{N}$ as shown in class and there exists a bijection between this and $\mathbb N$. Now composing these two gives us a bijection between $\mathbb N$ and $A$ thus proving that $\mathbb N$ and $A$ are equipotent implying that $A$ is countablely infinite hence countable.
+\end{proof}
+\begin{problem}\label{prob:1-1}
+Let $C, D$ be sets with $4$ and $5$ elements respectively. 
+Find the number of functions from $C$ to $D$ which are:
+(i) injective; (ii) surjective. \\
+Similarly, find the number of functions from $D$ to $C$ which are:
+(iii) injective; (iv) surjective.
+\end{problem}
+\begin{solution}
+(i) Enumerate the sets as $C=\{c_1,\ldots,c_4\}$ and $D=\{d_1,\ldots,d_5\}$. Now to count the number of injections we can first choose which $4$ elements from $D$ will be in the range of $f$, there are $^5C_4$ ways to do this and as the order matters the number of such injections will be $$4!\times\binom{5}{4}=5!$$
+(ii) There are no surjections from $C$ to $D$ as $C$ and $D$ are finite sets where $|C|<|D|$ i.e. $D$ has strictly more values and we can not have all of this in the range of $f$ as the range has atmost as many elements as the domain i.e. $4<5$. (iii) A function from $D$ to $C$ can not be an injection as we have $5$ elements in $D$ but atmost $4$ values their image can be thus we ought to have some element in $C$ thats the image of two distinct elements in $C$. (iv) for it to be surjective we see that all the elements in $C$ must be in its range thus exactly one element in $C$ must be the image of some two distict elements in $D$ and there are $^5C_2$ ways choose these two elements and $4$ ways to choose the element in $C$ which will be their image whereas the $3$ elements that are left in $D$ will be mapped to $3$ distinct elements in $C$ and there are $3!$ ways to do this. Now the multiplicative principle in combinatorics there are $$4\times\binom{5}{2}\times 3!$$surjections.
+\end{solution}
+\begin{problem}\label{prob:1-2}
+Suppose $X$ is a non-empty set and $f : X \to X$ is a function.
+Prove or disprove the following:  
+(i) $f$ injective $\Leftrightarrow$ $f \circ f$ injective;  
+(ii) $f$ surjective $\Leftrightarrow$ $f \circ f$ surjective;  
+(iii) $f$ bijective $\Leftrightarrow$ $f \circ f$ bijective.
+\end{problem}
+\begin{solution}
+  (i) This is true. If $f:X\to X$ is injective then so is $f\circ f$ as for $a,b\in X, f(f(a))=f(f(b))\implies f(a)=f(b)\implies a=b$ using $f$'s injectivity twice, this proves the only if part. Now for the if part, when $f\circ f:X\to X$ is injective,for some $a,b\in X,f(a)=f(b)\implies f(f(a))=f(f(b))\implies a=b$ using the fact that $f$ is a function and then the fact that its an injection, thus $f$ is also an injection. (ii) This is true. Using the notation $$f(S):=\{f(x):x\in S\}\text{ for subsets }S\text{ of }X$$we see that $f$ being a surjection is equivalent to the equality $f(X)=X$
+ being true. Now for the if part, if $f\circ f$ is a surjection, we see that as $f:X\to X$ we have that $f(X)\subseteq X$ and thus $X=f(f(X))\subseteq f(X)\subseteq X$ giving us $f(X)=X$. For the only if part we can clearly see that $f(X)=X\implies f(f(X))=f(X)=X.$ (iii) This is true as a function is bijecitve iff its injective and its also surjective and we have already seen that $f$ is injective iff $f\circ f$ is and the same goes for surjectivity. \end{solution}
+\begin{problem}\label{prob:1-3}
+Find three functions $u, v, w$ from $\mathbb{N}$ to $\mathbb{N}$, which are injective and have disjoint ranges.
+\end{problem}
+\begin{solution}
+  Let $u,v,w:\mathbb N\to\mathbb N$ be the functions: $u:k\mapsto 3k,v:k\mapsto 3k+1,w:k\mapsto 3k+2$ these are clearly injective and have disjoint ranges.
+\end{solution}
+\begin{problem}\label{prob:1-4}
+Let $R, S$ be two non-empty sets. Suppose there exists an injective function $g : R \to S$. Show that there exists a surjective function $h : S \to R$.
+\end{problem}
+\begin{solution}
+  As $R$ is nonempty, fix some $x_o\in R$. Now if $g$ is injective then we see that for all $y\in g(R)\subseteq S$, there exists an unique $x\in R$ such that $g(x)=y$ and for these $y$ we set $h(y)=x$ and for $y\in S\setminus g(R)$(if nonempty, otherwise $g$ was a bijection and we can set $h=g^{-1}$ in that case,) we set $h(y)=x_o$. This is well defined as $g$ is an injection and its a surjection as every element in the domain of $g$ is mapped to some element in the range.  
+\end{solution}
+\begin{problem}\label{prob:1-5}
+Suppose $A$ and $B$ are countable sets. Show that $A \cup B$ is countable.
+\end{problem}
+\begin{solution}
+  As $A,B$ are countable there exist surjections $f,g$ from $\mathbb N$ to $A$ and $B$ respectively. Define $h:\mathbb N\to A\cup B$ as $$h(n):=\begin{cases}
+    f(k)\text{ if }n=2k+1\text{ for some }k\in\mathbb N\\ g(k)\text{ if }n=2k\text{ for some }k\in\mathbb N
+  \end{cases}$$This is clearly a surjection as $A,B\subseteq f(\mathbb N)\cup g(\mathbb N)=h(\mathbb N)$ and thus $A\cup B\subseteq h(\mathbb N)$ and by definititon $A\cup B$ is countable.
+\end{solution}
+\begin{problem}\label{prob:1-6}
+Suppose $A_1, A_2, \dots$ is a sequence of countable sets. Show that
+\[
+\bigcup_{n=1}^{\infty} A_n = \{ a : a \in A_n \text{ for some } n \in \mathbb{N} \}
+\]
+is countable. (In other words, a countable union of countable sets is countable.)
+\end{problem}
+\begin{solution}
+  We re index the sets as $A_0,A_1,\ldots$. Now as each $A_n$ is countable, there exists a surjection $f_n:\mathbb N \to A_n$ for all $n \in \mathbb N$. Define $f:\mathbb N \to \bigcup_{n \in \mathbb N} A_n$ by
+$$
+f(X):=
+\begin{cases}
+f_{\nu_2(X)}\!\left(\dfrac{\tfrac{X}{2^{\nu_2(X)}}-1}{2}\right) & \text{if } X \neq 0, \\[1ex]
+f_0(0) & \text{if } X=0,
+\end{cases}
+$$
+where $\nu_2(X)$ denotes the largest integer $m$ such that $2^m \mid X$. Every $X>0$ can be written uniquely in the form $X=2^m(2k+1)$ with $m,k \in \mathbb N$, and then $f(X)=f_m(k)$. To check surjectivity, let $a \in A_m$ for some $m$. Since $f_m$ is surjective, there exists $k \in \mathbb N$ with $f_m(k)=a$. Setting $X=2^m(2k+1)$ gives $f(X)=a$. Thus $f$ is surjective, and it follows that $\bigcup_{n \in \mathbb N} A_n$ is countable.
+
+\end{solution}
+\begin{problem}\label{prob:1-7}
+Let $X$ be a non-empty set. Show that the set of all functions from $X$ to $\{0, 1\}$ is in bijective correspondence with the power set of $X$. (Here $X$ need not be a finite set.)
+\end{problem}
+\begin{solution}
+  We define a function $M:\{0,1\}^X\to\mathcal P(X)$ as, $$M(f):=f^{-1}(\{1\})=\{x\in X:f(x)=1\}$$This is injective as $M(f)=M(g)$ implies that for all $x\in X, f(x)=1$ iff $g(x)=1$ and as the only other values these could have is $0$ we see that for all $x\in X$ we also have that $f(x)=0\iff g(x)=0$ thus $f=g$. This is surjective as for any subset $S\subseteq X$ we can find $\{0,1\}^X\ni f:X\to\{0,1\}$ defined as $$f(x):=\begin{cases}
+    1\text{ if }x\in S\\ 0\text{ otherwise }
+  \end{cases}$$and we see that $M(f)=S.$ As it is both a surjection and an injection we see that its a bijection.
+\end{solution}
+\begin{problem}\label{prob:1-8}
+Let $Y$ be a non-empty set. What is the maximum possible number of distinct sets we can form using $n$-subsets $A_1, A_2, \dots, A_n$ of $Y$, using set theoretic operations of union, intersection, complement in $Y$?  
+
+For instance, when $n = 1$, the answer is $4$: $A_1$, $A_1^c$, $\varnothing = A_1 \cap A_1^c$, $Y = A_1 \cup A_1^c$.  
+
+For $n = 2$, the answer is $16$, where the list goes on something like $A_1$, $A_2$, $A_1 \cap A_2$, $A_1 \cup A_2$, $A_1 \cap A_2^c$, $A_1^c \cap A_2$, $A_1^c \cup A_2^c$, etc.  
+
+Guess the answer for general $n$ and prove it. (Hint: Think of the Venn diagram.)
+\end{problem}
+\begin{solution}disjoint
+  For a set $S$ and a collection of subsets, $X$ we define $\mathfrak{G}(X)$ to be the collection of all sets that are formed with the sets in $X$ via the set theoretic operations of union, intersection and complement in $S$. We claim that the maximum possible number of such sets is $2^{2^n}$ i.e. $|\mathfrak{G}(\{A_1,\ldots,A_n\})|\leq 2^{2^n}$ and a case where this is achieved is for subsets $A_i=\{(x_1,\ldots,x_n):(\forall j\neq i)x_j\in\{0,1\}\text{ and }x_i=1\}$ for all $i=1,\ldots,n$ and $Y=\{(x_1,\ldots,x_n):(\forall i)x_i\in\{0,1\}\}$. For a function $f:\{1,\ldots,n\}\to\{0,1\}$ we define $$\mathfrak{G}(\{A_1,\ldots,A_n\})\ni A(f):=\bigcap_{i=1}^nA_i^{f(i)}\text{ where }A^1:=A\text{ and }A^0:=A^c$$In this case we see that $A(f)=\{(f(1),\ldots,f(n))\}$ are all disjoint sets for different such functions and as there are $2^n$ of these as there are $2^n$ such functions and we can make $2^{2^n}$ distinct sets using these by choosing which ones to include in the union; formally this collection of sets can be written as, $$\left\{\bigcup_{f\in S}A(f)\bigg\vert S\subseteq\{f:\{0,\ldots,n\}\to\{0,1\}\}\right\}$$In this case we also see that this collection is precisely the powerset of $Y$ itself and thus $|\mathfrak{G}(\{A_1,\ldots,A_n\})|=2^{\text{number of subsets of }Y}=2^{2^n}.$ Now we will prove the inequality. Say $Y$ is a set and $A_1,\ldots,A_n$ are subsets, then we claim that, with $A(f)$ defined in the same way, $\mathfrak{G}(\{A_1,\ldots,A_n\})=\mathfrak{G}(\{A(f)\vert f:\{1,\ldots,n\}\to\{0,1\}\})$. This is true because, for all $f,A(f)\in\mathfrak G(\{A_1,\ldots,A_n\})$ and this proves one direction of the set inequality, $\mathfrak{G}(\{A(f)\vert f:\{1,\ldots,n\}\to\{0,1\}\})\subseteq\mathfrak{G}(\{A_1,\ldots,A_n\})$ as anything on the left can have its individual sets $A(f)$ be written in terms of elements on the right with set theoretic operations and clearly $\mathfrak{G}(\text{anything})$ is closed under all the set theoretic operations and thus it contains these sets. We also see that, $$(\forall i)A_i=\bigcup_{\substack{f:\{1,\ldots,n\}\to\{0,1\}\\ f(i)=1}}A(f)\in\mathfrak{G}(\{A(f)\vert f:\{1,\ldots,n\}\to\{0,1\}\})$$and similarly we get the other direction of the set equality. Thus it suffices to show that $|\mathfrak{G}(\{A(f)\vert f:\{1,\ldots,n\}\to\{0,1\}\})|\leq 2^{2^n}$. We first see that the collection in question $\{A(f)\vert f:\{1,\ldots,n\}\to\{0,1\}\}$ is closed under complements in $Y$ and the intersection of any sets in it is empty as all the sets in it are disjoint. Also the complement of the union of some sets in this is again an union of some sets in this as these sets partition $Y$(they are disjoint as for any $f\neq g$ there must exist some $i$ such that $f(i)\neq g(i)$ and we would have that $A(f)\cap A(g)\in A_i^{f(i)}\cap A_i^{g(i)}=A^1\cap A^0=\emptyset$ and also we see that the union of all of these $A(f)$ is $Y$ as any $x\in Y$ is, for all $i,$ either in $A_i$ or $A_i^c$ and we can take the intersection of the ones which contain $x$ to get a elemenent in our collection containing $x$.), thus any expression with unions and intersections and complements in $Y$ can be reduced to a union of some sets in this collection and we have the choices of whether to include some set $A(f)$ in the union and as there are atmost(some of the intersections may be empty) $2^n$ elements in $\{A(f)\vert f:\{1,\ldots,n\}\to\{0,1\}\}$ there can be atmost $2^{2^n}$ such unions giving us the final inequality, $$|\mathfrak{G}(\{A_1,\ldots,A_n\})|=|\mathfrak{G}(\{A(f)\vert f:\{1,\ldots,n\}\to\{0,1\}\})|\leq 2^{2^n}$$
+\end{solution}
+\begin{problem}\label{prob:1-9}
+Let $K = \{0, 1\}$ and $L = \{0, 1, 2, 3\}$. Consider Cartesian products of countably many copies of $K$ and $L$:
+\[
+M = K \times K \times \cdots, \quad N = L \times L \times \cdots
+\]
+Show that $M$ and $N$ are equipotent.
+\end{problem}
+\begin{solution}
+  We define a function $f:N\to M$ which maps $(a_0,a_1,\ldots)$ to $(b_0,b_1,\ldots)$ where for all $n\in\mathbb N,$ the representation of the $a_n$ in binary using two digits (a redundant leading zero is allowed )is $b_{2n}b_{2n+1}$ viewing this as a digit and not the product. For example, $$(1,0,2,3,\ldots)\longmapsto(0,1,0,0,1,0,1,1,\ldots)$$where $1$ in binary is written as $01$, $2$ as $10$, $3$ as $11$ and $0$ as $00$. This function is a surjection as given any $b=(b_0,b_1,\ldots)\in M$ we see that $(2b_0+b_1,2b_2+b_3,\ldots)\in N$ is mapped to $b$ as $2^1\cdot b_{2n}+2^0\cdot b_{2n+1}$ is the decimal representation of $b_{2n}b_{2n+1}$(as a number binary following pteviously stated convention), in the decimal system. The function is also injective because each $b\in M$ uniquely determines the $a\in N$ such that $f(a)=b$ as seen above. As it is an injection and also a surjection, it is a bijection and the two sets are equipotent.
+\end{solution}
+\begin{problem}\label{prob:1-10}
+A real number $x$ is said to be a rational number if $x = \frac{p}{q}$, for some integers $p, q$ with $q \neq 0$. Let $\mathbb{Q}$ be the set of rational numbers. Show that $\mathbb{Q}$ is countable.
+\end{problem}
+\begin{solution}
+  The sets $D_q:=\{p/q:p\in\mathbb Z\}$ for $q\in\mathbb N\setminus\{0\}$ are all clearly countable and so is $N\setminus\{0\}$. And as, $$\mathbb Q=\bigcup_{n=1}^\infty D_n$$its countable as its a countable union of countable sets by \hyperref[prob:1-6]{Problem 1.6.}
+\end{solution}
+\begin{problem}\label{prob:1-11}
+Read about “Proof by infinite descent” and write down one such proof.
+\end{problem}
+We will prove a result due to fermat: The only integer solutions $(x,y,z)$ to the diophantine equation $x^3+2y^3+4z^3=0$ is $(0,0,0).\\$For the sake of contradiction assume that we have some solution $(x,y,z)$ in the integers such that $(x,y,z)\neq (0,0,0)$. Now we see that, $x^3+2y^3+4z^3=0\implies x^2=-2(y^3+2z^3)\implies 2|x^3\implies 2|x$ and we can write $x=2x_*$ for an integer $x_*$. Now substituing this in the equation and dividing by two we get $y^3+2z^3+4x_*^3=0$ and this has the exact same structure as the original equation! So if we have a solution $(x,y,z)$ then we can find another integer solution $(y,z,x_*)=(y,z,x/2)$. We can keep doing this as follows, $$(x,y,z)\to(y,z,x/2)\to(z,x/2,y/2)\to(x/2,y/2,z/2)\to\ldots\to(x/2^n,y/2^n/z/2^n)\to\ldots$$and all of these must be integer solutions by the construction. But this implies that for all $n\in\mathbb N,2^n|x,y,z$ which is a contradiction unless all of $x,y,z$ are zero as a nonzero integer can only have a finite exponent of $2$ in it Thus the only solution is $(0,0,0)$.
+\begin{problem}\label{prob:1-12}
+Suppose a rabbit moves along a straight line on the lattice points of the plane, making identical jumps every minute (the initial position and the jump vector are unknown). If we can place a trap once every hour at any lattice point of the plane, and the trap captures the rabbit if it is at that point at that moment, can we guarantee capturing the rabbit in a finite amount of time?
+\end{problem}
+
+\begin{solution}
+Each rabbit path is determined by an initial position $X \in \mathbb{Z}^2$ and a jump vector $Y \in \mathbb{Z}^2$, and can be written as
+\[
+w(X,Y) = \{X + Yt : t \in \mathbb{N} \cup \{0\}\}.
+\]
+This gives an injective map from the set of paths to $(\mathbb{Z}^2)^2$, so the set of possible paths is countable. Hence we can enumerate them as $\{w(n) : n \in \mathbb{N}\}$.
+
+We place traps as follows. At stage $1$, place a trap at the point $X+Y \cdot 2^1$ on path $w(1)$. At stage $2$, place traps at $X+Y \cdot 2^2$ for both $w(1)$ and $w(2)$. At stage $3$, place traps at $X+Y \cdot 2^3$ for $w(1), w(2), w(3)$, and so on. In general, at stage $n$ we place traps at $X+Y \cdot 2^n$ for each of $w(1),\dots,w(n)$.
+
+Let $P>0$ denote the number of rabbit jumps that occur in the time it takes us to place one trap. In the problem $P=60$, but the argument works for any positive $P$. By stage $n$, we have placed traps at $2^n$ jumps along each of $w(1),\dots,w(n)$. The total time elapsed is
+\[
+T(n) = P \cdot \frac{n(n+1)}{2}.
+\]
+
+Suppose the rabbit is traveling along path $w(h)$ for some $h \in \mathbb{N}$. By time $T(m)$, it has made at most $Pm(m+1)/2$ jumps. If $m \geq h$, then a trap has been placed at $2^m$ jumps along $w(h)$. If in addition
+\[
+2^m > \frac{Pm(m+1)}{2},
+\]
+then the trap lies ahead of the rabbit on its path and the rabbit will eventually reach it. Since $2^m$ grows exponentially while $\tfrac{Pm(m+1)}{2}$ grows quadratically, this inequality holds for all sufficiently large $m$. Therefore for large enough $m \geq h$, the rabbit is guaranteed to be caught.
+
+Thus the rabbit will always be captured in finite time.
+\end{solution}
+
+% ========================
+%\section{Home Assignment II}
+% Add problems here
+
+\end{document}
