@@ -1,0 +1,12 @@
+\documentclass[english,10pt,a4paper,]{article}
+\usepackage{amsmath,amsfonts,amssymb,amsthm,latexsym}
+\usepackage[T1]{fontenc}
+\usepackage{microtype}
+\title{\vspace{-2cm}\textbf{Probability I - Random Variables} \\
+\author{Arkaraj Mukherjee}}
+\newcommand{\supp}{\operatorname{supp}}
+\begin{document}
+\maketitle
+For a sample space $\Omega$, event space $\mathcal{F}$ and probability $P$, a \textit{random variable} is a function $X:\Omega\to\mathbb R$. the set of values the random variable can take, i.e. it's range is called the \textit{support} of the RV (short form of Random Variable) often denoted by $$\supp{X:}=\{X(\omega)\vert\omega\in\Omega\}$$RVs $X$ for which $\supp{X}$ is atmost countable i.e. countably infinite or finite are called \textit{discrete RVs}. The probabilities of the RV taking on some values in its support are governed by the \textit{probability mass function} (\textit{pmf.} in short) often denoted by $p$, i.e. $$p:\supp{X}\longrightarrow[0,1]$$ $$\hspace{72pt}x\mapsto P(X=x):=P(X^{-1}\{x\})$$In practice we extend this definition of $p$ on $\supp{X}$ all the way to $\mathbb{R}$ by fixing $p(x)=0$ for all $x\in\mathbb R\setminus\supp{X}$. For discrete RVs, if we ennumerate $\supp{X}=\{x_i\vert i=1,2,\ldots\}$ then from the axioms of probability we get that, $$\sum_{i=1}^{\infty}p(x_i)=\underbrace{\sum_{i=1}^{\infty}P(X^{-1}(\{x_i\}))=P\left(\bigcup_{i=1}^{\infty}X^{-1}(\{x_i\})\right)=P(\Omega)=1}_{\text{Why are these three equalities true?}}$$
+The $\textit{cumulative distribution function}$ (cdf. for short) of a random variable is a function on the real line defined as, $$F:\mathbb R\to[0,1]$$ $$\hspace{134pt}x\mapsto P(X\leq x):=P(X^{-1}((-\infty,x]))$$This is a non-decreasing step-function with jump discontinuitites and from the definition we can see that (try proving it) $$p(x)=F(x)-\lim_{\substack{h\to x\\ h<x}}F(h)$$The limit on the right is sometimes known as the \textit{left limit of $F$ at $x$}. From the axioms of probability again we can see that $$F(x)=P(X^{-1}((-\infty,x]))=P\left(\bigcup_{x_i<x}X^{-1}(\{x_i\})\right)=\sum_{x_i<x}P(X^{-1}(\{x_i\}))=\sum_{x_i<x}p(x_i)$$You should notice that we can also deduce the equation with the left limit from this as well. The \textit{expectation} of a RV is a weighted average of the values it takes, formally this is written as$$\mathbb{E}(X):=\sum_{i=1}^{\infty}x_ip(x_i)$$+
+\end{document}
