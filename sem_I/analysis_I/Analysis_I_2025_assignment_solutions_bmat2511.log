@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex 2025.7.12)  23 AUG 2025 22:15
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex 2025.8.29)  1 SEP 2025 11:48
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -492,21 +492,21 @@ LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
 Package rerunfilecheck Info: File `Analysis_I_2025_assignment_solutions_bmat2511.out' has not changed.
-(rerunfilecheck)             Checksum: 6FA97328C1DE259A9394D05637E9E35D;1618.
+(rerunfilecheck)             Checksum: B76EBDF34054D08808CE4B781673A159;1876.
  ) 
 Here is how much of TeX's memory you used:
- 13228 strings out of 475171
- 213556 string characters out of 5767095
+ 13230 strings out of 475171
+ 213576 string characters out of 5767095
  649962 words of memory out of 5000000
- 36020 multiletter control sequences out of 15000+600000
+ 36021 multiletter control sequences out of 15000+600000
  616180 words of font info for 82 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  75i,12n,79p,3763b,490s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/euler/eufm10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmri12.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Analysis_I_2025_assignment_solutions_bmat2511.pdf (8 pages, 198249 bytes).
+Output written on Analysis_I_2025_assignment_solutions_bmat2511.pdf (8 pages, 198606 bytes).
 PDF statistics:
- 192 PDF objects out of 1000 (max. 8388607)
- 152 compressed objects within 2 object streams
- 23 named destinations out of 1000 (max. 500000)
- 105 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 197 PDF objects out of 1000 (max. 8388607)
+ 157 compressed objects within 2 object streams
+ 24 named destinations out of 1000 (max. 500000)
+ 113 words of extra memory for PDF output out of 10000 (max. 10000000)
 
