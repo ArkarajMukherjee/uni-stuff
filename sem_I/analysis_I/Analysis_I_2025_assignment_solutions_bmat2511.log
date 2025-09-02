@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex 2025.8.29)  1 SEP 2025 11:48
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex 2025.8.29)  1 SEP 2025 18:58
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -333,7 +333,7 @@ LaTeX Info: Redefining \labelcpageref on input line 2370.
 Package cleveref Info: `amsthm' support loaded on input line 3026.
 )
 \c@problem=\count299
-LaTeX Font Info:    Trying to load font information for T1+lmr on input line 39.
+LaTeX Font Info:    Trying to load font information for T1+lmr on input line 43.
  (/usr/share/texmf-dist/tex/latex/lm/t1lmr.fd
 File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 ) (/usr/share/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
@@ -343,24 +343,24 @@ File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
 ) (./Analysis_I_2025_assignment_solutions_bmat2511.aux)
 \openout1 = `Analysis_I_2025_assignment_solutions_bmat2511.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
  (/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count301
@@ -414,38 +414,38 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Package hyperref Info: Link coloring ON on input line 39.
+Package hyperref Info: Link coloring ON on input line 43.
 (./Analysis_I_2025_assignment_solutions_bmat2511.out) (./Analysis_I_2025_assignment_solutions_bmat2511.out)
 \@outlinefile=\write3
 \openout3 = `Analysis_I_2025_assignment_solutions_bmat2511.out'.
 
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 41.
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 45.
  (/usr/share/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 41.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 45.
  (/usr/share/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 41.
+LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 45.
  (/usr/share/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 41.
+LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 45.
  (/usr/share/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <14.4> on input line 41.
+(Font)              <14.4> on input line 45.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 41.
+(Font)              <10> on input line 45.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 41.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 41.
+(Font)              <7> on input line 45.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 45.
  (/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 41.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 45.
  (/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
@@ -470,7 +470,7 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 [3{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}]
 
 [4]
-LaTeX Font Info:    Trying to load font information for U+euf on input line 128.
+LaTeX Font Info:    Trying to load font information for U+euf on input line 132.
  (/usr/share/texmf-dist/tex/latex/amsfonts/ueuf.fd
 File: ueuf.fd 2013/01/14 v3.01 Euler Fraktur
 )
@@ -478,35 +478,42 @@ File: ueuf.fd 2013/01/14 v3.01 Euler Fraktur
 [5]
 
 [6]
-Overfull \hbox (2.42754pt too wide) detected at line 149
+Overfull \hbox (2.42754pt too wide) detected at line 153
 \OT1/lmr/m/n/12 (\OML/lmm/m/it/12 x; y; z\OT1/lmr/m/n/12 ) \OMS/lmsy/m/n/12 ! \OT1/lmr/m/n/12 (\OML/lmm/m/it/12 y; z; x=\OT1/lmr/m/n/12 2) \OMS/lmsy/m/n/12 ! \OT1/lmr/m/n/12 (\OML/lmm/m/it/12 z; x=\OT1/lmr/m/n/12 2\OML/lmm/m/it/12 ; y=\OT1/lmr/m/n/12 2) \OMS/lmsy/m/n/12 ! \OT1/lmr/m/n/12 (\OML/lmm/m/it/12 x=\OT1/lmr/m/n/12 2\OML/lmm/m/it/12 ; y=\OT1/lmr/m/n/12 2\OML/lmm/m/it/12 ; z=\OT1/lmr/m/n/12 2) \OMS/lmsy/m/n/12 ! [] ! \OT1/lmr/m/n/12 (\OML/lmm/m/it/12 x=\OT1/lmr/m/n/12 2[]\OML/lmm/m/it/12 ; y=\OT1/lmr/m/n/12 2[]\OML/lmm/m/it/12 =z=\OT1/lmr/m/n/12 2[]) \OMS/lmsy/m/n/12 ! []
  []
 
 
 
 [7]
+Overfull \hbox (15.29051pt too wide) detected at line 191
+\OML/lmm/m/it/12 A \OT1/lmr/m/n/12 + \OML/lmm/m/it/12 B \OT1/lmr/m/n/12 = \OMS/lmsy/m/n/12 f\OML/lmm/m/it/12 a \OT1/lmr/m/n/12 + \OML/lmm/m/it/12 b \OT1/lmr/m/n/12 : \OML/lmm/m/it/12 a \OMS/lmsy/m/n/12 2 \OML/lmm/m/it/12 A; b \OMS/lmsy/m/n/12 2 \OML/lmm/m/it/12 B\OMS/lmsy/m/n/12 g\OML/lmm/m/it/12 ;  A \OMS/lmsy/m/n/12 ^^@ \OML/lmm/m/it/12 B \OT1/lmr/m/n/12 = \OMS/lmsy/m/n/12 f\OML/lmm/m/it/12 a \OMS/lmsy/m/n/12 ^^@ \OML/lmm/m/it/12 b \OT1/lmr/m/n/12 : \OML/lmm/m/it/12 a \OMS/lmsy/m/n/12 2 \OML/lmm/m/it/12 A; b \OMS/lmsy/m/n/12 2 \OML/lmm/m/it/12 B\OMS/lmsy/m/n/12 g\OML/lmm/m/it/12 ;  AB \OT1/lmr/m/n/12 = \OMS/lmsy/m/n/12 f\OML/lmm/m/it/12 ab \OT1/lmr/m/n/12 : \OML/lmm/m/it/12 a \OMS/lmsy/m/n/12 2 \OML/lmm/m/it/12 A; b \OMS/lmsy/m/n/12 2 \OML/lmm/m/it/12 B\OMS/lmsy/m/n/12 g\OML/lmm/m/it/12 :
+ []
 
-[8] (./Analysis_I_2025_assignment_solutions_bmat2511.aux)
+
+
+[8]
+
+[9] (./Analysis_I_2025_assignment_solutions_bmat2511.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
 Package rerunfilecheck Info: File `Analysis_I_2025_assignment_solutions_bmat2511.out' has not changed.
-(rerunfilecheck)             Checksum: B76EBDF34054D08808CE4B781673A159;1876.
+(rerunfilecheck)             Checksum: 1E05B650AE42E0C822B55C56B477D3BC;3012.
  ) 
 Here is how much of TeX's memory you used:
- 13230 strings out of 475171
- 213576 string characters out of 5767095
+ 13275 strings out of 475171
+ 214084 string characters out of 5767095
  649962 words of memory out of 5000000
- 36021 multiletter control sequences out of 15000+600000
+ 36055 multiletter control sequences out of 15000+600000
  616180 words of font info for 82 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 75i,12n,79p,3763b,490s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,12n,79p,3763b,543s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/euler/eufm10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmri12.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Analysis_I_2025_assignment_solutions_bmat2511.pdf (8 pages, 198606 bytes).
+Output written on Analysis_I_2025_assignment_solutions_bmat2511.pdf (9 pages, 207084 bytes).
 PDF statistics:
- 197 PDF objects out of 1000 (max. 8388607)
- 157 compressed objects within 2 object streams
- 24 named destinations out of 1000 (max. 500000)
- 113 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 254 PDF objects out of 1000 (max. 8388607)
+ 212 compressed objects within 3 object streams
+ 35 named destinations out of 1000 (max. 500000)
+ 193 words of extra memory for PDF output out of 10000 (max. 10000000)
 

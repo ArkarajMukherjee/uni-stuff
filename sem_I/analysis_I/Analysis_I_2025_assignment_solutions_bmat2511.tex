@@ -36,6 +36,10 @@
 \title{\textbf{Analysis I} \\ \large Home Assignments}
 \author{Arkaraj Mukherjee \\ B.Math., First Year, ISI Bangalore}
 \date{\today}
+\def\bN{\mathbb{N}}
+\def\bR{\mathbb{R}}
+\def\bZ{\mathbb{Z}}
+\def\bQ{\mathbb{Q}}
 \begin{document}
 \maketitle
 \newpage
@@ -163,5 +167,92 @@ $$2^m > \frac{Pm(m+1)}{2}$$
 then the trap lies ahead of the rabbit on its path and the rabbit will eventually reach it. Since $2^m$ grows exponentially while $\tfrac{Pm(m+1)}{2}$ grows quadratically, this inequality holds for all sufficiently large $m$. Therefore for large enough $m \geq h$, the rabbit is guaranteed to be caught. Thus the rabbit will always be captured in finite time.
 \end{solution}
 \section{Home Assignment II (Due: Sep 04, 2025)}
+\begin{problem}\label{prob:2-1}
+  Take $$C=\left\{2-\frac{1}{n}:n\in\bN\right\}\cup\left\{5-\frac{1}{n}:n\in\bN\right\}$$Show that every nonempty subset of $C$ has a minimal element. Determine as to whether the same property holds for $D$ where,$$D=\left\{3-\frac{1}{m}-\frac{1}{n^2}:m,n\in\bN\right\}$$
+\end{problem}
+\begin{solution}
+  Firstly we note that every element in $\{2-1/n:n\in\bN\}$ is less than every element in $\{5-1/n:n\in\bN\}$, so if the subset we choose has nonempty intersection with the first set then it suffices to prove existence of a minimal element for this. Assume that the subset we choose has nonempty intersection with the first set and consider their intersection which is a subset of the first element, it suffices to show that this has a minimal element. Consider the $n\in\bN$ for which $2-1/n$ is in our subset, this being a subset of the natural numbers has a minimal element and we claim that if tis is $n_o$ then $2-1/n_o$ is the minimal element we are after, which is clearly true as $2-1/n\leq 2-1/m$ iff $n\leq m$. Now if our chosen subset was disjoint with the first set, we can repeat the same arguement on the second set using $5$ in plcae of $2$. For the second part of the problem, consider the function $f(m,n)=5-1/n-1/m^2$ for brevity. We see that $f$ is monotonically decreasing in each input (i.e. for any $m$ if we set $g_m(n):=f(m,n)$ then this $g_m$ is monotonically decreasing and the same goes for the other input.) The subsets we choose are of form $\{f(m,n):(m,n)\in A\times B\}$ for some nonempty $A,B\subseteq\bN$. Now we claim that the minimal element is $f(\min A,\min B)$, the minimal elements of $A,B$ exist as they are subsets of $\bN$. This is true as for all $(m,n)\in A\times B$ we have that $f(\min A,\min B)\leq f(m,\min B)\leq f(m,n)$.
+\end{solution}
+\begin{problem}\label{prob:2-2}
+Find the infimum and supremum of the following subsets of the real line:
+\[
+A_1 = \Bigl\{3 + \frac{(-1)^n}{n} : n \in \mathbb{N}\Bigr\}, 
+\quad 
+A_2 = \{x^2 + 1 : 0 \le x \le 1\}.
+\]
+\end{problem}
 
+\begin{problem}\label{prob:2-3}
+Let \(A,B\) be non-empty, bounded subsets of \(\mathbb{R}\). Define
+\[
+A+B = \{a+b : a \in A, b \in B\}, \quad 
+A-B = \{a-b : a \in A, b \in B\}, \quad 
+AB = \{ab : a \in A, b \in B\}.
+\]
+Show that these sets are bounded. Determine which of the following statements are true and which are false in general (prove your claim):
+
+(a) \(\sup(A \cup B) = \max\{\sup A, \sup B\}\).  
+(b) \(\sup(A \cap B) = \min\{\sup A, \sup B\}\).  
+(c) \(\sup(A+B) = \sup A + \sup B\).  
+(d) \(\sup(A-B) = \sup A - \sup B\).  
+(e) \(\sup(AB) = (\sup A)(\sup B)\).  
+\end{problem}
+
+\begin{problem}\label{prob:2-4}
+Let \(\{t_n\}_{n \ge 1}\) be a sequence defined by
+\[
+t_1 = 2, 
+\quad 
+t_{n+1} = \tfrac{1}{2}\Bigl(t_n + \frac{2}{t_n}\Bigr) \quad (n \ge 1).
+\]
+Show that \(\{t_n\}\) is a convergent sequence, converging to \(\sqrt{2}\).
+\end{problem}
+
+\begin{problem}\label{prob:2-5}
+Show that 
+\[
+\lim_{n \to \infty}\Bigl(1 + \tfrac{1}{n}\Bigr)^n
+\]
+exists. (Hint: Prove that it is a monotone bounded sequence.)
+\end{problem}
+
+\begin{problem}\label{prob:2-6}
+Show that there exists a unique positive real number \(x\) such that \(x^3 = 2\).
+\end{problem}
+
+\begin{problem}\label{prob:2-7}
+Prove that the following sequences are convergent:
+\[
+a_n = \prod_{k=1}^n \Bigl(1 - \frac{1}{k+1}\Bigr), \quad n \in \mathbb{N};
+\]
+\[
+b_n = \frac{1}{n+1} + \frac{1}{n+2} + \cdots + \frac{1}{n+n}, \quad n \in \mathbb{N}.
+\]
+\end{problem}
+
+\begin{problem}\label{prob:2-8}
+Prove that the sequence
+\[
+c_n = 5 + (-1)^n\Bigl(2 + \frac{1}{n}\Bigr)
+\]
+is not convergent.
+\end{problem}
+
+\begin{problem}\label{prob:2-9}
+Suppose \(\{x_n\}\) is a real sequence. For \(n \ge 1\) define the averages
+\[
+y_n = \frac{1}{n}\sum_{k=1}^n x_k.
+\]
+Show that if \(\{x_n\}\) converges, then \(\{y_n\}\) also converges. However, the converse is not true.
+\end{problem}
+
+\begin{problem}\label{prob:2-10}
+Find all functions \(h : \mathbb{R} \to \mathbb{R}\) satisfying
+\[
+h(x+y) = h(x) + h(y), 
+\quad 
+h(xy) = h(x)h(y)
+\]
+for all \(x,y \in \mathbb{R}\). (Hint: You may need order properties and completeness of \(\mathbb{R}\).)
+\end{problem}
 \end{document}
