@@ -14,7 +14,7 @@
 \contentsline {section}{\numberline {2}Home Assignment II (Due: Sep 04, 2025)}{8}{section.2}%
 \contentsline {subsection}{Problem~2.1}{8}{problem.2.1}%
 \contentsline {subsection}{Problem~2.2}{8}{problem.2.2}%
-\contentsline {subsection}{Problem~2.3}{9}{problem.2.3}%
+\contentsline {subsection}{Problem~2.3}{8}{problem.2.3}%
 \contentsline {subsection}{Problem~2.4}{9}{problem.2.4}%
 \contentsline {subsection}{Problem~2.5}{9}{problem.2.5}%
 \contentsline {subsection}{Problem~2.6}{9}{problem.2.6}%
