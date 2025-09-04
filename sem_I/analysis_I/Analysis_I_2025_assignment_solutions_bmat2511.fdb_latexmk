@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1757007940.74595 "/home/coffey/isi_bmath/sem_I/analysis_I/Analysis_I_2025_assignment_solutions_bmat2511.tex" "Analysis_I_2025_assignment_solutions_bmat2511.pdf" "Analysis_I_2025_assignment_solutions_bmat2511" 1757007941.50831 0
-  "/home/coffey/isi_bmath/sem_I/analysis_I/Analysis_I_2025_assignment_solutions_bmat2511.tex" 1757007940.44014 39265 63dbad05f9313eeada70b2c5c9716780 ""
+["pdflatex"] 1757009310.096 "/home/coffey/isi_bmath/sem_I/analysis_I/Analysis_I_2025_assignment_solutions_bmat2511.tex" "Analysis_I_2025_assignment_solutions_bmat2511.pdf" "Analysis_I_2025_assignment_solutions_bmat2511" 1757009310.80422 0
+  "/home/coffey/isi_bmath/sem_I/analysis_I/Analysis_I_2025_assignment_solutions_bmat2511.tex" 1757009309.80352 38112 f9e8506fb5f4c0cc1267fcb0e38564ae ""
   "/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc" 1755987285 2375 baa924870cfb487815765f9094cf3728 ""
   "/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc" 1755987285 3486 c7eadf5dcc57b3b2d11736679f6636ba ""
   "/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc" 1755987285 2405 5dcf2c1b967ee25cc46c58cd52244aed ""
@@ -120,10 +120,10 @@
   "/usr/share/texmf-dist/web2c/texmf.cnf" 1755987285 42087 b0f9697c952c8f5a8eede4134282cb0d ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1756475368 5311557 9da84c45f5b388655502706482323571 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1756475284 2008250 7d04ad79827f822836920f44a1dbaa24 ""
-  "Analysis_I_2025_assignment_solutions_bmat2511.aux" 1757007941.4281 5090 d02e186a7c67832a83195abc88008872 "pdflatex"
-  "Analysis_I_2025_assignment_solutions_bmat2511.out" 1757007941.4291 3012 1e05b650ae42e0c822b55c56b477d3bc "pdflatex"
-  "Analysis_I_2025_assignment_solutions_bmat2511.tex" 1757007940.44014 39265 63dbad05f9313eeada70b2c5c9716780 ""
-  "Analysis_I_2025_assignment_solutions_bmat2511.toc" 1757007941.4291 1456 53f9a63e1832aa161f7593fb8b8a5c3a "pdflatex"
+  "Analysis_I_2025_assignment_solutions_bmat2511.aux" 1757009310.73255 5090 d98c86cccb9a9f14c5ba9741b051ed8d "pdflatex"
+  "Analysis_I_2025_assignment_solutions_bmat2511.out" 1757009310.73355 3012 1e05b650ae42e0c822b55c56b477d3bc "pdflatex"
+  "Analysis_I_2025_assignment_solutions_bmat2511.tex" 1757009309.80352 38112 f9e8506fb5f4c0cc1267fcb0e38564ae ""
+  "Analysis_I_2025_assignment_solutions_bmat2511.toc" 1757009310.73355 1456 67df239fe6feaa3ea4a04cb64693f8b9 "pdflatex"
   (generated)
   "Analysis_I_2025_assignment_solutions_bmat2511.aux"
   "Analysis_I_2025_assignment_solutions_bmat2511.log"
