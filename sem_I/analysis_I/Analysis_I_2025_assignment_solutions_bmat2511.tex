@@ -181,7 +181,9 @@ A_1 = \Bigl\{3 + \frac{(-1)^n}{n} : n \in \mathbb{N}\Bigr\},
 A_2 = \{x^2 + 1 : 0 \le x \le 1\}.
 \]
 \end{problem}
-
+\begin{solution}
+  First we prove a \textit{lemma} : if a nonempty set $S\subseteq\bR$ has a maximal (or, minimal) element then the supremum (or, infimum) of $S$ is exactly that element. For a proof assume that $\max S=m$ then we see that for all $x\in S$ we have $x\leq m$ thus, $m$ is an upper bound and $\sup S\leq m$. On the other hand we know that $\sup S$ is also an upper bound and as $m=\max S\in S,m\leq\sup S$. This implies that $m=\sup S.$ For the infimum and minimal element its very similar. Now we see that in $A_1$, a maximal element exists which is $3.5=3+(-1)^2/2$ as $3+(-1)^1/1=2<3.5$ and for all $n>2,$ $$3+\frac{(-1)^n}{n}\leq 3+\frac{1}{n}< 3+\frac{1}{2}$$Thus the supremum of $A_1$ is $3.5$. We similarly see that the minimal element of $A_1$ is $3+(-1)^1/1=2$ as for all $n>1,$ $$3+\frac{(-1)^1}{1}<3+\frac{(-1)}{n}\leq 3+\frac{(-1)^n}{n}$$and thus this must be the infimum.  It was shown in class that for $a,b\geq 0$ the inequalities $a\geq b$ and $a^2\geq b^2$ are equivalent, we can add $1$ to both sides of the second inequality to get $a\geq b\iff a^2+1\geq b^2+1$ for all $a,b\geq 0$ and thus we clearly see that for all $x$ such that $0\leq x\leq 1$ we have, $1=0^2+1\leq x^2+1\leq 1^2+1=2$ and thus $1$ and $2$ are the minimal and maximal elements of $A_2$ respectively and as shown previously they must also be the infimum and supremum respectively.
+\end{solution}
 \begin{problem}\label{prob:2-3}
 Let \(A,B\) be non-empty, bounded subsets of \(\mathbb{R}\). Define
 \[
@@ -197,7 +199,13 @@ Show that these sets are bounded. Determine which of the following statements ar
 (d) \(\sup(A-B) = \sup A - \sup B\).  
 (e) \(\sup(AB) = (\sup A)(\sup B)\).  
 \end{problem}
-
+\begin{solution}
+  (a) This is true. Let $m=\sup(A\cup B)$, then for all $x\in A,B$ we have that $x\leq m$ thus $m\geq\sup A,\sup B$ which implies that $m\geq \max\{\sup A,\sup B\}.$ Now if $x\in A\cup B$ then $x\in A$ or $x\in B$ and if $x\in A$ then $x\leq \sup A\leq m$ and if $x\in B$ then $x\leq\sup B\leq m$ thus we see that $\sup(A\cup B)\leq m$. This implies that $\sup(A\cup B)=\max\{\sup A,\sup B\}$. \newline 
+  (b) This is false, consider $A=\{0,2\}$ and $B=\{0,1\}$, then we have that $\min\{\sup A,\sup B\}=\min\{1,2\}=1\neq 0=\sup\{0\}=\sup A\cap B$. \newline
+  (c) This is true. Say $a=\sup A$ and $b=\sup B$ for brevity. Then for all $x+y\in A+B$ with $x\in A,y\in B$ we see that $x\leq a$ and $y\leq b$ which implies that $x+y\leq a+b$ thus $a+b$ is an upper bound for $A+B.$ Now given any $\varepsilon>0$ we can find $x_o+y_o\in[a+b-\varepsilon,a+b]$ by choosing $x_o$ in $A$ and $y_o$ in $B$ such that $x_o\in[a-\varepsilon/2,a]$ and $y_o\in[b-\varepsilon/2,b]$ (which exist as we defined $a,b$ to be the supremums of $A,B$ respectively) as $$a+b-\varepsilon=(a-\varepsilon/2)+(b-\varepsilon/2)\leq x_o+y_o\leq a+b$$This is enough to conclude that $a+b$ is the supremum of $A+B$. (It was shown in class that if for some nonempty set $S\subseteq\bR,s$ is an upper bound such that for all $\varepsilon>0$ we have $S\cap[s-\varepsilon,s]\neq\emptyset$ then its the supremum.) \newline
+  (d) This is false. Consider $A=\{0\}$ and $B=[-1,1]$. Then we have that $A-B=\{0-x:x\in[-1,1]\}=[-1,1]$ and thus $\sup(A-B)=1$. But as $\sup A=0$ and $\sup B=1$, $\sup(A-B)=1$ is not equal to $\sup A-\sup B=0-1=-1$ disproving the statement. \newline
+  (e) This is false. Consider $A=\{-1\}$ and $B=[-1,1]$. We see that $AB=\{-x:x\in[-1,1]\}=[-1,1]$ and thus $\sup AB=1$ but this is not equal to $(\sup A)(\sup B)=(-1)(1)=-1$ disproving the statement.
+\end{solution}
 \begin{problem}\label{prob:2-4}
 Let \(\{t_n\}_{n \ge 1}\) be a sequence defined by
 \[
@@ -207,7 +215,9 @@ t_{n+1} = \tfrac{1}{2}\Bigl(t_n + \frac{2}{t_n}\Bigr) \quad (n \ge 1).
 \]
 Show that \(\{t_n\}\) is a convergent sequence, converging to \(\sqrt{2}\).
 \end{problem}
-
+\begin{solution}
+  Firstly by AM-GM inequality we see that for all $n\geq 1$, $$t_{n+1}=\frac{t_n+2/t_n}{2}\geq\sqrt{t_n\cdot\frac{2}{t_n}}=\sqrt{2}$$and $t_1=2\geq\sqrt{2}$ as well so the sequence is bounded below by $\sqrt{2}$. From $t_n\geq \sqrt{2}$ we have, $t_n^2\geq 2$ which implies that $t_n\geq 2/t_n$. Using this, for all $n\geq 1$ we have, $$t_{n+1}=\frac{t_n+2/t_n}{2}\leq{t_n+t_n}{2}=t_n$$i.e. $\{t_n\}_{n\geq 1}$ is a decreasing sequence. As this is also bounded below, by a theorem proved in class (all decreasing sequences that are bounded above are convergent) this must converge to some limit $L$ and we must also have that $L\neq 0$ as $L\geq\sqrt{2}$ by another theorem proved in class (if $\{x_n\}_{n\geq 1}$ is bounded below by $m$ and it converges, then $\lim_{n\to\infty}x_n\geq m$ as well.) Taking the limit on both sides and using the algebra of limits of sequences as shown in class we have, $$L=\lim_{n\to\infty}x_n=\lim_{n\to\infty}x_{n+1}=\lim_{n\to\infty}\frac{1}{2}\left(t_n+\frac{2}{t_n}\right)=\frac{1}{2}\left(\lim_{n\to\infty}t_n+\frac{2}{\lim_{n\to\infty}t_n}\right)=\frac{1}{2}\left(L+\frac{2}{L}\right)$$which is a quadratic in $L$ with solutions $\pm\sqrt{2}$ and as $L\geq\sqrt{2}$ it must be $\sqrt{2}.$ We have thus shown that it converges to $\sqrt{2}$.
+\end{solution}
 \begin{problem}\label{prob:2-5}
 Show that 
 \[
@@ -215,11 +225,15 @@ Show that
 \]
 exists. (Hint: Prove that it is a monotone bounded sequence.)
 \end{problem}
-
+\begin{solution}
+  For all $n\geq 1$, by the binomial theorem we have that, $$\left(1+\frac{1}{n}\right)^n=\sum_{k=0}^n\binom{n}{k}\frac{1}{n^k}=\sum_{k=0}^n\frac{n(n-1)\ldots(n-k+1)}{k!}\frac{1}{n^k}\leq\sum_{k=0}^n\frac{n^k}{k!}\cdot\frac{1}{n^k}\leq\sum_{k=0}^n\frac{1}{k!}$$ $$=1+\frac{1}{1}+\frac{1}{2}+\frac{1}{2\cdot 3}+\frac{1}{2\cdot 3\cdot 4}+\ldots\leq 1+\left(\frac{1}{1}+\frac{1}{2}+\frac{1}{2\cdot 2}+\frac{1}{2\cdot 2\cdot 2}+\ldots\right)=1+2=3$$Thus the sequence is bounded above by $3.$ Using the AM-GM inequality we see that, $$\frac{1+\underbrace{\left(1+\frac{1}{n}\right)+\ldots+\left(1+\frac{1}{n}\right)}_{\text{n times}}}{n+1}\geq\left(1\cdot\underbrace{\left(1+\frac{1}{n}\right)\cdot\ldots\cdot\left(1+\frac{1}{n}\right)}_{\text{n times}}\right)^{\frac{1}{n+1}}$$simplifying this we see that its just the inequality, $$1+\frac{1}{n+1}\geq \left(1+\frac{1}{n}\right)^{\frac{n}{n+1}}$$and now raising both sides to the exponent of $n+1$ this reads as $$\left(1+\frac{1}{n+1}\right)^{n+1}\geq\left(1+\frac{1}{n}\right)^n$$so the sequence is increasing. Now as shown in class we can conclude that its convergent from the fact that its increasing and bounded above.
+\end{solution}
 \begin{problem}\label{prob:2-6}
 Show that there exists a unique positive real number \(x\) such that \(x^3 = 2\).
 \end{problem}
-
+\begin{solution}
+  Let $S:=\{x\in\bR:x^3<2\}$, this is nonempty as $1\in S$ and bounded above as $x\geq 2\implies x^3\geq 8$, thus $x\in S\implies x<2$ making $2$ an upper bound so the supremum must exist by the completeness axiom. We claim that $(\sup S)^3=2$. For brevity let $s=\sup S$. As $1.1^3=1.331<2$ we must have that $1<1.1\leq s$ and thus $1<s<s^2<s^3$. For the sake of contradiction assume $s^3<2$. For small $\varepsilon\in(0,1)$ (thus $\varepsilon>\varepsilon^2>\varepsilon^3$) we have, $(s+\varepsilon)^3=s^3+3\varepsilon^2s+3\varepsilon s^2+\varepsilon^3<s^3+3\varepsilon s^3+3\varepsilon s^3+\varepsilon<s^3+3\varepsilon\cdot 2+3\varepsilon\cdot 2+\varepsilon=s^3+13\varepsilon$ but now we can just take $\varepsilon>0$ small enough such that $13\varepsilon<2-s^3$(this is positive by the assumption) and then $(s+\varepsilon)^3<s^3+13\varepsilon<2$ which implies that $s+\varepsilon\in S$ which contradicts the assumption as $s+\varepsilon>s$, the supremum of the set which is impossible and thus $s^3\geq 2$. Now again for the sake of contradiction assume $s^3>2$. Take small $\varepsilon\in(0,1)$ and then $(s-\varepsilon)^3=s^3-3\varepsilon^2s+3\varepsilon s^2-\varepsilon^3>s^3-3\varepsilon s^3-\varepsilon>s^3-3\varepsilon\cdot 2-\varepsilon=s^3-7\varepsilon$ and again we can choose $\varepsilon>0$ small enough such that $7\varepsilon<s^3-2$(positive by assumption) and then $(s-\varepsilon)>s^3-7\varepsilon>2$ which contradicts the assumption as by virtue of $s$ being a supremum we can find some element $x\in S$ such that $s\geq x\leq s-7\varepsilon$ but this implies that $x^3>(s-7\varepsilon)^3>2$ which is impossible as $x\in S\implies x^3<2$, contradicting the assumption and we get that $s^3\leq 2$. As we have shown that $2\leq s^3$ and $2\geq s^3$ both, we must have $s^3=2$ proving existence. For uniqueness we see that if $a^3=b^3=2$ for reals $a,b$ then firstly $a,b>0$ and then factorising this we can rewrite the equality as $(a-b)(a^2+ab+b^2)=0$ but here $a^2+ab+b^2>0$ as all $a^2,ab,b^2$ are and thus for it to be zero we must have $a-b$ be $0$ which is only possible when $a=b$ and this proves uniqueness.
+\end{solution}
 \begin{problem}\label{prob:2-7}
 Prove that the following sequences are convergent:
 \[
@@ -229,7 +243,9 @@ a_n = \prod_{k=1}^n \Bigl(1 - \frac{1}{k+1}\Bigr), \quad n \in \mathbb{N};
 b_n = \frac{1}{n+1} + \frac{1}{n+2} + \cdots + \frac{1}{n+n}, \quad n \in \mathbb{N}.
 \]
 \end{problem}
-
+\begin{solution}
+  For all $n\in\bN$, $$a_n=\prod_{k=1}^n\left(1-\frac{1}{k+1}\right)=\prod_{k=1}^n\frac{k}{k+1}=\frac{1}{2}\cdot\frac{2}{3}\cdot\ldots\cdot\frac{n}{n+1}=\frac{1}{n+1}$$Thus $a_n=1/(n+1)$ and it converges to $\lim_{n\to\infty}a_n=\lim_{n\to\infty}1/(n+1)=0$ so its convergent. We will show that $b_n$ is bounded above and increasing, this is sufficient as we can conclude convergence from this as discussed in class. For boundedness, $$b_n=\sum_{k=1}^n\frac{1}{n+k}\leq\sum_{k=1}^n\frac{1}{n+1}=\frac{n}{n+1}<1$$so its bounded above by $1$. To prove that its increasing its sufficnent to show that $b_{n+1}-b_n>0$ for all $n\in\bN$, if we write these out we have, $$b_{n+1}-b_n=\left(\frac{1}{n+2}+\frac{1}{n+3}\ldots+\frac{1}{2n+2}\right)-\left(\frac{1}{n+1}+\frac{1}{n+2}+\ldots+\frac{1}{2n}\right)$$ $$=\frac{1}{2n+2}+\frac{1}{2n+1}-\frac{1}{n+1}>\frac{1}{2n+2}+\frac{1}{2n+2}-\frac{1}{n+1}=0$$so we are done.
+\end{solution}
 \begin{problem}\label{prob:2-8}
 Prove that the sequence
 \[
@@ -237,7 +253,9 @@ c_n = 5 + (-1)^n\Bigl(2 + \frac{1}{n}\Bigr)
 \]
 is not convergent.
 \end{problem}
-
+\begin{solution}
+  Consider the subsequences $\{c_{2k}\}_{k\geq 1}$ and $\{c_{2k-1}\}_{k\geq 1}$. We have, $$c_{2k-1}=5+(-1)^{2k-1}(1+1/(2k-1))=5-1-1/(2k-1)=4-1/(2k-1)$$taking the limits,$$\lim_{k\to\infty} c_{2k-1}=\lim_{k\to\infty}(4-1/(2k-1))=\lim_{k\to\infty}4+(-1)\cdot\lim_{k\to\infty}1/(2k-1)=4-0=4$$and similarly for the other subsequence we have $$c_{2k}=5+(-1)^{2k}(1+1/2k)=5+1+1/2k=6+1/2k$$again taking the limits $$\lim_{k\to\infty}c_{2k}=\lim_{k\to\infty}(6+1/2k)=\lim_{k\to\infty}6+\lim_{k\to\infty}1/2k=6+0=6$$So we have two subsequences with different limits which implies that the sequence can't converge as then they'd have the same limits by the theorem: all subsequences of a converging sequence also converge to the same limit as that sequence (this was shown in class).
+\end{solution}
 \begin{problem}\label{prob:2-9}
 Suppose \(\{x_n\}\) is a real sequence. For \(n \ge 1\) define the averages
 \[
@@ -245,14 +263,19 @@ y_n = \frac{1}{n}\sum_{k=1}^n x_k.
 \]
 Show that if \(\{x_n\}\) converges, then \(\{y_n\}\) also converges. However, the converse is not true.
 \end{problem}
-
+\begin{solution}
+  Assume that $x_n$ converges to $x$. Then for any $\varepsilon>0$ there exists $N\in\bN$ such that for all $n>N$ we have $|x-x_n|<\varepsilon$. Now for $M>N$, using the triangle inequality we have, $$\left|x-\frac{1}{M}\sum_{k=1}^Mx_k\right|=\frac{1}{M}\left|\sum_{k=1}^M(x-x_k)\right|\leq\frac{1}{M}\left|\sum_{k=1}^{N}(x-x_k)\right|+\frac{1}{M}\sum_{k=N+1}^M|x-x_k|$$ $$\leq\frac{1}{M}\left|\sum_{k=1}^N(x-x_k)\right|+\frac{(M-N)\varepsilon}{M}\leq\frac{1}{M}\left|\sum_{k=1}^N(x-x_k)\right|+\varepsilon$$As the quantity $G=|\Sigma_{k=1}^N(x-x_k)|$ is fixed we can find $M'\in\bN$ such that $G/M'<\varepsilon$ and clearly for all $K>M'$ we have that $G/K\leq G/M'<\varepsilon$. Thus for all $K>M'$ we have, $$\left|x-\sum_{k=1}^Kx_k\right|\leq\frac{G}{K}+\varepsilon\leq\frac{G}{M'}+\varepsilon<\varepsilon+\varepsilon=2\varepsilon$$which can be made arbitrarily small and thus we see that for all $\varepsilon>0$ there exists $M'\in\bN$ such that for all $K>M'$ we have $|y_n-x|<\varepsilon$ so by the definition of convergence, $y_n$ also converges to $x$. We provide a counterexample for the converse i.e. a sequence $\{x_n\}$ that does not converge but for which $\{y_n\}$ does. Such an example is the sequence $\{x_n\}$ with $x_{2n}:=1,x_{2n-1}:=0$ for $n\in\bN$, which clearly does not converge but the average,$$y_n=\frac{1}{n}\sum_{k=1}^nx_k=\frac{\lfloor n/2\rfloor}{n}$$does converge which we can conclude from the fact that its bounded on both sides by convergent sequences that converge to the same limit as follows, $$\text{(has limit half as well clearly) }1/2-1/n=\frac{\frac{n}{2}-1}{n}\leq y_n\leq\frac{n/2}{n}=1/2\text{ (constant sequence)}$$where the inequalities are true as for any real $x,$ the integer part $\lfloor x\rfloor\in(x-1,1].$ As we provided a counterexample to the converse it can't be true.
+\end{solution}
 \begin{problem}\label{prob:2-10}
-Find all functions \(h : \mathbb{R} \to \mathbb{R}\) satisfying
+Find all functions \(f : \mathbb{R} \to \mathbb{R}\) satisfying
 \[
-h(x+y) = h(x) + h(y), 
+f(x+y) = f(x) + f(y), 
 \quad 
-h(xy) = h(x)h(y)
+f(xy) = f(x)f(y)
 \]
 for all \(x,y \in \mathbb{R}\). (Hint: You may need order properties and completeness of \(\mathbb{R}\).)
 \end{problem}
+\begin{solution}
+  Firstly we see that $f(1)=f(1\cdot 1)=f(1)^2\implies f(1)=0$ or, $1$ and if its $0$ then everything is i.e. for all $x$ we would have $f(x)=f(x\cdot 1)=f(x)\cdot f(1)=f(x)\cdot 0=0$ so $f$ would be identically zero. We work with the case where $f(1)=1$ now. From the definition, $f(0)=f(0+0)=f(0)+f(0)\implies f(0)=0$ and this is the only element that is mapped to zero as otherwise if we had some nonzero $v$ being mapped to zero, this would imply that, for all $f(1)=f(v\cdot(1/v))\cdot f(v)=f(1/v)\cdot 0=0$ which is not possible as we assumed $f(1)$ to be $1$. We also see that $f(-x)=f((-1)\cdot x)=f(-1)\cdot f(x)$ and as $f(-1)+f(1)=f(-1+1)=f(0)=0\implies f(-1)=-1$ we see that $f(-x)=-f(x)$, this shows us that $f$ is uniquely determined by its values on the positive reals. Now for positive integers $n$, $$f(n)=f\left(\underbrace{1+\ldots+1}_{\text{n times}}\right)=\underbrace{f(1)+\ldots+f(1)}_{\text{n times}}=\underbrace{1+\ldots+1}_{\text{n times}}=n$$and we can generalise this to negative integers too using the fact that $f(-n)=-f(n)=-n$. As $f(0)=0$ too we see that $f$ is the identity on the integers. Now for nonzero integers $n$ and any integer $m$ we see that, $$f(m/n)\cdot n=f(m/n)\cdot f(n)=f(m)=m\implies f(m/n)=m/n$$thus $f$ acts as the identity function on the rationals as well. Now for positive $x$ we can see that $f(x)=f(\sqrt{x}\cdot\sqrt{x})=f(\sqrt{x})^2>0$ (the existence of these $\sqrt{x}$ can be proven just like in \hyperref[prob:2-6]{Problem 2.6} or, by using the intermediate value theorem on the continous function $x\mapsto x^2$ which was all discussed in class. The strict inequality is due to $\sqrt{x}$ being nonzero for nonzero $x$.) We will now show that $f(x)=x$ for all $x\in\bR$. For the sake of contradiction assume that $f(k)<k$ for some $k\in\bR$ i.e. $f(k)=k-\varepsilon$ for some $\varepsilon>0$. Now for any rationals $r<k$ i.e. $k-r>0$ we must have that $0<f(k-r)=f(k)-f(r)=f(k)-r=k-r-\varepsilon\implies \varepsilon<k-r$ which can't be true as we can choose a rational $r$ in $(k-\varepsilon/2,k)$ (we have shown in class that any open interval in the reals contains atleast one rational) for which we would have $k-r<\varepsilon/2$ but this implies that $\varepsilon<\varepsilon/2$ which is false for positive $\varepsilon$ and we have a contradiction so $f(k)\geq k$ for all reals $k$. Now again, with the goal of showing that $f(k)\leq k$ for all reals $k$, for the sake of contradiction assume that for some real $k$ we have $f(k)>k$ i.e. $f(k)=k+\varepsilon$ for some $\varepsilon>0.$ This time consider rationals $r>k$ i.e. $r-k>0$. For these we have that, $0<f(r-k)=f(r)-f(k)=r-f(k)=r-k-\varepsilon\implies r-k>\varepsilon$ which again can't be true as we can similarly choose some rational $r\in(k,k+\varepsilon/2)$ for which we would have $r-k<\varepsilon/2$ implying that $\varepsilon/2<\varepsilon$ which is false for positive $\varepsilon$ and thus we have a contradiction so $f(k)\leq k$ for all reals $k$. As we showed that $k\leq f(k)\leq k$ for all reals $k$ we have proved that $f(k)=k$ for all reals $k$ and we are done. So the functions $f$ satisfying the conditions of the problem are exactly the identity function i.e $x\mapsto x$ and the identically zero function i.e. $x\mapsto 0$.
+\end{solution}
 \end{document}

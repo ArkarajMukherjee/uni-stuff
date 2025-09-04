@@ -14,11 +14,11 @@
 \contentsline {section}{\numberline {2}Home Assignment II (Due: Sep 04, 2025)}{8}{section.2}%
 \contentsline {subsection}{Problem~2.1}{8}{problem.2.1}%
 \contentsline {subsection}{Problem~2.2}{8}{problem.2.2}%
-\contentsline {subsection}{Problem~2.3}{8}{problem.2.3}%
-\contentsline {subsection}{Problem~2.4}{9}{problem.2.4}%
-\contentsline {subsection}{Problem~2.5}{9}{problem.2.5}%
-\contentsline {subsection}{Problem~2.6}{9}{problem.2.6}%
-\contentsline {subsection}{Problem~2.7}{9}{problem.2.7}%
-\contentsline {subsection}{Problem~2.8}{9}{problem.2.8}%
-\contentsline {subsection}{Problem~2.9}{9}{problem.2.9}%
-\contentsline {subsection}{Problem~2.10}{9}{problem.2.10}%
+\contentsline {subsection}{Problem~2.3}{9}{problem.2.3}%
+\contentsline {subsection}{Problem~2.4}{10}{problem.2.4}%
+\contentsline {subsection}{Problem~2.5}{10}{problem.2.5}%
+\contentsline {subsection}{Problem~2.6}{11}{problem.2.6}%
+\contentsline {subsection}{Problem~2.7}{11}{problem.2.7}%
+\contentsline {subsection}{Problem~2.8}{12}{problem.2.8}%
+\contentsline {subsection}{Problem~2.9}{12}{problem.2.9}%
+\contentsline {subsection}{Problem~2.10}{13}{problem.2.10}%
