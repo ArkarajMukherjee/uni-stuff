@@ -34,7 +34,7 @@ Finally we check $T_1\cap T_2=\{0\}$. Suppose $y\in T_1\cap T_2$. Then $y=\sum_{
 
 Thus we have shown that $S\oplus T_2=V$ and $T_1\cap T_2=\{0\}$ as required.
 $\\\noindent\rule{\linewidth}{0.5pt}\linebreak$
-$\bf{5.9}$ Let $A_1,\ldots,A_n$ be the columns of $A$, $C_1,\ldots,C_m$ be the columns of $C$ and $B_1,\ldots,B_m$ be the columns of $B$  then in block form we can write, 
+$\bf{6.9}$ Let $A_1,\ldots,A_n$ be the columns of $A$, $C_1,\ldots,C_m$ be the columns of $C$ and $B_1,\ldots,B_m$ be the columns of $B$  then in block form we can write, 
 $$\begin{bmatrix}
 	A_1 & A_2 & \cdots & A_n & B_1 & B_2 & \cdots & B_m
 	\\
@@ -71,9 +71,11 @@ $$\begin{bmatrix}A & B\\ 0 & C\end{bmatrix}=\begin{bmatrix}1 & 0 & 0 & 1\\ 0 & 0
 Now to show that the rank of a upper triangular matrix is atleast as much as the number of nonzero diagonal elements we can proceed by induction with the base case being a $1\times 1$ matrix which is effectively a scalar and has rank $1$ if its nonzero and $0$ otherwise.
  Assume that this fact is true for all $k\times k$ upper triangular matrices when $k>n$, if we can prove this for $n$ then we can conclude by the principle of strong induction.
  To prove this, enumerate the elements of our $n\times n$ matrix as $(a_{i,j})$ and partition it into the following blockss
-$$A=\{a_{i,j}\}_{\substack{1\leq i\leq 1\\ 1\leq j\leq 1}},B=\{a_{i,j}\}_{\substack{1\leq i\leq n\\ 1<j\leq n}},C=\{a_{i,j}\}_{\substack{1<i\leq n\\ 1<j\leq n}}$$
+$$A=\{a_{i,j}\}_{\substack{1\leq i\leq 1\\ 1\leq j\leq 1}},B=\{a_{i,j}\}_{\substack{1\leq i\leq 1\\ 1<j\leq n}},C=\{a_{i,j}\}_{\substack{1<i\leq n\\ 1<j\leq n}}$$
 where the remaining block will be all zeroes by the virtue of the original matrix being upper triangular and we can write the matrix as,
 $$\begin{bmatrix}A & B \\ 0 & C\end{bmatrix}$$
-Using the induction hypothesis, as the size of upper triangular matrices $A,C$ are $1,n-1$ respectively, by the identity proved above the original matrix has rank atleast $\rho(A)+\rho(C)$ which is atleast $$\underbrace{\left|\{1\leq i\leq 1:a_{i,i}\neq 0\}\right|}_{\leq\rho(A)\text{ by induction hyp.}}+\underbrace{\left|\{1<j\leq n:a_{j,j}\neq 0\}\right|}_{\leq\rho(C)\text{ by induction hyp.}}=\left|\{1\leq i\leq n:a_{i,i}\neq 0\}\right|$$so we are done.
-$\\ \bf{5.12}$ Firstly for every such $k$, by considering the column space of our matrix and trimming the spanning set which is the columns, to a basis which has size $r$, we can choose any $k$ columns from this set and these will form a matrix with $k$ linearly independant columns when concatenated. Again, on this $m\times k$ matrix, as the row rank which is equal to the column rank $k$ (there are $k$ columns, all of which are linearly independant and hence they have a span of dimension exactly $k$) we can repeat the exact arguement we gave to get $k$ columns, to now get $k$ rows in this matrix which are linearly independant giving us a $k\times k$ matrix which has row rank $r$ and thus column rank also the same and this is a submatrix of the original matrix as we only first omitted $n-r$ columns and then $m-r$ rows from it to arrive here.
+Using the induction hypothesis, as the size of upper triangular matrices $A,C$ are $1,n-1$ respectively, by the identity proved above the original matrix has rank atleast $\rho(A)+\rho(C)$ which is atleast 
+$$\underbrace{\left|\{1\leq i\leq 1:a_{i,i}\neq 0\}\right|}_{\leq\rho(A)\text{ by induction hyp.}}+\underbrace{\left|\{1<j\leq n:a_{j,j}\neq 0\}\right|}_{\leq\rho(C)\text{ by induction hyp.}}=\left|\{1\leq i\leq n:a_{i,i}\neq 0\}\right|$$
+so we are done.
+$\\ \bf{6.12}$ Firstly for every such $k$, by considering the column space of our matrix and trimming the spanning set which is the columns, to a basis which has size $r$, we can choose any $k$ columns from this set and these will form a matrix with $k$ linearly independant columns when concatenated. Again, on this $m\times k$ matrix, as the row rank which is equal to the column rank $k$ (there are $k$ columns, all of which are linearly independant and hence they have a span of dimension exactly $k$) we can repeat the exact arguement we gave to get $k$ columns, to now get $k$ rows in this matrix which are linearly independant giving us a $k\times k$ matrix which has row rank $r$ and thus column rank also the same and this is a submatrix of the original matrix as we only first omitted $n-r$ columns and then $m-r$ rows from it to arrive here.
 \end{document}
