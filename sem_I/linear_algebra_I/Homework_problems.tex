@@ -69,7 +69,7 @@ is a linearly independant set of columns of our matrix and thus the matrix has r
 $$\begin{bmatrix}A & B\\ 0 & C\end{bmatrix}=\begin{bmatrix}1 & 0 & 0 & 1\\ 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0\\ 0 & 0 & 1 & 0\end{bmatrix}$$
 	$$A=\begin{bmatrix}1 & 0\\ 0 & 0\end{bmatrix},B=\begin{bmatrix}0 & 1 \\ 0 & 0\end{bmatrix},C=\begin{bmatrix} 0 & 0\\ 1 & 0\end{bmatrix}$$
 Now to show that the rank of a upper triangular matrix is atleast as much as the number of nonzero diagonal elements we can proceed by induction with the base case being a $1\times 1$ matrix which is effectively a scalar and has rank $1$ if its nonzero and $0$ otherwise.
- Assume that this fact is true for all $k\times k$ upper triangular matrices when $k>n$, if we can prove this for $n$ then we can conclude by the principle of strong induction.
+ Assume that this fact is true for all $k\times k$ upper triangular matrices when $k<n$, if we can prove this for $n$ then we can conclude by the principle of strong induction.
  To prove this, enumerate the elements of our $n\times n$ matrix as $(a_{i,j})$ and partition it into the following blockss
 $$A=\{a_{i,j}\}_{\substack{1\leq i\leq 1\\ 1\leq j\leq 1}},B=\{a_{i,j}\}_{\substack{1\leq i\leq 1\\ 1<j\leq n}},C=\{a_{i,j}\}_{\substack{1<i\leq n\\ 1<j\leq n}}$$
 where the remaining block will be all zeroes by the virtue of the original matrix being upper triangular and we can write the matrix as,

@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1758305851.47645 "Homework_problems.tex" "Homework_problems.pdf" "Homework_problems" 1758305851.74936 2
+["pdflatex"] 1758306462.12212 "Homework_problems.tex" "Homework_problems.pdf" "Homework_problems" 1758306462.39668 2
   "/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1755987285 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1755987285 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texmf-dist/fonts/tfm/jknappen/ec/ecbx1000.tfm" 1755987285 3584 2d666ecf6d466d8b007246bc2f94d9da ""
@@ -81,8 +81,8 @@
   "/usr/share/texmf-dist/web2c/texmf.cnf" 1755987285 42087 b0f9697c952c8f5a8eede4134282cb0d ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1756475368 5311557 9da84c45f5b388655502706482323571 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1756475284 2008250 7d04ad79827f822836920f44a1dbaa24 ""
-  "Homework_problems.aux" 1758305851.70209 32 c81c40425fbb5e93b90fba65da0b5e61 "pdflatex"
-  "Homework_problems.tex" 1758305851.3911 12666 6cdb97e5333fc199a1bbe019bd577542 ""
+  "Homework_problems.aux" 1758306462.34843 32 c81c40425fbb5e93b90fba65da0b5e61 "pdflatex"
+  "Homework_problems.tex" 1758306462.03543 12666 b51455dc3e66442268c332b009bc663f ""
   (generated)
   "Homework_problems.aux"
   "Homework_problems.log"
