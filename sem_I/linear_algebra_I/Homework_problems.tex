@@ -33,4 +33,47 @@ Now we check $S\cap T_2=\{0\}$. Suppose $x\in S\cap T_2$. Then we can write $x$ 
 Finally we check $T_1\cap T_2=\{0\}$. Suppose $y\in T_1\cap T_2$. Then $y=\sum_{k=1}^m\beta_kv_{n+k}$ since $y\in T_1$ and also $y=\sum_{k=1}^m\gamma_k(v_{n+k}+v_k)$ since $y\in T_2$. Comparing coefficients of $v_k$ gives $\gamma_k=0$ for all $k=1,\ldots,m$, and thus the right hand side becomes $y=\sum_{k=1}^m0\cdot(v_{n+k}+v_k)=0$. Therefore $y=0$ and $T_1\cap T_2=\{0\}$.  
 
 Thus we have shown that $S\oplus T_2=V$ and $T_1\cap T_2=\{0\}$ as required.
+$\\\noindent\rule{\linewidth}{0.5pt}\linebreak$
+$\bf{5.9}$ Let $A_1,\ldots,A_n$ be the columns of $A$, $C_1,\ldots,C_m$ be the columns of $C$ and $B_1,\ldots,B_m$ be the columns of $B$  then in block form we can write, 
+$$\begin{bmatrix}
+	A_1 & A_2 & \cdots & A_n & B_1 & B_2 & \cdots & B_m
+	\\
+	0 & 0 & \cdots & 0 & C_1 & C_2 & \cdots & C_m
+\end{bmatrix}$$Assuming both the matrices $A$ and $C$ to have nonzero rank as if one of them having zero rank would mean that all the columns of said matrix is zero as otherwise all scalar multiples of some fixed nonzero column would be an one dimensional subspace of the column space making it have nonzero dimension and we can clearly see that,
+$$\rho\begin{bmatrix}
+	A & B 
+	\\
+	0 & 0
+\end{bmatrix}
+=\rho\begin{bmatrix}
+	A & B
+\end{bmatrix}
+\geq\rho(A)=rho(A)+\rho(0)
+$$
+as adding column vectors to some set can not decrease the dimension of its span and similarly considering the rows (and the row rank which is equal to the column rank as proven in class)
+$$\rho\begin{bmatrix}
+	0 &  B
+	\\
+	0 & C
+\end{bmatrix}
+\geq\rho(C)=\rho(0)+\rho(C)$$
+and the case $A=C=0$ is covered by the last case with $C=0.$
+WLOG $A_1,\ldots,A_{\rho(A)}$ is a basis for the column space of $A$ (we can trim the spanning set which consists of all the columns of the matrix to a basis) making them linearly independant and choose $C_1,\ldots,C_{\rho(C)}$ similarly for $C$. Now for some scalars 
+$\alpha_1,\ldots,\alpha_{\rho(A)},\beta_1,\ldots,\beta_{\rho(C)}$, $$\sum_{i=1}^{\rho(A)}\alpha_i\cdot\begin{bmatrix}A_i \\ 0\end{bmatrix}+\sum_{j=1}^{\rho(C)}\beta_j\cdot\begin{bmatrix}B_j \\ C_j\end{bmatrix}=\begin{bmatrix}\sum_{i=1}^{\rho(A)}\alpha_i\cdot A_i+\sum_{j=1}^{\rho(C)}\beta_j\cdot B_j \\ \sum_{k=1}^{\rho(C)}\beta_k\cdot C_k\end{bmatrix}=0$$
+$$\implies\sum_{i=1}^{\rho(C)}\beta_i\cdot C_i=0$$
+Which implies that $\beta_i$ are all zero by linear independance which in turn implies that $\alpha_i$ are also zero after considering the other equation
+$$\sum_{i=1}^{\rho(A)}\alpha_i\cdot A_i+\sum_{j=1}^{\rho(C)}\beta_j\cdot B_j=0\implying\sum_{i=1}^{\rho(A)}\alpha_i\cdot A_i=0$$
+which forces all $\alpha_i$ to be zero as well through linear independance and all together, all the scalars are forced to be zero and hence we can conclude that
+$$\left\{\begin{bmatrix} A_i\\ 0\end{bmatrix}:1\leq i\leq\rho(A)\right\}\bigcup\left\{\begin{bmatrix}B_j\\ C_j\end{bmatrix}:1\leq j\leq\rho(C)\right\}$$
+is a linearly independant set of columns of our matrix and thus the matrix has rank atleast more than the size of said set which is $\rho(A)+\rho(C)$. For a case where strict inequality occurs we can consider,
+$$\begin{bmatrix}A & B\\ 0 & C\end{bmatrix}=\begin{bmatrix}1 & 0 & 0 & 1\\ 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0\\ 0 & 0 & 1 & 0\end{bmatrix}$$
+	$$A=\begin{bmatrix}1 & 0\\ 0 & 0\end{bmatrix},B=\begin{bmatrix}0 & 1 \\ 0 & 0\end{bmatrix},C=\begin{bmatrix} 0 & 0\\ 1 & 0\end{bmatrix}$$
+Now to show that the rank of a upper triangular matrix is atleast as much as the number of nonzero diagonal elements we can proceed by induction with the base case being a $1\times 1$ matrix which is effectively a scalar and has rank $1$ if its nonzero and $0$ otherwise.
+ Assume that this fact is true for all $k\times k$ upper triangular matrices when $k>n$, if we can prove this for $n$ then we can conclude by the principle of strong induction.
+ To prove this, enumerate the elements of our $n\times n$ matrix as $(a_{i,j})$ and partition it into the following blockss
+$$A=\{a_{i,j}\}_{\substack{1\leq i\leq 1\\ 1\leq j\leq 1}},B=\{a_{i,j}\}_{\substack{1\leq i\leq n\\ 1<j\leq n}},C=\{a_{i,j}\}_{\substack{1<i\leq n\\ 1<j\leq n}}$$
+where the remaining block will be all zeroes by the virtue of the original matrix being upper triangular and we can write the matrix as,
+$$\begin{bmatrix}A & B \\ 0 & C\end{bmatrix}$$
+Using the induction hypothesis, as the size of upper triangular matrices $A,C$ are $1,n-1$ respectively, by the identity proved above the original matrix has rank atleast $\rho(A)+\rho(C)$ which is atleast $$\underbrace{\left|\{1\leq i\leq 1:a_{i,i}\neq 0\}\right|}_{\leq\rho(A)\text{ by induction hyp.}}+\underbrace{\left|\{1<j\leq n:a_{j,j}\neq 0\}\right|}_{\leq\rho(C)\text{ by induction hyp.}}=\left|\{1\leq i\leq n:a_{i,i}\neq 0\}\right|$$so we are done.
+$\\ \bf{5.12}$ Firstly for every such $k$, by considering the column space of our matrix and trimming the spanning set which is the columns, to a basis which has size $r$, we can choose any $k$ columns from this set and these will form a matrix with $k$ linearly independant columns when concatenated. Again, on this $m\times k$ matrix, as the row rank which is equal to the column rank $k$ (there are $k$ columns, all of which are linearly independant and hence they have a span of dimension exactly $k$) we can repeat the exact arguement we gave to get $k$ columns, to now get $k$ rows in this matrix which are linearly independant giving us a $k\times k$ matrix which has row rank $r$ and thus column rank also the same and this is a submatrix of the original matrix as we only first omitted $n-r$ columns and then $m-r$ rows from it to arrive here.
 \end{document}
