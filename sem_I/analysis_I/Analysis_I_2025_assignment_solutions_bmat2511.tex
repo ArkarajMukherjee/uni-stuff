@@ -421,7 +421,10 @@ Determine $\limsup$ and $\liminf$ of the following sequences of real numbers:
 \begin{solution}
 	In $1$, let the terms of the sequence be $a_n$, now partition the whole sequence $\{a_n\}$ into two subsequences $\{a_{2n}\}$ and $\{a_{2n-1}\}$. Clearly one converges to $5$ whereas the other to $-5$. Now as this is a partition, any convergent subsequence of this sequence $\{a_n\}$  must be eventually always a subsequence of $\{a_{2n}\}$ or $\{a_{2n-1}\}$ as alternating between these two infinitely often will not allow the subsequence in question to converge as both these parts have different limits. Thus the only limit points are these two i.e. $5$ and $-5$ because every convergent subsequence of the sequence is eventually always a subsequence of one of the parts stated above, which converge and thus so do these subsequences, to the same limit as these parts. Thus, 
 $$\limsup_{n\to\infty}a_n=\sup\{+5,-5\}=+5\text{ and, }\liminf_{n\to\infty}a_n=\inf\{+5,-5\}=-5$$
-Both the sequences in $2$ and $3$ converge to $0$ as exponential growth dominates polynomial growth as shown in class and $n^2$ dominates $n$ as well. As these are convergent sequences, they have the same limit extremums and limits which is $0$.
+Using the fact proven in class that the limit supremum is the supremum of the subsequential limits and the limit infimum, the infimum of the same.
+
+
+Both the sequences in $2$ and $3$ converge to $0$ as exponential growth dominates polynomial growth as shown in class and $n^2$ dominates $n$ as well. As these are convergent sequences, they have the same limit extremums and limits all of which are $0$.
 \end{solution}
 \begin{problem}\label{prob:3-3}
 Suppose $\{a_{n}\}_{n\in\mathbb{N}},\{b_{n}\}_{n\in\mathbb{N}}$ are two bounded sequences of real numbers. Show that $\{a_{n}+b_{n}\}_{n\in\mathbb{N}}$ is a bounded sequence of real numbers and
@@ -433,7 +436,7 @@ Give examples to show that equality may not hold in (i) or (ii).
 \end{problem}
 \begin{solution}
 	If $a_n$ and $b_n$ are bounded sequence, there exists $A,B\geq 0$ such that $|a_n|\leq A$ and $|b_n|\leq B$ for all $n$. Now by the triangle inequality we have that for all $n$,
-$$|a_n+b_n|\leq|a_n|+|b_n|\leq M+N$$
+$$|a_n+b_n|\leq|a_n|+|b_n|\leq A+B$$
 so $a_n+b_n$ is also bounded. For $1$, by definition, 
 $$\liminf_{n\to\infty}a_n+\liminf_{n\to\infty}b_n=\lim_{n\to\infty}\inf_{m\geq n}a_m+\lim_{n\to\infty}\inf_{m\geq n}b_m=\lim_{n\to\infty}\left(\inf_{m\geq n}a_m+\inf_{m\geq n}b_m\right)$$
 	Now we see that, $\inf_{m\geq n}a_m+\inf_{m\geq n}b_m\leq a_m+b_m$ for all $m\geq n$ which by the definition of the infimum implies that, for all $n$,
@@ -443,7 +446,7 @@ Combined with the previous equality we get,
 This proves the desired inequality. To prove the statement for limit supremums it suffices to consider sequences $-a_n,-b_n$ as follows,
 $$\limsup_{n\to\infty}a_n+\limsup_{n\to\infty}b_n=-\left(\liminf_{n\to\infty}(-a_n)+\liminf_{n\to\infty}(-b_n)\right)$$
 $$\geq -\liminf_{n\to\infty}(-(a_n+b_n))=\limsup_{n\to\infty}(a_n+b_n)$$
-Where we used this fact proven in class: For bounded sequences of real numbers $\{a_n\}_{n\in\bN}$ we have, $$\limsup_{n\to\infty}a_n=-\liminf_{n\to\infty}(-a_n)$$Here equality might not occur in either case, for example when $a_n=(-1)^n$ and $b_n=-a_n$, in this case we see that
+Where we used the above proven inequality and also this fact proven in class: For bounded sequences of real numbers $\{a_n\}_{n\in\bN}$ we have, $$\limsup_{n\to\infty}a_n=-\liminf_{n\to\infty}(-a_n)$$Here equality might not occur in either case, for example when $a_n=(-1)^n$ and $b_n=-a_n$, in this case we see that
 $$-2=-1+-1=\liminf_{n\to\infty}a_n+\liminf_{n\to\infty}b_n<\liminf_{n\to\infty}(a_n+b_n)=0$$
 	$$2=1+1=\limsup_{n\to\infty}a_n+\limsup_{n\to\infty}b_n>\limsup_{n\to\infty}(a_n+b_n)=0$$
 \end{solution}
