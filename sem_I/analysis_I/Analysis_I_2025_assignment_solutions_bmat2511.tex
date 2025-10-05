@@ -120,7 +120,7 @@ Let $X$ be a non-empty set. Show that the set of all functions from $X$ to $\{0,
   \end{cases}$$and we see that $M(f)=S.$ As it is both a surjection and an injection we see that its a bijection.
 \end{solution}
 \begin{problem}\label{prob:1-8}
-Let $Y$ be a non-empty set. What is the maximum possible number of distinct sets we can form using $n$-subsets $A_1, A_2, \dots, A_n$ of $Y$, using set theoretic operations of union, intersection, complement in $Y$?  
+$^\star$Let $Y$ be a non-empty set. What is the maximum possible number of distinct sets we can form using $n$-subsets $A_1, A_2, \dots, A_n$ of $Y$, using set theoretic operations of union, intersection, complement in $Y$?  
 
 For instance, when $n = 1$, the answer is $4$: $A_1$, $A_1^c$, $\varnothing = A_1 \cap A_1^c$, $Y = A_1 \cup A_1^c$.  
 
@@ -226,7 +226,7 @@ t_{n+1} = \tfrac{1}{2}\Bigl(t_n + \frac{2}{t_n}\Bigr) \quad (n \ge 1).
 Show that \(\{t_n\}\) is a convergent sequence, converging to \(\sqrt{2}\).
 \end{problem}
 \begin{solution}
-  Firstly by AM-GM inequality we see that for all $n\geq 1$, $$t_{n+1}=\frac{t_n+2/t_n}{2}\geq\sqrt{t_n\cdot\frac{2}{t_n}}=\sqrt{2}$$and $t_1=2\geq\sqrt{2}$ as well so the sequence is bounded below by $\sqrt{2}$. From $t_n\geq \sqrt{2}$ we have, $t_n^2\geq 2$ which implies that $t_n\geq 2/t_n$. Using this, for all $n\geq 1$ we have, $$t_{n+1}=\frac{t_n+2/t_n}{2}\leq\frac{t_n+t_n}{2}=t_n$$i.e. $\{t_n\}_{n\geq 1}$ is a decreasing sequence. As this is also bounded below, by a theorem proved in class (all decreasing sequences that are bounded above are convergent) this must converge to some limit $L$ and we must also have that $L\neq 0$ as $L\geq\sqrt{2}$ by another theorem proved in class (if $\{x_n\}_{n\geq 1}$ is bounded below by $m$ and it converges, then $\lim_{n\to\infty}x_n\geq m$ as well.) Taking the limit on both sides and using the algebra of limits of sequences as shown in class we have, $$L=\lim_{n\to\infty}t_n=\lim_{n\to\infty}t_{n+1}=\lim_{n\to\infty}\frac{1}{2}\left(t_n+\frac{2}{t_n}\right)=\frac{1}{2}\left(\lim_{n\to\infty}t_n+\frac{2}{\lim_{n\to\infty}t_n}\right)=\frac{1}{2}\left(L+\frac{2}{L}\right)$$which is a quadratic in $L$ with solutions $\pm\sqrt{2}$ and as $L\geq\sqrt{2}$ it must be $\sqrt{2}.$ We have thus shown that it converges to $\sqrt{2}$.
+  Firstly by AM-GM inequality we see that for all $n\geq 1$, $$t_{n+1}=\frac{t_n+2/t_n}{2}\geq\sqrt{t_n\cdot\frac{2}{t_n}}=\sqrt{2}$$and $t_1=2\geq\sqrt{2}$ as well so the sequence is bounded below by $\sqrt{2}$. From $t_n\geq \sqrt{2}$ we have, $t_n^2\geq 2$ which implies that $t_n\geq 2/t_n$. Using this, for all $n\geq 1$ we have, $$t_{n+1}=\frac{t_n+2/t_n}{2}\leq\frac{t_n+t_n}{2}=t_n$$i.e. $\{t_n\}_{n\geq 1}$ is a decreasing sequence. As this is also bounded below, by a theorem proved in class (all decreasing sequences that are bounded above are convergent) this must converge to some limit $L$ and we must also have that $L\neq 0$ as $L\geq\sqrt{2}$ by another theorem proved in class (if $\{t_n\}_{n\geq 1}$ is bounded below by $m$ and it converges, then $\lim_{n\to\infty}x_n\geq m$ as well.) Taking the limit on both sides and using the algebra of limits of sequences as shown in class we have, $$L=\lim_{n\to\infty}t_n=\lim_{n\to\infty}t_{n+1}=\lim_{n\to\infty}\frac{1}{2}\left(t_n+\frac{2}{t_n}\right)=\frac{1}{2}\left(\lim_{n\to\infty}t_n+\frac{2}{\lim_{n\to\infty}t_n}\right)=\frac{1}{2}\left(L+\frac{2}{L}\right)$$which is a quadratic in $L$ with solutions $\pm\sqrt{2}$ and as $L\geq\sqrt{2}$ it must be $\sqrt{2}.$ We have thus shown that it converges to $\sqrt{2}$.
 \end{solution}
 \begin{problem}\label{prob:2-5}
 Show that 
@@ -287,10 +287,33 @@ y_n = \frac{1}{n}\sum_{k=1}^n x_k.
 Show that if \(\{x_n\}\) converges, then \(\{y_n\}\) also converges. However, the converse is not true.
 \end{problem}
 \begin{solution}
-  Assume that $x_n$ converges to $x$. Then for any $\varepsilon>0$ there exists $N\in\bN$ such that for all $n>N$ we have $|x-x_n|<\varepsilon$. Now for $M>N$, using the triangle inequality we have, $$\left|x-\frac{1}{M}\sum_{k=1}^Mx_k\right|=\frac{1}{M}\left|\sum_{k=1}^M(x-x_k)\right|\leq\frac{1}{M}\left|\sum_{k=1}^{N}(x-x_k)\right|+\frac{1}{M}\sum_{k=N+1}^M|x-x_k|$$ $$\leq\frac{1}{M}\left|\sum_{k=1}^N(x-x_k)\right|+\frac{(M-N)\varepsilon}{M}\leq\frac{1}{M}\left|\sum_{k=1}^N(x-x_k)\right|+\varepsilon$$As the quantity $G=|\Sigma_{k=1}^N(x-x_k)|$ is fixed we can find $M'\in\bN$ such that $G/M'<\varepsilon$ and clearly for all $K>M'$ we have that $G/K\leq G/M'<\varepsilon$. Thus for all $K>M'$ we have, $$\left|x-\sum_{k=1}^Kx_k\right|\leq\frac{G}{K}+\varepsilon\leq\frac{G}{M'}+\varepsilon<\varepsilon+\varepsilon=2\varepsilon$$which can be made arbitrarily small and thus we see that for all $\varepsilon>0$ there exists $M'\in\bN$ such that for all $K>M'$ we have $|y_n-x|<\varepsilon$ so by the definition of convergence, $y_n$ also converges to $x$. We provide a counterexample for the converse i.e. a sequence $\{x_n\}$ that does not converge but for which $\{y_n\}$ does. Such an example is the sequence $\{x_n\}$ with $x_{2n}:=1,x_{2n-1}:=0$ for $n\in\bN$, which clearly does not converge but the average,$$y_n=\frac{1}{n}\sum_{k=1}^nx_k=\frac{\lfloor n/2\rfloor}{n}$$does converge which we can conclude from the fact that its bounded on both sides by convergent sequences that converge to the same limit as follows, $$\text{(has limit half as well clearly) }1/2-1/n=\frac{\frac{n}{2}-1}{n}\leq y_n\leq\frac{n/2}{n}=1/2\text{ (constant sequence)}$$where the inequalities are true as for any real $x,$ the integer part $\lfloor x\rfloor\in(x-1,1].$ As we provided a counterexample to the converse it can't be true.
+  Assume that $x_n$ converges to $x$. Then for any $\varepsilon>0$ there exists
+	$N\in\bN$ such that for all $n>N$ we have $|x-x_n|<\varepsilon$. Now for
+	$M>N$, using the triangle inequality we have,
+	$$\left|x-\frac{1}{M}\sum_{k=1}^Mx_k\right|=\frac{1}{M}\left|\sum_{k=1}^M(x-x_k)\right|\leq\frac{1}{M}\left|\sum_{k=1}^{N}(x-x_k)\right|+\frac{1}{M}\sum_{k=N+1}^M|x-x_k|$$
+	$$\leq\frac{1}{M}\left|\sum_{k=1}^N(x-x_k)\right|+\frac{(M-N)\varepsilon}{M}\leq\frac{1}{M}\left|\sum_{k=1}^N(x-x_k)\right|+\varepsilon$$As
+	the quantity $G=|\Sigma_{k=1}^N(x-x_k)|$ is fixed we can find $M'\in\bN$
+	such that $G/M'<\varepsilon$ and clearly for all $K>M'$ we have that
+	$G/K\leq G/M'<\varepsilon$. Thus for all $K>M'$ we have,
+	$$\left|x-\sum_{k=1}^Kx_k\right|\leq\frac{G}{K}+\varepsilon\leq\frac{G}{M'}+\varepsilon<\varepsilon+\varepsilon=2\varepsilon$$which
+	can be made arbitrarily small and thus we see that for all $\varepsilon>0$
+	there exists $M'\in\bN$ such that for all $K>M'$ we have
+	$|y_n-x|<\varepsilon$ so by the definition of convergence, $y_n$ also
+	converges to $x$. We provide a counterexample for the converse i.e. a
+	sequence $\{x_n\}$ that does not converge but for which $\{y_n\}$ does.
+	Such an example is the sequence $\{x_n\}$ with $x_{2n}:=1,x_{2n-1}:=0$ for
+	$n\in\bN$, which clearly does not converge but the
+	average,$$y_n=\frac{1}{n}\sum_{k=1}^nx_k=\frac{\lfloor n/2\rfloor}{n}$$does
+	converge which we can conclude from the fact that its bounded on both sides
+	by convergent sequences that converge to the same limit as follows,
+	$$\text{(has limit half as well clearly)
+	}1/2-1/n=\frac{\frac{n}{2}-1}{n}\leq y_n\leq\frac{n/2}{n}=1/2\text{
+		(constant sequence)}$$where the inequalities are true as for any real
+	$x,$ the integer part $\lfloor x\rfloor\in(x-1,1].$ As we provided a
+	counterexample to the converse it can't be true.
 \end{solution}
 \begin{problem}\label{prob:2-10}
-Find all functions \(f : \mathbb{R} \to \mathbb{R}\) satisfying
+$^\star$Find all functions \(f : \mathbb{R} \to \mathbb{R}\) satisfying
 \[
 f(x+y) = f(x) + f(y), 
 \quad 
@@ -299,7 +322,186 @@ f(xy) = f(x)f(y)
 for all \(x,y \in \mathbb{R}\). (Hint: You may need order properties and completeness of \(\mathbb{R}\).)
 \end{problem}
 \begin{solution}
-  \textit{The only solutions are the identity function and the identically zero function. The proof works solely because of completeness axiom and the order defined on the reals which directly or indirectly implies the existence of roots down the line which is crucial to this proof.}\newline
-  Firstly we see that $f(1)=f(1\cdot 1)=f(1)^2\implies f(1)=0$ or, $1$ and if its $0$ then everything is i.e. for all $x$ we would have $f(x)=f(x\cdot 1)=f(x)\cdot f(1)=f(x)\cdot 0=0$ so $f$ would be identically zero. We work with the case where $f(1)=1$ now. From the definition, $f(0)=f(0+0)=f(0)+f(0)\implies f(0)=0$ and this is the only element that is mapped to zero as otherwise if we had some nonzero $v$ being mapped to zero, this would imply that, for all $f(1)=f(v\cdot(1/v))\cdot f(v)=f(1/v)\cdot 0=0$ which is not possible as we assumed $f(1)$ to be $1$. We also see that $f(-x)=f((-1)\cdot x)=f(-1)\cdot f(x)$ and as $f(-1)+f(1)=f(-1+1)=f(0)=0\implies f(-1)=-1$ we see that $f(-x)=-f(x)$, this shows us that $f$ is uniquely determined by its values on the positive reals. Now for positive integers $n$, $$f(n)=f\left(\underbrace{1+\ldots+1}_{\text{n times}}\right)=\underbrace{f(1)+\ldots+f(1)}_{\text{n times}}=\underbrace{1+\ldots+1}_{\text{n times}}=n$$and we can generalise this to negative integers too using the fact that $f(-n)=-f(n)=-n$. As $f(0)=0$ too we see that $f$ is the identity on the integers. Now for nonzero integers $n$ and any integer $m$ we see that, $$f(m/n)\cdot n=f(m/n)\cdot f(n)=f(m)=m\implies f(m/n)=m/n$$thus $f$ acts as the identity function on the rationals as well. Now for positive $x$ we can see that $f(x)=f(\sqrt{x}\cdot\sqrt{x})=f(\sqrt{x})^2>0$ (the existence of these $\sqrt{x}$ can be proven just like in \hyperref[prob:2-6]{Problem 2.6} or, by using the intermediate value theorem on the continous function $x\mapsto x^2$ which was all discussed in class. The strict inequality is due to $\sqrt{x}$ being nonzero for nonzero $x$.) We will now show that $f(x)=x$ for all $x\in\bR$. For the sake of contradiction assume that $f(k)<k$ for some $k\in\bR$ i.e. $f(k)=k-\varepsilon$ for some $\varepsilon>0$. Now for any rationals $r<k$ i.e. $k-r>0$ we must have that $0<f(k-r)=f(k)-f(r)=f(k)-r=k-r-\varepsilon\implies \varepsilon<k-r$ which can't be true as we can choose a rational $r$ in $(k-\varepsilon/2,k)$ (we have shown in class that any open interval in the reals contains atleast one rational) for which we would have $k-r<\varepsilon/2$ but this implies that $\varepsilon<\varepsilon/2$ which is false for positive $\varepsilon$ and we have a contradiction so $f(k)\geq k$ for all reals $k$. Now again, with the goal of showing that $f(k)\leq k$ for all reals $k$, for the sake of contradiction assume that for some real $k$ we have $f(k)>k$ i.e. $f(k)=k+\varepsilon$ for some $\varepsilon>0.$ This time consider rationals $r>k$ i.e. $r-k>0$. For these we have that, $0<f(r-k)=f(r)-f(k)=r-f(k)=r-k-\varepsilon\implies r-k>\varepsilon$ which again can't be true as we can similarly choose some rational $r\in(k,k+\varepsilon/2)$ for which we would have $r-k<\varepsilon/2$ implying that $\varepsilon/2<\varepsilon$ which is false for positive $\varepsilon$ and thus we have a contradiction so $f(k)\leq k$ for all reals $k$. As we showed that $k\leq f(k)\leq k$ for all reals $k$ we have proved that $f(k)=k$ for all reals $k$ and we are done. So the functions $f$ satisfying the conditions of the problem are exactly the identity function i.e $x\mapsto x$ and the identically zero function i.e. $x\mapsto 0$.
+  \textit{The only solutions are the identity function and the identically zero
+	function. The proof works solely because of completeness axiom and the
+	order defined on the reals which directly or indirectly implies the
+	existence of roots down the line which is crucial to this proof.}\newline
+	Firstly we see that $f(1)=f(1\cdot 1)=f(1)^2\implies f(1)=0$ or, $1$ and if
+	its $0$ then everything is i.e. for all $x$ we would have $f(x)=f(x\cdot
+	1)=f(x)\cdot f(1)=f(x)\cdot 0=0$ so $f$ would be identically zero. We work
+	with the case where $f(1)=1$ now. From the definition,
+	$f(0)=f(0+0)=f(0)+f(0)\implies f(0)=0$ and this is the only element that is
+	mapped to zero as otherwise if we had some nonzero $v$ being mapped to
+	zero, this would imply that, for all $f(1)=f(v\cdot(1/v))\cdot
+	f(v)=f(1/v)\cdot 0=0$ which is not possible as we assumed $f(1)$ to be $1$.
+	We also see that $f(-x)=f((-1)\cdot x)=f(-1)\cdot f(x)$ and as
+	$f(-1)+f(1)=f(-1+1)=f(0)=0\implies f(-1)=-1$ we see that $f(-x)=-f(x)$,
+	this shows us that $f$ is uniquely determined by its values on the positive
+	reals. Now for positive integers $n$,
+	$$f(n)=f\left(\underbrace{1+\ldots+1}_{\text{n
+	times}}\right)=\underbrace{f(1)+\ldots+f(1)}_{\text{n
+	times}}=\underbrace{1+\ldots+1}_{\text{n times}}=n$$and we can generalise
+	this to negative integers too using the fact that $f(-n)=-f(n)=-n$. As
+	$f(0)=0$ too we see that $f$ is the identity on the integers. Now for
+	nonzero integers $n$ and any integer $m$ we see that, $$f(m/n)\cdot
+	n=f(m/n)\cdot f(n)=f(m)=m\implies f(m/n)=m/n$$thus $f$ acts as the identity
+	function on the rationals as well. Now for positive $x$ we can see that
+	$f(x)=f(\sqrt{x}\cdot\sqrt{x})=f(\sqrt{x})^2>0$ (the existence of these
+	$\sqrt{x}$ can be proven just like in \hyperref[prob:2-6]{Problem 2.6} or,
+	by using the intermediate value theorem on the continous function $x\mapsto
+	x^2$ which was all discussed in class. The strict inequality is due to
+	$\sqrt{x}$ being nonzero for nonzero $x$.) We will now show that $f(x)=x$
+	for all $x\in\bR$. For the sake of contradiction assume that $f(k)<k$ for
+	some $k\in\bR$ i.e. $f(k)=k-\varepsilon$ for some $\varepsilon>0$. Now for
+	any rationals $r<k$ i.e. $k-r>0$ we must have that
+	$0<f(k-r)=f(k)-f(r)=f(k)-r=k-r-\varepsilon\implies \varepsilon<k-r$ which
+	can't be true as we can choose a rational $r$ in $(k-\varepsilon/2,k)$ (we
+	have shown in class that any open interval in the reals contains atleast
+	one rational) for which we would have $k-r<\varepsilon/2$ but this implies
+	that $\varepsilon<\varepsilon/2$ which is false for positive $\varepsilon$
+	and we have a contradiction so $f(k)\geq k$ for all reals $k$. Now again,
+	with the goal of showing that $f(k)\leq k$ for all reals $k$, for the sake
+	of contradiction assume that for some real $k$ we have $f(k)>k$ i.e.
+	$f(k)=k+\varepsilon$ for some $\varepsilon>0.$ This time consider rationals
+	$r>k$ i.e. $r-k>0$. For these we have that,
+	$0<f(r-k)=f(r)-f(k)=r-f(k)=r-k-\varepsilon\implies r-k>\varepsilon$ which
+	again can't be true as we can similarly choose some rational
+	$r\in(k,k+\varepsilon/2)$ for which we would have $r-k<\varepsilon/2$
+	implying that $\varepsilon/2<\varepsilon$ which is false for positive
+	$\varepsilon$ and thus we have a contradiction so $f(k)\leq k$ for all
+	reals $k$. As we showed that $k\leq f(k)\leq k$ for all reals $k$ we have
+	proved that $f(k)=k$ for all reals $k$ and we are done. So the functions
+	$f$ satisfying the conditions of the problem are exactly the identity
+	function i.e $x\mapsto x$ and the identically zero function i.e. $x\mapsto
+	0$.
+\end{solution}
+\section{Home Assignment III (Due: Oct 10, 2025)}
+\begin{problem}\label{prob:3-1}
+$^\star$A binary expansion $0.b_{1}b_{2}b_{3}\ldots$ is said to be periodic if there exist natural numbers $M$ and $p$ such that $b_{k+p}=b_{k}$ for all $k \ge M$. Show that a binary expansion of a real number in the interval $[0, 1]$ is periodic if and only if it is a rational number. Use this to show that the set of all rational numbers in $[0, 1]$ is countable.
+\end{problem}
+\begin{solution}
+  For one direction, let $x \in [0, 1]$ have a periodic binary expansion $0.b_1b_2b_3\ldots$. By definition, there exist natural numbers $M$ and $p$ such that $b_{k+p} = b_k$ for all $k \ge M$. We can express $x$ as the sum of its non-periodic and periodic components as follows,
+  $$ x = \sum_{k=1}^{M-1} \frac{b_k}{2^k} + \sum_{k=M}^{\infty} \frac{b_k}{2^k} $$
+  The first sum is a finite sum of rational numbers and thus its rational itself. Now for the second sum, the periodic part can be rearranged and summed in this manner
+  $$\frac{b_M}{2^M} + \frac{b_{M+1}}{2^{M+1}} + \dots = \left( \sum_{j=1}^{p} \frac{b_{M+j-1}}{2^{M+j-1}} \right) + \left( \sum_{j=1}^{p} \frac{b_{M+j-1}}{2^{M+j+p-1}} \right) + \dots $$
+  $$= \left( \sum_{j=1}^{p} \frac{b_{M+j-1}}{2^{M+j-1}} \right) \left( 1 + \frac{1}{2^p} + \frac{1}{2^{2p}} + \dots \right) $$
+The first factor is rational, being a finite sum of rationals and the second factor is a geometric series converging to $1/(1-2^{-p})$ so the whole thing is rational, being a product of two rationals. As the periodic and nonperiodic parts are both rational, the original number being a sum of those two is also rational. 
+	For the other direction, let $x = a/b$ be a rational number in $[0,1]$, with $a, b \in \bZ$, $b \neq 0$. The bits $b_k$ of its binary expansion are generated by the algorithm: $r_0 = x$, and for $k \ge 1$,
+  $$ b_k = \lfloor 2r_{k-1} \rfloor, \quad r_k = 2r_{k-1} - b_k $$
+  We can show that each remainder $r_k$ is a rational number with denominator $b$. We have $r_1 = 2(a/b) - b_1 = \frac{2a-b_1b}{b}$. Let $a_1 = 2a-b_1b$. Inductively, if $r_{k-1} = a_{k-1}/b$ for some integer $a_{k-1}$, then $r_k = 2(a_{k-1}/b) - b_k = \frac{2a_{k-1}-b_kb}{b}$. The new numerator $a_k = 2a_{k-1}-b_kb$ is also an integer.
+  
+  By the construction of the algorithm, we always have $0 \le r_k < 1$. This implies $0 \le a_k/b < 1$, which means the integer numerator $a_k$ must belong to the finite set $\{0, 1, \ldots, b-1\}$.
+  
+  Since the sequence of numerators $(a_1, a_2, a_3, \ldots)$ can only take on a finite number of values, the Pigeonhole Principle dictates that a value must eventually repeat. Let $M$ and $p$ be the smallest positive integers such that $a_M = a_{M+p}$. This equality of numerators implies an equality of remainders: $r_M = a_M/b = a_{M+p}/b = r_{M+p}$.
+  
+  This repetition forces the entire subsequent process to cycle. We have:
+  \begin{itemize}
+    \item $b_{M+1} = \lfloor 2r_M \rfloor = \lfloor 2r_{M+p} \rfloor = b_{M+p+1}$
+    \item $r_{M+1} = 2r_M - b_{M+1} = 2r_{M+p} - b_{M+p+1} = r_{M+p+1}$
+  \end{itemize}
+  By induction, it follows that $b_k = b_{k+p}$ for all $k \ge M$, which is the definition of a periodic binary expansion. If some $a_k=0$, the expansion terminates with zeros, which is a special case of a periodic sequence.
+
+  Using this we can see that the set of rational numbers in $[0,1]$, which we denote $\bQ \cap [0,1]$, is precisely the set of numbers in that interval which have a periodic binary expansion.
+  
+  Let $S$ be the set of all periodic binary expansions. There is a surjective map from $S$ to $\bQ \cap [0,1]$. To prove that $\bQ \cap [0,1]$ is countable, it suffices to show that $S$ is countable.
+  
+  An element of $S$ is uniquely defined by a finite amount of information: a pre-period of length $M-1$ and a period of length $p$. Let $S_{M,p}$ be the set of all such expansions for fixed $M,p \in \bN$. Any expansion in $S_{M,p}$ is determined by its first $M+p-1$ bits. There are exactly $2^{M+p-1}$ such sequences, so $S_{M,p}$ is a finite set.
+  
+  The total set of all periodic expansions is the union over all possible lengths:
+  $$ S = \bigcup_{(M,p) \in \bN \times \bN} S_{M,p} $$
+	This is a countable union of finite sets as the index set $\bN \times \bN$ is countable. By \hyperref[prob:1-6]{\text{Problem 1.6}} we can say that $S$ is countable.
+  
+  Since there is a surjection from the countable set $S$ onto $\bQ \cap [0,1]$, we conclude that $\bQ \cap [0,1]$ must be countable.
+\end{solution}
+\begin{problem}\label{prob:3-2}
+Determine $\limsup$ and $\liminf$ of the following sequences of real numbers:
+\begin{enumerate}[(i)]
+    \item $\{(-1)^{n}5+(-\frac{1}{2})^{n}7:n\in\mathbb{N}\}$.
+    \item $\{\frac{n}{2^{n}}-\frac{n}{3^{n}}:n\in\mathbb{N}\}$.
+    \item $\{\frac{n+6}{n^{2}-2n-8}:n\in\mathbb{N}\}$.
+\end{enumerate}
+\end{problem}
+\begin{solution}
+	In $1$, let the terms of the sequence be $a_n$, now partition the whole sequence $\{a_n\}$ into two subsequences $\{a_{2n}\}$ and $\{a_{2n-1}\}$. Clearly one converges to $5$ whereas the other to $-5$. Now as this is a partition, any convergent subsequence of this sequence $\{a_n\}$  must be eventually always a subsequence of $\{a_{2n}\}$ or $\{a_{2n-1}\}$ as alternating between these two infinitely often will not allow the subsequence in question to converge as both these parts have different limits. Thus the only limit points are these two i.e. $5$ and $-5$ because every convergent subsequence of the sequence is eventually always a subsequence of one of the parts stated above, which converge and thus so do these subsequences, to the same limit as these parts. Thus, 
+$$\limsup_{n\to\infty}a_n=\sup\{+5,-5\}=+5\text{ and, }\liminf_{n\to\infty}a_n=\inf\{+5,-5\}=-5$$
+Both the sequences in $2$ and $3$ converge to $0$ as exponential growth dominates polynomial growth as shown in class and $n^2$ dominates $n$ as well. As these are convergent sequences, they have the same limit extremums and limits which is $0$.
+\end{solution}
+\begin{problem}\label{prob:3-3}
+Suppose $\{a_{n}\}_{n\in\mathbb{N}},\{b_{n}\}_{n\in\mathbb{N}}$ are two bounded sequences of real numbers. Show that $\{a_{n}+b_{n}\}_{n\in\mathbb{N}}$ is a bounded sequence of real numbers and
+\begin{enumerate}[(i)]
+    \item $\liminf_{n\to\infty}a_{n}+\liminf_{n\to\infty}b_{n}\le \liminf_{n\to\infty}(a_{n}+b_{n});$
+    \item $\limsup_{n\to\infty}(a_{n}+b_{n})\le \limsup_{n\to\infty}a_{n}+\limsup_{n\to\infty}b_{n}$.
+\end{enumerate}
+Give examples to show that equality may not hold in (i) or (ii).
+\end{problem}
+\begin{solution}
+	If $a_n$ and $b_n$ are bounded sequence, there exists $A,B\geq 0$ such that $|a_n|\leq A$ and $|b_n|\leq B$ for all $n$. Now by the triangle inequality we have that for all $n$,
+$$|a_n+b_n|\leq|a_n|+|b_n|\leq M+N$$
+so $a_n+b_n$ is also bounded. For $1$, by definition, 
+$$\liminf_{n\to\infty}a_n+\liminf_{n\to\infty}b_n=\lim_{n\to\infty}\inf_{m\geq n}a_m+\lim_{n\to\infty}\inf_{m\geq n}b_m=\lim_{n\to\infty}\left(\inf_{m\geq n}a_m+\inf_{m\geq n}b_m\right)$$
+	Now we see that, $\inf_{m\geq n}a_m+\inf_{m\geq n}b_m\leq a_m+b_m$ for all $m\geq n$ which by the definition of the infimum implies that, for all $n$,
+$$\inf_{m\geq n}a_m+\inf_{m\geq n}b_m\leq\inf_{m\geq n}(a_m+b_m)$$
+Combined with the previous equality we get,
+	$$\liminf_{n\to\infty}a_n+\liminf_{n\to\infty}b_n=\lim_{n\to\infty}\left(\inf_{m\geq n}a_m+\inf_{m\geq n}b_m\right)\leq\lim_{n\to\infty}\inf_{m\geq n}(a_m+b_m)=\liminf_{n\to\infty}(a_n+b_n)$$
+This proves the desired inequality. To prove the statement for limit supremums it suffices to consider sequences $-a_n,-b_n$ as follows,
+$$\limsup_{n\to\infty}a_n+\limsup_{n\to\infty}b_n=-\left(\liminf_{n\to\infty}(-a_n)+\liminf_{n\to\infty}(-b_n)\right)$$
+$$\geq -\liminf_{n\to\infty}(-(a_n+b_n))=\limsup_{n\to\infty}(a_n+b_n)$$
+Where we used this fact proven in class: For bounded sequences of real numbers $\{a_n\}_{n\in\bN}$ we have, $$\limsup_{n\to\infty}a_n=-\liminf_{n\to\infty}(-a_n)$$Here equality might not occur in either case, for example when $a_n=(-1)^n$ and $b_n=-a_n$, in this case we see that
+$$-2=-1+-1=\liminf_{n\to\infty}a_n+\liminf_{n\to\infty}b_n<\liminf_{n\to\infty}(a_n+b_n)=0$$
+	$$2=1+1=\limsup_{n\to\infty}a_n+\limsup_{n\to\infty}b_n>\limsup_{n\to\infty}(a_n+b_n)=0$$
+\end{solution}
+\begin{problem}\label{prob:3-4}
+Show that a continuous function $g:[0,1]\to(0,1)$ can not be surjective. Give an example of a surjective continuous function $h:(0,1)\to[0,1]$.
+\end{problem}
+\begin{solution}
+ Functions $g$ as in the question, by the extreme value theorem will furnish some point $m\in[0,1]$ such that $f(m)$ is the maximum value $f$ reaches. Now as per the question we must have that $0<f(m)<1$ but this means that $f$ misses all the values in the nonempty interval $(f(m),1)$ by the maximality of $f(m)$, so it can't be surjective. An example of a continous surjection $h:(0,1)\to[0,1]$ is, 
+	$$h(x):=\begin{cases} 0\text{ if } x<1/3 \\ \frac{x-1/3}{2/3-1/3}\text{ if } 1/3\leq x\leq 2/3\\ 1 \text{ otherwise}\end{cases}$$
+\end{solution}
+\begin{problem}\label{prob:3-5}
+Let $k:[0,1]\to[0,1]$ be a continuous function. Show that there exists $t\in[0,1]$ such that $k(t)=1-t^{2}$.
+\end{problem}
+\begin{solution}
+	Consider the continuous (this is continous as its the sum of two continuous functions) $f(x):=k(x)-(1-x^2)$. By the definition of $k$, for all $x\in[0,1]$ we must have $0\leq k(x)\leq 1$ thus, $$f(0)=k(0)-(1-0^2)=k(0)-1\leq 0\text{ and }f(1)=k(1)-(1-1^2)=k(1)\geq 0$$
+Thus by the intermediate value theorem done in class, for all $c\in[f(0),f(1)]\supseteq[0,0]=\{0\}$ there exists some $t\in[0,1]$ such that $f(t)=c$. Choosing $c=0$, there exists some $t$ such that $f(t)=0$ i.e. $k(t)-(1-t^2)=0$ which upon rearrangement becomes $k(t)=1-t^2$ and we are done.
+\end{solution}
+\begin{problem}\label{prob:3-6}
+Prove or disprove: Suppose $A$ is a non-empty subset of $\mathbb{R}$ and $f:A\to\mathbb{R}$ has the property that $\{f(a_{n})\}_{n\in\mathbb{N}}$ is Cauchy whenever $\{a_{n}\}_{n\in\mathbb{N}}$ is Cauchy in $A$. Then $f$ is uniformly continuous.
+\end{problem}
+\begin{solution}
+	This property does not hold. For a counterexample consider $f:x\mapsto x^2$ in $\bR$, this was shown to not be uniformly continuous in class. If $\{x_n\}$ is a cauchy sequence then it is convergent in $\bR$ (this was shown in class) and as $x\mapsto x^2$ is continous we see that $\{f(x_n)\}$ also converges to $f(\lim_{n\to\infty} x_n)$. But as all convergent sequences are cauchy we see that $\{f(x_n)\}$ is cauchy too and we are done as we found a non uniformly continous function that has said property.
+\end{solution}
+\begin{problem}\label{prob:3-7}
+Let $A$ be a non-empty subset of $\mathbb{R}$ and $f:A\to\mathbb{R}$, $g:A\to\mathbb{R}$ be uniformly continuous functions. Prove or disprove:
+\begin{enumerate}[(i)]
+    \item $af+bg$ is uniformly continuous for every $a, b \in\mathbb{R}$.
+    \item $fg$ is uniformly continuous on $A$.
+    \item If $g(x)\neq 0$ for every $x\in A,$ then $\frac{f}{g}$ is uniformly continuous on $A$.
+\end{enumerate}
+\end{problem}
+\begin{solution}
+	Only $1$ is true and the rest are false, we prove our claim regarding the rest first. For $2$ consider $f,g$ to be the identity on $A=\bR$. Here $f,g$ are clearly uniformly continuous whereas $(f\cdot g)(x)=x^2$ is not uniformly continuous. For $3$ we can take $A=(0,+\infty)$ and set $f(x)=1$ on $A$, a constant function and then set $g(x)=x$ on $A$. Here again $f,g$ are both uniformly continuous and $g\neq 0$ but $(f/g)(x)=1/x$ is not uniformly continous as shown in class. Now we will prove $1$. Given any $\varepsilon >0$, there exists $\delta_1>0$ and $\delta_2>0$ such that $x,y\in A$ and $|x-y|<\delta_1\implies|f(x)-f(y)|<\varepsilon$ and $|x-y|<\delta_2\implies |g(x)-g(y)|<\varepsilon$. Let $\delta=\min\{\delta_1,\delta_2\}$ then we see that, $x,y\in A$ and $|x-y|<\delta$ implies, 
+	$$|af(x)+bg(x)-(af(y)+bg(y)|\leq|af(x)-af(y)|+|bg(x)-bg(y)|< |a|\cdot\varepsilon+|b|\cdot\varepsilon$$using the triangle inequality. If at first, instead of choosing $\varepsilon>0$ we had chosen $\varepsilon/(|a|+|b|)>0$ (assuming that not both of $a,b$ are zero, in that case it would be trivial as it'd be the zero function which is constant and thus clearly uniformly continous.) then we would have gotten 
+$$|(af(x)-bg(x))-(af(y)+bg(y))|<\varepsilon$$
+which suffices to prove uniform continuity as $\varepsilon>0$ was arbitrary and we found some $\delta>0$ such that $x,y\in A$ and $|x-y|<\delta$ implies the above inequality.
+\end{solution}
+\begin{problem}\label{prob:3-8}
+Prove or disprove: Let $A, B$ be non-empty subsets of $\mathbb{R}$. Suppose $f:A\to\mathbb{R}$ and $g:B\to\mathbb{R}$ are uniformly continuous functions such that $f(A)\subseteq B$. Then $h=g\circ f$ is uniformly continuous.
+\end{problem}
+\begin{solution}
+	By definiton, for any $\varepsilon>0$ there exists $\delta>0$ such that $x,y\in B$ and $|x-y|<\delta\implies |g(x)-g(y)|<\varepsilon$ and again there exists $\delta_*>0$ such that $x,y\in A$ and $|x-y|<\delta_*\implies |f(x)-f(y)|<\delta.$ Now when $x,y\in A$ and $|x-y|<\delta_*$ we have that $|f(x)-f(y)|<\delta\implies|g(f(x))-g(f(y))|<\varepsilon.$ Thus we have proven that $g\circ f$ is also uniformly continuous.
+\end{solution}
+\begin{problem}\label{prob:3-9}
+Show that $p:\mathbb{R}\to\mathbb{R}$ defined by $p(x)=x^{3}-5x$, $x\in\mathbb{R}$ is not uniformly continuous.
+\end{problem}
+\begin{solution}
+	We have to show that there exists some $\varepsilon>0$ such that for all $\delta>0$ there exists $x,y$ with $|x-y|<\delta$ such that $|f(x)-f(y)|\geq\varepsilon.$ Choose $\varepsilon=1$ and look at $|p(x+\delta)-p(x)|=|(x+\delta/2)^3-x^3-5(x+\delta/2)+x|=|1.5x^2\delta+\text{lower order terms}|$, this is clearly dominated by the $1.5\delta x^2$ term for large $x$ and is thus unbounded so there must be some $x$ for which its atleast $1$, no matter what $\delta>0$ we start with. As $|x-(x+\delta/2)|<\delta$ we could clearly find such points given any $\delta$ so we are done.
+\end{solution}
+\begin{problem}\label{prob:3-10}
+Give an example of a bijection $f:\mathbb{R}\to\mathbb{R}$ where $f$ is differentiable at every point in $\mathbb{R}$ but $f^{-1}$ is not differentiable at some point. (Hint: Think of polynomials). Prove your claim.
+\end{problem}
+\begin{solution}
+	Such a function is $f(x)=x^3$, its well known to be a bijection and its differentiable as all polynomials are. Its inverse is $g(x)=x^{1/3}$ and it is not differentiable at $0$ as the limit 
+$$\lim_{x\to 0}\frac{x^{1/3}-0^{1/3}}{x-0}=\lim_{x\to 0}x^{-2/3}$$
+clearly doesn't exist.
 \end{solution}
 \end{document}

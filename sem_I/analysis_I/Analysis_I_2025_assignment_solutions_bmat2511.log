@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex 2025.8.29)  13 SEP 2025 16:58
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex 2025.8.29)  5 OCT 2025 19:23
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -558,21 +558,74 @@ S/lmsy/m/n/12 f\OT1/lmr/m/n/12 0\OML/lmm/m/it/12 ; \OT1/lmr/m/n/12 2\OMS/lmsy/m
 
 [13]
 
-[14] (./Analysis_I_2025_assignment_solutions_bmat2511.aux)
+[14]
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 3
+99.
+(/usr/share/texmf-dist/tex/latex/lm/ts1lmr.fd
+File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+
+[15{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}]
+
+! Package enumitem Error: (i) undefined.
+
+See the enumitem package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.418 \begin{enumerate}[(i)]
+                            
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! Package enumitem Error: (i) undefined.
+
+See the enumitem package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.431 \begin{enumerate}[(i)]
+                            
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+
+[16]
+
+[17]
+
+! Package enumitem Error: (i) undefined.
+
+See the enumitem package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.475 \begin{enumerate}[(i)]
+                            
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+
+[18]
+
+[19] (./Analysis_I_2025_assignment_solutions_bmat2511.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
 Package rerunfilecheck Info: File `Analysis_I_2025_assignment_solutions_bmat251
 1.out' has not changed.
-(rerunfilecheck)             Checksum: 1E05B650AE42E0C822B55C56B477D3BC;3012.
+(rerunfilecheck)             Checksum: 4A665557120586D7C8569B763CA1DD66;4411.
  ) 
 Here is how much of TeX's memory you used:
- 13279 strings out of 475171
- 214001 string characters out of 5767095
+ 13379 strings out of 475171
+ 215705 string characters out of 5767095
  653962 words of memory out of 5000000
- 36055 multiletter control sequences out of 15000+600000
- 616180 words of font info for 82 fonts, out of 8000000 for 9000
+ 36126 multiletter control sequences out of 15000+600000
+ 616555 words of font info for 83 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  75i,12n,79p,3723b,545s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/euler/eufm10.pfb></usr/sha
@@ -583,13 +636,14 @@ fonts/type1/public/lm/lmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lm
 r12.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/share/texmf
 -dist/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf-dist/fonts/type1/public/
 lm/lmri12.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/sha
-re/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/share/texmf-dist/fonts/type
-1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Analysis_I_2025_assignment_solutions_bmat2511.pdf (14 pages, 
-234488 bytes).
+re/texmf-dist/fonts/type1/public/lm/lmsy6.pfb></usr/share/texmf-dist/fonts/type
+1/public/lm/lmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbol
+s/msbm10.pfb>
+Output written on Analysis_I_2025_assignment_solutions_bmat2511.pdf (19 pages, 
+262350 bytes).
 PDF statistics:
- 279 PDF objects out of 1000 (max. 8388607)
- 232 compressed objects within 3 object streams
- 40 named destinations out of 1000 (max. 500000)
- 193 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 378 PDF objects out of 1000 (max. 8388607)
+ 322 compressed objects within 4 object streams
+ 64 named destinations out of 1000 (max. 500000)
+ 281 words of extra memory for PDF output out of 10000 (max. 10000000)
 

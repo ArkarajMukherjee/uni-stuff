@@ -22,3 +22,14 @@
 \contentsline {subsection}{Problem~2.8}{12}{problem.2.8}%
 \contentsline {subsection}{Problem~2.9}{13}{problem.2.9}%
 \contentsline {subsection}{Problem~2.10}{13}{problem.2.10}%
+\contentsline {section}{\numberline {3}Home Assignment III (Due: Oct 10, 2025)}{15}{section.3}%
+\contentsline {subsection}{Problem~3.1}{15}{problem.3.1}%
+\contentsline {subsection}{Problem~3.2}{16}{problem.3.2}%
+\contentsline {subsection}{Problem~3.3}{16}{problem.3.3}%
+\contentsline {subsection}{Problem~3.4}{17}{problem.3.4}%
+\contentsline {subsection}{Problem~3.5}{18}{problem.3.5}%
+\contentsline {subsection}{Problem~3.6}{18}{problem.3.6}%
+\contentsline {subsection}{Problem~3.7}{18}{problem.3.7}%
+\contentsline {subsection}{Problem~3.8}{19}{problem.3.8}%
+\contentsline {subsection}{Problem~3.9}{19}{problem.3.9}%
+\contentsline {subsection}{Problem~3.10}{19}{problem.3.10}%
