@@ -224,11 +224,9 @@ INPUT /usr/share/texmf-dist/tex/latex/amsfonts/ueuf.fd
 INPUT /usr/share/texmf-dist/fonts/tfm/public/amsfonts/euler/eufm10.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/amsfonts/euler/eufm10.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/amsfonts/euler/eufm7.tfm
-INPUT /usr/share/texmf-dist/tex/latex/lm/ts1lmr.fd
-INPUT /usr/share/texmf-dist/tex/latex/lm/ts1lmr.fd
-INPUT /usr/share/texmf-dist/tex/latex/lm/ts1lmr.fd
-INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/ts1-lmr12.tfm
-INPUT /usr/share/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc
+INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/rm-lmbx12.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/rm-lmbx8.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/rm-lmbx6.tfm
 INPUT Analysis_I_2025_assignment_solutions_bmat2511.aux
 INPUT ./Analysis_I_2025_assignment_solutions_bmat2511.out
 INPUT ./Analysis_I_2025_assignment_solutions_bmat2511.out
@@ -243,6 +241,5 @@ INPUT /usr/share/texmf-dist/fonts/type1/public/lm/lmr6.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/lm/lmr8.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/lm/lmri12.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/lm/lmsy10.pfb
-INPUT /usr/share/texmf-dist/fonts/type1/public/lm/lmsy6.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/lm/lmsy8.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb
