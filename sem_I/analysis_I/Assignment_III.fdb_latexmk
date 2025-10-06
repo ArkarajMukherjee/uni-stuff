@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1759690237.42052 "Assignment_III.tex" "Assignment_III.pdf" "Assignment_III" 1759690238.03844 2
+["pdflatex"] 1759735220.57183 "Assignment_III.tex" "Assignment_III.pdf" "Assignment_III" 1759735221.24803 2
   "/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc" 1755987285 2375 baa924870cfb487815765f9094cf3728 ""
   "/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc" 1755987285 3486 c7eadf5dcc57b3b2d11736679f6636ba ""
   "/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc" 1755987285 2405 5dcf2c1b967ee25cc46c58cd52244aed ""
@@ -118,10 +118,10 @@
   "/usr/share/texmf-dist/web2c/texmf.cnf" 1755987285 42087 b0f9697c952c8f5a8eede4134282cb0d ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1756475368 5311557 9da84c45f5b388655502706482323571 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1756475284 2008250 7d04ad79827f822836920f44a1dbaa24 ""
-  "Assignment_III.aux" 1759690237.96796 2396 dcbd69e031defb89b226da46406b5ec4 "pdflatex"
-  "Assignment_III.out" 1759690237.96896 1390 970c3f0381ebb609384a15316f27e8d3 "pdflatex"
-  "Assignment_III.tex" 1759690237.28301 16664 f7e0cc428575754e44fcc03112932ca2 ""
-  "Assignment_III.toc" 1759690237.96896 667 81d1d95064fc6d0a1f643589cc12e48f "pdflatex"
+  "Assignment_III.aux" 1759735221.1583 2396 dcbd69e031defb89b226da46406b5ec4 "pdflatex"
+  "Assignment_III.out" 1759735221.1583 1390 970c3f0381ebb609384a15316f27e8d3 "pdflatex"
+  "Assignment_III.tex" 1759735220.37197 16717 56ef963a5ebffd770b801d0c69b24986 ""
+  "Assignment_III.toc" 1759735221.1583 667 81d1d95064fc6d0a1f643589cc12e48f "pdflatex"
   (generated)
   "Assignment_III.aux"
   "Assignment_III.log"
