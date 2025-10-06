@@ -1,0 +1,177 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath, amssymb, amsthm, graphicx}
+\usepackage{enumitem}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage[dvipsnames]{xcolor}
+\definecolor{EvanPink}{rgb}{0.85, 0.13, 0.55}
+\usepackage[colorlinks=true,
+            linkcolor=OliveGreen,
+            urlcolor=EvanPink,
+            citecolor=OliveGreen]{hyperref}
+\usepackage{cleveref}
+\usepackage{etoolbox}
+\newenvironment{solution}{%
+  \par\noindent\textit{Solution.}\ }{\qed}
+\newtheoremstyle{problemstyle}
+  {1em}   
+  {1em}   
+  {}      
+  {}      
+  {\bfseries} 
+  {.}     
+  {0.5em} 
+  {}      
+\theoremstyle{problemstyle}
+\newtheorem{problem}{Problem}[section]
+\apptocmd{\problem}{%
+  \addcontentsline{toc}{subsection}{Problem~\thesection.\arabic{problem}}%
+}{}{}
+\crefname{problem}{Problem}{Problems}
+\Crefname{problem}{Problem}{Problems}
+\setcounter{tocdepth}{2}
+\title{\textbf{Analysis I} \\ \large Home Assignment III}
+\author{Arkaraj Mukherjee \\ B.Math., First Year, ISI Bangalore}
+\date{\today}
+\def\bN{\mathbb{N}}
+\def\bR{\mathbb{R}}
+\def\bZ{\mathbb{Z}}
+\def\bQ{\mathbb{Q}}
+\begin{document}
+\maketitle
+\newpage
+\tableofcontents
+\newpage
+\section{Home Assignment III (Due: Oct 10, 2025)}
+\begin{problem}\label{prob:3-1}
+$^\star$A binary expansion $0.b_{1}b_{2}b_{3}\ldots$ is said to be periodic if there exist natural numbers $M$ and $p$ such that $b_{k+p}=b_{k}$ for all $k \ge M$. Show that a binary expansion of a real number in the interval $[0, 1]$ is periodic if and only if it is a rational number. Use this to show that the set of all rational numbers in $[0, 1]$ is countable.
+\end{problem}
+\begin{solution}
+  For one direction, let $x \in [0, 1]$ have a periodic binary expansion $0.b_1b_2b_3\ldots$. By definition, there exist natural numbers $M$ and $p$ such that $b_{k+p} = b_k$ for all $k \ge M$. We can express $x$ as the sum of its non-periodic and periodic components as follows,
+  $$ x = \sum_{k=1}^{M-1} \frac{b_k}{2^k} + \sum_{k=M}^{\infty} \frac{b_k}{2^k} $$
+  The first sum is a finite sum of rational numbers and thus its rational itself. Now for the second sum, the periodic part can be rearranged and summed in this manner
+  $$\frac{b_M}{2^M} + \frac{b_{M+1}}{2^{M+1}} + \dots = \left( \sum_{j=1}^{p} \frac{b_{M+j-1}}{2^{M+j-1}} \right) + \left( \sum_{j=1}^{p} \frac{b_{M+j-1}}{2^{M+j+p-1}} \right) + \dots $$
+  $$= \left( \sum_{j=1}^{p} \frac{b_{M+j-1}}{2^{M+j-1}} \right) \left( 1 + \frac{1}{2^p} + \frac{1}{2^{2p}} + \dots \right) $$
+The first factor is rational, being a finite sum of rationals and the second factor is a geometric series converging to $1/(1-2^{-p})$ so the whole thing is rational, being a product of two rationals. As the periodic and nonperiodic parts are both rational, the original number being a sum of those two is also rational.
+
+	For the second part, let $x=p/q$ be our rational, here $p\in\bZ_{\geq 0}$ and $q\in\bN$. Suppose this has binary expansion, 
+$$x=\frac{b_1}{2}+\frac{b_2}{2^2}+\ldots$$
+Where $b\in\{0,1\}$. multiplying by two and taking the floor,
+	$$\lfloor 2x\rfloor=\Big\lfloor b_1+\frac{b_2}{2}+\frac{b_3}{2^2}+\ldots\Big\rfloor=b_1+\Big\lfloor\underbrace{\frac{b_2}{2}+\frac{b_3}{2^2}+\frac{b_4}{2^3}+\ldots}_{\mathbf{\star\star}}\Big\rfloor=b_1+0=b_1$$
+$(\mathbf{\star\star})$ This is because the sum $\frac{b_2}{2} + \frac{b_3}{4} + \dots$ satisfies $0 \le S \le \sum_{k=1}^{\infty} \frac{1}{2^k} = 1$ and the case where the sum equals 1 (e.g., $0.0111\ldots = 0.1$) corresponds to a number that has a terminating binary expansion. The algorithm, by its nature, produces the terminating expansion, ensuring the remainder is always strictly less than 1. Therefore, the sum is in the interval $[0, 1)$, and its floor is 0. Now look at $\{2x\}=2x-\lfloor 2x\rfloor$, the fractional part. This is,
+$$\{2x\}=2x-\lfloor 2x\rfloor=\left(b_1+\frac{b_2}{2}+\frac{b_3}{4}+\ldots\right)-b_1=\frac{b_2}{2}+\frac{b_3}{4}+\frac{b_4}{8}+\ldots$$
+And we can keep repeating what we did to $x$ initially to get the bits $b_i$ one by one following this recurrence,
+$$b_1=\lfloor 2x\rfloor,r_1=\{2x\}\text{ and }r_k=\{2r_{k-1}\},b_k=\lfloor 2r_{k-1}\rfloor\text{ for }k\geq 2$$
+Writing $x=p/q$ again we see that,
+$$b_1=\Big\lfloor\frac{2p}{q}\Big\rfloor,r_1=\frac{2p}{q}-\Big\lfloor\frac{2p}{q}\Big\rfloor=\frac{2p\pmod{q}}{q}$$
+	Here, $a\pmod{b}$ is the nonnegative remainder left when dividing $a$ by $b$. Again,
+$$r_2=\{2\cdot r_1\}=\frac{2\times(2p\pmod{q})\pmod{q}}{q}$$this keeps going on and on. We can see that all the $r_k$ are fractions of form $d/q$ where $0\leq d<q$. But as there are only finitely many such $d$, there must exist some two $r_k$ and $r_{k+M}(M>0)$ which are equal as their numerator must be the same (we can not keep getting unique numerators as there are only a finite amount of them, infact only $q$ of them.) Now we see that, $r_k=r_{k+M}\implies b_{k+1}=\lfloor 2\cdot r_k\rfloor=\lfloor 2\cdot r_{k+M}\rfloor=b_{k+M+1}$ and also $r_{k+1}=\{2\cdot r_k\}=\{2\cdot r_{k+M}\}=r_{k+M+1}$ which in turn again implies $b_{k+2}=b_{k+M+2}$ and this keeps going on and on. We thus see that for all $n\geq k$ we have $r_{n}=r_{n+M}$ i.e. its periodic and we are done.
+ 
+Now let $S$ be the set of all periodic binary expansions. Every $x\in\bQ\cap[0,1]$ corresponds to some periodic binary expansion as we showed above, thus there is a surjection from $S$ to $\bQ \cap [0,1]$ and to prove that $\bQ \cap [0,1]$ is countable, its sufficient to show that $S$ is countable.
+  
+  An element of $S$ is uniquely defined by a finite amount of information: a pre-period of length $M-1$ and a period of length $p$. Let $S_{M,p}$ be the set of all such expansions for fixed $M,p \in \bN$. Any expansion in $S_{M,p}$ is determined by its first $M+p-1$ bits. There are exactly $2^{M+p-1}$ such sequences, so $S_{M,p}$ is a finite set.
+  
+  The total set of all periodic expansions is the union over all possible lengths:
+  $$ S = \bigcup_{(M,p) \in \bN \times \bN} S_{M,p} $$
+	This is a countable union of finite sets as the index set $\bN \times \bN$ is countable. By \hyperref[prob:1-6]{\text{Problem 1.6}} we can say that $S$ is countable.
+  
+  Since there is a surjection from the countable set $S$ onto $\bQ \cap [0,1]$, we conclude that $\bQ \cap [0,1]$ must be countable.
+\end{solution}
+\begin{problem}\label{prob:3-2}
+Determine $\limsup$ and $\liminf$ of the following sequences of real numbers:
+\begin{enumerate}[(i)]
+    \item $\{(-1)^{n}5+(-\frac{1}{2})^{n}7:n\in\mathbb{N}\}$.
+    \item $\{\frac{n}{2^{n}}-\frac{n}{3^{n}}:n\in\mathbb{N}\}$.
+    \item $\{\frac{n+6}{n^{2}-2n-8}:n\in\mathbb{N}\}$.
+\end{enumerate}
+\end{problem}
+\begin{solution}
+	In $1$, let the terms of the sequence be $a_n$, now partition the whole sequence $\{a_n\}$ into two subsequences $\{a_{2n}\}$ and $\{a_{2n-1}\}$. Clearly one converges to $5$ whereas the other to $-5$. Now as this is a partition, any convergent subsequence of this sequence $\{a_n\}$  must be eventually always a subsequence of $\{a_{2n}\}$ or $\{a_{2n-1}\}$ as alternating between these two infinitely often will not allow the subsequence in question to converge as both these parts have different limits. Thus the only limit points are these two i.e. $5$ and $-5$ because every convergent subsequence of the sequence is eventually always a subsequence of one of the parts stated above, which converge and thus so do these subsequences, to the same limit as these parts. Thus, 
+$$\limsup_{n\to\infty}a_n=\sup\{+5,-5\}=+5\text{ and, }\liminf_{n\to\infty}a_n=\inf\{+5,-5\}=-5$$
+Using the fact proven in class that the limit supremum is the supremum of the subsequential limits and the limit infimum, the infimum of the same.
+
+
+Both the sequences in $2$ and $3$ converge to $0$ as exponential growth dominates polynomial growth as shown in class and $n^2$ dominates $n$ as well. As these are convergent sequences, they have the same limit extremums and limits all of which are $0$.
+\end{solution}
+\begin{problem}\label{prob:3-3}
+Suppose $\{a_{n}\}_{n\in\mathbb{N}},\{b_{n}\}_{n\in\mathbb{N}}$ are two bounded sequences of real numbers. Show that $\{a_{n}+b_{n}\}_{n\in\mathbb{N}}$ is a bounded sequence of real numbers and
+\begin{enumerate}[(i)]
+    \item $\liminf_{n\to\infty}a_{n}+\liminf_{n\to\infty}b_{n}\le \liminf_{n\to\infty}(a_{n}+b_{n});$
+    \item $\limsup_{n\to\infty}(a_{n}+b_{n})\le \limsup_{n\to\infty}a_{n}+\limsup_{n\to\infty}b_{n}$.
+\end{enumerate}
+Give examples to show that equality may not hold in (i) or (ii).
+\end{problem}
+\begin{solution}
+	If $a_n$ and $b_n$ are bounded sequence, there exists $A,B\geq 0$ such that $|a_n|\leq A$ and $|b_n|\leq B$ for all $n$. Now by the triangle inequality we have that for all $n$,
+$$|a_n+b_n|\leq|a_n|+|b_n|\leq A+B$$
+so $a_n+b_n$ is also bounded. For $1$, by definition, 
+$$\liminf_{n\to\infty}a_n+\liminf_{n\to\infty}b_n=\lim_{n\to\infty}\inf_{m\geq n}a_m+\lim_{n\to\infty}\inf_{m\geq n}b_m=\lim_{n\to\infty}\left(\inf_{m\geq n}a_m+\inf_{m\geq n}b_m\right)$$
+	Now we see that, $\inf_{m\geq n}a_m+\inf_{m\geq n}b_m\leq a_m+b_m$ for all $m\geq n$ which by the definition of the infimum implies that, for all $n$,
+$$\inf_{m\geq n}a_m+\inf_{m\geq n}b_m\leq\inf_{m\geq n}(a_m+b_m)$$
+Combined with the previous equality we get,
+	$$\liminf_{n\to\infty}a_n+\liminf_{n\to\infty}b_n=\lim_{n\to\infty}\left(\inf_{m\geq n}a_m+\inf_{m\geq n}b_m\right)\leq\lim_{n\to\infty}\inf_{m\geq n}(a_m+b_m)=\liminf_{n\to\infty}(a_n+b_n)$$
+This proves the desired inequality. To prove the statement for limit supremums it suffices to consider sequences $-a_n,-b_n$ as follows,
+$$\limsup_{n\to\infty}a_n+\limsup_{n\to\infty}b_n=-\left(\liminf_{n\to\infty}(-a_n)+\liminf_{n\to\infty}(-b_n)\right)$$
+$$\geq -\liminf_{n\to\infty}(-(a_n+b_n))=\limsup_{n\to\infty}(a_n+b_n)$$
+Where we used the above proven inequality and also this fact proven in class: For bounded sequences of real numbers $\{a_n\}_{n\in\bN}$ we have, $$\limsup_{n\to\infty}a_n=-\liminf_{n\to\infty}(-a_n)$$Here equality might not occur in either case, for example when $a_n=(-1)^n$ and $b_n=-a_n$, in this case we see that
+$$-2=-1+-1=\liminf_{n\to\infty}a_n+\liminf_{n\to\infty}b_n<\liminf_{n\to\infty}(a_n+b_n)=0$$
+	$$2=1+1=\limsup_{n\to\infty}a_n+\limsup_{n\to\infty}b_n>\limsup_{n\to\infty}(a_n+b_n)=0$$
+\end{solution}
+\begin{problem}\label{prob:3-4}
+Show that a continuous function $g:[0,1]\to(0,1)$ can not be surjective. Give an example of a surjective continuous function $h:(0,1)\to[0,1]$.
+\end{problem}
+\begin{solution}
+ Functions $g$ as in the question, by the extreme value theorem will furnish some point $m\in[0,1]$ such that $f(m)$ is the maximum value $f$ reaches. Now as per the question we must have that $0<f(m)<1$ but this means that $f$ misses all the values in the nonempty interval $(f(m),1)$ by the maximality of $f(m)$, so it can't be surjective. An example of a continous surjection $h:(0,1)\to[0,1]$ is, 
+	$$h(x):=\begin{cases} 0\text{ if } x<1/3 \\ \frac{x-1/3}{2/3-1/3}\text{ if } 1/3\leq x\leq 2/3\\ 1 \text{ otherwise}\end{cases}$$
+\end{solution}
+\begin{problem}\label{prob:3-5}
+Let $k:[0,1]\to[0,1]$ be a continuous function. Show that there exists $t\in[0,1]$ such that $k(t)=1-t^{2}$.
+\end{problem}
+\begin{solution}
+	Consider the continuous (this is continous as its the sum of two continuous functions) $f(x):=k(x)-(1-x^2)$. By the definition of $k$, for all $x\in[0,1]$ we must have $0\leq k(x)\leq 1$ thus, $$f(0)=k(0)-(1-0^2)=k(0)-1\leq 0\text{ and }f(1)=k(1)-(1-1^2)=k(1)\geq 0$$
+Thus by the intermediate value theorem done in class, for all $c\in[f(0),f(1)]\supseteq[0,0]=\{0\}$ there exists some $t\in[0,1]$ such that $f(t)=c$. Choosing $c=0$, there exists some $t$ such that $f(t)=0$ i.e. $k(t)-(1-t^2)=0$ which upon rearrangement becomes $k(t)=1-t^2$ and we are done.
+\end{solution}
+\begin{problem}\label{prob:3-6}
+Prove or disprove: Suppose $A$ is a non-empty subset of $\mathbb{R}$ and $f:A\to\mathbb{R}$ has the property that $\{f(a_{n})\}_{n\in\mathbb{N}}$ is Cauchy whenever $\{a_{n}\}_{n\in\mathbb{N}}$ is Cauchy in $A$. Then $f$ is uniformly continuous.
+\end{problem}
+\begin{solution}
+	This property does not hold. For a counterexample consider $f:x\mapsto x^2$ in $\bR$, this was shown to not be uniformly continuous in class. If $\{x_n\}$ is a cauchy sequence then it is convergent in $\bR$ (this was shown in class) and as $x\mapsto x^2$ is continous we see that $\{f(x_n)\}$ also converges to $f(\lim_{n\to\infty} x_n)$. But as all convergent sequences are cauchy we see that $\{f(x_n)\}$ is cauchy too and we are done as we found a non uniformly continous function that has said property.
+\end{solution}
+\begin{problem}\label{prob:3-7}
+Let $A$ be a non-empty subset of $\mathbb{R}$ and $f:A\to\mathbb{R}$, $g:A\to\mathbb{R}$ be uniformly continuous functions. Prove or disprove:
+\begin{enumerate}[(i)]
+    \item $af+bg$ is uniformly continuous for every $a, b \in\mathbb{R}$.
+    \item $fg$ is uniformly continuous on $A$.
+    \item If $g(x)\neq 0$ for every $x\in A,$ then $\frac{f}{g}$ is uniformly continuous on $A$.
+\end{enumerate}
+\end{problem}
+\begin{solution}
+	Only $1$ is true and the rest are false, we prove our claim regarding the rest first. For $2$ consider $f,g$ to be the identity on $A=\bR$. Here $f,g$ are clearly uniformly continuous whereas $(f\cdot g)(x)=x^2$ is not uniformly continuous. For $3$ we can take $A=(0,+\infty)$ and set $f(x)=1$ on $A$, a constant function and then set $g(x)=x$ on $A$. Here again $f,g$ are both uniformly continuous and $g\neq 0$ but $(f/g)(x)=1/x$ is not uniformly continous as shown in class. Now we will prove $1$. Given any $\varepsilon >0$, there exists $\delta_1>0$ and $\delta_2>0$ such that $x,y\in A$ and $|x-y|<\delta_1\implies|f(x)-f(y)|<\varepsilon$ and $|x-y|<\delta_2\implies |g(x)-g(y)|<\varepsilon$. Let $\delta=\min\{\delta_1,\delta_2\}$ then we see that, $x,y\in A$ and $|x-y|<\delta$ implies, 
+	$$|af(x)+bg(x)-(af(y)+bg(y)|\leq|af(x)-af(y)|+|bg(x)-bg(y)|< |a|\cdot\varepsilon+|b|\cdot\varepsilon$$using the triangle inequality. If at first, instead of choosing $\varepsilon>0$ we had chosen $\varepsilon/(|a|+|b|)>0$ (assuming that not both of $a,b$ are zero, in that case it would be trivial as it'd be the zero function which is constant and thus clearly uniformly continous.) then we would have gotten 
+$$|(af(x)-bg(x))-(af(y)+bg(y))|<\varepsilon$$
+which suffices to prove uniform continuity as $\varepsilon>0$ was arbitrary and we found some $\delta>0$ such that $x,y\in A$ and $|x-y|<\delta$ implies the above inequality.
+\end{solution}
+\begin{problem}\label{prob:3-8}
+Prove or disprove: Let $A, B$ be non-empty subsets of $\mathbb{R}$. Suppose $f:A\to\mathbb{R}$ and $g:B\to\mathbb{R}$ are uniformly continuous functions such that $f(A)\subseteq B$. Then $h=g\circ f$ is uniformly continuous.
+\end{problem}
+\begin{solution}
+	By definiton, for any $\varepsilon>0$ there exists $\delta>0$ such that $x,y\in B$ and $|x-y|<\delta\implies |g(x)-g(y)|<\varepsilon$ and again there exists $\delta_*>0$ such that $x,y\in A$ and $|x-y|<\delta_*\implies |f(x)-f(y)|<\delta.$ Now when $x,y\in A$ and $|x-y|<\delta_*$ we have that $|f(x)-f(y)|<\delta\implies|g(f(x))-g(f(y))|<\varepsilon.$ Thus we have proven that $g\circ f$ is also uniformly continuous.
+\end{solution}
+\begin{problem}\label{prob:3-9}
+Show that $p:\mathbb{R}\to\mathbb{R}$ defined by $p(x)=x^{3}-5x$, $x\in\mathbb{R}$ is not uniformly continuous.
+\end{problem}
+\begin{solution}
+	We have to show that there exists some $\varepsilon>0$ such that for all $\delta>0$ there exists $x,y$ with $|x-y|<\delta$ such that $|f(x)-f(y)|\geq\varepsilon.$ Choose $\varepsilon=1$ and look at $|p(x+\delta)-p(x)|=|(x+\delta/2)^3-x^3-5(x+\delta/2)+x|=|1.5x^2\delta+\text{lower order terms}|$, this is clearly dominated by the $1.5\delta x^2$ term for large $x$ and is thus unbounded so there must be some $x$ for which its atleast $1$, no matter what $\delta>0$ we start with. As $|x-(x+\delta/2)|<\delta$ we could clearly find such points given any $\delta$ so we are done.
+\end{solution}
+\begin{problem}\label{prob:3-10}
+Give an example of a bijection $f:\mathbb{R}\to\mathbb{R}$ where $f$ is differentiable at every point in $\mathbb{R}$ but $f^{-1}$ is not differentiable at some point. (Hint: Think of polynomials). Prove your claim.
+\end{problem}
+\begin{solution}
+	Such a function is $f(x)=x^3$, its well known to be a bijection and its differentiable as all polynomials are. Its inverse is $g(x)=x^{1/3}$ and it is not differentiable at $0$ as the limit 
+$$\lim_{x\to 0}\frac{x^{1/3}-0^{1/3}}{x-0}=\lim_{x\to 0}x^{-2/3}$$
+clearly doesn't exist.
+\end{solution}
+\end{document}
