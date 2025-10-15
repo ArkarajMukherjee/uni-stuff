@@ -504,4 +504,193 @@ Give an example of a bijection $f:\mathbb{R}\to\mathbb{R}$ where $f$ is differen
 $$\lim_{x\to 0}\frac{x^{1/3}-0^{1/3}}{x-0}=\lim_{x\to 0}x^{-2/3}$$
 clearly doesn't exist.
 \end{solution}
+\section{Home Assignment IV (Due: Oct 26, 2025)}
+
+\begin{problem}\label{prob:4-1}
+Let $g: [0,1] \to \mathbb{R}$ be a function such that $g$ is strictly increasing and satisfies the intermediate value property, that is, for any $y$ with $g(0) < y < g(1)$, there exists $0 < x < 1$ such that $g(x) = y$. Show that $g$ is continuous.
+\end{problem}
+\begin{solution}
+Fix some $\varepsilon>0$ and $x\in(0,1)$ (continuity at the ends can be proved in the exact same manner as below by considering points on only 'one side' of the interval, depending on which end we look at) as in the usual definition of continuity. 
+By the problem statement $g(0)<g(x)<g(1)$ so clearly there exists some $0<\varepsilon_o<\varepsilon$ such that
+$$g(0)<g(x)-\varepsilon_o<g(x)<g(x)+\varepsilon_o<g(1)$$
+Again by the problem statement, there exists  $x_l,y_l$ such that,
+$$g(x_l)=g(x)-\varepsilon_o,g(x_r)=g(x)+\varepsilon_o$$
+and by strict increasing(ness) of $g,x_l<x<x_r.$ Now let $\delta>0$ be such that, $$x_l<x-\delta<x<x+\delta<x_r$$
+We will show that this $\delta$ works as in the definition of continuity. Given any $y\in(x-\delta,x+\delta)$ (which is just $|y-x|<\delta$ rephrased) by the above inequality we see that 
+$$x_l<x-\delta<y<x+\delta\implies g(x)-\varepsilon_o<g(x_l)<g(y)<g(x_r)=g(x)+\varepsilon_o$$
+which implies that $|g(x)-g(y)|<\varepsilon_o<\varepsilon$ and we are done.
+\end{solution}
+\begin{problem}\label{prob:4-2}
+Let $h : [0, 1] \to [0, 1]$ be a continuous function. A real number $x \in [0, 1]$ is said to be a fixed point of $h$, if $h(x) = x$. Suppose $h$ is a strict contraction that is: $|h(x) - h(y)| < c|x - y|$ for all $x \neq y$ in $[0, 1]$ for some $0 < c < 1$. Given $a \in [0, 1]$ define a sequence $\{a_n\}_{n\geq 1}$ by $a_1 = a$ and $a_{n+1} = h(a_n)$. Show that $\{a_n\}_{n\geq1}$ is a convergent sequence and the limit is a fixed point of $h$.
+\end{problem}
+\begin{solution}
+This is a case of the banach fixed point theorem. We will prove that the sequence $\{a_n\}$ is cauchy which will imply that its convergent in $\bR$, with limit being a fixed point as
+$$L=\lim_{n\to\infty}a_n=\lim_{n\to\infty}a_{n+1}=\lim_{n\to\infty}h(a_n)=h\left(\lim_{n\to\infty}a_n\right)=h(L)$$
+where we used the continuity of $h$ (can be easily shown, take $\delta=\varepsilon/c>0$ given $\varepsilon>0$) in the fourth equality.
+ We ease the strict equality $|h(x)-h(y)|<c|x-y|$ for $x\neq y$ to $|h(x)-h(y)|\leq c|x-y|$ which allows us to extend it into including the case of $x=y$. For any $n\geq 2$ we see that, 
+$$|a_{n+1}-a_n|=|h(a_n)-h(a_{n-1})|\leq c|a_n-a_{n-1}|\leq\ldots$$
+proceeding inductively we have, for all $n\geq 2$
+$$|a_{n+1}-a_n|\leq c^{n-2}|a_2-a_1|$$
+For some large $N\in\bN$ we see that for distinct $m,n>N$ (wlog $m>n$),
+$$|a_m-a_n|=\left|\sum_{k=0}^{m-n-1}(a_{m-k}-a_{m-k-1})\right|\leq\sum_{k=0}^{m-n-1}|a_{m-k}-a_{m-k-1}|\leq\sum_{k=0}^{m-n-1}c^{m-k-3}|a_2-a_1|$$
+$$\implies|a_m-a_n|\leq|a_2-a_1|\sum_{k=n-2}^{m-3}c^k\leq|a_2-a_1|\sum_{k=n-2}^\infty c^k=\left(\frac{|a_2-a_1|}{1-c}\right)\cdot c^{n-2}$$As $n>N$ and $0<c<1$ we also see that,
+$$|a_m-a_n|<\left(\frac{|a_2-a_1|}{1-c}\right)\cdot c^{N-2}$$
+because $c^{N-2}>c^{n-2}$ as $c\in(0,1)$. 
+Now given any $\varepsilon>0$, as the right hand side clearly tends to $0$ as $N$ tends to infinity, we can find some $M>0$ such that $(\text{that constant})c^M<\varepsilon$ and by the previous inequality, for all $m,n>M$ we must have
+$$|a_m-a_n|<\varepsilon$$
+so its cauchy and we are done.
+\end{solution}
+\begin{problem}\label{prob:4-3}
+For any two continuous functions $f, g$ on $[0, 1]$ define
+\[d(f, g) = \sup\{|f(x) - g(x)| : x \in [0, 1]\}.\]
+Show the triangle inequality:
+\[d(f,g) \leq d(f,h) + d(h, g),\]
+for any three continuous functions $f, g, h$ on $[0, 1]$.
+\end{problem}
+\begin{solution}
+We know that continuous functions over closed sets are bounded as proven in class so $f,g,h$ are all bounded. For continuous functions $\nu$ on $[0,1]$ define,
+$$\|\nu\|_{\infty}:=\sup\{|\nu(x)|:x\in[0,1]\}<+\infty\text{ (as its bounded)}$$
+As $|\nu(x)|\leq\|\nu\|_{\infty}$ for all $x\in[0,1]$ and similarly $|\mu|\leq\|\mu\|_{\infty}$ for another continuous $\mu$ on $[0,1]$ we see that 
+$$|\nu(x)+\mu(x)|\leq|\nu(x)|+|\mu(x)|\leq\|\nu\|_{\infty}+\|\mu\|_{\infty}$$
+Now by the definition of the supremum we must have,
+$$\|\nu+\mu\|_{\infty}\leq\|\nu\|_{\infty}+\|\mu\|_{\infty}$$
+and the problem statement is deduced from the case where 
+$$\mu=f-h,\nu=h-g\text{ are continuous functions on }[0,1]$$
+using the fact that for continous $\nu,\mu$ on $[0,1]$ we have $d(\mu,\nu)=\|\nu-\mu\|_\infty$ as follows,
+$$d(f,g)=\|f-g\|_\infty=\|(f-h)+(h-g)\|_\infty\leq\|f-h\|_\infty+\|h-g\|_\infty=d(f,h)+d(h,g)$$
+\end{solution}
+\begin{problem}\label{prob:4-4}
+Let $f : \mathbb{R} \to \mathbb{R}$ be a continuous function such that $f(x + y) = f(x) + f(y)$ for all $x, y \in \mathbb{R}$. Show that there exists $d \in \mathbb{R}$ such that $f(x) = dx$ for all $x \in \mathbb{R}$.
+\end{problem}
+\begin{solution}
+	Just as in \hyperref[prob:2-10]{Problem 2.10.} we can show that for any rational $r$ we have $f(r)=f(1)\cdot r$ and as given any real number $x$ there exists a sequence of rationals $\{x_n\}$ converging to it we see that,
+$$f(x)=f\left(\lim_{n\to\infty}x_n\right)=\lim_{n\to\infty}f(x_n)=\lim_{n\to\infty}f(1)\cdot x_n=f(1)\cdot\lim_{n\to\infty}x_n=f(1)\cdot x$$
+where we used the continuity of $f$ in the second inequality and a basic fact from the algebra of limits in the fourth. Thus we see that $d=f(1)$ and $f(x)=f(1)\cdot x$ for all $x\in\bR$
+\end{solution}
+\begin{problem}\label{prob:4-5}
+Let $h : \mathbb{R} \to \mathbb{R}$ be a continuous function such that $h(x) = h(5x)$ for all $x \in \mathbb{R}$. Show that $h$ is a constant function.
+\end{problem}
+As $5\cdot(x/5)=x$ for all reals $x$, we have that $f(x/5)=f(x)$. Using this equation repeatedly we have, for any $n\in\bN$
+$$f(x)=f(x/5)=\ldots=f(x/5^n)$$
+We can thus take the limits on both sides to get,
+$$f(x)=\lim_{n\to\infty}f(x)=\lim_{n\to\infty}f(x/5^n)=f\left(\lim_{n\to\infty}x/5^n\right)=f(0)$$
+where we used the continuity of $f$ in the third equality and the fact that $x/5^n$ clearly converges to $0$ as $n$ tends to infinity, for any real $x$, in the last equality. Thus $f(x)=f(0)$ for all $x\in\bR$ proving that its constant.
+\begin{problem}\label{prob:4-6}
+Show that there is no continuous function $u$ on $\mathbb{R}$ such that $u(x)$ is irrational whenever $x$ is rational and $u(x)$ is rational whenever $x$ is irrational.
+\end{problem}
+\begin{solution}
+As there are no reals that are simultaneously rational and irrational, the function can't be constant. Thus there exists reals $x,y$ with $f(x)\neq f(y)$ and as there are uncountably many irrational numbers between $f(x)$ and $f(y)$ we see that $f$, if continuous must achieve all of these values at some point in between $x$ and $y$ which it can not possibly do as there are only countably many rationals in between $x,y$ which are the only points where it achieves irrational values.
+\end{solution}
+\begin{problem}\label{prob:4-7}
+Let $B$ be a nonempty subset of $\mathbb{R}$. Define a function $k : \mathbb{R} \to \mathbb{R}$ by
+\[k(x) = \inf\{|x - b| : b \in B\}.\]
+Show that $k$ is a continuous function.
+\end{problem}
+\begin{solution}
+For any $x,y\in\bR$ we see that,
+$$k(x)=\inf_{b\in B}|x-b|\leq\inf_{b\in B}\left(|x-y|+|y-b|\right)=k(y)+|x-y|$$
+where the second inequality follows from the definition of the infimum after considering how $k(x)\leq|x-b|\leq|x-y|+|y-b|$ for all $b\in B$ by the definition of the infumum and triangle inequality respectively, and the second equality can be easily proven. Similarly we can show that,
+$k(y)\leq k(x)+|x-y|$. Combining the two inequalities, 
+$$k(x)-k(y)\leq|x-y|,k(y)-k(x)\leq|x-y|\implies |k(x)-k(y)|\leq|x-y|$$
+This proves that $k$ is continous as we can take the delta and epsilon in the definition to be equal.
+\end{solution}
+\begin{problem}\label{prob:4-8}
+Show that the function $m : \mathbb{R} \to \mathbb{R}$ defined by $m(x) = \frac{5}{1+x^2}$ is uniformly continuous.
+\end{problem}
+For any $x,y\in\bR$,
+$$|m(x)-m(y)|=\left|\frac{5(y^2-x^2)}{(1+x^2)(1+y^2)}\right|=\left(\frac{5|x+y|}{(1+x^2)(1+y^2)}\right)\cdot|x-y|$$
+Now, by the AM-GM inequality we see that, 
+$$\frac{|x+y|}{(1+x^2)(1+y^2)}\leq\frac{|x|}{(1+x^2)(1+y^2)}+\frac{|y|}{(1+x^2)(1+y^2)}\leq\frac{|x|}{1+x^2}+\frac{|y|}{1+y^2}\leq 1/2+1/2=1$$
+where we used the triangle inequality for the first inequality, the fact that $1+x^2,1+y^2\geq 1$ for the second and AM-GM on the third as $2|x|=2\sqrt{1\cdot x^2}\leq 1+x^2$, similarly for $y$. Thus, refining the original inequality, 
+$$|m(x)-m(y)|\leq 5|x-y|$$
+this proves that $m$ is continuous as we can set $\delta=\varepsilon/5$ with $\varepsilon,\delta$ being the usual variables used to define continuity.
+\begin{problem}\label{prob:4-9}
+Suppose $C$ is a bounded subset of $\mathbb{R}$ and $f : C \to \mathbb{R}$ is uniformly continuous. Show that $f(C)$ is bounded.
+\end{problem}
+\begin{solution}
+Say $M\geq 0$ is such that $C\subseteq[-M,M]$ which exists as $B$ is bounded. As $f$ is uniformly continuous there exists some $\delta>0$ such that $|x-y|<\delta\implies |f(x)-f(y)|<1$.
+ Now consider the partition of $\bR$ into the intervals $I_m:=[m\delta/2,(m+1)\delta/2)$ where $m\in\bZ$. There also exists some $n$ such that,
+$$[-M,M]\subseteq\bigcup_{k=-n}^nI_k$$
+by the archimidean principle, Now consider those $I_k$ from these which have nonempty intersection with $C$, let these be $I_{k_1},\ldots,I_{k_m}.$
+ Now choose some $x_m\in I_{k_m}\cap C$. By construction, $x,y\in I_j\implies |x-y|<\delta$ thus for any $x\in B\cap I_{k_m}$ we have $|x-x_m|<\delta$ and thus $|f(x)-f(x_m)|<\delta\implies |f(x)|<|f(x_m)|+1$.
+ Let, 
+$$\Lambda:=\max_{1\leq i\leq m}|f(x_m)|+1$$ 
+Now as,
+$$C=\bigcup_{i=1}^m(I_{k_i}\cap C)$$
+we see that $x\in C$ implies its in some $I_{k_j}\cap C$ and thus $|f(x)|<|f(x_j)|+1\leq\Lambda$. So for all $x\in C$ we must have
+$|f(x)|\leq\Lambda$ making this function is bounded.
+\end{solution}
+\begin{problem}\label{prob:4-10}
+Let $k$ be a function on $\mathbb{R}$ defined by
+\[ k(x) = 
+\begin{cases}
+x^2 \sin(\frac{1}{x}) & \text{if } x \neq 0 \\
+0 & \text{if } x = 0.
+\end{cases}
+\]
+Show that $k$ is a differentiable function, however the derivative is not continuous.
+\end{problem}
+\begin{solution}
+Clearly $k$ is differentiable everywhere except at $0$ following the algebra of derivatives and composition law, after some algebraic manipulation, for $x\neq 0,$
+$$k'(x)=2x\sin(1/x)-\cos(1/x)$$
+For $x=0,$ we take the limit,
+$$\lim_{t\to 0}\frac{t^2\sin(1/t)-f(0)}{t-0}=\lim_{t\to 0}t\sin(1/t)=0$$
+where the last limit is $0$ as $\sin$ is a bounded function and the identity function tends to $0$ in this cthe identity function tends to $0$ in this case. Thus the function is infact differentiable with derivative,
+$$k'(x)=\begin{cases}0\text{ if, }x=0\\ 2x\sin(1/x)-\cos(1/x)\text{ otherwise}\end{cases}$$
+The derivative is not continuous at zero because if it were then for any sequence $\{x_n\}$ with limit zero, the sequence $\{k'(x_n)\}$ would also have limit $k'(0)=0$ which is not the case here.
+This can be seen by considering the sequence $1/n\pi$ which has limit $0$ but the sequence $\{k'(1/n\pi)\}$ does not tend to $k'(0)$. This can be seen by examining the terms, 
+$$k'(1/n\pi)=\frac{2\sin(n\pi)}{n\pi}-\cos(n\pi)=0-(-1)^n=(-1)^{n+1}$$
+which does not tend to $0=k'(0)$ at all.
+\end{solution}
+\begin{problem}\label{prob:4-11}
+Let $f$ be $n$ times differentiable on $\mathbb{R}$. Let $x_1, x_2, \dots, x_{n-1}$ be $(n-1)$ distinct real numbers for some $n \geq 2$. Suppose there exists a real polynomial $p$ of degree $(n-1)$ satisfying,
+\[f(x_j) = p(x_j), \forall j \in \{1, 2, \dots, n-1\}.\]
+Show that there exists some $c \in \mathbb{R}$ such that $f^{(n)}(c) = 0$.
+\end{problem}
+
+\begin{problem}\label{prob:4-12}
+Find the maximum and the minimum points of the polynomial
+\[q(x) = x(x - 1)(x - 2),\]
+in the interval $[0, 3]$. (Justify your claim).
+\end{problem}
+\begin{solution}
+Extrema occur at points where the derivative is zero, or on the edges in this case. The derivative $p'(x)=3x^2-6x+2$ has roots $1\pm 3^{-0.5}$ and the values of $p$ on these are $\mp 2\cdot 3^{-1.5}$. The values on the edge are $0$ and $6$ so these are the only candidate for extrema and thus the minimum point is at $1+3^{-0.5}$ and the maximum is at $3$.
+\end{solution}
+\begin{problem}\label{prob:4-13}
+Use Taylor's theorem to prove the Binomial theorem:
+\[(1 + x)^n = 1 + nx + \frac{n(n-1)}{2}x^2 + \dots + x^n\]
+for $n \in \mathbb{N}$ and $x \in \mathbb{R}$.
+\end{problem}
+$f(x)=(1+x)^n$ is infinitely differentiable but all the derivaitives of order $n+1$ or more are $0$ as its a polynomial of degree $n$. 
+Using taylor's theorem centered around $0$ we have, 
+$$(1+x)^n=\sum_{k=0}^n\frac{f^{(k)}(0)(x-0)^k}{k!}$$
+Also differentiating $f,k$ times for $k\leq n$ gives, 
+$$f^{(k)}(x)=n(n-1)\ldots(n-k+1)(1+x)^{n-k}\implies f^{(k)}(0)=\frac{n!}{(n-k)!}$$
+Combining these two, the coeffecient of $x^k$ in $f(x)$ must be,
+$$\frac{n!}{(n-k)!}\cdot\frac{1}{k!}=\binom{n}{k}$$
+thus we have shown that $$f(x)=\sum_{k=0}^n\binom{n}{k}x^k$$
+\begin{problem}\label{prob:4-14}
+Use Taylor's theorem around the point $x_0 = 4$ to get a good approximation of $\sqrt{5}$ (You may consider the function $f(x) = \sqrt{x}$ on $[0, \infty)$ and take $n=3$).
+\end{problem}
+\begin{solution}
+Let $f(x)=\sqrt{x}$. First we compute the derivatives, 
+$$f^{(0)}(x)=x^{1/2},f^{(1)}(x)=(1/2)x^{-1/2},f^{(2)}(x)=(-1/4)x^{-3/2}$$ $$f^{(3)}(x)=(3/8)x^{-5/2},f^{(4)}(x)=(-15/16)x^{-7/2}$$
+Now using taylor's theorem we can say that there exists some $\zeta\in(4,5)$ such that,
+$$f(5)=\sum_{k=0}^3\frac{f^{(k)}(4)(5-4)^k}{k!}+\frac{f^{(4)}(\zeta)}{4!}=\frac{1145}{512}-\frac{15}{16}\cdot\frac{\zeta^{-7/2}}{4!}$$
+And as $\zeta\in(4,5)$ we can say that,
+$$\sqrt{5}\in\left(\frac{1145}{512}-\frac{15\cdot 4^{-7/2}}{4!\cdot 16},\frac{1145}{512}-\frac{15\cdot 9^{-7/2}}{4!\cdot 16}\right)=\left(\frac{36635}{16384},\frac{2504095}{1119744}\right)$$
+upon long division we see that,
+$$\sqrt{5}\in(2.23602294921875,2.2363102637746)$$
+So we can say that $\sqrt{5}\approx 2.236$ is a good approximation.
+\end{solution}
+\begin{problem}\label{prob:4-15}
+Fix $n \in \mathbb{N}$. Prove that the function $v$ defined on $[0, \infty)$ by
+\[v(x) = (x + 1)^{\frac{1}{n}} - x^{\frac{1}{n}}\]
+is decreasing.
+\end{problem}
+\begin{solution}
+We can calculate the derivative,
+$$v'(x)=\frac{(1+x)^{-\frac{n-1}{n}}-x^{-\frac{n-1}{n}}}{n}$$
+Let $\beta=-(n-1)/n\leq 0$, then $f(x)=x^\beta$ is decreasing on our domain and as $1+x>x$ we must have that $f(x+1)-f(x)\leq 0$ for all $x$, thus, $v'(x)=(f(1+x)-f(x))/n\leq 0$ for all $x\in[0,\infty)$ so the function is decreasing.
+\end{solution}
 \end{document}
