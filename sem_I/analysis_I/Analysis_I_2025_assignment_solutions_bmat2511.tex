@@ -643,10 +643,13 @@ $$k'(1/n\pi)=\frac{2\sin(n\pi)}{n\pi}-\cos(n\pi)=0-(-1)^n=(-1)^{n+1}$$
 which does not tend to $0=k'(0)$ at all.
 \end{solution}
 \begin{problem}\label{prob:4-11}
-Let $f$ be $n$ times differentiable on $\mathbb{R}$. Let $x_1, x_2, \dots, x_{n-1}$ be $(n-1)$ distinct real numbers for some $n \geq 2$. Suppose there exists a real polynomial $p$ of degree $(n-1)$ satisfying,
+Let $f$ be $n$ times differentiable on $\mathbb{R}$. Let $x_1, x_2, \dots, x_{n-1}$ be $(n+1)$ distinct real numbers for some $n \geq 2$. Suppose there exists a real polynomial $p$ of degree $(n-1)$ satisfying,
 \[f(x_j) = p(x_j), \forall j \in \{1, 2, \dots, n-1\}.\]
 Show that there exists some $c \in \mathbb{R}$ such that $f^{(n)}(c) = 0$.
 \end{problem}
+\begin{solution}
+	Consider $h(x):=f(x)-p(x)$, as polynomials are infinitely differentiable and $f$ is n times differentiable, $h$ is also n times differentiable. We are given $(n+1)$ distinct reals $x_i$, wlog assume $x_1<x_2<\ldots<x_{n+1}$ on which $h$ is $0$. Now by applying rolle's (or, mid value theorem as the endpoints are both $0$, hence equal.) on the intervals $(x_i,x_{i+1});1\leq i\leq n$, we get points $y_i\in(x_i,x_{i+1})$ where $0=h'(y_i)=f'(y_i)-p'(y_i)$. We also see that the $y_i$ are distinct and form a increasing finite sequence as well. Repeat the same procedure with $y_i's$ serving the role of $x_i's$ and $h'$, which is now $n-1$ times differentiable, serving the role of $h$ until we get down to one point $c$ such that $0=h^{(n)}(c)=f^{(n)}(c)+p^{(n)}(c)$. As $p$ is a polynomial of degree $n-1$, its $n$-th derivative is identically zero thus, $0=f^{(n)}(c)+0\implies f^{(n)}(c)=0$ and we are done.
+\end{solution}
 
 \begin{problem}\label{prob:4-12}
 Find the maximum and the minimum points of the polynomial

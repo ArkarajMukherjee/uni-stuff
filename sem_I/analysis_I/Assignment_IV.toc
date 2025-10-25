@@ -10,7 +10,7 @@
 \contentsline {subsection}{Problem~1.9}{6}{problem.1.9}%
 \contentsline {subsection}{Problem~1.10}{7}{problem.1.10}%
 \contentsline {subsection}{Problem~1.11}{7}{problem.1.11}%
-\contentsline {subsection}{Problem~1.12}{7}{problem.1.12}%
+\contentsline {subsection}{Problem~1.12}{8}{problem.1.12}%
 \contentsline {subsection}{Problem~1.13}{8}{problem.1.13}%
 \contentsline {subsection}{Problem~1.14}{8}{problem.1.14}%
-\contentsline {subsection}{Problem~1.15}{8}{problem.1.15}%
+\contentsline {subsection}{Problem~1.15}{9}{problem.1.15}%

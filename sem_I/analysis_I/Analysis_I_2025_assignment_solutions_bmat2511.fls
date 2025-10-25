@@ -1,7 +1,7 @@
 PWD /home/coffey/isi_bmath/sem_I/analysis_I
 INPUT /usr/share/texmf-dist/web2c/texmf.cnf
 INPUT /var/lib/texmf/web2c/pdftex/pdflatex.fmt
-INPUT Analysis_I_2025_assignment_solutions_bmat2511.tex
+INPUT /home/coffey/isi_bmath/sem_I/analysis_I/Analysis_I_2025_assignment_solutions_bmat2511.tex
 OUTPUT Analysis_I_2025_assignment_solutions_bmat2511.log
 INPUT /usr/share/texmf-dist/tex/latex/base/article.cls
 INPUT /usr/share/texmf-dist/tex/latex/base/article.cls
@@ -142,14 +142,8 @@ INPUT /usr/share/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 INPUT /usr/share/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 INPUT /usr/share/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 INPUT /usr/share/texmf-dist/tex/latex/graphics/color.sty
-INPUT ./Analysis_I_2025_assignment_solutions_bmat2511.out
-INPUT ./Analysis_I_2025_assignment_solutions_bmat2511.out
-INPUT Analysis_I_2025_assignment_solutions_bmat2511.out
-INPUT Analysis_I_2025_assignment_solutions_bmat2511.out
-OUTPUT Analysis_I_2025_assignment_solutions_bmat2511.pdf
-INPUT ./Analysis_I_2025_assignment_solutions_bmat2511.out
-INPUT ./Analysis_I_2025_assignment_solutions_bmat2511.out
 OUTPUT Analysis_I_2025_assignment_solutions_bmat2511.out
+OUTPUT Analysis_I_2025_assignment_solutions_bmat2511.pdf
 INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/ec-lmr17.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/ec-lmbx12.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/ec-lmr12.tfm
@@ -191,10 +185,8 @@ INPUT /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map
 INPUT /usr/share/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc
 INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/ec-lmr17.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/ec-lmbx12.tfm
-INPUT ./Analysis_I_2025_assignment_solutions_bmat2511.toc
-INPUT ./Analysis_I_2025_assignment_solutions_bmat2511.toc
-INPUT Analysis_I_2025_assignment_solutions_bmat2511.toc
-INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/ec-lmbx12.tfm
+OUTPUT Analysis_I_2025_assignment_solutions_bmat2511.toc
+INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/ec-lmri12.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/rm-lmr12.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/rm-lmr8.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/rm-lmr6.tfm
@@ -210,8 +202,7 @@ INPUT /usr/share/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam7.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7.tfm
-OUTPUT Analysis_I_2025_assignment_solutions_bmat2511.toc
-INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/ec-lmri12.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/ec-lmbx12.tfm
 INPUT /usr/share/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc
 INPUT /usr/share/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc
 INPUT /usr/share/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc
