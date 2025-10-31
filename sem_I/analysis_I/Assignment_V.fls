@@ -1,7 +1,7 @@
 PWD /home/coffey/isi_bmath/sem_I/analysis_I
 INPUT /usr/share/texmf-dist/web2c/texmf.cnf
 INPUT /var/lib/texmf/web2c/pdftex/pdflatex.fmt
-INPUT Assignment_V.tex
+INPUT /home/coffey/isi_bmath/sem_I/analysis_I/Assignment_V.tex
 OUTPUT Assignment_V.log
 INPUT /usr/share/texmf-dist/tex/latex/base/article.cls
 INPUT /usr/share/texmf-dist/tex/latex/base/article.cls
