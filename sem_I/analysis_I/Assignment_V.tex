@@ -208,7 +208,7 @@ Let $f: [0,1] \to [0, 1]$ be a continuous strictly increasing bijection. Assume 
 	$$f^n(x_0)=\underbrace{f(f^{n-1}(x_0)>f^{n-1}(x_0)>\ldots>f^m(x_0)}_{n-m\text{ inequalities}}$$
 	and as $1$ and $0$ never appear in the orbit of $x_0$ we see that $0<f^n(x_0)<1$ for all $n\in\bZ$ and together it reads $0<x_m<x_n<1$, we have thus proved $(i)$. For (ii), as $n\to\infty,\{x_n\}$ must converge to a limit as its increasing and bounded above, say it converges to $x$, then $0<x\leq 1$. Using the continuity of $f$ we have can show that this is a fixed point as follows 
 	$$f(x)=f\left(\lim_{n\to\infty}x_n\right)=\lim_{n\to\infty}f(x_n)=\lim_{n\to\infty}x_{n+1}=\lim_{n\to\infty}x_n=x$$
-	so it has to be $1$. We can similarly show that $x_n\xrightarrow{n\to-\infty}x_n=0$ as well. For every $n\in\bZ$ we see that $x_n<x_{n+1}$ and thus $x_{n+1}=f(x_n)<f(x_{n+1})=x_{n+2}$ thus we have $f([x_n,x_{n+1}])\subseteq[x_{n+1},x_{n+2}]$ using the fact that $f$ is increasing. Using IVT we can say that we have equality here i.e. $f([x_n,x_{n+1}])=[x_{n+1},x_{n+2}]$ and the $f$ is clearly still a bijection here, this proves (iii). 
+	so it has to be $1$. We can similarly show that $x_n\xrightarrow{n\to-\infty}x_n=0$ as well. For every $n\in\bZ$ we see that $x_n<x_{n+1}$ and thus $x_{n+1}=f(x_n)<f(x_{n+1})=x_{n+2}$ so we have $f([x_n,x_{n+1}])\subseteq[x_{n+1},x_{n+2}]$ using the fact that $f$ is increasing. Using IVT we can say that we have equality here i.e. $f([x_n,x_{n+1}])=[x_{n+1},x_{n+2}]$ and the $f$ is clearly still a bijection here, this proves (iii). 
 \end{solution}
 \begin{problem}\label{prob:5-15}
 	Consider the set up of the previous question. Fix $y_0 \in (x_0, x_1)$. Set $y_n = f^n(y_0)$ for $n \in \mathbb{Z}$. Let $h : [x_0, y_0] \to [y_0, x_1]$ be a continuous strictly increasing bijection. Define $g : [0, 1] \to [0,1]$ by $g(0) = 0, g(1) = 1$,
@@ -224,4 +224,24 @@ Then show that:
 (iii) $f = g \circ g$.
 This shows that $f$ has infinitely many square roots.
 \end{problem}
+\begin{solution}
+	We know that inverses of continuous bijections in $\bR$ are also continuous bijections and both of these are strictly increasing.
+	From the previous problem we can see that $f^{-n}$ bijectively maps $[x_n,y_n]$ to $[x_0,y_0]$, after this $h$ maps $[x_0,y_0]$ to $[y_0,x_1]$ bijectively and at the end $f^n$ maps this bijectively to $[y_n,x_{n+1}]$, thus $g$ maps $[x_n,y_n]$ bijectively to $[y_n,x_{n+1}]$. Using similar arguements we can show that $g$ also bijectively maps $[y_n,x_{n+1}]$ to $[x_{n+1},y_{n+1}]$ and (i) is proven.
+	We can see that 
+	$$\mathfrak J:=\{[x_n,y_n),[y_n,x_{n+1}):n\in\bZ\}\cup\{\{0\},\{1\}\}$$
+	is a partition of $[0,1]$, this is because $\{[x_n,x_{n+1}):n\in\bZ\}\cup\{\{0\},\{1\}\}$ is a partition (this can be deduced from parts (i) and (ii) of \hyperref[prob:5-14]{Problem 5.14.}) and we just partition each of the intervals into two intervals. 
+	As $g(0)=0,g(1)=1$ and, 
+	$$g([x_{n},y_{n}))=[x_{x+1},y_{n}]\setminus\{g^{-1}(y_n)\}=[y_{n},x_{n+1})$$
+	As, $g(y_n){=f^n(h(f^{-n}(y_n)))=f^n(h(y_0))=f^n(x_1)=x_{n+1}}$. 
+	Similarly, for the other type of intervals, as, $g(x_{n+1})=f^{n+1}(h^{-1}(f^{-n}(x_{n+1}))=f^{n+1}(h^{-1}(x_1))=f^{n+1}(y_0)=y_{n+1}$ we get,
+	$$g([y_n,x_{n+1}))=[x_{n+1},y_{n+1})$$
+	Now, looking at $g$ as a set function defined by $g(S):=\{g(x):x\in S\}$ we can clearly see that $g$ is a bijection on $\mathfrak I$ and as its a bijection on each set in $\mathfrak I$ which is a partition of $[0,1]$, its clearly a bijection on $[0,1]$ as a whole. Thus we have shown that $g$ is continous and a bijection, thus it must be strictly increasing as well hence proving (ii). For (iii), firstly $(g\circ g)(0)=0=f(0)$ and $(g\circ g)(1)=1=f(1)$, now if some $x\in(0,1)$ is in an interval of form $[x_n,y_n]$ then when $g$ is first applied to it, it acts as $f^n\circ h\circ f^{-n}$ and sends it to the interval $[y_n,x_{n+1}]$ as seen in (ii) and thus on the second application $g$ acts as $f^{n+1}\circ h^{-1}\circ f^{-n}$ as in the definition of $g$, thus,
+	$$(g\circ g)(x)=(f^{n+1}\circ h^{-1}\circ f^{-n}\circ f^n\circ h\circ f^{-n})(x)=(f^{n+1}\circ h^{-1}\circ(f^{-n}\circ f^n)\circ h\circ f^{-n})(x)$$
+	$$=(f^{n+1}\circ h^{-1}\circ\operatorname{Id}\circ h\circ f^{-n})(x)=(f^{n+1}\circ h^{-1}\circ(\operatorname{Id}\circ h)\circ f^{-n})(x)=(f^{n+1}\circ h^{-1}\circ h\circ f^{-n})(x)$$
+	$$=(f^{n+1}\circ(h^{-1}\circ h)\circ f^{-n})(x)=(f^{n+1}\circ\operatorname{Id}\circ f^{-n})(x)=(f^{n+1}\circ(\operatorname{Id}\circ f^{-n}))(x)=(f^{n+1}\circ f^{-n})(x)$$
+	$$=f(x)$$
+	and when $x$ is in an interval of form $[y_n,x_{n+1}]$ using similar arguements we have that,
+	$$(g\circ g)(x)=(\underbrace{f^{n+1}\circ h\circ f^{-(n+1)}}_{\text{as }g(x)\in[x_{n+1},y_{n+1}]}\circ f^{n+1}\circ h^{-1}\circ f^{-n})(x)=(f^{n+1}\circ f^{-n})(x)=f(x)$$
+	Thus we have shown that $g\circ g=f$ on $[0,1]$ and we are done.
+\end{solution}
 \end{document}
