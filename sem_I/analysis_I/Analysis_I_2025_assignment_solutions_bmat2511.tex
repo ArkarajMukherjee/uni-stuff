@@ -709,10 +709,12 @@ We sum both sides of this inequality for $n,n+1,\ldots,m$ to get,
 	$$\implies (v-\varepsilon)(b_{m+1}-b_n)>a_{m+1}-a_n>(v+\varepsilon)(b_{m+1}-b_n)$$
 Thus this holds for all $m\geq n$ and taking the limits as $m\to\infty$ on all of the terms in this inequality we get, 
 	$$(v-\varepsilon)(-b_n)\geq -a_n\geq (v+\varepsilon)(-b_n)\implies v-\varepsilon\leq\frac{a_n}{b_n}\leq v+\varepsilon$$
-	which is enough to conclude that $a_n/b_n\longrightarrow v$ as well. For an example consider $a_n=\sin(n)/n-1$ and $b_n=1/n^2$, both of these tend to $0$ and $b_n$ decreases monotonically. Now using taylor series we can easily show that, $a_{n+1}-a_n=\frac{-1}{6n^3}+O(n^{-5})$ hence, 
-	$$\frac{a_{n+1}-a_n}{b_{n+1}-b_n}\xrightarrow{n\to\infty}\frac{-1}{6}$$
-	Thus using the result we see that,
-	$$\frac{a_n}{b_n}\xrightarrow{n\to\infty}\frac{-1}{6}$$
+	which is enough to conclude that $a_n/b_n\longrightarrow v$ as well. 
+	For an example consider $a_n=1/n^2$ and $b_n=1/n$, both of these tend to $0$ and $b_n$ decreases strictly. Now, $a_{n+1}-a_n=-(2n+1)/(n^4+2n^3+n^2)$ and $b_{n+1}-b_n=-1/(n^2+n)$. Thus,
+	$$\lim_{n\to\infty}\frac{a_{n+1}-a_n}{b_{n+1}-b_n}=\lim_{n\to\infty}\frac{(2n+1)(n^2+n)}{n^4+2n^3+n^2}=0$$
+	and we can verify,
+	$$\lim_{n\to\infty}\frac{a_n}{b_n}=\lim_{n\to\infty}\frac{1/n^2}{1/n}=0$$
+	clearly as well.
 \end{solution}
 \begin{problem}\label{prob:5-2}
 Suppose $k \in \mathbb{N}$ and $b_1, b_2, \dots, b_k$ are strictly positive real numbers. Show that
@@ -754,9 +756,9 @@ $g(x + y) = g(x) + g(y), \forall x,y \in \mathbb{R}$.
 Show that $g = cx$ for some $c \in \mathbb{R}$.
 \end{problem}
 \begin{solution}
-Just as in \hyperref[prob:2-10]{Problem 2.10.} (problem 10 in the 2nd assignment) we can show that for any rational $r$ we have $f(r)=f(1)\cdot r$ and as given any real number $x$ there exists a sequence of rationals $\{x_n\}$ converging to it we see that,
-$$f(x)=f\left(\lim_{n\to\infty}x_n\right)=\lim_{n\to\infty}f(x_n)=\lim_{n\to\infty}f(1)\cdot x_n=f(1)\cdot\lim_{n\to\infty}x_n=f(1)\cdot x$$
-where we used the continuity of $f$ in the second inequality and a basic fact from the algebra of limits in the fourth. Thus we see that $c=f(1)$ and $f(x)=f(1)\cdot x$ for all $x\in\bR$
+Just as in \hyperref[prob:2-10]{Problem 2.10.} (problem 10 in the 2nd assignment) we can show that for any rational $r$ we have $g(r)=g(1)\cdot r$ and as given any real number $x$ there exists a sequence of rationals $\{x_n\}$ converging to it we see that,
+$$g(x)=g\left(\lim_{n\to\infty}x_n\right)=\lim_{n\to\infty}g(x_n)=\lim_{n\to\infty}g(1)\cdot x_n=g(1)\cdot\lim_{n\to\infty}x_n=g(1)\cdot x$$
+	where we used the continuity of $g$ in the second inequality and a basic fact from the algebra of limits in the fourth. Thus we see that $c=g(1)$ and $g(x)=g(1)\cdot x$ for all $x\in\bR$
 \end{solution}
 \begin{problem}\label{prob:5-6}
 Let $I$ be an interval in $\mathbb{R}$. A function $f : I \to \mathbb{R}$, is said to be convex if
@@ -792,7 +794,7 @@ Show that there is no continuous function $f : \mathbb{R} \to \mathbb{R}$, such 
 	Unless there is an extrema which is achieved only in $(x,y)$ we can easily see that $f$ is constant in this interval which gives us much more than two, infact infinitely many reals where $f$ is zero which is not allowed as per the assumption. Again without loss of generality assume that we reach a maxima at $u\in(x,y).$
 	We claim that $u$ is the unique such point in $[x,y].$
 	For a proof of this claim, for the sake of contradiction asssume without loss of generality that we also reach a maxima at $v\in(u,y]$.
-	Now $f$ can not be continous on the interval $[u,v]$ so there is some $w\in(u,v)$ such that $0<f(w)<f(u)$ where the first inequality can be achieved due to continuity because by construction $f(u)=f(v)>0$ and if we did not have some $w$ it would produce jump discontinuities in $(u,v).$ 
+	$f$ can not be constant on the interval $[u,v]$ so there is some $w\in(u,v)$ such that $0<f(w)<f(u)$ where the first inequality can be achieved due to continuity because by construction $f(u)=f(v)>0$ and if we did not have some $w$ it would produce jump discontinuities in $(u,v).$ 
 	Now for any $\lambda\in(f(w),f(u))$ we can find a real $z$ with $f(z)=\lambda$ in all three of the intervals : $(x,u),(u,v),(v,y)$ by IVT, which contradicts the assumption as there should be exactly two such $z$ and the claim is proved. By the condition on $f$, there must be another $g\notin[x,y]$ such that $f(u)=f(g)$. Without loss of generality assume that $g>y,$ then for any $\lambda\in(0,f(u))$ we can find some $z$ with $f(z)=\lambda$ from all of these three intervals : $(x,u),(u,y),(y,g)$ by IVT which is a contradiction and we are done.
 \end{solution}
 \begin{problem}\label{prob:5-8}
@@ -808,7 +810,7 @@ Let $a < b$ be real numbers. Let $f: (a, b) \to \mathbb{R}$ be a twice different
 \[ f''(x_0) = \lim_{h\to 0} \frac{f(x_0 + h) - 2f(x_0) + f(x_0 - h)}{h^2}. \]
 \end{problem}
 \begin{solution}
-$f$ being twice differentiable makes it continuous and thus the numerator tends to $0$ as $h\to 0$ and the denominator also tends to zero as $h\to 0$ and also the derivative of the denominator is nonzero near $0$,except at $0.$ 
+$f$ being twice differentiable makes it continuous and thus the numerator tends to $0$ as $h\to 0$ and the denominator also tends to zero as $h\to 0$ and also the derivative of the denominator is nonzero near $0$, except at $0.$ 
 Let the numerator be $X(h)$ and denominator $Y(h)$, then, 
 $$\frac{X'(h)}{Y'(h)}=\frac{f'(x_0+h)-f'(x_0-h)}{2h}$$
 $$=\frac{f'(x_0+h)-f'(x_0)}{2h}-\frac{f'(x_0)-f'(x_0-h)}{2h}\xrightarrow{h\to 0}\frac{f''(x_0)}{2}+\frac{f''(x_0)}{2}=f''(x_0)$$
@@ -818,13 +820,8 @@ and we can thus conclude via LHopital's rule.
 (i) For $x \in \mathbb{R}$, show that $\sum_{n=0}^{\infty} \frac{x^n}{n!}$ converges absolutely. (ii) Define $e : \mathbb{R} \to \mathbb{R}$ by $e(x) = \sum_{n=0}^{\infty} \frac{x^n}{n!}$. Show that $e(x + y) = e(x)e(y), \forall x, y \in \mathbb{R}$.
 \end{problem}
 \begin{solution}
-	We can say, using \hyperref[prob:2-9]{Problem 2.9.} that for a sequence of positive numbers $x_n$ that converge to $x$, that $\sqrt[n]{x_1x_2\ldots x_n}\xrightarrow{n\to\infty}x$ using that result on $\log(x_n)$ and using the continuity of $\log$ on its domain. We know from \hyperref[prob:2-5]{Problem 2.5.} that the limit $(1+1/n)^{n}$ as $n$ tends to infinity exists and using the binomial theorem we clearly see that $(1+1/n)^n\geq 1+n(1/n)=2$ so the limit is positive, call this $\tt{not_e}.$ Now consider the product,
-	$$\prod_{k=1}^n\left(1+\frac{1}{k}\right)^k=\frac{2^1}{1^1}\cdot\frac{3^2}{2^2}\cdots\frac{(n+1)^n}{n^n}=\frac{(n+1)^n}{n!}$$
-Using the results mentioned above we have,
-	$$\frac{n+1}{(n!)^{1/n}}=\sqrt[n]{\prod_{k=1}^n\left(1+\frac{1}{k}\right)^k}\xrightarrow{n\to\infty}\tt{not_e}$$
-	For (i), we will show that for any $x\in\bR$ this series is absolutely convergent using the root test,
-	$$\lim_{n\to\infty}\sqrt[n]{|x^n/n!|}=\lim_{n\to\infty}\frac{|x|}{(n!)^{1/n}}=\lim_{n\to\infty}\frac{|x|}{n+1}\cdot\frac{n+1}{(n!)^{1/n}}$$
-	$$=\left(\lim_{n\to\infty}\frac{|x|}{n+1}\right)\cdot\lim_{n\to\infty}\frac{n+1}{(n!)^{1/n}}=0\cdot\tt{not_e}=0<1$$
+	For (i), we will show that for any $x\in\bR$ this series is absolutely convergent using the ratio test,	
+	$$\lim_{n\to\infty}\left|\frac{\frac{x^{n+1}}{(n+1)!}}{\frac{x^n}{n!}}\right|=\lim_{n\to\infty}\frac{|x|}{n+1}=0<1$$
 	so we are done. For (ii), using the cauchy product theorem for product of sums, atleast one of which is absolutely convegrent we have,
 	$$e(x)e(y)=\sum_{n=0}^{\infty}\sum_{k=0}^n\frac{x^k}{k!}\frac{y^{n-k}}{(n-k)!}=\sum_{n=0}^\infty\frac{1}{n!}\sum_{k=0}^n\binom{n}{k}x^ky^{n-k}=\sum_{n=0}^{\infty}\frac{(x+y)^n}{n!}=e(x+y)$$
 
@@ -833,7 +830,7 @@ Using the results mentioned above we have,
 Let $h : \mathbb{R} \to \mathbb{R}$ be the function $h(x) = \sin(x)$ (Here we are assuming your familiarity with trigonometric functions). Show that the remainder term in Taylor's theorem converges to 0 as $n \to \infty$ for every $x_0$ and $x$.
 \end{problem}
 \begin{solution}
-	If we keep taking the derivative if $h$ we can easily see that $|h^{(n)}(x)|$ is either $|\sin x|$ or $|\cos x|$, eitherways its bounded by $1$. Now given any $x,x_0$ the $n-th$ remainder term, say $R_n$ tends to zero as follow,
+	If we keep taking the derivative if $h$ we can easily see that $|h^{(n)}(x)|$ is either $|\sin x|$ or $|\cos x|$, eitherways its bounded by $1$. Now given any $x,x_0$ the $n-th$ remainder term, say $R_n$ tends to zero as follows,
 	$$|R_n|\leq\frac{|x_0-x|^n}{n!}\cdot\sup_{x\in\bR}|h^{(n)}(x)|=\frac{|x-x_0|^n}{n!}\xrightarrow{n\to\infty}0$$
 	just as we did in \hyperref[prob:5-10]{Problem 5.10.}.
 \end{solution}
@@ -841,13 +838,13 @@ Let $h : \mathbb{R} \to \mathbb{R}$ be the function $h(x) = \sin(x)$ (Here we ar
 Consider the function $h : [0, \infty) \to \mathbb{R}$ defined by $h(x) = \frac{x}{1+x^2}$. Determine the set $\{h(x) : x \in [0, \infty)\}$.
 \end{problem}
 \begin{solution}
-	Clearly $h(x)\geq 0$ with equality at $0$ and using AM-GM, $h(x)\leq 1/2$ with equality at $x=1$. By IVT we can say that it also achieves every value in between and hence the set is $[0,1/2]$
+		Clearly $h$ is strictly decreasing with $h(0)=1$ and $\lim_{x\to\infty}h(x)=0$ so the set is $(0,1]$ which we get by using IVT as we can find arbitrary small positive values of $h$ at very large inputs and $h(0)=0$.
 \end{solution}
 \begin{problem}\label{prob:5-13}
 Let $v : \mathbb{R} \to \mathbb{R}$ be the function $v(x) = x^3 - 6x^2 + 9x$, for all $x$. Determine the set: $\{x : v(x) > 0\}$.
 \end{problem}
 \begin{solution}
-	We can factor this into $x(x-3)^2$, so it is zero at $0$ and $2$. For $x\neq 0,3$ it has the same sign as $x$ as $(x-3)^2$ is positive. Thus the set is $(0,\infty)\setminus\{3\}.$
+	We can factor this into $x(x-3)^2$, so it is zero at $0$ and $3$. For $x\neq 0,3$ it has the same sign as $x$ as $(x-3)^2$ is positive. Thus the set is $(0,\infty)\setminus\{3\}.$
 \end{solution}
 \begin{problem}\label{prob:5-14}
 Let $f: [0,1] \to [0, 1]$ be a continuous strictly increasing bijection. Assume that $x < f(x)$ for all $x \in (0,1)$. Fix $x_0 \in (0,1)$. Define $x_n$ for $n \in \mathbb{Z}$ by $x_n = f^n(x_0)$. Show that:
@@ -857,10 +854,10 @@ Let $f: [0,1] \to [0, 1]$ be a continuous strictly increasing bijection. Assume 
 \end{problem}
 \begin{solution}
 	As $f$ is strictly increasing we see that we must have $f(0)=0$ and $f(1)=1$ and as its also a bijection, $0$ or $1$ never appear in $f$ orbits i.e. $\{f^n(x):n\in\bZ\}$ of any points in $(0,1)$. Thus we can see that for any $m<n$, 
-	$$f^n(x_0)=\underbrace{f(f^{n-1}(x_0)>f^{n-1}(x_0)>\ldots>f^m(x_0)}_{n-m\text{ inequalities}}$$
+	$$f^n(x_0)=\underbrace{f(f^{n-1}(x_0))>f^{n-1}(x_0)>\ldots>f^m(x_0)}_{n-m\text{ inequalities}}$$
 	and as $1$ and $0$ never appear in the orbit of $x_0$ we see that $0<f^n(x_0)<1$ for all $n\in\bZ$ and together it reads $0<x_m<x_n<1$, we have thus proved $(i)$. For (ii), as $n\to\infty,\{x_n\}$ must converge to a limit as its increasing and bounded above, say it converges to $x$, then $0<x\leq 1$. Using the continuity of $f$ we have can show that this is a fixed point as follows 
 	$$f(x)=f\left(\lim_{n\to\infty}x_n\right)=\lim_{n\to\infty}f(x_n)=\lim_{n\to\infty}x_{n+1}=\lim_{n\to\infty}x_n=x$$
-	so it has to be $1$. We can similarly show that $x_n\xrightarrow{n\to-\infty}x_n=0$ as well. For every $n\in\bZ$ we see that $x_n<x_{n+1}$ and thus $x_{n+1}=f(x_n)<f(x_{n+1})=x_{n+2}$ so we have $f([x_n,x_{n+1}])\subseteq[x_{n+1},x_{n+2}]$ using the fact that $f$ is increasing. Using IVT we can say that we have equality here i.e. $f([x_n,x_{n+1}])=[x_{n+1},x_{n+2}]$ and the $f$ is clearly still a bijection here, this proves (iii). 
+	so it has to be $1$. We can similarly show that $x_n\xrightarrow{n\to-\infty}0$ as well. For every $n\in\bZ$ we see that $x_n<x_{n+1}$ and thus $x_{n+1}=f(x_n)<f(x_{n+1})=x_{n+2}$ so we have $f([x_n,x_{n+1}])\subseteq[x_{n+1},x_{n+2}]$ using the fact that $f$ is increasing. Using IVT and the fact that $x_{n+1}=f(x_n),x_{n+2}=f(x_{n+1})$ we can say that we have equality here i.e. $f([x_n,x_{n+1}])=[x_{n+1},x_{n+2}]$ and the $f$ is clearly still a bijection here, this proves (iii). 
 \end{solution}
 \begin{problem}\label{prob:5-15}
 	Consider the set up of the previous question. Fix $y_0 \in (x_0, x_1)$. Set $y_n = f^n(y_0)$ for $n \in \mathbb{Z}$. Let $h : [x_0, y_0] \to [y_0, x_1]$ be a continuous strictly increasing bijection. Define $g : [0, 1] \to [0,1]$ by $g(0) = 0, g(1) = 1$,
@@ -877,17 +874,22 @@ Then show that:
 This shows that $f$ has infinitely many square roots.
 \end{problem}
 \begin{solution}
-	We know that inverses of continuous bijections in $\bR$ are also continuous bijections and both of these are strictly increasing.
+	h being a continuous bijection forces $h(x_0)=y_0$ and $h(y_0)=x_{1}$, this will be used here on. We know that inverses of continuous bijections in $\bR$ are also continuous bijections and both of these are strictly increasing.
 	From the previous problem we can see that $f^{-n}$ bijectively maps $[x_n,y_n]$ to $[x_0,y_0]$, after this $h$ maps $[x_0,y_0]$ to $[y_0,x_1]$ bijectively and at the end $f^n$ maps this bijectively to $[y_n,x_{n+1}]$, thus $g$ maps $[x_n,y_n]$ bijectively to $[y_n,x_{n+1}]$. Using similar arguements we can show that $g$ also bijectively maps $[y_n,x_{n+1}]$ to $[x_{n+1},y_{n+1}]$ and (i) is proven.
 	We can see that 
 	$$\mathfrak J:=\{[x_n,y_n),[y_n,x_{n+1}):n\in\bZ\}\cup\{\{0\},\{1\}\}$$
-	is a partition of $[0,1]$, this is because $\{[x_n,x_{n+1}):n\in\bZ\}\cup\{\{0\},\{1\}\}$ is a partition (this can be deduced from parts (i) and (ii) of \hyperref[prob:5-14]{Problem 5.14.}) and we just partition each of the intervals into two intervals. 
+	is a partition of $[0,1]$, this is because $\{[x_n,x_{n+1}):n\in\bZ\}\cup\{\{0\},\{1\}\}$ is a partition (this can be deduced from parts (i) and (ii) of \hyperref[prob:5-14]{Problem 5.14.}) and we just partition each of the intervals into two intervals. If we were to write these out in order(visually speaking) then $[0,1]$ would look like this,
+	$$\ldots[y_{-2},x_{-1})\cup[x_{-1},y_{-1})\cup[y_{-1},x_0)\cup[x_0,y_0)\cup[y_0,x_1)\cup[x_1,y_1)\cup[y_1,x_2)\ldots$$
 	As $g(0)=0,g(1)=1$ and, 
-	$$g([x_{n},y_{n}))=[x_{x+1},y_{n}]\setminus\{g^{-1}(y_n)\}=[y_{n},x_{n+1})$$
+	$$g([x_{n},y_{n}))=[y_n,x_{n+1}]\setminus\{g^{-1}(y_n)\}=[y_{n},x_{n+1})$$
 	As, $g(y_n){=f^n(h(f^{-n}(y_n)))=f^n(h(y_0))=f^n(x_1)=x_{n+1}}$. 
 	Similarly, for the other type of intervals, as, $g(x_{n+1})=f^{n+1}(h^{-1}(f^{-n}(x_{n+1}))=f^{n+1}(h^{-1}(x_1))=f^{n+1}(y_0)=y_{n+1}$ we get,
 	$$g([y_n,x_{n+1}))=[x_{n+1},y_{n+1})$$
-	Now, looking at $g$ as a set function defined by $g(S):=\{g(x):x\in S\}$ we can clearly see that $g$ is a bijection on $\mathfrak I$ and as its a bijection on each set in $\mathfrak I$ which is a partition of $[0,1]$, its clearly a bijection on $[0,1]$ as a whole. Thus we have shown that $g$ is continous and a bijection, thus it must be strictly increasing as well hence proving (ii). For (iii), firstly $(g\circ g)(0)=0=f(0)$ and $(g\circ g)(1)=1=f(1)$, now if some $x\in(0,1)$ is in an interval of form $[x_n,y_n]$ then when $g$ is first applied to it, it acts as $f^n\circ h\circ f^{-n}$ and sends it to the interval $[y_n,x_{n+1}]$ as seen in (ii) and thus on the second application $g$ acts as $f^{n+1}\circ h^{-1}\circ f^{-n}$ as in the definition of $g$, thus,
+	Now, looking at $g$ as a set function defined by $g(S):=\{g(x):x\in S\}$ we can clearly see that $g$ is a bijection on $\mathfrak I$ and as its a bijection on each set in $\mathfrak I$ which is a partition of $[0,1]$, its clearly a bijection on $[0,1]$ as a whole. Thus we have shown that $g$ is a bijection. But we still have to show that it is continous, which it is on the smaller intervals we partitioned the larger interval $[0,1]$ into, thus for it to be continuous on the larger interval we need to check continuity at the points where one of these smaller intervals end and the other begins i.e. $x_n$ and $y_n$ for $n\in\bZ$. At $x_n$, we arrive at the left limit for $g$ i.e. $g(x_n-)$ by using its definition on $[y_{n-1},x_n)$ so due to continuity on this interval this is,
+	$$g(x_n-)=f^{(n-1)+1}(h^{-1}(f^{-(n-1)}(x_n)))=f^{n}(h^{-1}(x_1)=f^n(y_0)=y_n$$
+And now the right limit will use the definition of $g$ on $[x_n,y_n)$ and thus similarly,
+	$$g(x_n+)=f^n(h(f^{-n}(x_n)))=f^n(h(x_0))=f^n(y_0)=y_n$$
+So its continuous at the points $x_n$. The continuity at the points $y_n$ can be proved very similarly.	Thus it must be strictly increasing as well hence proving (ii). For (iii), firstly $(g\circ g)(0)=0=f(0)$ and $(g\circ g)(1)=1=f(1)$, now if some $x\in(0,1)$ is in an interval of form $[x_n,y_n]$ then when $g$ is first applied to it, it acts as $f^n\circ h\circ f^{-n}$ and sends it to the interval $[y_n,x_{n+1}]$ as seen in (ii) and thus on the second application $g$ acts as $f^{n+1}\circ h^{-1}\circ f^{-n}$ as in the definition of $g$, thus,
 	$$(g\circ g)(x)=(f^{n+1}\circ h^{-1}\circ f^{-n}\circ f^n\circ h\circ f^{-n})(x)=(f^{n+1}\circ h^{-1}\circ(f^{-n}\circ f^n)\circ h\circ f^{-n})(x)$$
 	$$=(f^{n+1}\circ h^{-1}\circ\operatorname{Id}\circ h\circ f^{-n})(x)=(f^{n+1}\circ h^{-1}\circ(\operatorname{Id}\circ h)\circ f^{-n})(x)=(f^{n+1}\circ h^{-1}\circ h\circ f^{-n})(x)$$
 	$$=(f^{n+1}\circ(h^{-1}\circ h)\circ f^{-n})(x)=(f^{n+1}\circ\operatorname{Id}\circ f^{-n})(x)=(f^{n+1}\circ(\operatorname{Id}\circ f^{-n}))(x)=(f^{n+1}\circ f^{-n})(x)$$
@@ -897,4 +899,3 @@ This shows that $f$ has infinitely many square roots.
 	Thus we have shown that $g\circ g=f$ on $[0,1]$ and we are done.
 \end{solution}
 \end{document}
-

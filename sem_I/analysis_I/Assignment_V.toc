@@ -1,4 +1,4 @@
-\contentsline {section}{\numberline {1}Home Assignment V (Due: Dec 4, 2025)}{3}{section.1}%
+\contentsline {section}{\numberline {1}Home Assignment V (Due: Nov 2, 2025)}{3}{section.1}%
 \contentsline {subsection}{Problem~1.1}{3}{problem.1.1}%
 \contentsline {subsection}{Problem~1.2}{3}{problem.1.2}%
 \contentsline {subsection}{Problem~1.3}{4}{problem.1.3}%
@@ -12,5 +12,5 @@
 \contentsline {subsection}{Problem~1.11}{7}{problem.1.11}%
 \contentsline {subsection}{Problem~1.12}{7}{problem.1.12}%
 \contentsline {subsection}{Problem~1.13}{7}{problem.1.13}%
-\contentsline {subsection}{Problem~1.14}{8}{problem.1.14}%
+\contentsline {subsection}{Problem~1.14}{7}{problem.1.14}%
 \contentsline {subsection}{Problem~1.15}{8}{problem.1.15}%

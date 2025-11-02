@@ -218,13 +218,6 @@ INPUT /usr/share/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc
 INPUT /usr/share/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc
 INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/ec-lmr8.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/ec-lmr6.tfm
-INPUT /usr/share/texmf-dist/tex/latex/lm/ot1lmtt.fd
-INPUT /usr/share/texmf-dist/tex/latex/lm/ot1lmtt.fd
-INPUT /usr/share/texmf-dist/tex/latex/lm/ot1lmtt.fd
-INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/rm-lmtt12.tfm
-INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/rm-lmtt8.tfm
-INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/rm-lmtt8.tfm
-INPUT /usr/share/texmf-dist/fonts/enc/dvips/lm/lm-rmtt.enc
 INPUT /usr/share/texmf-dist/tex/latex/amsfonts/ueuf.fd
 INPUT /usr/share/texmf-dist/tex/latex/amsfonts/ueuf.fd
 INPUT /usr/share/texmf-dist/tex/latex/amsfonts/ueuf.fd
@@ -246,6 +239,4 @@ INPUT /usr/share/texmf-dist/fonts/type1/public/lm/lmr8.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/lm/lmri12.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/lm/lmsy10.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/lm/lmsy8.pfb
-INPUT /usr/share/texmf-dist/fonts/type1/public/lm/lmtt12.pfb
-INPUT /usr/share/texmf-dist/fonts/type1/public/lm/lmtt8.pfb
 INPUT /usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb

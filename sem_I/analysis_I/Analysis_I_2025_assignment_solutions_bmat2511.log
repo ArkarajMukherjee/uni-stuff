@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex 2025.8.29)  1 NOV 2025 03:03
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex 2025.8.29)  2 NOV 2025 21:55
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -544,19 +544,15 @@ Overfull \hbox (5.80933pt too wide) in paragraph at lines 210--215
 [28]
 
 [29]
-Overfull \hbox (8.62814pt too wide) in paragraph at lines 799--801
+Overfull \hbox (8.62814pt too wide) in paragraph at lines 801--803
 []\T1/lmr/bx/n/12 Problem 5.8. []\T1/lmr/m/n/12 Fix $\OML/lmm/m/it/12 n \OMS/lmsy/m/n/12 2 \U/msb/m/n/12 N$\T1/lmr/m/n/12 . Let $\OML/lmm/m/it/12 x[]; x[]; [] ; x[]$ \T1/lmr/m/n/12 be $\OML/lmm/m/it/12 n$ \T1/lmr/m/n/12 dis-tinct real num-bers and let $\OML/lmm/m/it/12 y[]; y[]; [] ; y[]$
  []
 
 
 
 [30]
-LaTeX Font Info:    Trying to load font information for OT1+lmtt on input line 821.
- (/usr/share/texmf-dist/tex/latex/lm/ot1lmtt.fd
-File: ot1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
 
-[31{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-rmtt.enc}]
+[31]
 
 [32]
 
@@ -571,18 +567,18 @@ Package rerunfilecheck Info: File `Analysis_I_2025_assignment_solutions_bmat2511
 (rerunfilecheck)             Checksum: 93582D5F23983DB3E7CCA3C498B9F145;8379.
  ) 
 Here is how much of TeX's memory you used:
- 13532 strings out of 475171
- 217320 string characters out of 5767095
+ 13486 strings out of 475171
+ 216588 string characters out of 5767095
  653962 words of memory out of 5000000
- 36227 multiletter control sequences out of 15000+600000
- 625944 words of font info for 88 fonts, out of 8000000 for 9000
+ 36187 multiletter control sequences out of 15000+600000
+ 625008 words of font info for 85 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  75i,12n,79p,3763b,675s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texmf-dist/fonts/type1/public/amsfonts/euler/eufm10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmri12.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmsy6.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmtt12.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmtt8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Analysis_I_2025_assignment_solutions_bmat2511.pdf (34 pages, 356148 bytes).
+</usr/share/texmf-dist/fonts/type1/public/amsfonts/euler/eufm10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmri12.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmsy6.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on Analysis_I_2025_assignment_solutions_bmat2511.pdf (34 pages, 325171 bytes).
 PDF statistics:
- 625 PDF objects out of 1000 (max. 8388607)
- 549 compressed objects within 6 object streams
+ 612 PDF objects out of 1000 (max. 8388607)
+ 540 compressed objects within 6 object streams
  111 named destinations out of 1000 (max. 500000)
  537 words of extra memory for PDF output out of 10000 (max. 10000000)
 
