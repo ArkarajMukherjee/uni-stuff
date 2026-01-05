@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex 2025.8.29)  16 SEP 2025 12:52
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2026/dev/Arch Linux) (preloaded format=pdflatex 2025.8.29)  22 SEP 2025 12:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -328,7 +328,7 @@ type1/public/cm-super/sfbx1728.pfb></usr/share/texmf-dist/fonts/type1/public/cm
 -super/sfrm0700.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1000
 .pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/shar
 e/texmf-dist/fonts/type1/public/cm-super/sfti1000.pfb>
-Output written on Probability_I_notes.pdf (5 pages, 257494 bytes).
+Output written on Probability_I_notes.pdf (5 pages, 257185 bytes).
 PDF statistics:
  116 PDF objects out of 1000 (max. 8388607)
  70 compressed objects within 1 object stream
