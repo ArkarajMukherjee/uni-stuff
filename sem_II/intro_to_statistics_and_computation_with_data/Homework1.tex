@@ -1,0 +1,328 @@
+\documentclass[11pt]{article}\usepackage[]{graphicx}\usepackage[dvipsnames]{xcolor}
+% maxwidth is the original width if it is less than linewidth
+% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlsng}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hldef}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+\let\hlipl\hlkwb
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath, amssymb, amsthm, graphicx, physics}
+\usepackage{enumitem}
+\usepackage{geometry}
+\usepackage[dvipsnames]{xcolor}
+\definecolor{EvanPink}{rgb}{0.85, 0.13, 0.55}
+\usepackage[colorlinks=true,
+            linkcolor=OliveGreen,
+            urlcolor=EvanPink,
+            citecolor=OliveGreen]{hyperref}
+\usepackage{cleveref}
+\usepackage{etoolbox}
+\newenvironment{solution}{%
+  \par\noindent\textit{Solution.}\ }{\qed}
+\newtheoremstyle{problemstyle}
+  {1em}   
+  {1em}   
+  {}      
+  {}      
+  {\bfseries} 
+  {.}     
+  {0.5em} 
+  {}      
+\theoremstyle{problemstyle}
+\newtheorem{problem}{Problem}[section]
+\crefname{problem}{Problem}{Problems}
+\Crefname{problem}{Problem}{Problems}
+\def\bN{\mathbb{N}}
+\def\bR{\mathbb{R}}
+\def\bZ{\mathbb{Z}}
+\def\bQ{\mathbb{Q}}
+\def\mM{\mathcal{M}}
+\def\mR{\mathcal{R}}
+\def\mN{\mathcal{N}}
+\def\mE{\mathcal{E}}
+\def\mA{\mathcal{A}}
+%%%%%%%%%%%%%%%Setting Page Sizes %%%%%%%%%%%%
+\setlength{\parindent}{0in}
+\setlength{\parskip}{\baselineskip}
+\setlength{\textheight}{9in}
+\setlength{\textwidth}{6.3in}
+\setlength{\topmargin}{-0.6in}
+\setlength{\evensidemargin}{-.5in}
+\setlength{\oddsidemargin}{0in}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%To make R commands appear in different Color%%%%%%%%%%
+\usepackage{color}
+\usepackage{fancyvrb} % Verbatim
+\usepackage{Sweave} % for R code
+\usepackage{color}
+\definecolor{codecolor}{RGB}{114,12,112}
+\DefineVerbatimEnvironment{Sinput}{Verbatim}{formatcom=\color{codecolor}}
+\DefineVerbatimEnvironment{Soutput}{Verbatim}{formatcom=\color{codecolor}}
+\DefineVerbatimEnvironment{Scode}{Verbatim}{formatcom=\color{codecolor}}
+\DefineVerbatimEnvironment{Sin}{Verbatim}{formatcom=\color{codecolor}}
+\DefineVerbatimEnvironment{Sout}{Verbatim}{formatcom=\color{codecolor}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+
+{\bf Arkaraj Mukherjee: }
+{\bf H.W. 1:}
+
+{\bf Solution 1:}
+\begin{enumerate}[label=\alph*.]
+  \item 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hldef{instasee} \hlkwb{=} \hlkwd{c}\hldef{(}\hlnum{8}\hldef{,}\hlnum{8}\hldef{,}\hlnum{3}\hldef{,}\hlnum{12}\hldef{,}\hlnum{13}\hldef{,}\hlnum{10}\hldef{,}\hlnum{1}\hldef{,}\hlnum{8}\hldef{,}\hlnum{7}\hldef{)}
+\hldef{differences} \hlkwb{=} \hlkwd{diff}\hldef{(instasee)}
+\hldef{differences}
+\end{alltt}
+\begin{verbatim}
+## [1]  0 -5  9  1 -3 -9  7 -1
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+  The \texttt{diff} function gives us a vector that has the differences between adjacent terms in the input vector as output. 
+  Adding $24$ to every entry in this \texttt{differences} vector gives us the vector \texttt{x} with the number of hours between consecutive logins as we are working with the $24$-hour format. 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hldef{x} \hlkwb{=} \hldef{differences} \hlopt{+} \hlnum{24}
+\hldef{x}
+\end{alltt}
+\begin{verbatim}
+## [1] 24 19 33 25 21 15 31 23
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+  \item 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{max}\hldef{(x)}
+\end{alltt}
+\begin{verbatim}
+## [1] 33
+\end{verbatim}
+\begin{alltt}
+\hlkwd{mean}\hldef{(x)}
+\end{alltt}
+\begin{verbatim}
+## [1] 23.875
+\end{verbatim}
+\begin{alltt}
+\hlkwd{min}\hldef{(x)}
+\end{alltt}
+\begin{verbatim}
+## [1] 15
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\end{enumerate}
+
+{\bf Solution 2:}
+\begin{enumerate}[label=\alph*.]
+  \item 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hldef{scoreSS} \hlkwb{=} \hlkwd{c}\hldef{(}\hlnum{7}\hldef{,}\hlnum{6}\hldef{,}\hlnum{10}\hldef{,}\hlnum{8}\hldef{,}\hlnum{7}\hldef{,}\hlnum{9}\hldef{,}\hlnum{9}\hldef{,}\hlnum{6}\hldef{,}\hlnum{4}\hldef{,}\hlnum{10}\hldef{,}\hlnum{8}\hldef{,}\hlnum{6}\hldef{,}\hlnum{9}\hldef{,}\hlnum{10}\hldef{)}
+\hlkwd{max}\hldef{(scoreSS)}
+\end{alltt}
+\begin{verbatim}
+## [1] 10
+\end{verbatim}
+\begin{alltt}
+\hlkwd{mean}\hldef{(scoreSS)}
+\end{alltt}
+\begin{verbatim}
+## [1] 7.785714
+\end{verbatim}
+\begin{alltt}
+\hlkwd{min}\hldef{(scoreSS)}
+\end{alltt}
+\begin{verbatim}
+## [1] 4
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+  \item 
+  I can fix this by updating the $4$-th value in the vector \texttt{scoreSS} as follows
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hldef{scoreSS[}\hlnum{4}\hldef{]} \hlkwb{=} \hlnum{5}
+\hldef{scoreSS}
+\end{alltt}
+\begin{verbatim}
+##  [1]  7  6 10  5  7  9  9  6  4 10  8  6  9 10
+\end{verbatim}
+\begin{alltt}
+\hlkwd{mean}\hldef{(scoreSS)}
+\end{alltt}
+\begin{verbatim}
+## [1] 7.571429
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+  \item 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{sum}\hldef{(scoreSS} \hlopt{>=} \hlnum{9}\hldef{)}
+\end{alltt}
+\begin{verbatim}
+## [1] 6
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+  \item 
+  That command outputs the sum of all those entries in the vector \texttt{scoreSS} which are greater than or equal to $9$. 
+  
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlnum{100}\hlopt{*}\hlkwd{length}\hldef{(scoreSS[scoreSS}\hlopt{<}\hlnum{17}\hldef{])}\hlopt{/}\hlkwd{length}\hldef{(scoreSS)}
+\end{alltt}
+\begin{verbatim}
+## [1] 100
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+  
+\end{enumerate}
+{\bf{Solution 3}}
+\begin{enumerate}[label=\alph*.]
+  \item 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hldef{Shreelakshmibill} \hlkwb{=} \hlkwd{c}\hldef{(}\hlnum{460}\hldef{,}\hlnum{330}\hldef{,}\hlnum{390}\hldef{,}\hlnum{370}\hldef{,}\hlnum{460}\hldef{,}\hlnum{300}\hldef{,}\hlnum{480}\hldef{,}\hlnum{320}\hldef{,}\hlnum{490}\hldef{,}\hlnum{350}\hldef{,}\hlnum{300}\hldef{,}\hlnum{280}\hldef{)}
+\hldef{Shreelakshmibill}
+\end{alltt}
+\begin{verbatim}
+##  [1] 460 330 390 370 460 300 480 320 490 350 300 280
+\end{verbatim}
+\begin{alltt}
+\hlkwd{sum}\hldef{(Shreelakshmibill)}
+\end{alltt}
+\begin{verbatim}
+## [1] 4530
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+  \item 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{min}\hldef{(Shreelakshmibill)}
+\end{alltt}
+\begin{verbatim}
+## [1] 280
+\end{verbatim}
+\begin{alltt}
+\hlkwd{max}\hldef{(Shreelakshmibill)}
+\end{alltt}
+\begin{verbatim}
+## [1] 490
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+  These are the minimum and maximum amounts spent in some month respectively.
+  \item 
+  The number of months with the amount being greater than $50$ can be found as follows:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{length}\hldef{(Shreelakshmibill[Shreelakshmibill}\hlopt{>}\hlnum{400}\hldef{])}
+\end{alltt}
+\begin{verbatim}
+## [1] 4
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+  The percentage too can be found from this like this:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlnum{100}\hlopt{*}\hlkwd{length}\hldef{(Shreelakshmibill[Shreelakshmibill}\hlopt{>}\hlnum{400}\hldef{])}\hlopt{/}\hlkwd{length}\hldef{(Shreelakshmibill)}
+\end{alltt}
+\begin{verbatim}
+## [1] 33.33333
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+  \item 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hldef{freemoney} \hlkwb{=} \hlnum{3000} \hlopt{-} \hldef{Shreelakshmibill}
+\hldef{freemoney}
+\end{alltt}
+\begin{verbatim}
+##  [1] 2540 2670 2610 2630 2540 2700 2520 2680 2510 2650 2700 2720
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+  The average money available each month after paying the phone bill is the aveerage of entries in the vector \texttt{freemoney}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{mean}\hldef{(freemoney)}
+\end{alltt}
+\begin{verbatim}
+## [1] 2622.5
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\end{enumerate}
+\end{document}      

@@ -1,0 +1,151 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath, amssymb, amsthm, graphicx, physics}
+\usepackage{enumitem}
+\usepackage{geometry}
+\usepackage[dvipsnames]{xcolor}
+\definecolor{EvanPink}{rgb}{0.85, 0.13, 0.55}
+\usepackage[colorlinks=true,
+            linkcolor=OliveGreen,
+            urlcolor=EvanPink,
+            citecolor=OliveGreen]{hyperref}
+\usepackage{cleveref}
+\usepackage{etoolbox}
+\newenvironment{solution}{%
+  \par\noindent\textit{Solution.}\ }{\qed}
+\newtheoremstyle{problemstyle}
+  {1em}   
+  {1em}   
+  {}      
+  {}      
+  {\bfseries} 
+  {.}     
+  {0.5em} 
+  {}      
+\theoremstyle{problemstyle}
+\newtheorem{problem}{Problem}[section]
+\crefname{problem}{Problem}{Problems}
+\Crefname{problem}{Problem}{Problems}
+\def\bN{\mathbb{N}}
+\def\bR{\mathbb{R}}
+\def\bZ{\mathbb{Z}}
+\def\bQ{\mathbb{Q}}
+\def\mM{\mathcal{M}}
+\def\mR{\mathcal{R}}
+\def\mN{\mathcal{N}}
+\def\mE{\mathcal{E}}
+\def\mA{\mathcal{A}}
+%%%%%%%%%%%%%%%Setting Page Sizes %%%%%%%%%%%%
+\setlength{\parindent}{0in}
+\setlength{\parskip}{\baselineskip}
+\setlength{\textheight}{9in}
+\setlength{\textwidth}{6.3in}
+\setlength{\topmargin}{-0.6in}
+\setlength{\evensidemargin}{-.5in}
+\setlength{\oddsidemargin}{0in}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%To make R commands appear in different Color%%%%%%%%%%
+\usepackage{color}
+\usepackage{fancyvrb} % Verbatim
+\usepackage{Sweave} % for R code
+\usepackage{color}
+\definecolor{codecolor}{RGB}{114,12,112}
+\DefineVerbatimEnvironment{Sinput}{Verbatim}{formatcom=\color{codecolor}}
+\DefineVerbatimEnvironment{Soutput}{Verbatim}{formatcom=\color{codecolor}}
+\DefineVerbatimEnvironment{Scode}{Verbatim}{formatcom=\color{codecolor}}
+\DefineVerbatimEnvironment{Sin}{Verbatim}{formatcom=\color{codecolor}}
+\DefineVerbatimEnvironment{Sout}{Verbatim}{formatcom=\color{codecolor}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+{\bf Arkaraj Mukherjee: }
+{\bf H.W. 1:}
+
+{\bf Solution 1:}
+\begin{enumerate}[label=\alph*.]
+  \item 
+  <<>>=
+  instasee = c(8,8,3,12,13,10,1,8,7)
+  differences = diff(instasee)
+  differences
+  @
+  The \texttt{diff} function gives us a vector that has the differences between adjacent terms in the input vector as output. 
+  Adding $24$ to every entry in this \texttt{differences} vector gives us the vector \texttt{x} with the number of hours between consecutive logins as we are working with the $24$-hour format. 
+  <<>>=
+  x = differences + 24
+  x
+  @
+  \item 
+  <<>>=
+  max(x)
+  mean(x)
+  min(x)
+  @
+\end{enumerate}
+
+{\bf Solution 2:}
+\begin{enumerate}[label=\alph*.]
+  \item 
+  <<>>=
+  scoreSS = c(7,6,10,8,7,9,9,6,4,10,8,6,9,10)
+  max(scoreSS)
+  mean(scoreSS)
+  min(scoreSS)
+  @
+  \item 
+  I can fix this by updating the $4$-th value in the vector \texttt{scoreSS} as follows
+  <<>>=
+  scoreSS[4] = 5
+  scoreSS
+  mean(scoreSS)
+  @
+  \item 
+  <<>>=
+  sum(scoreSS >= 9)
+  @
+  \item 
+  That command outputs the sum of all those entries in the vector \texttt{scoreSS} which are greater than or equal to $9$. 
+  
+  <<>>= 
+  100*length(scoreSS[scoreSS<17])/length(scoreSS)
+  @
+  
+\end{enumerate}
+{\bf{Solution 3}}
+\begin{enumerate}[label=\alph*.]
+  \item 
+  <<>>=
+  Shreelakshmibill = c(460,330,390,370,460,300,480,320,490,350,300,280)
+  Shreelakshmibill
+  sum(Shreelakshmibill)
+  @
+  \item 
+  <<>>=
+  min(Shreelakshmibill)
+  max(Shreelakshmibill)
+  @
+  These are the minimum and maximum amounts spent in some month respectively.
+  \item 
+  The number of months with the amount being greater than $50$ can be found as follows:
+  <<>>=
+  length(Shreelakshmibill[Shreelakshmibill>400])
+  @
+  The percentage too can be found from this like this:
+  <<>>=
+  100*length(Shreelakshmibill[Shreelakshmibill>400])/length(Shreelakshmibill)
+  @
+  \item 
+  <<>>>=
+  freemoney = 3000 - Shreelakshmibill
+  freemoney
+  @
+  The average money available each month after paying the phone bill is the aveerage of entries in the vector \texttt{freemoney}
+  <<>>=
+  mean(freemoney)
+  @
+\end{enumerate}
+\end{document}      
