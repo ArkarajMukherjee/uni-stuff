@@ -114,7 +114,7 @@
 \begin{document}
 
 {\bf Arkaraj Mukherjee: }
-{\bf H.W. 1:}
+{\bf H.W. 1}
 
 {\bf Solution 1:}
 \begin{enumerate}[label=\alph*.]
@@ -226,12 +226,23 @@
 \end{kframe}
 \end{knitrout}
   \item 
-  That command outputs the sum of all those entries in the vector \texttt{scoreSS} which are greater than or equal to $9$. 
-  
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hlnum{100}\hlopt{*}\hlkwd{length}\hldef{(scoreSS[scoreSS}\hlopt{<}\hlnum{17}\hldef{])}\hlopt{/}\hlkwd{length}\hldef{(scoreSS)}
+\hldef{scoreSS} \hlopt{>=} \hlnum{9}
+\end{alltt}
+\begin{verbatim}
+##  [1] FALSE FALSE  TRUE FALSE FALSE  TRUE  TRUE FALSE FALSE  TRUE FALSE FALSE
+## [13]  TRUE  TRUE
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+  As we can see, \texttt{ScoresSS >= 9} is a vector of \texttt{TRUE} and \texttt{FALSE} values, which seem to be treated as $1$'s and $0$'s respectively when performing arithmetic operations so the sum of all the entries in this vector is just the number of scores which are atleast $9$. 
+  We can use this technique to find the number of entries in a vector which satisfy some condition and hence we use it here to find the percentage of scores which are less than $17$
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlnum{100}\hlopt{*}\hlkwd{sum}\hldef{(scoreSS}\hlopt{<}\hlnum{17}\hldef{)}\hlopt{/}\hlkwd{length}\hldef{(scoreSS)}
 \end{alltt}
 \begin{verbatim}
 ## [1] 100
@@ -246,17 +257,17 @@
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hldef{Shreelakshmibill} \hlkwb{=} \hlkwd{c}\hldef{(}\hlnum{460}\hldef{,}\hlnum{330}\hldef{,}\hlnum{390}\hldef{,}\hlnum{370}\hldef{,}\hlnum{460}\hldef{,}\hlnum{300}\hldef{,}\hlnum{480}\hldef{,}\hlnum{320}\hldef{,}\hlnum{490}\hldef{,}\hlnum{350}\hldef{,}\hlnum{300}\hldef{,}\hlnum{280}\hldef{)}
+\hldef{Shreelakshmibill} \hlkwb{=} \hlkwd{c}\hldef{(}\hlnum{460}\hldef{,}\hlnum{330}\hldef{,}\hlnum{390}\hldef{,}\hlnum{370}\hldef{,}\hlnum{460}\hldef{,}\hlnum{300}\hldef{,}\hlnum{480}\hldef{,}\hlnum{320}\hldef{,}\hlnum{490}\hldef{,}\hlnum{350}\hldef{,}\hlnum{300}\hldef{,}\hlnum{480}\hldef{)}
 \hldef{Shreelakshmibill}
 \end{alltt}
 \begin{verbatim}
-##  [1] 460 330 390 370 460 300 480 320 490 350 300 280
+##  [1] 460 330 390 370 460 300 480 320 490 350 300 480
 \end{verbatim}
 \begin{alltt}
 \hlkwd{sum}\hldef{(Shreelakshmibill)}
 \end{alltt}
 \begin{verbatim}
-## [1] 4530
+## [1] 4730
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -267,7 +278,7 @@
 \hlkwd{min}\hldef{(Shreelakshmibill)}
 \end{alltt}
 \begin{verbatim}
-## [1] 280
+## [1] 300
 \end{verbatim}
 \begin{alltt}
 \hlkwd{max}\hldef{(Shreelakshmibill)}
@@ -279,14 +290,14 @@
 \end{knitrout}
   These are the minimum and maximum amounts spent in some month respectively.
   \item 
-  The number of months with the amount being greater than $50$ can be found as follows:
+  The number of months with the amount being greater than $400$ can be found as follows:
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
 \hlkwd{length}\hldef{(Shreelakshmibill[Shreelakshmibill}\hlopt{>}\hlnum{400}\hldef{])}
 \end{alltt}
 \begin{verbatim}
-## [1] 4
+## [1] 5
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -297,7 +308,7 @@
 \hlnum{100}\hlopt{*}\hlkwd{length}\hldef{(Shreelakshmibill[Shreelakshmibill}\hlopt{>}\hlnum{400}\hldef{])}\hlopt{/}\hlkwd{length}\hldef{(Shreelakshmibill)}
 \end{alltt}
 \begin{verbatim}
-## [1] 33.33333
+## [1] 41.66667
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -309,7 +320,7 @@
 \hldef{freemoney}
 \end{alltt}
 \begin{verbatim}
-##  [1] 2540 2670 2610 2630 2540 2700 2520 2680 2510 2650 2700 2720
+##  [1] 2540 2670 2610 2630 2540 2700 2520 2680 2510 2650 2700 2520
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
@@ -320,7 +331,7 @@
 \hlkwd{mean}\hldef{(freemoney)}
 \end{alltt}
 \begin{verbatim}
-## [1] 2622.5
+## [1] 2605.833
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
