@@ -1,0 +1,233 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath, amssymb, amsthm, graphicx, physics}
+\usepackage{enumitem}
+\usepackage{geometry}
+\usepackage[dvipsnames]{xcolor}
+\definecolor{EvanPink}{rgb}{0.85, 0.13, 0.55}
+\usepackage[colorlinks=true,
+            linkcolor=OliveGreen,
+            urlcolor=EvanPink,
+            citecolor=OliveGreen]{hyperref}
+\usepackage{cleveref}
+\usepackage{etoolbox}
+\newenvironment{solution}{%
+  \par\noindent\textit{Solution.}\ }{\qed}
+\newtheoremstyle{problemstyle}
+  {1em}   
+  {1em}   
+  {}      
+  {}      
+  {\bfseries} 
+  {.}     
+  {0.5em} 
+  {}      
+\theoremstyle{problemstyle}
+\newtheorem{problem}{Problem}[section]
+\crefname{problem}{Problem}{Problems}
+\Crefname{problem}{Problem}{Problems}
+\def\bN{\mathbb{N}}
+\def\bR{\mathbb{R}}
+\def\bZ{\mathbb{Z}}
+\def\bQ{\mathbb{Q}}
+\def\mM{\mathcal{M}}
+\def\mR{\mathcal{R}}
+\def\mN{\mathcal{N}}
+\def\mE{\mathcal{E}}
+\def\mA{\mathcal{A}}
+%%%%%%%%%%%%%%%Setting Page Sizes %%%%%%%%%%%%
+\setlength{\parindent}{0in}
+\setlength{\parskip}{\baselineskip}
+\setlength{\textheight}{9in}
+\setlength{\textwidth}{6.3in}
+\setlength{\topmargin}{-0.6in}
+\setlength{\evensidemargin}{-.5in}
+\setlength{\oddsidemargin}{0in}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%To make R commands appear in different Color%%%%%%%%%%
+\usepackage{color}
+\usepackage{fancyvrb} % Verbatim
+\usepackage{Sweave} % for R code
+\usepackage{color}
+\definecolor{codecolor}{RGB}{114,12,112}
+\DefineVerbatimEnvironment{Sinput}{Verbatim}{formatcom=\color{codecolor}}
+\DefineVerbatimEnvironment{Soutput}{Verbatim}{formatcom=\color{codecolor}}
+\DefineVerbatimEnvironment{Scode}{Verbatim}{formatcom=\color{codecolor}}
+\DefineVerbatimEnvironment{Sin}{Verbatim}{formatcom=\color{codecolor}}
+\DefineVerbatimEnvironment{Sout}{Verbatim}{formatcom=\color{codecolor}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+{\bf Arkaraj Mukherjee: }
+{\bf H.W. 2}
+\\
+Loading necessary libraries:
+<<>>=
+library("tidyverse");
+@
+{\bf Solution 1:}
+\begin{enumerate}[label=(\alph*)]
+  \item \begin{enumerate}[label=\arabic*.]
+    \item If we facet a continuous variable then R will generate a seperate plot for every value this variable takes. 
+    Even though this does not always produce errors, it isn't always useful as the figure becomes increasingly cluttered as the range of the faceted variable gets larger in cardinality. 
+    For example, in the dataset \texttt{mpg} we facet one of its continuous variables \texttt{cty} while plotting \texttt{displ}$\times$\texttt{hwy} graphs. 
+    This is still intelligible but it won't be if the \texttt{cty} took maybe ten more values even. 
+    <<>>=
+    ggplot(data = mpg) +
+    geom_point(mapping = aes(x = displ, y = hwy)) +
+    facet_wrap(~hwy)
+    @
+    
+    \item
+    <<>>=
+    ggplot(data = mpg) + 
+    geom_point(mapping = aes(x = drv, y = cyl))
+    @
+    From this plot we can infer that there are no vehicles which are $4$wd with $5$ cylinders, rear wheel drive with $7$ cylinders etc. and naturally the plots corresponding to these tuples in \texttt{drv}$\times$\texttt{cyl} are empty. 
+    
+    \item for \texttt{facet\_grid}, R interprets the dot as a placeholder for "nothing", this is necessary as \texttt{facet\_grid} expects terms on both sides of the tilde(\texttt{~}) to make a matrix of panels following the structure \texttt{term\_on\_left}$\times$\texttt{term\_on\_right} and in this case the usage of dot on the left results in a column of plots as R facets by "nothing" (hence, it does not facet) on the rows and only facets on the columns whereas a dot on the right results in a row of plots due to a similar reason.
+    <<>>=
+    ggplot(data = mpg) + 
+    geom_point(mapping = aes(x = displ, y = hwy)) +
+    facet_grid(drv ~ .)
+
+    ggplot(data = mpg) + 
+    geom_point(mapping = aes(x = displ, y = hwy)) +
+    facet_grid(. ~ cyl)
+    @
+    
+    \item Plots using colour aesthetic to effectively add another dimension to the plot often loose some information due to the data points overlapping or nearly covering some point whereas this is not a problem when using \texttt{facet\_wrap} as data points with different values of this parameters have completely seperate plots alloted to them and no information about this parameter is lost. 
+    It might seem from the above line that \texttt{facet\_wrap} is overall superior but it is not, when the parameter to be added on (be it via faceting or using colour aesthetic) takes many values, the \texttt{facet\_wrap} will get extremely cluttered and eventually rendered useless for continuous variables taking on more than maybe $50$ values whereas the colour aesthetic can easily account for this by using the numerous different shades of colours available. 
+    On top of this, its not possible to infer globar properties of the parameter being faceted from \texttt{facet\_wrap} as the points are in completetly seperate plots - which isn't a case when using colour aesthetic. 
+    All in all, we could say that \texttt{facet\_wrap} usually scales better for larger datasets unless the parameter to be faceted takes on way too many values.
+    \item \texttt{nrow} and \texttt{ncol} fix the maximum number of rows and columns used on the screen, here is an example:
+    <<>>=
+    ggplot(data = mpg) + 
+    geom_point(mapping = aes(x = displ, y = hwy)) +
+    facet_wrap(vars(cyl,drv))
+
+    ggplot(data = mpg) + 
+    geom_point(mapping = aes(x = displ, y = hwy)) +
+    facet_wrap(vars(cyl,drv), nrow=2)
+    @
+    The other options that control the layout of individual panels are \texttt{as.table,strip.position,dir}. 
+    \texttt{facet\_grid} does not have these arguements because the number of columns and rows are already fixed by its inputs. 
+    \item This is to avoid the potentially english labels from overlapping with the adjacent labels.
+  \end{enumerate}
+  \item \begin{enumerate}[label=\arabic*.]
+    \item We would use the \texttt{geom\_line,geom\_boxplot,geom\_histogram,geom\_area} respectively. 
+    \item I think we will see two plots on the dataset \texttt{mpg} with the \texttt{x} and \texttt{y} axis being \texttt{displ} and \texttt{hwy} respectively, each grouped (with a legend) according to \texttt{drv} using colour, layered on top of eachother: a scatter plot and a smooth line plot which will not have a confidense interval (due to \texttt{se = FALSE}, its on by default.) - other than that I think the two layers will use the same colours for each class and hence there will only be one legend. Now we run the code:
+    <<>>=
+    ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color = drv)) + 
+    geom_point() + 
+    geom_smooth(se = FALSE)
+    @
+    my prediction was not wrong but I didn't think that the legends would overlap as in the line and dot would both be included in the "legend box"(s).
+    \item \texttt{show.legend = FALSE} stops a legend from being displayed in the plot. 
+    If this is removed then a legend appears if it was supposed to anyways and doesn't if it wasn't supposed to (for example, when using \texttt{group}). 
+    It was used earlier to remove the legend because ggplot2 will automatically group the data for these geoms whenever you map \texttt{color} to a discrete variable and make a legend as well, using \texttt{show.legend = FALSE} stops the legend from being displayed. 
+    \item The \texttt{se} arguement to \texttt{geom\_smooth} toggles inclusion for the confidence interval of data being plotted. 
+    \item These will produce the same plots as in one we have a global mapping that gets applied to both geoms and in the other we use the same mapping for each geom but locally. 
+    \item The R code is written going towards the right and downwards:
+    <<>>=
+
+    ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) + 
+    geom_point() + 
+    geom_smooth(se = FALSE)
+
+    ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) + 
+    geom_point() + 
+    geom_smooth(mapping = aes(group = drv), se = FALSE)
+
+    ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color = drv)) + 
+    geom_point() + 
+    geom_smooth(se = FALSE)
+
+    ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) + 
+    geom_point(mapping = aes(color = drv)) + 
+    geom_smooth(se = FALSE)
+
+    ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) + 
+    geom_point(mapping = aes(color = drv)) + 
+    geom_smooth(mapping = aes(linetype = drv),se = FALSE)
+
+    ggplot(data = mpg) + 
+    geom_point(mapping = aes(x = displ, y = hwy, fill = drv),
+     shape = 21, size = 4, stroke = 4, color = "white")
+    @
+  \end{enumerate}
+  \item \begin{enumerate}[label=\arabic*.]
+    \item The default geom associated with \texttt{stat\_summary()} is \texttt{geom\_pointrange}. 
+    We could rewrite it as follows, by calling the specific stat \texttt{summary} to do the necessary calculations.
+    <<>>>=
+    ggplot(data = diamonds) +
+    geom_pointrange(mapping = aes(x = cut, y = depth),
+    stat = "summary",
+    fun = median,
+    fun.min = min,
+    fun.max = max)
+    @
+    \item \texttt{geom\_col()} creates a bar chart where the height of the bars represents specific values provided in the data, requiring you to map a variable to \texttt{y} (height). 
+    The difference is in the default statistical transformation as \texttt{geom\_bar()} calculates the bar height automatically by counting rows (with \texttt{stat = "count"}), whereas \texttt{geom\_col()} expects the heights to be pre-calculated and present in the data (as it uses \texttt{stat = "identity"} which does nothing extra). 
+    \item 
+    \begin{itemize}
+      \item \texttt{geom\_bar} $\leftrightarrow$ \texttt{stat\_count}
+      \item \texttt{geom\_boxplot} $\leftrightarrow$ \texttt{stat\_boxplot}
+      \item \texttt{geom\_density} $\leftrightarrow$ \texttt{stat\_density}
+      \item \texttt{geom\_histogram} $\leftrightarrow$ \texttt{stat\_bin}
+      \item \texttt{geom\_smooth} $\leftrightarrow$ \texttt{stat\_smooth}
+      \item \texttt{geom\_quantile} $\leftrightarrow$ \texttt{stat\_quantile}
+      \item \texttt{geom\_bin2d} $\leftrightarrow$ \texttt{stat\_bin2d}
+    \end{itemize}
+    Almost all of them share the same names and they depend on eachother, for example: \texttt{geom\_bar} uses \texttt{stat\_count} to calculate the heights neccesary for the bars and \texttt{stat\_count} uses \texttt{geom\_bar} to plot the results it generates. 
+    \item \texttt{stat\_smooth} computes the variables: \texttt{y} the predicted value, \texttt{ymin} the lower bound for the confidence interval, \texttt{ymax} the upper bound of the same, \texttt{se} the standard error and has parameters: \texttt{method} for the smoothing function to use (An example being \texttt{loess}), \texttt{fo2rmula} for the equation used for smoothing, \texttt{se} to specify whether to display the confidence interval, \texttt{level} to specify the confidence level, \texttt{span} (only valid for \texttt{method = loess}) to control how much the line wiggles (almost as if bounding the variaton of the curve), \texttt{n} the number of points at which it has to evaluate the smoother. 
+    \item By default, \texttt{ggplot2} treats each x-axis category as its own group, meaning proportions are calculated within that category (summing to 1). Setting \texttt{group = 1}(we could have writte \texttt{group = "meaow"} too, everything just needs to be dumped into a single bucket so that the proportions aren't calculated locally but rather globally on this one group which has it all) overrides this, putting all data into a single group so that proportions are calculated relative to the total dataset. 
+  \end{enumerate}
+  \item \begin{enumerate}[label=\arabic*.]
+    \item There is a lot of mass around (18,26) which is not visible through the scatter plot. 
+    This can be fixed by just using a jitter plot instead which makes this visible. 
+    \item The parameters \texttt{width, height} control the amount of horizontal and vertical jitter respectively. 
+    \item The jitter plot aims to make every data point visible, be it ever so slightly inaccurat due to the random noise whereas count plots add more information to the plot by effectively labelling each data point with the number of data points in the same location. 
+    They both have the same goal of helping us in the case of overplotting but they do it in vastly different ways, jitter plots convey mass through no. of points we visually see around some location whereas count plots explicitly mention the mass at each location.
+    \item The default position adjustment for boxplots is \texttt{dodge2}, this moves the boxplots along the x-axis ensuring that they do not overlap (hence the name "dodge"). 
+    Here's a demonstration with the \texttt{mpg} dataset:
+    <<>>=
+    ggplot(data = mpg) + 
+    geom_boxplot(mapping = aes(x = drv, y = hwy, fill = class))
+    @
+  \end{enumerate}
+  \item \begin{enumerate}[label=\arabic*.]
+    \item 
+    <<>>=
+    ggplot(data = diamonds) + 
+    geom_bar(mapping = aes(x = 1, fill = cut), width = 1)
+
+    ggplot(data = diamonds) + 
+    geom_bar(mapping = aes(x = 1, fill = cut), width = 1) + 
+    coord_polar(theta = "y")
+    @
+    \item \texttt{labs} is used to add the labels to a plot hence making it more accessible to others. 
+    It can also be used to add tags and captions etc. to differentiate between different plots.
+    \item \texttt{coord\_map} projects a portion of the earth, which is approximately spherical, onto a flat 2D plane using any projection define by the ‘mapproj’ package. 
+    Map projections do not, in general, preserve straight lines, so this \textbf{requires considerable computation} whereas \texttt{coord\_quickmap} is a \textbf{quick approximation} that does preserve straight lines. 
+    It works best for smaller areas closer to the equator.
+    \item \texttt{coord\_fixed} lets us see exactly how the parameters grow with respect to eachother as here one unit on the x-axis and has the same visual length as that on the y-axis. 
+    \texttt{geom\_abline} is used to draw a straight line that stretches infinitely, on the plot. 
+    It takes slope and intercept as input along with some other aesthetic parameters like color, linetype etc.
+  \end{enumerate}
+  \item \begin{enumerate}[label=\arabic*.]
+    \item \texttt{diamonds} is a dataset of containing the prices and other attributes like cut, depth etc. of almost $54000$ diamonds. 
+    This has $10$ variables namely: \texttt{price, carat, cut, colour, clarity, depth}. 
+    \item 
+    <<>>=
+    ggplot(data = diamonds) +
+    geom_bar(mapping = aes(x = cut, fill = clarity), position = "dodge")
+    @
+    \item The total number of diamonds increases as the quality of the cut increases across almost all the cuts and the number of diamonds is mostly concentrated towards the sl1,vs2,vs1 clarity so there are more diamonds of "slightly to very slightly included" clarity as per GIA terminology.
+  \end{enumerate}
+\end{enumerate}
+\end{document}
