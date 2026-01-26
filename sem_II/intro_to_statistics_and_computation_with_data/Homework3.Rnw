@@ -1,0 +1,148 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath, amssymb, amsthm, graphicx, physics}
+\usepackage{enumitem}
+\usepackage{geometry}
+\usepackage[dvipsnames]{xcolor}
+\definecolor{EvanPink}{rgb}{0.85, 0.13, 0.55}
+\usepackage[colorlinks=true,
+            linkcolor=OliveGreen,
+            urlcolor=EvanPink,
+            citecolor=OliveGreen]{hyperref}
+\usepackage{cleveref}
+\usepackage{etoolbox}
+\newenvironment{solution}{%
+  \par\noindent\textit{Solution.}\ }{\qed}
+\newtheoremstyle{problemstyle}
+  {1em}   
+  {1em}   
+  {}      
+  {}      
+  {\bfseries} 
+  {.}     
+  {0.5em} 
+  {}      
+\theoremstyle{problemstyle}
+\newtheorem{problem}{Problem}[section]
+\crefname{problem}{Problem}{Problems}
+\Crefname{problem}{Problem}{Problems}
+\def\bN{\mathbb{N}}
+\def\bR{\mathbb{R}}
+\def\bZ{\mathbb{Z}}
+\def\bQ{\mathbb{Q}}
+\def\mM{\mathcal{M}}
+\def\mR{\mathcal{R}}
+\def\mN{\mathcal{N}}
+\def\mE{\mathcal{E}}
+\def\mA{\mathcal{A}}
+%%%%%%%%%%%%%%%Setting Page Sizes %%%%%%%%%%%%
+\setlength{\parindent}{0in}
+\setlength{\parskip}{\baselineskip}
+\setlength{\textheight}{9in}
+\setlength{\textwidth}{6.3in}
+\setlength{\topmargin}{-0.6in}
+\setlength{\evensidemargin}{-.5in}
+\setlength{\oddsidemargin}{0in}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%To make R commands appear in different Color%%%%%%%%%%
+\usepackage{color}
+\usepackage{fancyvrb} % Verbatim
+\usepackage{Sweave} % for R code
+\usepackage{color}
+\definecolor{codecolor}{RGB}{114,12,112}
+\DefineVerbatimEnvironment{Sinput}{Verbatim}{formatcom=\color{codecolor}}
+\DefineVerbatimEnvironment{Soutput}{Verbatim}{formatcom=\color{codecolor}}
+\DefineVerbatimEnvironment{Scode}{Verbatim}{formatcom=\color{codecolor}}
+\DefineVerbatimEnvironment{Sin}{Verbatim}{formatcom=\color{codecolor}}
+\DefineVerbatimEnvironment{Sout}{Verbatim}{formatcom=\color{codecolor}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+{\bf Arkaraj Mukherjee: }
+{\bf H.W. 3}
+\\
+Loading necessary libraries and setting the current working directory appropriately:
+<<>>=
+library("tidyverse");
+library("scales")
+library("viridis");
+setwd("~/isi_bmath/sem_II/intro_to_statistics_and_computation_with_data");
+@
+
+\begin{enumerate}[label=(\alph*)]
+    \item The headers in the csv have been edited for brevity. 
+    The graph has its x-axis being the dates and y-axis being the current time in $24$-hour format. 
+    The bars correspond (according to colour which depend on the topic) to the meeting timespans. 
+    It should be noted that there were meetings ($56$ of them) which ended on a date later than the start date, these have been split into two seperate meetings for the sake of plotting. 
+    What we aim to capture is "when is Suppandi in what (according to topic) meeting".
+
+    <<>>=
+    SuppandiZoomLog = read.csv("SuppandiZoomLog.csv", header = T);
+    SZL = SuppandiZoomLog[c("Topic","Start","End")]
+    head(SZL, n = 3)
+    SZL$Start = as.POSIXlt(SZL$Start);
+    SZL$End = strptime(SZL$End, "%m/%d/%Y %I:%M:%S %p");
+    
+    #splitting meetings which overflow and attaching them at the end
+    for(i in 1:nrow(SZL)) {
+        if(as.POSIXlt(SZL$End[i])$mday != as.POSIXlt(SZL$Start[i])$mday) {
+            
+            new_start = as.POSIXlt(SZL$Start[i]);
+            new_start$mday = new_start$mday + 1;
+            new_start$sec <- 0;
+            new_start$min <- 0;
+            new_start$hour <- 0;
+
+            SZL <- SZL %>%
+                add_row(Topic = SZL$Topic[i], Start = new_start, End = SZL$End[i]);
+            
+            new_end = as.POSIXlt(SZL$Start[i]);
+            new_end$sec <- 59;
+            new_end$min <- 59;
+            new_end$hour <- 23;
+
+            SZL$End[i] = new_end;
+        }
+    }
+
+    to_plot <- SZL %>% mutate(
+        Date = as.Date(Start),
+        Start = as.POSIXlt(SZL$Start)$hour + 
+        as.POSIXlt(SZL$Start)$min/60 + as.POSIXlt(SZL$Start)$sec/3600,
+        End = as.POSIXlt(SZL$End)$hour + 
+        as.POSIXlt(SZL$End)$min/60 + as.POSIXlt(SZL$End)$sec/3600,
+    )
+
+    ggplot(data = to_plot) +
+    geom_rect(mapping = aes(
+        xmin = Date - 0.5,
+        xmax = Date + 0.5,
+        ymin = Start,
+        ymax = End,
+        fill = Topic)
+    ) +
+    scale_x_date(
+        date_breaks = "1 month",
+        date_minor_breaks = "1 day",
+        labels = date_format("%b %Y")
+    ) +
+    scale_y_continuous(
+        breaks = 0:24,
+        limits = c(0,24)
+    ) +
+    labs(
+        title = "Daily schdecule of zoom meetings",
+        x = "Date",
+        y = "Time of day",
+        fill = "Topic"
+    ) +
+    theme(
+    axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1)
+    )
+    @
+\end{enumerate}
+\end{document}

@@ -1,0 +1,261 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath, amssymb, amsthm, graphicx, physics}
+\usepackage{enumitem}
+\usepackage{geometry}
+\usepackage[dvipsnames]{xcolor}
+\definecolor{EvanPink}{rgb}{0.85, 0.13, 0.55}
+\usepackage[colorlinks=true,
+            linkcolor=OliveGreen,
+            urlcolor=EvanPink,
+            citecolor=OliveGreen]{hyperref}
+\usepackage{cleveref}
+\usepackage{etoolbox}
+\newenvironment{solution}{%
+  \par\noindent\textit{Solution.}\ }{\qed}
+\newtheoremstyle{problemstyle}
+  {1em}   
+  {1em}   
+  {}      
+  {}      
+  {\bfseries} 
+  {.}     
+  {0.5em} 
+  {}      
+\theoremstyle{problemstyle}
+\newtheorem{problem}{Problem}[section]
+\crefname{problem}{Problem}{Problems}
+\Crefname{problem}{Problem}{Problems}
+\def\bN{\mathbb{N}}
+\def\bR{\mathbb{R}}
+\def\bZ{\mathbb{Z}}
+\def\bQ{\mathbb{Q}}
+\def\mM{\mathcal{M}}
+\def\mR{\mathcal{R}}
+\def\mN{\mathcal{N}}
+\def\mE{\mathcal{E}}
+\def\mA{\mathcal{A}}
+%%%%%%%%%%%%%%%Setting Page Sizes %%%%%%%%%%%%
+\setlength{\parindent}{0in}
+\setlength{\parskip}{\baselineskip}
+\setlength{\textheight}{9in}
+\setlength{\textwidth}{6.3in}
+\setlength{\topmargin}{-0.6in}
+\setlength{\evensidemargin}{-.5in}
+\setlength{\oddsidemargin}{0in}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%To make R commands appear in different Color%%%%%%%%%%
+\usepackage{color}
+\usepackage{fancyvrb} % Verbatim
+\usepackage{Sweave} % for R code
+\usepackage{color}
+\definecolor{codecolor}{RGB}{114,12,112}
+\DefineVerbatimEnvironment{Sinput}{Verbatim}{formatcom=\color{codecolor}}
+\DefineVerbatimEnvironment{Soutput}{Verbatim}{formatcom=\color{codecolor}}
+\DefineVerbatimEnvironment{Scode}{Verbatim}{formatcom=\color{codecolor}}
+\DefineVerbatimEnvironment{Sin}{Verbatim}{formatcom=\color{codecolor}}
+\DefineVerbatimEnvironment{Sout}{Verbatim}{formatcom=\color{codecolor}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+{\bf Arkaraj Mukherjee: }
+{\bf Worksheet 3}
+\\
+!!AI WAS USED TO FIGURE OUT "ARRANGE" AND "FILTER" COMMANDS ALONG WITH MOVING THE LEGEND TO THE BOTTOM AND PLOTTING THE GAUSSIAN ON THE GRAPH BUT ONLY SYNTAX!!
+Loading necessary libraries and setting the current working directory appropriately:
+<<>>=
+library("tidyverse");
+library("viridis");
+setwd("~/isi_bmath/sem_II/intro_to_statistics_and_computation_with_data");
+@
+
+\begin{enumerate}[label=\arabic*.]
+    \item \begin{enumerate}[label=(\alph*)]
+    \item The command \texttt{read\.csv}eads a file in table format and creates a data frame from it, with cases corresponding to lines and variables to fields in the file. 
+    \item \texttt{setwd} is used to set the working directory. 
+    \item \texttt{getwd} returns the current working directory.
+    \end{enumerate}
+    \item \begin{enumerate}[label=(\alph*)]
+    \item This will read the data from our file and due to the \texttt{header = T} arguement, assume that the first row (in our case it is the line "Dice") contains the column name and not data itself.
+    <<>>=
+    DiceR = read.csv("Dice.csv", header = T)
+    @
+    This line renames the column in our file to "Sum"
+    <<>>=
+    names(DiceR) = "Sum"
+    @
+    This changes the data type of the column in our file named \texttt{Sum} to plain numbers. 
+    <<>>=
+    DiceR$Sum = as.numeric(DiceR$Sum)
+    @
+    This effectively removes the empty rows which have no data (\texttt{NA} to be more precise) and puts the new clean data into the vector \texttt{Dice}
+    <<>>=
+    Dice = na.omit(DiceR$Sum)
+    @
+    This creates a histogram with this data
+    <<>>=
+    hist(Dice)
+    @
+    This calculates and prints some basic statistics from this data like mean, median, mode, maximum, minimum and some quartiles.
+    <<>>=
+    summary(Dice)
+    @
+
+    \item
+    This calculates the Z-score of the data in our frame and puts it in the vector \texttt{cs}
+    <<>>=
+    cs = (Dice-mean(Dice))/(sd(Dice))
+    @
+    This calculates the mean (It will be $0$ by linearity of expectation but theres some numerical error at play here) of these Z-scores
+    <<>>=
+    mean(cs)
+    @
+    This calculates the standard deviation of these Z-scores
+    <<>>=
+    sd(cs)
+    @
+    The first among these lines puts the scores that are within one standard deviation away from the mean in the vector \texttt{onesdcs}, the second line does this but for two standard deviations and puts them in \texttt{twosdcs} and the third line does it for three standard deviations and puts them in \texttt{threesdcs}.
+    <<>>=
+    onesdcs = cs[cs > -1 & cs < 1];
+    twosdcs = cs[cs > -2 & cs < 2];
+    threesdcs = cs[cs > -3 & cs < 3];
+    @
+    These are indeed approximated well by a normall distribution of appropriate variance and mean. 
+    This is because after standardizing this data we find that it is approximated well by the standard normal distribution due to 
+    \begin{itemize}
+        \item The mean of \texttt{cs} is $0$ and the sd is $1$ which are the same as in a standard normal distribution. 
+        \item As the sums of these die follow a binomial distribution, upon standardization they become more and more approximable by the normal distribution due to the central limit theorem and the question here is \textit{how good is the approximation}.
+        \item We can use the empirical rule, also called $68$-$95$-$99.7$  rule(these are the percentage of values that fall in within first, second and third standard deviations of the mean in a standard normal distribution) to say whether this is a good approximation. 
+        \item We will now calculate these percentages for our distribution and if they are close to these then our claim holds. 
+        <<>>>=
+        100*length(onesdcs)/length(cs)
+        100*length(twosdcs)/length(cs)
+        100*length(threesdcs)/length(cs)
+        @
+        \item We can use a bar plot to see the geomtric shape of the data too. 
+        The appropriate normal pdf is also graphed alongside, we see that it captures the shape of our data well at most points. 
+        \texttt{length(Dice) * 1} is multiplied to scale the graph, this is needed as it represents the probability and in our case the number of trials is \texttt{length(Dice)}.
+        <<>>=
+        ggplot(data = DiceR) +
+        geom_bar(mapping = aes(x = Sum)) +
+        stat_function(
+        fun = function(x) dnorm(
+            x,
+            mean = mean(Dice),
+            sd = sd(Dice)) * length(Dice) * 1,
+        color = "red"
+        )
+        @
+    \end{itemize}
+\end{enumerate}
+\item \begin{enumerate}[label=(\alph*)]
+    \item This dataset contains daily time-series records of COVID-19 statistics in India from January 30, 2020, onwards. 
+    It tracks cumulative counts of confirmed cases, recoveries, deceased individuals, "other" cases, and tested samples, categorized by specific states (like Kerala, Delhi, etc.) and the nation as a whole. 
+    <<>>=
+    statedf = read.csv("states.csv", header = T)
+    head(statedf)
+    @
+    \item I pick \texttt{Uttar Pradesh} as my name is probably \texttt{Arkaraj Mukherjee}
+    \item 
+    <<>>=
+    mystatedf = subset(statedf, statedf$State == "Uttar Pradesh")
+    head(mystatedf)
+    @ 
+    \item We just have to subtract the number of confirmed cases from all the other closed cases. 
+    We put these new numbers in a seperate column called \texttt{Active}. 
+    <<>>=
+    mystatedf$Active = mystatedf$Confirmed - 
+    (mystatedf$Recovered + mystatedf$Deceased + mystatedf$Other)
+    mystatedf$Date = as.Date(mystatedf$Date)
+    to_plot = mystatedf %>%
+    filter(Date >= "2021-07-01" & Date <= "2021-12-31")
+    ggplot(data = to_plot) +
+    geom_line(mapping = aes(x = Date, y = Active, color = Date)) +
+    scale_color_viridis_c(option = "viridis", trans = "date") + 
+    scale_x_date(date_labels = "%b %Y", date_breaks = "1 month") +
+    labs(title = "Active cases for Uttar Pradesh", x = "Dates", y = "Cases")
+    @
+    \item First we get the daily new deceased cases to use them to compute new deaths per month.
+    <<>>=
+    mystatedf$Daily_Deceased = c(0, diff(mystatedf$Deceased))
+    mystatedf$Month = as.Date(format(mystatedf$Date, "%Y-%m-01"))
+    to_plot_1 = 
+    mystatedf[mystatedf$Date >= "2020-03-01" & mystatedf$Date <= "2021-12-31", ]
+    monthly_data = aggregate(Daily_Deceased ~ Month, data = to_plot_1, sum)
+    ggplot(data = monthly_data) +
+    geom_bar(mapping = aes(x = Month, y = Daily_Deceased,
+    fill = as.factor(Month)), stat = "identity") +
+    scale_fill_viridis_d() +
+    labs(title = "Monthly Deceased Totals for UP",
+       x = "Months",
+       y = "Deceased Total",
+       fill = "Months")
+    @
+    \item The process to do this is identical to that of the previous part.
+    <<>>=
+    mystatedf$Daily_Confirmed = c(0, diff(mystatedf$Confirmed))
+    mystatedf$Month = as.Date(format(mystatedf$Date, "%Y-%m-01"))
+    to_plot_1 = 
+    mystatedf[mystatedf$Date >= "2020-03-01" & mystatedf$Date <= "2021-12-31", ]
+    monthly_data = aggregate(Daily_Confirmed ~ Month, data = to_plot_1, sum)
+    ggplot(data = monthly_data) +
+    geom_bar(mapping = aes(x = Month, y = Daily_Confirmed,
+    fill = as.factor(Month)), stat = "identity") +
+    scale_fill_viridis_d() +
+    labs(title = "Monthly Confirmed Totals for UP",
+       x = "Months",
+       y = "Confirmed Totals",
+       fill = "Months")
+    @
+    \item
+    <<>>=
+    statedf = statedf %>%
+    arrange(State, Date) %>%
+    group_by(State) %>%
+    mutate(
+        Daily_Confirmed = c(0, diff(Confirmed)),
+        Daily_Deceased  = c(0, diff(Deceased))
+    ) %>%
+    ungroup()
+
+    state_totals = statedf %>%
+    filter(Date >= "2020-03-01" & Date <= "2021-12-31") %>%
+    group_by(State) %>%
+    summarise(
+        Total_Confirmed = sum(Daily_Confirmed, na.rm = TRUE),
+        Total_Deceased  = sum(Daily_Deceased, na.rm = TRUE)
+    )
+
+    ggplot(data = state_totals, aes(x = Total_Deceased, y = Total_Confirmed)) +
+    scale_x_log10() +
+    geom_point(aes(color = State), size = 1) +
+    #geom_text(mapping = aes(label = State)) +
+    scale_color_viridis_d(option = "viridis") +
+    labs(title = "Scatter Plot of Confirmed Versus Deceased",
+       x = "Deceased Figures",
+       y = "Confirmed Cases") +
+    theme(legend.position = "bottom",
+        legend.text = element_text(size = 7),
+        legend.title = element_text(size = 9))
+    @
+    log scale is used as otherwise the points are concentrated at the bottom right and immense overplotting takes. Names can be added with \texttt{geom\_text} but the points get covered by the text itself. 
+    <<>>=
+    ggplot(data = state_totals, aes(x = Total_Deceased, y = Total_Confirmed)) +
+    scale_x_log10() +
+    geom_point(aes(color = State), size = 1) +
+    geom_text(mapping = aes(label = State), size = 2) +
+    scale_color_viridis_d(option = "viridis") +
+    labs(title = "Scatter Plot of Confirmed Versus Deceased",
+       x = "Deceased Figures",
+       y = "Confirmed Cases") +
+    theme(legend.position = "bottom",
+        legend.text = element_text(size = 7),
+        legend.title = element_text(size = 9))
+    @
+\end{enumerate}
+\end{enumerate}
+\end{document}

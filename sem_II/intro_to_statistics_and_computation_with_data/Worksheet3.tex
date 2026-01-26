@@ -1,0 +1,452 @@
+\documentclass[11pt]{article}\usepackage[]{graphicx}\usepackage[dvipsnames]{xcolor}
+% maxwidth is the original width if it is less than linewidth
+% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlsng}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hldef}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+\let\hlipl\hlkwb
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath, amssymb, amsthm, graphicx, physics}
+\usepackage{enumitem}
+\usepackage{geometry}
+\usepackage[dvipsnames]{xcolor}
+\definecolor{EvanPink}{rgb}{0.85, 0.13, 0.55}
+\usepackage[colorlinks=true,
+            linkcolor=OliveGreen,
+            urlcolor=EvanPink,
+            citecolor=OliveGreen]{hyperref}
+\usepackage{cleveref}
+\usepackage{etoolbox}
+\newenvironment{solution}{%
+  \par\noindent\textit{Solution.}\ }{\qed}
+\newtheoremstyle{problemstyle}
+  {1em}   
+  {1em}   
+  {}      
+  {}      
+  {\bfseries} 
+  {.}     
+  {0.5em} 
+  {}      
+\theoremstyle{problemstyle}
+\newtheorem{problem}{Problem}[section]
+\crefname{problem}{Problem}{Problems}
+\Crefname{problem}{Problem}{Problems}
+\def\bN{\mathbb{N}}
+\def\bR{\mathbb{R}}
+\def\bZ{\mathbb{Z}}
+\def\bQ{\mathbb{Q}}
+\def\mM{\mathcal{M}}
+\def\mR{\mathcal{R}}
+\def\mN{\mathcal{N}}
+\def\mE{\mathcal{E}}
+\def\mA{\mathcal{A}}
+%%%%%%%%%%%%%%%Setting Page Sizes %%%%%%%%%%%%
+\setlength{\parindent}{0in}
+\setlength{\parskip}{\baselineskip}
+\setlength{\textheight}{9in}
+\setlength{\textwidth}{6.3in}
+\setlength{\topmargin}{-0.6in}
+\setlength{\evensidemargin}{-.5in}
+\setlength{\oddsidemargin}{0in}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%To make R commands appear in different Color%%%%%%%%%%
+\usepackage{color}
+\usepackage{fancyvrb} % Verbatim
+\usepackage{Sweave} % for R code
+\usepackage{color}
+\definecolor{codecolor}{RGB}{114,12,112}
+\DefineVerbatimEnvironment{Sinput}{Verbatim}{formatcom=\color{codecolor}}
+\DefineVerbatimEnvironment{Soutput}{Verbatim}{formatcom=\color{codecolor}}
+\DefineVerbatimEnvironment{Scode}{Verbatim}{formatcom=\color{codecolor}}
+\DefineVerbatimEnvironment{Sin}{Verbatim}{formatcom=\color{codecolor}}
+\DefineVerbatimEnvironment{Sout}{Verbatim}{formatcom=\color{codecolor}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+
+{\bf Arkaraj Mukherjee: }
+{\bf Worksheet 3}
+\\
+!!AI WAS USED TO FIGURE OUT "ARRANGE" AND "FILTER" COMMANDS ALONG WITH MOVING THE LEGEND TO THE BOTTOM AND PLOTTING THE GAUSSIAN ON THE GRAPH BUT ONLY SYNTAX!!
+Loading necessary libraries and setting the current working directory appropriately:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{library}\hldef{(}\hlsng{"tidyverse"}\hldef{);}
+\end{alltt}
+
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# -- Attaching core tidyverse packages ------------------------ tidyverse 2.0.0 --\\\#\# v dplyr \ \ \ \ 1.1.4 \ \ \ \ v readr \ \ \ \ 2.1.6\\\#\# v forcats \ \ 1.0.1 \ \ \ \ v stringr \ \ 1.6.0\\\#\# v ggplot2 \ \ 4.0.1 \ \ \ \ v tibble \ \ \ 3.3.0\\\#\# v lubridate 1.9.4 \ \ \ \ v tidyr \ \ \ \ 1.3.2\\\#\# v purrr \ \ \ \ 1.2.0 \ \ \ \ \\\#\# -- Conflicts ------------------------------------------ tidyverse\_conflicts() --\\\#\# x dplyr::filter() masks stats::filter()\\\#\# x dplyr::lag() \ \ \ masks stats::lag()\\\#\# i Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors}}\begin{alltt}
+\hlkwd{library}\hldef{(}\hlsng{"viridis"}\hldef{);}
+\end{alltt}
+
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loading required package: viridisLite}}\begin{alltt}
+\hlkwd{setwd}\hldef{(}\hlsng{"~/isi_bmath/sem_II/intro_to_statistics_and_computation_with_data"}\hldef{);}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\begin{enumerate}[label=\arabic*.]
+    \item \begin{enumerate}[label=(\alph*)]
+    \item The command \texttt{read\.csv}eads a file in table format and creates a data frame from it, with cases corresponding to lines and variables to fields in the file. 
+    \item \texttt{setwd} is used to set the working directory. 
+    \item \texttt{getwd} returns the current working directory.
+    \end{enumerate}
+    \item \begin{enumerate}[label=(\alph*)]
+    \item This will read the data from our file and due to the \texttt{header = T} arguement, assume that the first row (in our case it is the line "Dice") contains the column name and not data itself.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hldef{DiceR} \hlkwb{=} \hlkwd{read.csv}\hldef{(}\hlsng{"Dice.csv"}\hldef{,} \hlkwc{header} \hldef{= T)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+    This line renames the column in our file to "Sum"
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{names}\hldef{(DiceR)} \hlkwb{=} \hlsng{"Sum"}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+    This changes the data type of the column in our file named \texttt{Sum} to plain numbers. 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hldef{DiceR}\hlopt{$}\hldef{Sum} \hlkwb{=} \hlkwd{as.numeric}\hldef{(DiceR}\hlopt{$}\hldef{Sum)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+    This effectively removes the empty rows which have no data (\texttt{NA} to be more precise) and puts the new clean data into the vector \texttt{Dice}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hldef{Dice} \hlkwb{=} \hlkwd{na.omit}\hldef{(DiceR}\hlopt{$}\hldef{Sum)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+    This creates a histogram with this data
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{hist}\hldef{(Dice)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-6-1} 
+\end{knitrout}
+    This calculates and prints some basic statistics from this data like mean, median, mode, maximum, minimum and some quartiles.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{summary}\hldef{(Dice)}
+\end{alltt}
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    1.00   15.00   17.00   17.14   20.00   27.00
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+    \item
+    This calculates the Z-score of the data in our frame and puts it in the vector \texttt{cs}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hldef{cs} \hlkwb{=} \hldef{(Dice}\hlopt{-}\hlkwd{mean}\hldef{(Dice))}\hlopt{/}\hldef{(}\hlkwd{sd}\hldef{(Dice))}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+    This calculates the mean (It will be $0$ by linearity of expectation but theres some numerical error at play here) of these Z-scores
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{mean}\hldef{(cs)}
+\end{alltt}
+\begin{verbatim}
+## [1] 1.34184e-16
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+    This calculates the standard deviation of these Z-scores
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{sd}\hldef{(cs)}
+\end{alltt}
+\begin{verbatim}
+## [1] 1
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+    The first among these lines puts the scores that are within one standard deviation away from the mean in the vector \texttt{onesdcs}, the second line does this but for two standard deviations and puts them in \texttt{twosdcs} and the third line does it for three standard deviations and puts them in \texttt{threesdcs}.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hldef{onesdcs} \hlkwb{=} \hldef{cs[cs} \hlopt{> -}\hlnum{1} \hlopt{&} \hldef{cs} \hlopt{<} \hlnum{1}\hldef{];}
+\hldef{twosdcs} \hlkwb{=} \hldef{cs[cs} \hlopt{> -}\hlnum{2} \hlopt{&} \hldef{cs} \hlopt{<} \hlnum{2}\hldef{];}
+\hldef{threesdcs} \hlkwb{=} \hldef{cs[cs} \hlopt{> -}\hlnum{3} \hlopt{&} \hldef{cs} \hlopt{<} \hlnum{3}\hldef{];}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+    These are indeed approximated well by a normall distribution of appropriate variance and mean. 
+    This is because after standardizing this data we find that it is approximated well by the standard normal distribution due to 
+    \begin{itemize}
+        \item The mean of \texttt{cs} is $0$ and the sd is $1$ which are the same as in a standard normal distribution. 
+        \item As the sums of these die follow a binomial distribution, upon standardization they become more and more approximable by the normal distribution due to the central limit theorem and the question here is \textit{how good is the approximation}.
+        \item We can use the empirical rule, also called $68$-$95$-$99.7$  rule(these are the percentage of values that fall in within first, second and third standard deviations of the mean in a standard normal distribution) to say whether this is a good approximation. 
+        \item We will now calculate these percentages for our distribution and if they are close to these then our claim holds. 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlnum{100}\hlopt{*}\hlkwd{length}\hldef{(onesdcs)}\hlopt{/}\hlkwd{length}\hldef{(cs)}
+\end{alltt}
+\begin{verbatim}
+## [1] 66.47059
+\end{verbatim}
+\begin{alltt}
+\hlnum{100}\hlopt{*}\hlkwd{length}\hldef{(twosdcs)}\hlopt{/}\hlkwd{length}\hldef{(cs)}
+\end{alltt}
+\begin{verbatim}
+## [1] 95.88235
+\end{verbatim}
+\begin{alltt}
+\hlnum{100}\hlopt{*}\hlkwd{length}\hldef{(threesdcs)}\hlopt{/}\hlkwd{length}\hldef{(cs)}
+\end{alltt}
+\begin{verbatim}
+## [1] 99.41176
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+        \item We can use a bar plot to see the geomtric shape of the data too. 
+        The appropriate normal pdf is also graphed alongside, we see that it captures the shape of our data well at most points. 
+        \texttt{length(Dice) * 1} is multiplied to scale the graph, this is needed as it represents the probability and in our case the number of trials is \texttt{length(Dice)}.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{ggplot}\hldef{(}\hlkwc{data} \hldef{= DiceR)} \hlopt{+}
+\hlkwd{geom_bar}\hldef{(}\hlkwc{mapping} \hldef{=} \hlkwd{aes}\hldef{(}\hlkwc{x} \hldef{= Sum))} \hlopt{+}
+\hlkwd{stat_function}\hldef{(}
+\hlkwc{fun} \hldef{=} \hlkwa{function}\hldef{(}\hlkwc{x}\hldef{)} \hlkwd{dnorm}\hldef{(}
+    \hldef{x,}
+    \hlkwc{mean} \hldef{=} \hlkwd{mean}\hldef{(Dice),}
+    \hlkwc{sd} \hldef{=} \hlkwd{sd}\hldef{(Dice))} \hlopt{*} \hlkwd{length}\hldef{(Dice)} \hlopt{*} \hlnum{1}\hldef{,}
+\hlkwc{color} \hldef{=} \hlsng{"red"}
+\hldef{)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-12-1} 
+\end{knitrout}
+    \end{itemize}
+\end{enumerate}
+\item \begin{enumerate}[label=(\alph*)]
+    \item This dataset contains daily time-series records of COVID-19 statistics in India from January 30, 2020, onwards. 
+    It tracks cumulative counts of confirmed cases, recoveries, deceased individuals, "other" cases, and tested samples, categorized by specific states (like Kerala, Delhi, etc.) and the nation as a whole. 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hldef{statedf} \hlkwb{=} \hlkwd{read.csv}\hldef{(}\hlsng{"states.csv"}\hldef{,} \hlkwc{header} \hldef{= T)}
+\hlkwd{head}\hldef{(statedf)}
+\end{alltt}
+\begin{verbatim}
+##         Date  State Confirmed Recovered Deceased Other Tested
+## 1 2020-01-30  India         1         0        0     0      0
+## 2 2020-01-30 Kerala         1         0        0     0      0
+## 3 2020-02-02  India         2         0        0     0      0
+## 4 2020-02-02 Kerala         2         0        0     0      0
+## 5 2020-02-03  India         3         0        0     0      0
+## 6 2020-02-03 Kerala         3         0        0     0      0
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+    \item I pick \texttt{Uttar Pradesh} as my name is probably \texttt{Arkaraj Mukherjee}
+    \item 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hldef{mystatedf} \hlkwb{=} \hlkwd{subset}\hldef{(statedf, statedf}\hlopt{$}\hldef{State} \hlopt{==} \hlsng{"Uttar Pradesh"}\hldef{)}
+\hlkwd{head}\hldef{(mystatedf)}
+\end{alltt}
+\begin{verbatim}
+##          Date         State Confirmed Recovered Deceased Other Tested
+## 24 2020-03-04 Uttar Pradesh         7         0        0     0      0
+## 31 2020-03-05 Uttar Pradesh         8         0        0     0      0
+## 38 2020-03-06 Uttar Pradesh         8         0        0     0      0
+## 47 2020-03-07 Uttar Pradesh         8         0        0     0      0
+## 56 2020-03-08 Uttar Pradesh         8         0        0     0      0
+## 69 2020-03-09 Uttar Pradesh        10         0        0     0      0
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+    \item We just have to subtract the number of confirmed cases from all the other closed cases. 
+    We put these new numbers in a seperate column called \texttt{Active}. 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hldef{mystatedf}\hlopt{$}\hldef{Active} \hlkwb{=} \hldef{mystatedf}\hlopt{$}\hldef{Confirmed} \hlopt{-}
+\hldef{(mystatedf}\hlopt{$}\hldef{Recovered} \hlopt{+} \hldef{mystatedf}\hlopt{$}\hldef{Deceased} \hlopt{+} \hldef{mystatedf}\hlopt{$}\hldef{Other)}
+\hldef{mystatedf}\hlopt{$}\hldef{Date} \hlkwb{=} \hlkwd{as.Date}\hldef{(mystatedf}\hlopt{$}\hldef{Date)}
+\hldef{to_plot} \hlkwb{=} \hldef{mystatedf} \hlopt{%>%}
+\hlkwd{filter}\hldef{(Date} \hlopt{>=} \hlsng{"2021-07-01"} \hlopt{&} \hldef{Date} \hlopt{<=} \hlsng{"2021-12-31"}\hldef{)}
+\hlkwd{ggplot}\hldef{(}\hlkwc{data} \hldef{= to_plot)} \hlopt{+}
+\hlkwd{geom_line}\hldef{(}\hlkwc{mapping} \hldef{=} \hlkwd{aes}\hldef{(}\hlkwc{x} \hldef{= Date,} \hlkwc{y} \hldef{= Active,} \hlkwc{color} \hldef{= Date))} \hlopt{+}
+\hlkwd{scale_color_viridis_c}\hldef{(}\hlkwc{option} \hldef{=} \hlsng{"viridis"}\hldef{,} \hlkwc{trans} \hldef{=} \hlsng{"date"}\hldef{)} \hlopt{+}
+\hlkwd{scale_x_date}\hldef{(}\hlkwc{date_labels} \hldef{=} \hlsng{"%b %Y"}\hldef{,} \hlkwc{date_breaks} \hldef{=} \hlsng{"1 month"}\hldef{)} \hlopt{+}
+\hlkwd{labs}\hldef{(}\hlkwc{title} \hldef{=} \hlsng{"Active cases for Uttar Pradesh"}\hldef{,} \hlkwc{x} \hldef{=} \hlsng{"Dates"}\hldef{,} \hlkwc{y} \hldef{=} \hlsng{"Cases"}\hldef{)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-15-1} 
+\end{knitrout}
+    \item First we get the daily new deceased cases to use them to compute new deaths per month.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hldef{mystatedf}\hlopt{$}\hldef{Daily_Deceased} \hlkwb{=} \hlkwd{c}\hldef{(}\hlnum{0}\hldef{,} \hlkwd{diff}\hldef{(mystatedf}\hlopt{$}\hldef{Deceased))}
+\hldef{mystatedf}\hlopt{$}\hldef{Month} \hlkwb{=} \hlkwd{as.Date}\hldef{(}\hlkwd{format}\hldef{(mystatedf}\hlopt{$}\hldef{Date,} \hlsng{"%Y-%m-01"}\hldef{))}
+\hldef{to_plot_1} \hlkwb{=}
+\hldef{mystatedf[mystatedf}\hlopt{$}\hldef{Date} \hlopt{>=} \hlsng{"2020-03-01"} \hlopt{&} \hldef{mystatedf}\hlopt{$}\hldef{Date} \hlopt{<=} \hlsng{"2021-12-31"}\hldef{, ]}
+\hldef{monthly_data} \hlkwb{=} \hlkwd{aggregate}\hldef{(Daily_Deceased} \hlopt{~} \hldef{Month,} \hlkwc{data} \hldef{= to_plot_1, sum)}
+\hlkwd{ggplot}\hldef{(}\hlkwc{data} \hldef{= monthly_data)} \hlopt{+}
+\hlkwd{geom_bar}\hldef{(}\hlkwc{mapping} \hldef{=} \hlkwd{aes}\hldef{(}\hlkwc{x} \hldef{= Month,} \hlkwc{y} \hldef{= Daily_Deceased,}
+\hlkwc{fill} \hldef{=} \hlkwd{as.factor}\hldef{(Month)),} \hlkwc{stat} \hldef{=} \hlsng{"identity"}\hldef{)} \hlopt{+}
+\hlkwd{scale_fill_viridis_d}\hldef{()} \hlopt{+}
+\hlkwd{labs}\hldef{(}\hlkwc{title} \hldef{=} \hlsng{"Monthly Deceased Totals for UP"}\hldef{,}
+   \hlkwc{x} \hldef{=} \hlsng{"Months"}\hldef{,}
+   \hlkwc{y} \hldef{=} \hlsng{"Deceased Total"}\hldef{,}
+   \hlkwc{fill} \hldef{=} \hlsng{"Months"}\hldef{)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-16-1} 
+\end{knitrout}
+    \item The process to do this is identical to that of the previous part.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hldef{mystatedf}\hlopt{$}\hldef{Daily_Confirmed} \hlkwb{=} \hlkwd{c}\hldef{(}\hlnum{0}\hldef{,} \hlkwd{diff}\hldef{(mystatedf}\hlopt{$}\hldef{Confirmed))}
+\hldef{mystatedf}\hlopt{$}\hldef{Month} \hlkwb{=} \hlkwd{as.Date}\hldef{(}\hlkwd{format}\hldef{(mystatedf}\hlopt{$}\hldef{Date,} \hlsng{"%Y-%m-01"}\hldef{))}
+\hldef{to_plot_1} \hlkwb{=}
+\hldef{mystatedf[mystatedf}\hlopt{$}\hldef{Date} \hlopt{>=} \hlsng{"2020-03-01"} \hlopt{&} \hldef{mystatedf}\hlopt{$}\hldef{Date} \hlopt{<=} \hlsng{"2021-12-31"}\hldef{, ]}
+\hldef{monthly_data} \hlkwb{=} \hlkwd{aggregate}\hldef{(Daily_Confirmed} \hlopt{~} \hldef{Month,} \hlkwc{data} \hldef{= to_plot_1, sum)}
+\hlkwd{ggplot}\hldef{(}\hlkwc{data} \hldef{= monthly_data)} \hlopt{+}
+\hlkwd{geom_bar}\hldef{(}\hlkwc{mapping} \hldef{=} \hlkwd{aes}\hldef{(}\hlkwc{x} \hldef{= Month,} \hlkwc{y} \hldef{= Daily_Confirmed,}
+\hlkwc{fill} \hldef{=} \hlkwd{as.factor}\hldef{(Month)),} \hlkwc{stat} \hldef{=} \hlsng{"identity"}\hldef{)} \hlopt{+}
+\hlkwd{scale_fill_viridis_d}\hldef{()} \hlopt{+}
+\hlkwd{labs}\hldef{(}\hlkwc{title} \hldef{=} \hlsng{"Monthly Confirmed Totals for UP"}\hldef{,}
+   \hlkwc{x} \hldef{=} \hlsng{"Months"}\hldef{,}
+   \hlkwc{y} \hldef{=} \hlsng{"Confirmed Totals"}\hldef{,}
+   \hlkwc{fill} \hldef{=} \hlsng{"Months"}\hldef{)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-17-1} 
+\end{knitrout}
+    \item
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hldef{statedf} \hlkwb{=} \hldef{statedf} \hlopt{%>%}
+\hlkwd{arrange}\hldef{(State, Date)} \hlopt{%>%}
+\hlkwd{group_by}\hldef{(State)} \hlopt{%>%}
+\hlkwd{mutate}\hldef{(}
+    \hlkwc{Daily_Confirmed} \hldef{=} \hlkwd{c}\hldef{(}\hlnum{0}\hldef{,} \hlkwd{diff}\hldef{(Confirmed)),}
+    \hlkwc{Daily_Deceased}  \hldef{=} \hlkwd{c}\hldef{(}\hlnum{0}\hldef{,} \hlkwd{diff}\hldef{(Deceased))}
+\hldef{)} \hlopt{%>%}
+\hlkwd{ungroup}\hldef{()}
+
+\hldef{state_totals} \hlkwb{=} \hldef{statedf} \hlopt{%>%}
+\hlkwd{filter}\hldef{(Date} \hlopt{>=} \hlsng{"2020-03-01"} \hlopt{&} \hldef{Date} \hlopt{<=} \hlsng{"2021-12-31"}\hldef{)} \hlopt{%>%}
+\hlkwd{group_by}\hldef{(State)} \hlopt{%>%}
+\hlkwd{summarise}\hldef{(}
+    \hlkwc{Total_Confirmed} \hldef{=} \hlkwd{sum}\hldef{(Daily_Confirmed,} \hlkwc{na.rm} \hldef{=} \hlnum{TRUE}\hldef{),}
+    \hlkwc{Total_Deceased}  \hldef{=} \hlkwd{sum}\hldef{(Daily_Deceased,} \hlkwc{na.rm} \hldef{=} \hlnum{TRUE}\hldef{)}
+\hldef{)}
+
+\hlkwd{ggplot}\hldef{(}\hlkwc{data} \hldef{= state_totals,} \hlkwd{aes}\hldef{(}\hlkwc{x} \hldef{= Total_Deceased,} \hlkwc{y} \hldef{= Total_Confirmed))} \hlopt{+}
+\hlkwd{scale_x_log10}\hldef{()} \hlopt{+}
+\hlkwd{geom_point}\hldef{(}\hlkwd{aes}\hldef{(}\hlkwc{color} \hldef{= State),} \hlkwc{size} \hldef{=} \hlnum{1}\hldef{)} \hlopt{+}
+\hlcom{#geom_text(mapping = aes(label = State)) +}
+\hlkwd{scale_color_viridis_d}\hldef{(}\hlkwc{option} \hldef{=} \hlsng{"viridis"}\hldef{)} \hlopt{+}
+\hlkwd{labs}\hldef{(}\hlkwc{title} \hldef{=} \hlsng{"Scatter Plot of Confirmed Versus Deceased"}\hldef{,}
+   \hlkwc{x} \hldef{=} \hlsng{"Deceased Figures"}\hldef{,}
+   \hlkwc{y} \hldef{=} \hlsng{"Confirmed Cases"}\hldef{)} \hlopt{+}
+\hlkwd{theme}\hldef{(}\hlkwc{legend.position} \hldef{=} \hlsng{"bottom"}\hldef{,}
+    \hlkwc{legend.text} \hldef{=} \hlkwd{element_text}\hldef{(}\hlkwc{size} \hldef{=} \hlnum{7}\hldef{),}
+    \hlkwc{legend.title} \hldef{=} \hlkwd{element_text}\hldef{(}\hlkwc{size} \hldef{=} \hlnum{9}\hldef{))}
+\end{alltt}
+
+
+{\ttfamily\noindent\color{warningcolor}{\#\# Warning in scale\_x\_log10(): log-10 transformation introduced infinite values.}}\end{kframe}
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-18-1} 
+\end{knitrout}
+    log scale is used as otherwise the points are concentrated at the bottom right and immense overplotting takes. Names can be added with \texttt{geom\_text} but the points get covered by the text itself. 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{ggplot}\hldef{(}\hlkwc{data} \hldef{= state_totals,} \hlkwd{aes}\hldef{(}\hlkwc{x} \hldef{= Total_Deceased,} \hlkwc{y} \hldef{= Total_Confirmed))} \hlopt{+}
+\hlkwd{scale_x_log10}\hldef{()} \hlopt{+}
+\hlkwd{geom_point}\hldef{(}\hlkwd{aes}\hldef{(}\hlkwc{color} \hldef{= State),} \hlkwc{size} \hldef{=} \hlnum{1}\hldef{)} \hlopt{+}
+\hlkwd{geom_text}\hldef{(}\hlkwc{mapping} \hldef{=} \hlkwd{aes}\hldef{(}\hlkwc{label} \hldef{= State),} \hlkwc{size} \hldef{=} \hlnum{2}\hldef{)} \hlopt{+}
+\hlkwd{scale_color_viridis_d}\hldef{(}\hlkwc{option} \hldef{=} \hlsng{"viridis"}\hldef{)} \hlopt{+}
+\hlkwd{labs}\hldef{(}\hlkwc{title} \hldef{=} \hlsng{"Scatter Plot of Confirmed Versus Deceased"}\hldef{,}
+   \hlkwc{x} \hldef{=} \hlsng{"Deceased Figures"}\hldef{,}
+   \hlkwc{y} \hldef{=} \hlsng{"Confirmed Cases"}\hldef{)} \hlopt{+}
+\hlkwd{theme}\hldef{(}\hlkwc{legend.position} \hldef{=} \hlsng{"bottom"}\hldef{,}
+    \hlkwc{legend.text} \hldef{=} \hlkwd{element_text}\hldef{(}\hlkwc{size} \hldef{=} \hlnum{7}\hldef{),}
+    \hlkwc{legend.title} \hldef{=} \hlkwd{element_text}\hldef{(}\hlkwc{size} \hldef{=} \hlnum{9}\hldef{))}
+\end{alltt}
+
+
+{\ttfamily\noindent\color{warningcolor}{\#\# Warning in scale\_x\_log10(): log-10 transformation introduced infinite values.\\\#\# log-10 transformation introduced infinite values.}}\end{kframe}
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-19-1} 
+\end{knitrout}
+\end{enumerate}
+\end{enumerate}
+\end{document}

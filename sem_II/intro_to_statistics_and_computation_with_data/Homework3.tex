@@ -1,0 +1,228 @@
+\documentclass[11pt]{article}\usepackage[]{graphicx}\usepackage[dvipsnames]{xcolor}
+% maxwidth is the original width if it is less than linewidth
+% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlsng}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hldef}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+\let\hlipl\hlkwb
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath, amssymb, amsthm, graphicx, physics}
+\usepackage{enumitem}
+\usepackage{geometry}
+\usepackage[dvipsnames]{xcolor}
+\definecolor{EvanPink}{rgb}{0.85, 0.13, 0.55}
+\usepackage[colorlinks=true,
+            linkcolor=OliveGreen,
+            urlcolor=EvanPink,
+            citecolor=OliveGreen]{hyperref}
+\usepackage{cleveref}
+\usepackage{etoolbox}
+\newenvironment{solution}{%
+  \par\noindent\textit{Solution.}\ }{\qed}
+\newtheoremstyle{problemstyle}
+  {1em}   
+  {1em}   
+  {}      
+  {}      
+  {\bfseries} 
+  {.}     
+  {0.5em} 
+  {}      
+\theoremstyle{problemstyle}
+\newtheorem{problem}{Problem}[section]
+\crefname{problem}{Problem}{Problems}
+\Crefname{problem}{Problem}{Problems}
+\def\bN{\mathbb{N}}
+\def\bR{\mathbb{R}}
+\def\bZ{\mathbb{Z}}
+\def\bQ{\mathbb{Q}}
+\def\mM{\mathcal{M}}
+\def\mR{\mathcal{R}}
+\def\mN{\mathcal{N}}
+\def\mE{\mathcal{E}}
+\def\mA{\mathcal{A}}
+%%%%%%%%%%%%%%%Setting Page Sizes %%%%%%%%%%%%
+\setlength{\parindent}{0in}
+\setlength{\parskip}{\baselineskip}
+\setlength{\textheight}{9in}
+\setlength{\textwidth}{6.3in}
+\setlength{\topmargin}{-0.6in}
+\setlength{\evensidemargin}{-.5in}
+\setlength{\oddsidemargin}{0in}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%To make R commands appear in different Color%%%%%%%%%%
+\usepackage{color}
+\usepackage{fancyvrb} % Verbatim
+\usepackage{Sweave} % for R code
+\usepackage{color}
+\definecolor{codecolor}{RGB}{114,12,112}
+\DefineVerbatimEnvironment{Sinput}{Verbatim}{formatcom=\color{codecolor}}
+\DefineVerbatimEnvironment{Soutput}{Verbatim}{formatcom=\color{codecolor}}
+\DefineVerbatimEnvironment{Scode}{Verbatim}{formatcom=\color{codecolor}}
+\DefineVerbatimEnvironment{Sin}{Verbatim}{formatcom=\color{codecolor}}
+\DefineVerbatimEnvironment{Sout}{Verbatim}{formatcom=\color{codecolor}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+
+{\bf Arkaraj Mukherjee: }
+{\bf H.W. 3}
+\\
+Loading necessary libraries and setting the current working directory appropriately:
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{library}\hldef{(}\hlsng{"tidyverse"}\hldef{);}
+\end{alltt}
+
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# -- Attaching core tidyverse packages ------------------------ tidyverse 2.0.0 --\\\#\# v dplyr \ \ \ \ 1.1.4 \ \ \ \ v readr \ \ \ \ 2.1.6\\\#\# v forcats \ \ 1.0.1 \ \ \ \ v stringr \ \ 1.6.0\\\#\# v ggplot2 \ \ 4.0.1 \ \ \ \ v tibble \ \ \ 3.3.0\\\#\# v lubridate 1.9.4 \ \ \ \ v tidyr \ \ \ \ 1.3.2\\\#\# v purrr \ \ \ \ 1.2.0 \ \ \ \ \\\#\# -- Conflicts ------------------------------------------ tidyverse\_conflicts() --\\\#\# x dplyr::filter() masks stats::filter()\\\#\# x dplyr::lag() \ \ \ masks stats::lag()\\\#\# i Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors}}\begin{alltt}
+\hlkwd{library}\hldef{(}\hlsng{"scales"}\hldef{)}
+\end{alltt}
+
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# \\\#\# Attaching package: 'scales'\\\#\# \\\#\# The following object is masked from 'package:purrr':\\\#\# \\\#\# \ \ \ \ discard\\\#\# \\\#\# The following object is masked from 'package:readr':\\\#\# \\\#\# \ \ \ \ col\_factor}}\begin{alltt}
+\hlkwd{library}\hldef{(}\hlsng{"viridis"}\hldef{);}
+\end{alltt}
+
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loading required package: viridisLite\\\#\# \\\#\# Attaching package: 'viridis'\\\#\# \\\#\# The following object is masked from 'package:scales':\\\#\# \\\#\# \ \ \ \ viridis\_pal}}\begin{alltt}
+\hlkwd{setwd}\hldef{(}\hlsng{"~/isi_bmath/sem_II/intro_to_statistics_and_computation_with_data"}\hldef{);}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\begin{enumerate}[label=(\alph*)]
+    \item The headers in the csv have been edited for brevity. 
+    The graph has its x-axis being the dates and y-axis being the current time in $24$-hour format. 
+    The bars correspond (according to colour which depend on the topic) to the meeting timespans. 
+    It should be noted that there were meetings ($56$ of them) which ended on a date later than the start date, these have been split into two seperate meetings for the sake of plotting. 
+    What we aim to capture is "when is Suppandi in what (according to topic) meeting".
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hldef{SuppandiZoomLog} \hlkwb{=} \hlkwd{read.csv}\hldef{(}\hlsng{"SuppandiZoomLog.csv"}\hldef{,} \hlkwc{header} \hldef{= T);}
+\hldef{SZL} \hlkwb{=} \hldef{SuppandiZoomLog[}\hlkwd{c}\hldef{(}\hlsng{"Topic"}\hldef{,}\hlsng{"Start"}\hldef{,}\hlsng{"End"}\hldef{)]}
+\hlkwd{head}\hldef{(SZL,} \hlkwc{n} \hldef{=} \hlnum{3}\hldef{)}
+\end{alltt}
+\begin{verbatim}
+##   Topic               Start                    End
+## 1 Water 2024-01-12 17:30:59 01/12/2024 05:41:48 PM
+## 2 Water 2024-01-12 10:03:45 01/12/2024 12:38:40 PM
+## 3 Water 2023-01-26 18:58:09 01/26/2023 08:30:16 PM
+\end{verbatim}
+\begin{alltt}
+\hldef{SZL}\hlopt{$}\hldef{Start} \hlkwb{=} \hlkwd{as.POSIXlt}\hldef{(SZL}\hlopt{$}\hldef{Start);}
+\hldef{SZL}\hlopt{$}\hldef{End} \hlkwb{=} \hlkwd{strptime}\hldef{(SZL}\hlopt{$}\hldef{End,} \hlsng{"%m/%d/%Y %I:%M:%S %p"}\hldef{);}
+
+\hlcom{#splitting meetings which overflow and attaching them at the end}
+\hlkwa{for}\hldef{(i} \hlkwa{in} \hlnum{1}\hlopt{:}\hlkwd{nrow}\hldef{(SZL)) \{}
+    \hlkwa{if}\hldef{(}\hlkwd{as.POSIXlt}\hldef{(SZL}\hlopt{$}\hldef{End[i])}\hlopt{$}\hldef{mday} \hlopt{!=} \hlkwd{as.POSIXlt}\hldef{(SZL}\hlopt{$}\hldef{Start[i])}\hlopt{$}\hldef{mday) \{}
+
+        \hldef{new_start} \hlkwb{=} \hlkwd{as.POSIXlt}\hldef{(SZL}\hlopt{$}\hldef{Start[i]);}
+        \hldef{new_start}\hlopt{$}\hldef{mday} \hlkwb{=} \hldef{new_start}\hlopt{$}\hldef{mday} \hlopt{+} \hlnum{1}\hldef{;}
+        \hldef{new_start}\hlopt{$}\hldef{sec} \hlkwb{<-} \hlnum{0}\hldef{;}
+        \hldef{new_start}\hlopt{$}\hldef{min} \hlkwb{<-} \hlnum{0}\hldef{;}
+        \hldef{new_start}\hlopt{$}\hldef{hour} \hlkwb{<-} \hlnum{0}\hldef{;}
+
+        \hldef{SZL} \hlkwb{<-} \hldef{SZL} \hlopt{%>%}
+            \hlkwd{add_row}\hldef{(}\hlkwc{Topic} \hldef{= SZL}\hlopt{$}\hldef{Topic[i],} \hlkwc{Start} \hldef{= new_start,} \hlkwc{End} \hldef{= SZL}\hlopt{$}\hldef{End[i]);}
+
+        \hldef{new_end} \hlkwb{=} \hlkwd{as.POSIXlt}\hldef{(SZL}\hlopt{$}\hldef{Start[i]);}
+        \hldef{new_end}\hlopt{$}\hldef{sec} \hlkwb{<-} \hlnum{59}\hldef{;}
+        \hldef{new_end}\hlopt{$}\hldef{min} \hlkwb{<-} \hlnum{59}\hldef{;}
+        \hldef{new_end}\hlopt{$}\hldef{hour} \hlkwb{<-} \hlnum{23}\hldef{;}
+
+        \hldef{SZL}\hlopt{$}\hldef{End[i]} \hlkwb{=} \hldef{new_end;}
+    \hldef{\}}
+\hldef{\}}
+
+\hldef{to_plot} \hlkwb{<-} \hldef{SZL} \hlopt{%>%} \hlkwd{mutate}\hldef{(}
+    \hlkwc{Date} \hldef{=} \hlkwd{as.Date}\hldef{(Start),}
+    \hlkwc{Start} \hldef{=} \hlkwd{as.POSIXlt}\hldef{(SZL}\hlopt{$}\hldef{Start)}\hlopt{$}\hldef{hour} \hlopt{+}
+    \hlkwd{as.POSIXlt}\hldef{(SZL}\hlopt{$}\hldef{Start)}\hlopt{$}\hldef{min}\hlopt{/}\hlnum{60} \hlopt{+} \hlkwd{as.POSIXlt}\hldef{(SZL}\hlopt{$}\hldef{Start)}\hlopt{$}\hldef{sec}\hlopt{/}\hlnum{3600}\hldef{,}
+    \hlkwc{End} \hldef{=} \hlkwd{as.POSIXlt}\hldef{(SZL}\hlopt{$}\hldef{End)}\hlopt{$}\hldef{hour} \hlopt{+}
+    \hlkwd{as.POSIXlt}\hldef{(SZL}\hlopt{$}\hldef{End)}\hlopt{$}\hldef{min}\hlopt{/}\hlnum{60} \hlopt{+} \hlkwd{as.POSIXlt}\hldef{(SZL}\hlopt{$}\hldef{End)}\hlopt{$}\hldef{sec}\hlopt{/}\hlnum{3600}\hldef{,}
+\hldef{)}
+
+\hlkwd{ggplot}\hldef{(}\hlkwc{data} \hldef{= to_plot)} \hlopt{+}
+\hlkwd{geom_rect}\hldef{(}\hlkwc{mapping} \hldef{=} \hlkwd{aes}\hldef{(}
+    \hlkwc{xmin} \hldef{= Date} \hlopt{-} \hlnum{0.5}\hldef{,}
+    \hlkwc{xmax} \hldef{= Date} \hlopt{+} \hlnum{0.5}\hldef{,}
+    \hlkwc{ymin} \hldef{= Start,}
+    \hlkwc{ymax} \hldef{= End,}
+    \hlkwc{fill} \hldef{= Topic)}
+\hldef{)} \hlopt{+}
+\hlkwd{scale_x_date}\hldef{(}
+    \hlkwc{date_breaks} \hldef{=} \hlsng{"1 month"}\hldef{,}
+    \hlkwc{date_minor_breaks} \hldef{=} \hlsng{"1 day"}\hldef{,}
+    \hlkwc{labels} \hldef{=} \hlkwd{date_format}\hldef{(}\hlsng{"%b %Y"}\hldef{)}
+\hldef{)} \hlopt{+}
+\hlkwd{scale_y_continuous}\hldef{(}
+    \hlkwc{breaks} \hldef{=} \hlnum{0}\hlopt{:}\hlnum{24}\hldef{,}
+    \hlkwc{limits} \hldef{=} \hlkwd{c}\hldef{(}\hlnum{0}\hldef{,}\hlnum{24}\hldef{)}
+\hldef{)} \hlopt{+}
+\hlkwd{labs}\hldef{(}
+    \hlkwc{title} \hldef{=} \hlsng{"Daily schdecule of zoom meetings"}\hldef{,}
+    \hlkwc{x} \hldef{=} \hlsng{"Date"}\hldef{,}
+    \hlkwc{y} \hldef{=} \hlsng{"Time of day"}\hldef{,}
+    \hlkwc{fill} \hldef{=} \hlsng{"Topic"}
+\hldef{)} \hlopt{+}
+\hlkwd{theme}\hldef{(}
+\hlkwc{axis.text.x} \hldef{=} \hlkwd{element_text}\hldef{(}\hlkwc{angle} \hldef{=} \hlnum{45}\hldef{,} \hlkwc{vjust} \hldef{=} \hlnum{1}\hldef{,} \hlkwc{hjust} \hldef{=} \hlnum{1}\hldef{)}
+\hldef{)}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-2-1} 
+\end{knitrout}
+\end{enumerate}
+\end{document}
