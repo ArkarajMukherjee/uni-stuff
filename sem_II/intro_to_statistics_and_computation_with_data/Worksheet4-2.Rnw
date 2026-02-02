@@ -1,0 +1,155 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath, amssymb, amsthm, graphicx, physics}
+\usepackage{enumitem}
+\usepackage{geometry}
+\usepackage[dvipsnames]{xcolor}
+\definecolor{EvanPink}{rgb}{0.85, 0.13, 0.55}
+\usepackage[colorlinks=true,
+            linkcolor=OliveGreen,
+            urlcolor=EvanPink,
+            citecolor=OliveGreen]{hyperref}
+\usepackage{cleveref}
+\usepackage{etoolbox}
+\newenvironment{solution}{%
+  \par\noindent\textit{Solution.}\ }{\qed}
+\newtheoremstyle{problemstyle}
+  {1em}   
+  {1em}   
+  {}      
+  {}      
+  {\bfseries} 
+  {.}     
+  {0.5em} 
+  {}      
+\theoremstyle{problemstyle}
+\newtheorem{problem}{Problem}[section]
+\crefname{problem}{Problem}{Problems}
+\Crefname{problem}{Problem}{Problems}
+\def\bN{\mathbb{N}}
+\def\bR{\mathbb{R}}
+\def\bZ{\mathbb{Z}}
+\def\bQ{\mathbb{Q}}
+\def\mM{\mathcal{M}}
+\def\mR{\mathcal{R}}
+\def\mN{\mathcal{N}}
+\def\mE{\mathcal{E}}
+\def\mA{\mathcal{A}}
+%%%%%%%%%%%%%%%Setting Page Sizes %%%%%%%%%%%%
+\setlength{\parindent}{0in}
+\setlength{\parskip}{\baselineskip}
+\setlength{\textheight}{9in}
+\setlength{\textwidth}{6.3in}
+\setlength{\topmargin}{-0.6in}
+\setlength{\evensidemargin}{-.5in}
+\setlength{\oddsidemargin}{0in}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%To make R commands appear in different Color%%%%%%%%%%
+\usepackage{color}
+\usepackage{fancyvrb} % Verbatim
+\usepackage{Sweave} % for R code
+\usepackage{color}
+\definecolor{codecolor}{RGB}{114,12,112}
+\DefineVerbatimEnvironment{Sinput}{Verbatim}{formatcom=\color{codecolor}}
+\DefineVerbatimEnvironment{Soutput}{Verbatim}{formatcom=\color{codecolor}}
+\DefineVerbatimEnvironment{Scode}{Verbatim}{formatcom=\color{codecolor}}
+\DefineVerbatimEnvironment{Sin}{Verbatim}{formatcom=\color{codecolor}}
+\DefineVerbatimEnvironment{Sout}{Verbatim}{formatcom=\color{codecolor}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+{\bf Arkaraj Mukherjee: }
+{\bf Worksheet 4-2}
+\\
+<<>>=
+library("tidyverse");
+library("igraph");
+setwd("~/isi_bmath/sem_II/intro_to_statistics_and_computation_with_data");
+@
+
+\begin{enumerate}[label=\arabic*.]
+    \item
+    \begin{enumerate}[label=(\alph*)]
+        \item Section 1 generates a random probability $p$ between 0 and 1. 
+        Section 2 then initializes a $10 \times 10$ adjacency matrix to represent the 10 vertices of the graph. 
+        Using nested loops, the code iterates through every possible pair of vertices and "tosses a coin" based on the probability $p$. If the result is "HEAD," an edge is created (assigned a 1) and otherwise, it is 0. 
+        The script ensures the matrix is symmetric for an undirected graph and sets the diagonal to 0 to prevent self-loops.
+        In section 3, ssing the \texttt{igraph} library, the script converts this matrix into a graph object and plots it. 
+        in section 4 it calculates the graph size (total edges) and the degree (number of connections) for each vertex, displaying the results in a histogram to show the overall degree distribution.
+        \item We generate the adjacency matrix here
+        <<>>=
+        p <- runif(1)
+        prob_of_head <- p
+        prob_of_head
+        prob_of_tail <- 1-prob_of_head
+        prob_of_tail
+        coin_toss_outcome <- sample(c("HEAD","TAIL"), 1, prob = c(prob_of_head, prob_of_tail) )
+        coin_toss_outcome
+    number_of_vertices<- 10
+    adj_matrix <- matrix(NA, nrow=10, ncol=10)
+for(i in 1:(number_of_vertices-1)){
+  for(j in (i+1):number_of_vertices) {
+    print(c(i,j))
+    junk = sample(c("HEAD","TAIL"), 1, prob = c(prob_of_head,prob_of_tail))
+    if(junk=="HEAD")
+    adj_matrix[i,j] = 1
+    else
+      adj_matrix[i,j]= 0
+    adj_matrix[j,i] = adj_matrix[i,j]
+  }
+}
+diag(adj_matrix) <- 0
+adj_matrix
+    @
+    \item we now plot the graph corresponding to the matrix
+    <<>>=
+    ER_graph <- graph_from_adjacency_matrix(adj_matrix,mode="undirected")
+ER_graph
+plot(ER_graph, edge.arrow.size=0.5, vertex.color="#fde725", vertex.size=20, 
+     vertex.frame.color="#440154", vertex.label.color="#440154")
+    @
+    \item This calculates the degrees of the vertex and places them in the vector \texttt{deg} and the number of edges in \texttt{edges}
+    <<>>=
+    deg = degree(ER_graph)
+    edges = gsize(ER_graph)
+    edges
+    @
+    \item We plot the histogram now
+    <<>>=
+    hist(deg)
+    @
+    \end{enumerate}
+\item We set $p=4/6$ as in worksheet I and do the same
+<<>>=
+p = 4/6
+prob_of_head <- p
+        prob_of_head
+        prob_of_tail <- 1-prob_of_head
+        prob_of_tail
+        coin_toss_outcome <- sample(c("HEAD","TAIL"), 1, prob = c(prob_of_head, prob_of_tail) )
+        coin_toss_outcome
+    number_of_vertices<- 10
+    adj_matrix <- matrix(NA, nrow=10, ncol=10)
+for(i in 1:(number_of_vertices-1)){
+  for(j in (i+1):number_of_vertices) {
+    print(c(i,j))
+    junk = sample(c("HEAD","TAIL"), 1, prob = c(prob_of_head,prob_of_tail))
+    if(junk=="HEAD")
+    adj_matrix[i,j] = 1
+    else
+      adj_matrix[i,j]= 0
+    adj_matrix[j,i] = adj_matrix[i,j]
+  }
+};
+diag(adj_matrix) <- 0
+ER_graph <- graph_from_adjacency_matrix(adj_matrix,mode="undirected")
+ER_graph
+plot(ER_graph, edge.arrow.size=0.5, vertex.color="#fde725", vertex.size=20, 
+     vertex.frame.color="#440154", vertex.label.color="#440154")
+@
+\end{enumerate}
+\end{document}

@@ -1,0 +1,383 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath, amssymb, amsthm, graphicx}
+\usepackage{enumitem}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage[dvipsnames]{xcolor}
+\definecolor{EvanPink}{rgb}{0.85, 0.13, 0.55}
+\usepackage[colorlinks=true,
+            linkcolor=OliveGreen,
+            urlcolor=EvanPink,
+            citecolor=OliveGreen]{hyperref}
+\usepackage{cleveref}
+\usepackage{etoolbox}
+\newenvironment{solution}{%
+  \par\noindent\textit{Solution.}\ }{\qed}
+\newtheoremstyle{problemstyle}
+  {1em}   
+  {1em}   
+  {}      
+  {}      
+  {\bfseries} 
+  {.}     
+  {0.5em} 
+  {}      
+\theoremstyle{problemstyle}
+\newtheorem{problem}{Problem}[section]
+\apptocmd{\problem}{%
+  \addcontentsline{toc}{subsection}{Problem~\thesection.\arabic{problem}}%
+}{}{}
+\crefname{problem}{Problem}{Problems}
+\Crefname{problem}{Problem}{Problems}
+\setcounter{tocdepth}{2}
+\title{\textbf{Linear Algebra II} \\ \large Home Assignment I}
+\author{Arkaraj Mukherjee \\ B.Math., First Year, ISI Bangalore}
+\date{\today}
+\def\bN{\mathbb{N}}
+\def\bR{\mathbb{R}}
+\def\bZ{\mathbb{Z}}
+\def\bQ{\mathbb{Q}}
+\def\sgn{\epsilon}
+\begin{document}
+\maketitle
+\newpage
+\tableofcontents
+\newpage
+\section{Home Assignment I (Due: Feb 1, 2026)}
+\noindent \textbf{Notation:} In the following, for any permutation $\tau$, let $\epsilon(\tau)$ denote the signature of $\tau$.
+
+\begin{problem}\label{prob:1.1}
+    Consider the permutation $\sigma := (2,5)(1,4,3)$ of the set $\{1, 2, 3, 4, 5, 6\}$.
+    \begin{enumerate}
+        \item Write down the matrices $P^{\sigma}$ and $P^{\sigma^{-1}}$.
+        \item Verify that $\det(P^{\sigma}) = \epsilon(\sigma)$ for this permutation $\sigma$.
+    \end{enumerate}
+\end{problem}
+\begin{solution}
+    It is clear that $\sigma^{-1} = (2,5)(1,3,4)(6)$ which gives,
+$$P^{\sigma}=\begin{bmatrix}
+0 & 0 & 1 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 1 & 0\\
+0 & 0 & 0 & 1 & 0 & 0\\
+1 & 0 & 0 & 0 & 0 & 0\\
+0 & 1 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0 & 1
+\end{bmatrix}\hspace{5pt},
+P^{\sigma^{-1}}=\begin{bmatrix}
+0 & 0 & 0 & 1 & 0 & 0\\
+0 & 0 & 0 & 0 & 1 & 0\\
+1 & 0 & 0 & 0 & 0 & 0\\
+0 & 0 & 1 & 0 & 0 & 0\\
+0 & 1 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0 & 1
+\end{bmatrix}$$
+For the second question, its clear that the only nonzero term in the determinant is the term that corresponds to $\sigma^{-1}$ which is: 
+$$\epsilon(\sigma^{-1})a_{1,\sigma^{-1}(1)}\cdots a_{n,\sigma^{-1}(6)}=\epsilon(\sigma^{-1})\cdot 1\cdots 1$$ 
+$$=\epsilon(\sigma^{-1})=\epsilon(\sigma^{-1})\cdot\underbrace{\epsilon(\sigma)^2}_{=1}=(\epsilon(\sigma^{-1})\cdot\epsilon(\sigma))\cdot\epsilon(\sigma)=\epsilon(\sigma^{-1}\sigma)\cdot\epsilon(\sigma)=\epsilon(\textbf{Id})\cdot\epsilon(\sigma)=1\cdot\epsilon(\sigma)=\epsilon(\sigma)$$
+\end{solution}
+\begin{problem}\label{prob:1.2}
+    Let $A$ be a real matrix of order $3 \times 3$ and let $r_1, r_2$ and $r_3$ be the rows of $A$. Let $P$ be the parallelepiped in $\mathbb{R}^3$ whose vertices are:
+    \[
+        0, \quad r_1, \quad r_2, \quad r_3, \quad r_1+r_2, \quad r_2+r_3, \quad r_1+r_3 \quad \text{and} \quad r_1+r_2+r_3
+    \]
+    Prove that the volume of $P$ is the absolute value of $\det(A)$. \\
+    \textit{(Hint: Compare the effect of an elementary row operation on the volume and on $\det(A)$.)}
+\end{problem}
+\begin{solution}
+    If $r_1,r_2,r_3$ are not linearly independant then one of them lies in the plane spanned by the other two in which case the parallelepiped formed with them as mentioned in the problem has volume $0$ and the determinant in question is also $0$ so we have proved one case. 
+    Now assume that these vectors are linearly independant. 
+    As they are linearly independant, the matrix with them as rows has full rank and we can reah it starting from $I_3$ using elementary row operations, let these be left multiplication by $E_1,\ldots,E_n$ as done in the previous linear algebra course. 
+    Label the rows $R_1,R_2,R_3$, then we see that $R_i\to\alpha\cdot R_i$ dilates the parallelepiped by $\alpha$ which results in the volume changing by $|\alpha|$ multiplicatively while the absolute value of our matrix also changes by $|\alpha|$. 
+    Under the operation $R_i\to R_i+\alpha R_j$ for distinct $i,j$ we find that the volume does not change and neither does the determinant (thus its absolute value doesn't either). 
+    We know that $|\det(I_3)|=\text{Vol}(P_I)$ where we define $P_M$ to be the parallelepiped which uses the rows of matrix $M$ instead of $r_i$ in the same manner. 
+    $$I_3\xrightarrow{E_1}E_1\xrightarrow{E_2}E_2E_1\longrightarrow\cdots\longrightarrow E_n\cdots E_1=A$$
+    $$\text{Vol}(P_I)\xrightarrow{E_1}\text{Vol}(P_{E_1})\xrightarrow{E_2}\text{Vol}(P_{E_2E_1})\longrightarrow\cdots\text{Vol}(P_{E_n\cdots E_1}=P)$$
+    $$|\det(I)|\xrightarrow{E_1}|\det(E_1)|\xrightarrow{E_2}|\det(E_2E_1)|\longrightarrow\cdots\longrightarrow|\det(E_n\cdots E_1=A)|$$
+    Now, as the absolute value of the determinant and volume are changed in the same manner by the row operations, we find that they are equal at each intermediate step stemming from $|\det(I_3)|$ being equal to the unit square $P_{i}'s$ volume. 
+    Thus they must be equal at the final step by induction and we have $\text{Vol}(P)=|\det(A)|$.
+\end{solution}
+\begin{problem}\label{prob:1.3}
+    Let $\sigma$ be a permutation in $S_n$. Let $s(\sigma)$ denote the number of inversions, that is, the number of pairs $\{i, j\}$ such that $\sigma(i) > \sigma(j)$ when $1 \le i < j \le n$.
+    \begin{enumerate}
+        \item Show that $\epsilon(\sigma) = (-1)^{s(\sigma)}$.
+        \item Verify the identity:
+        \[
+            \prod_{1 \le i < j \le n} (x_{\sigma(j)} - x_{\sigma(i)}) = \epsilon(\sigma) \prod_{1 \le i < j \le n} (x_j - x_i)
+        \]
+        for any complex numbers $x_1, x_2, \dots, x_n$.
+    \end{enumerate}
+\end{problem}
+\begin{solution}
+    \begin{enumerate}[label=\arabic*.]
+    \item
+    We first write $f(\sigma):=(-1)^{s(\sigma)}$ in a more tangible form as follows
+    $$f(\sigma)=\prod_{1\leq i<j\leq n}(-1\text{ if }\sigma(i)>\sigma(j)\text{ and }1\text{ otherwise})=f(\sigma)=\prod_{1\leq i<j\leq n}\text{sgn}(\sigma(j)-\sigma(i))$$
+    We claim that this is multiplicative, i.e. $f(\sigma\tau)=f(\sigma)f(\tau).$ 
+    For a proof we write the product out and simplify
+    $$f(\sigma\tau)=\prod_{i<j}\text{sgn}(\sigma(\tau(j))-\sigma(\tau(i)))=\prod_{i<j}\frac{\text{sgn}(\sigma(\tau(j))-\sigma(\tau(i)))}{\text{sgn}(\tau(j)-\tau(i))}\cdot\prod_{i<j}\text{sgn}(\tau(j)-\tau(i))$$
+    In $f$'s original definition we go over all the pairs $(i,j)$ with $i<j$ but when theres a $\tau$ involved, we go over the pairs $(\tau(i),\tau(j))$ and it is not neccesary that $\tau(i)<\tau(j)$ even when $i<j$ but if we look at the set $\{(\tau(i),\tau(j)):i<j\}$, as $\tau$ is a bijection its clear that given any $i<j$ exactly one of $(i,j)$ or $(j,i)$ appears in this set. 
+    Now, in the first product, the $\text{sgn}(\tau(j)-\tau(i))$ is there to combat this change as, if $\tau(j)>\tau(i)$ then that term is $1$ and does not change anything while the numerator contributes what it is supposed to, to $\sgn(\sigma)$ but if thats not the case then it contributes $-1$ times whatever it was supposed to contribute as we just flipped the term that was supposed to appear. 
+    This leads to the conclusion that 
+    $$\prod_{i<j}\frac{\text{sgn}(\sigma(\tau(j))-\sigma(\tau(i)))}{\text{sgn}(\tau(j)-\tau(i))}=f(\sigma)$$
+    combining these deductions we get that $f(\tau\sigma)=f(\tau)f(\sigma).$ 
+    Now, we calculate $f(\sigma=(a,b))$ for some $a<_{\text{WLOG}}b$. 
+    For the pair $(i,j)$ (with $i<j$) to potentially be such that $\sigma(i)>\sigma(j)$ we must have that $\{i,j\}\cap\{a,b\}\neq\emptyset$ as $\sigma$ is identity outside $\{a,b\}$. 
+    We look at these pairs now: pairs of form $(i,a)$ do not result in inversions as $\sigma(i)=i<a<=\sigma(a)$, pairs of form $(i,b)$ only result in inversions for $a\leq i<b$ and there are $b-a$ such $i$ so these result in $(b-a)$ inversions, the pairs of form $(a,i)$ only result in inversions for $a<i\leq b$ resulting in $b-a+1$ inversions again and the pairs of form $(b,i)$ do not result in any inversions. 
+    Thus the total number of inversions is $2(b-a)+1$ and thus $f((a,b)=(-1)^{2(b-a)+1})=-1$ and this is all we need to prove that $f\equiv\epsilon.$ 
+    We have shown that $\epsilon$ and $f$ agree on transpositons($\epsilon((a,b))$ is also $-1$ for $a\neq b$ as shown in class.) and as both of these are multiplicative we see that for any $\sigma$, by first writing it as a product of transpositons $\sigma=\tau_1\cdots\tau_n$ and then using the multiplicativity as follows
+    $$f(\sigma)=f(\tau_1\cdots\tau_n)=f(\tau_1)\cdots f(\tau_n)=(-1)^n=\epsilon(\tau_1)\cdots\epsilon(\tau_n)=\epsilon(\tau_1\cdots\tau_n)=\epsilon(\sigma)$$
+    \item
+    We examine the product on the left hand side. Since $\sigma$ is a bijection, the set of pairs $\{\{\sigma(i), \sigma(j)\} : 1 \le i < j \le n\}$ is identical to the set $\{\{i, j\} : 1 \le i < j \le n\}$. Thus, the factors in the LHS product are the same as those in the RHS product, up to a possible sign change. 
+    Consider a specific factor $(x_{\sigma(j)} - x_{\sigma(i)})$ where $i < j$. 
+    If $\sigma(i) < \sigma(j)$, this term appears exactly as $(x_{\sigma(j)} - x_{\sigma(i)})$ in the RHS product (contributing $+1$). 
+    If $\sigma(i) > \sigma(j)$, this constitutes an inversion. The corresponding term in the RHS product is $(x_{\sigma(i)} - x_{\sigma(j)})$, so our term can be written as
+    $$(x_{\sigma(j)} - x_{\sigma(i)}) = -1 \cdot (x_{\sigma(i)} - x_{\sigma(j)})$$ 
+    This contributes a factor of $-1$. The number of such sign changes is exactly the number of pairs $(i, j)$ such that $i < j$ but $\sigma(i) > \sigma(j)$, which is $s(\sigma)$ by definition. 
+    Collecting these signs, we get
+    $$ \prod_{1 \le i < j \le n} (x_{\sigma(j)} - x_{\sigma(i)}) = (-1)^{s(\sigma)} \prod_{1 \le i < j \le n} (x_j - x_i) $$
+    Using the result from Part 1 where we proved $\epsilon(\sigma) = (-1)^{s(\sigma)}$, we substitute to verify the identity 
+    $$\prod_{1 \le i < j \le n} (x_{\sigma(j)} - x_{\sigma(i)}) = \epsilon(\sigma) \prod_{1 \le i < j \le n} (x_j - x_i)$$ 
+    \end{enumerate}
+\end{solution}
+\begin{problem}\label{prob:1.4}
+    Show that for $n \ge 3$, every even permutation in $S_n$ is a product of 3-cycles of the form $(i, i+1, i+2)$.
+\end{problem}
+\begin{solution}
+    Let $G$ be the set of permutations generated by the consecutive 3-cycles $C = \{ (i, i+1, i+2) : 1 \le i \le n-2 \}$. We aim to show that $G$ contains all 3-cycles, and consequently, all even permutations.
+    
+    \begin{enumerate}[label=\Roman*.]
+    \item \textit{Generating cycles of form $(1, 2, k)$}
+    
+    We proceed by induction on $k$.
+    For the base case $k=3$, the cycle $(1, 2, 3)$ is directly in $C$ (with $i=1$), so it is in $G$.
+    
+    Now, assume that for some $k \ge 3$, we have $(1, 2, k) \in G$. We want to show $(1, 2, k+1) \in G$.
+    First, we notice that the structure of our generators is translation-invariant. If we can form $(1, 2, k)$ using generators involving indices $\{1, \dots, k\}$, we can form the cycle $(2, 3, k+1)$ by simply shifting every index up by one, i.e., using generators involving $\{2, \dots, k+1\}$. Since these shifted generators are still in $C$, we have that $(2, 3, k+1) \in G$.
+    
+    We now look at the conjugation of $(2, 3, k+1)$ by $(1, 2, 3)$. We calculate the product
+    $$ (1, 2, 3)^{-1} (2, 3, k+1) (1, 2, 3) = (1, 3, 2)(2, 3, k+1)(1, 2, 3) $$
+    We calculate the mapping for $(1,3,2)(2,3,k+1)(1,2,3)$:
+    Input $1$: $(1,2,3)$ sends $1 \to 2$. Then $(2,3,k+1)$ sends $2 \to 3$. Then $(1,3,2)$ sends $3 \to 2$. So $1 \to 2$.
+    Input $2$: $(1,2,3)$ sends $2 \to 3$. Then $(2,3,k+1)$ sends $3 \to k+1$. Then $(1,3,2)$ fixes $k+1$. So $2 \to k+1$.
+    Input $k+1$: $(1,2,3)$ fixes $k+1$. Then $(2,3,k+1)$ sends $k+1 \to 2$. Then $(1,3,2)$ sends $2 \to 1$. So $k+1 \to 1$.
+    
+    Thus the product is $(1, 2, k+1)$. Since $(1, 2, 3) \in G$ and $(2, 3, k+1) \in G$, their product is in $G$. By induction, $G$ contains all $(1, 2, k)$.
+    
+    \item \textit{Generating all 3-cycles}
+    
+    We calculate the product $(1, 2, b)(1, 2, a)^{-1}$ for distinct $a, b > 2$.
+    $$(1, 2, b)(1, 2, a)^{-1} = (1, 2, b)(1, a, 2) = (1, a, b)$$
+    We check the mapping: $1 \to a \to a$ (so $1 \to a$), $a \to 2 \to b$ (so $a \to b$), $b \to b \to 1$ (so $b \to 1$).
+    Now for any arbitrary $a, b, c$ all distinct from 1, we write
+    $$(1, a, c)(1, a, b) = (a, b, c)$$
+    see that $a \to b \to b$ (so $a \to b$), $b \to 1 \to c$ (so $b \to c$), $c \to c \to 1 \to a$ (so $c \to a$).
+    Thus any 3-cycle is in $G$.
+    
+    \item \textit{Generating all even permutations}
+    
+    An even permutation is a product of an even number of transpositions. We group them into pairs. It suffices to show any pair of transpositions is a product of 3-cycles.
+    We look at the possible cases for a pair $\tau_1\tau_2$:
+    Case 1: Disjoint, e.g., $(a, b)(c, d)$. We use the trick of inserting identity $(b, c)(b, c)$:
+    $$(a, b)(c, d) = (a, b)(b, c)(b, c)(c, d) = [(a, b)(b, c)][(b, c)(c, d)]$$
+    Case 2: Share one element, e.g., $(a, b)(b, c)$.
+    We check the product: $a \to b \to c$, $c \to c \to b \to a$, $b \to a \to a$. This is just $(a, c, b)$.
+    
+    Combining these deductions, any pair of disjoint transpositions is a product of two overlapping pairs, and any overlapping pair is a 3-cycle. Thus, every even permutation is a product of 3-cycles, and since we can generate all 3-cycles from our consecutive set $C$, we are done.
+    \end{enumerate}
+\end{solution}
+\begin{problem}\label{prob:1.5}
+    Let $A$ be a complex $n\times n$ square matrix for some $n\in\bN$. A vector $v$ is called an eigenvector of $A$ if $Av = dv$ for some $d \in \mathbb{C}$. Show that for an invertible matrix $S$, the matrix $S^{-1}AS$ is a diagonal matrix if and only if columns of $S$ are eigenvectors of $A$.
+\end{problem}
+\begin{solution}
+    For the only if direction, we assume that $S^{-1}AS$ is diagonal and equal to $D=\text{diag}(\lambda_1,\ldots,\lambda_n)$. 
+    If $S^{-1}AS=D$ then we have $AS=SD\implies AS_{*,j}=(AS)_{*,j}=(SD)_{*,j}=SD_{*,j}=\lambda_jS_{*,j}$ by the definition of matrix multiplication and we have proved this direction. 
+    For the other direction assume that the columns are indeed eigenvectors and $AS_{*,j}=\lambda_jS_{*,j}$ then we see that $(AS)_{*,j}=AS_{*,j}=\lambda_jS_{*,j}=SD_{*,j}=(SD)_{*,j}$ where $D=\text{diag}(\lambda_1,\ldots,\lambda_n)$ implying $AS=SD$ where $D$ is diagonal as all the corresponding columns of these two matrices are the same as we showed above. 
+    As $S$ is invertible we have that $S^{-1}AS=D$ and we are done.
+\end{solution}
+\begin{problem}\label{prob:1.6}
+    If $A$ is an $n \times n$ matrix over $\mathbb{C}$, show that:
+    \[
+        |\det(A)| \le \prod_{i=1}^{n} \left( \sum_{j=1}^{n} |a_{ij}| \right)
+    \]
+\end{problem}
+\begin{solution}
+    Let, $[n]:=\{1,\ldots,n\}.$
+    Using the definition of scalar multiplication and distributive property we can clearly see that
+    $$\prod_{i=1}^n\left(\sum_{j=1}^n|a_{ij}|\right)=\sum_{f\in[n]^{[n]}}\prod_{i=1}^n|a_{i,f(i)}|$$
+    Now, $S_n\subseteq[n]^{[n]}$ and thus,
+    $$|\det(A)|=\left|\sum_{\sigma\in S_n}\epsilon(\sigma)\prod_{i=1}^na_{i,\sigma(i)}\right|\leq\sum_{\sigma\in S_n}|\epsilon(\sigma)a_{1,\sigma(1)}\cdots a_{n,\sigma(n)}|=\sum_{f\in S_n}\prod_{i=1}^n|a_{i,f(i)}|\leq\sum_{f\in[n]^{[n]}}\prod_{i=1}^n|a_{i,f(i)}|$$
+    which is less than $\prod(\sum|a_{i,j}|)$ as we sum over a subset of the terms, all of which are nonnegative.
+\end{solution}
+\begin{problem}\label{prob:1.7}
+    Let $f(x) = (\lambda_1 - x)(\lambda_2 - x)\dots(\lambda_n - x)$ and let $A$ be defined as:
+    \[
+    A := \begin{pmatrix}
+    \lambda_1 & a & a & \dots & a \\
+    b & \lambda_2 & a & \dots & a \\
+    b & b & \lambda_3 & \dots & a \\
+    \vdots & \vdots & \vdots & \ddots & \vdots \\
+    b & b & b & \dots & \lambda_n
+    \end{pmatrix}
+    \]
+    Show that $\det(A) = \frac{bf(a) - af(b)}{b-a}$ when $a \ne b$. Also find $\det(A)$ when $a=b$.
+\end{problem}
+\begin{solution}
+    If $a$ or $b$ are $0$ then the statement is easily proved as the matrix is upper triangular or lower triangular, in either case the determinant is the product of entries on the diagonal as seen in class so we omit this case and proceed with the assumption $a,b\neq 0$. 
+    Denote the rows of the matrix by $R_1,\ldots,R_n.$ 
+    Then, by the multilinearity of the determinant along its rows we see that 
+    \begin{flalign}
+    &\det([R_1,R_2-R_1,R_3-R_2,\ldots,R_n-R_{n-1}]^\top)\\
+    &=\det([R_1,R_2,\ldots]^\top)+\underbrace{\det([R_1,-R_1,\ldots])}_{=0}\\
+    &\vdots\\
+    &=\det([R_1,R_2,R_3,\ldots,R_n]^\top)
+    \end{flalign}
+    So it suffices to calculate determinant of this matrix. 
+    We find that 
+    $$\begin{bmatrix}
+        R_1 \\ R_2-R_1 \\  R_3-R_2 \\ \vdots \\ R_n-R_{n-1}
+    \end{bmatrix}= \begin{pmatrix}
+\lambda_1 & a & a & \dots & a & a \\
+b-\lambda_1 & \lambda_2-a & 0 & \dots & 0 & 0 \\
+0 & b-\lambda_2 & \lambda_3-a & \dots & 0 & 0 \\
+\vdots & \vdots & \ddots & \ddots & \vdots & \vdots \\
+0 & 0 & 0 & \dots & \lambda_{n-1}-a & 0 \\
+0 & 0 & 0 & \dots & b-\lambda_{n-1} & \lambda_n-a
+\end{pmatrix}$$ 
+We will calcuate the determinant directly by looking at the nonzero terms in its determinant. 
+For a permutation $\sigma\in S_n$, its clear from looking at the matrix that unless $\sigma(n)\in\{n,n-1\},\sigma(n-1)\in\{n-1,n-2\},\ldots,\sigma(2)\in\{2,1\}$ the term corresponding to this will be zero. 
+This implies that the $\sigma\neq\textbf{Identity}$ which might result in a nonzero term to be of form : $\sigma_k(n)=n,\ldots,\sigma(k)=k-1,\sigma(k-1)=k-2,\ldots,\sigma(2)=1,\sigma(1)=k$ for some $k=n,n-1,\ldots,2$. 
+We can also see that these $\sigma_k=(k,k-1,k-2,\ldots,2,1)$ and thus have sign $(-1)^{k-1}$ as defined in class. 
+Thus, the determinant is (we define products ($\Pi$) to be equal to $1$ if the conditions are never valid for the productants (like in the case of $k=n$ below))
+$$\lambda_1\prod_{i=2}^{n}(\lambda_i-a)+\sum_{k=2}^na\cdot(-1)^{k-1}\left(\prod_{i=k+1}^n(\lambda_i-a)\right)\cdot\left(\prod_{j=2}^k(b-\lambda_{j-1})\right)$$
+$$=f(a)+a(\lambda_2-a)\cdots(\lambda_n-a)+a\sum_{k=2}^n\prod_{k<i\leq n}(\lambda_i-a)\prod_{1\leq j<k}(\lambda_j-b)$$
+We simplify the secondsum (let it be $S$) now. 
+$$S = \sum_{k=1}^n \left( \prod_{j=1}^{k-1} (\lambda_j - b) \right) \left( \prod_{i=k+1}^n (\lambda_i - a) \right)$$
+To evaluate this, we multiply $S$ by $(b-a)$. As $b-a = (\lambda_k - a) - (\lambda_k - b)$ we have,
+\begin{align*}
+(b-a)S &= \sum_{k=1}^n \left( \prod_{j=1}^{k-1} (\lambda_j - b) \right) \Big[ (\lambda_k - a) - (\lambda_k - b) \Big] \left( \prod_{i=k+1}^n (\lambda_i - a) \right) \\
+&= \sum_{k=1}^n \left[ \underbrace{\left( \prod_{j=1}^{k-1} (\lambda_j - b) \right) (\lambda_k - a) \left( \prod_{i=k+1}^n (\lambda_i - a) \right)}_{\text{Term } A_k} \right] \\
+&\quad - \sum_{k=1}^n \left[ \underbrace{\left( \prod_{j=1}^{k-1} (\lambda_j - b) \right) (\lambda_k - b) \left( \prod_{i=k+1}^n (\lambda_i - a) \right)}_{\text{Term } B_k} \right]
+\end{align*}
+We see that the terms $(\lambda_k - a)$ and $(\lambda_k - b)$ can be included in two products. 
+Let, $P_k = \left( \prod_{j=1}^{k} (\lambda_j - b) \right) \left( \prod_{i=k+1}^n (\lambda_i - a) \right)$, then $A_k=P_{k-1},B_k=P_k$
+Thus, $(b-a)S = \sum_{k=1}^n (P_{k-1} - P_k) = P_0 - P_n$ and extreme terms (as per our assumption above) are 
+$$P_0 = \prod_{i=1}^n (\lambda_i - a) = f(a), \quad P_n = \prod_{j=1}^n (\lambda_j - b) = f(b)$$
+This implies that $S = \frac{f(a) - f(b)}{b-a}$ and substituting $S$ back in we get, 
+$$\det(A) = f(a) + a \left( \frac{f(a) - f(b)}{b-a} \right) = \frac{(b-a)f(a) + af(a) - af(b)}{b-a} = \frac{bf(a) - af(b)}{b-a}$$
+Now, in the case of $a=b$ we can use the continuity (this is due to the determinant being a polynomial in the entries) of the determinant over the matrices (over the metric $d(A,B):=\Sigma_{i,j}|A_{ij}-B_{ij}|$, although this is not the only metric of this kind) and limits to evaluate it. 
+Thus,
+$$\det\begin{pmatrix}
+    \lambda_1 & a & a & \dots & a \\
+    a & \lambda_2 & a & \dots & a \\
+    a & a & \lambda_3 & \dots & a \\
+    \vdots & \vdots & \vdots & \ddots & \vdots \\
+    a & a & a & \dots & \lambda_n
+    \end{pmatrix}=\det\left(\lim_{b\to a}\begin{pmatrix}
+    \lambda_1 & a & a & \dots & a \\
+    b & \lambda_2 & a & \dots & a \\
+    b & b & \lambda_3 & \dots & a \\
+    \vdots & \vdots & \vdots & \ddots & \vdots \\
+    b & b & b & \dots & \lambda_n
+    \end{pmatrix}\right)$$
+    $$=\lim_{b\to a}\det\begin{pmatrix}
+    \lambda_1 & a & a & \dots & a \\
+    b & \lambda_2 & a & \dots & a \\
+    b & b & \lambda_3 & \dots & a \\
+    \vdots & \vdots & \vdots & \ddots & \vdots \\
+    b & b & b & \dots & \lambda_n
+    \end{pmatrix}=\lim_{b\to a}\frac{bf(a)-af(b)}{b-a}$$
+    $$=\lim_{b\to a}\left(f(a)-a\cdot\frac{f(b)-f(a)}{b-a}\right)=f(a)-a\cdot f'(a)$$
+\end{solution}
+\begin{problem}\label{prob:1.8}
+    \textbf{Prove or disprove:} Let $A$ be a square matrix of size $n \times n$ such that all entries are either 1 or -1. Then $\det(A)$ is divisible by $2^{n-1}$.
+\end{problem}
+\begin{solution}
+    Using row operations, which the determinant is invariant under we can subtract the first row from every other row which will result in the other $n-1$ rows having entries in $\{0,2,-2\}$. 
+    Now, when we take the determinant every term in it will be either $0$ or have $n-1$ entries which are $\pm 2$. 
+    Thus each term in the sum is of form $2^{n-1}K$ for some $K\in\bZ$ or its $0$, summing which always results in a number divisible by $2^{n-1}$, proving the claim.
+\end{solution}
+\begin{problem}\label{prob:1.9}
+    The resultant is a determinant used to determine whether two polynomials have a common root or not. Consider polynomials $p(x) = a_2x^2 + a_1x + a_0$ and $q(x) = b_1x + b_0$. The Sylvester matrix of these two polynomials is defined as:
+    \[
+    A := \begin{pmatrix}
+    a_2 & a_1 & a_0 \\
+    b_1 & b_0 & 0 \\
+    0 & b_1 & b_0
+    \end{pmatrix}
+    \]
+    Show that $\det(A) = 0$ if and only if $p$ and $q$ have a common root.
+\end{problem}
+\begin{solution}
+    NOTE: If $b_1=0$ and $b_0\neq 0$ then $q$ does not have any roots and hence can't have any roots in common with $p$ but the determinant can still be zero (like in the case where $p$ is equivalently zero) so we omit it. \\
+    Suppose they do have a common root $x$, then we see that
+    $$A(x^2,x,1)^\top=(a_2x^2+a_1x+a_0,\underbrace{b_1x^2+b_0x}_{=x(b_1x+b_0)=x\cdot 0=0},b_1x+b_0)^{\top}=(0,0,0)^{\top}$$
+    and as $A$ sends a nonzero vector to the zero vector, it is singular and has $0$ determinant. For the other direction of the iff statement, we make cases depending on $q$ as follows while assuming the determinant to be $0$. 
+    If $b_0,b_1=0$ then they share common roots as $q\equiv 0$ has every number as a root. 
+    If $b_0=0,b_1\neq 0$ then the determinant is $a_0b_1^2$ being $0$ implies that $a_0=0$ so they share the common root $0$.
+    If $b_0,b_1\neq 0$ then $q$ has $-b_1^{-1}b_0$ as a root and the determinant is $a_2b_0^2-b_1a_1b_0+b_1^2a_0=b_1^2(a_2(-b_1^{-1}b_0)^2+a_1(-b_1^{-1}b_0)+a_0)$ which is just $b_1^2 p(-b_1^{-1}b_0)$ and this being zero implies that they two polynomials share a root and we are done. 
+\end{solution}
+\begin{problem}\label{prob:1.10}
+    Let $A, B, C$ and $D$ be square matrices of the same size and let
+    \[
+    P := \begin{pmatrix} A & B \\ C & D \end{pmatrix}
+    \]
+    \textbf{Prove or disprove:} If $BD = DB$, then $\det(P) = \det(DA - BC)$.
+\end{problem}
+\begin{solution}
+    We prove this statement for complex matrices.
+    \\ \textit{Lemma: } If $A,B,C$ are $n\times n$ square matrices then,
+    $$\det\begin{bmatrix}
+    A & 0 \\ C & B
+    \end{bmatrix}=\det(A)\det(B)$$ 
+    \\ \textit{proof: } All the potentially nonzero terms in the determinant of this block matrix must be those where the permutation $\sigma(i)\leq n$ for $i\leq n$, as this is a bijection we clearly see that $\sigma$ maps $1,2,\ldots,n$ to $[n]$ and thus its also a permutation when restricted to $\sigma$ i.e. $\sigma|_{[n]}\in S_n$. 
+    Similarly we see that as all of $[n]$ is expended already, for $k>n$ we must have $\sigma(k)>n$ which again shows us that $\sigma|_{[2n]\setminus[n]}$ is a bijection on $[2n]\setminus[n]$. 
+    Define $\sigma_{L}$ to be an extension of $\sigma|_{[n]}$ to $[2n]$ by setting it to be identity outside $[n]$ and define $\sigma_R$ similarly using $\sigma_{[2n]\setminus[n]}$. 
+    Then we have $\sigma=\sigma_L\sigma_R$. 
+    We can also see that the set $\{(\sigma_L,\sigma_R)\}$ over the $\sigma$ we described above is $S_n\times S([2n]\setminus[n])$ (here, $S(X)$ is the set of permutations over $X$, a finite nonempty set.) 
+    Thus, the determinant is
+    $$\sum_{\sigma\text{ under consideration}}\sgn(\sigma_L\sigma_R)\prod_{i=1}^na_{i,\sigma_L(i)}\prod_{j=n+1}^{2n}b_{j-n,\sigma_R(j)-n}
+    $$
+    We can also clearly see that $f(j)=\sigma_R(j)-n$ is a permutation in $S_n$ and this correspondence is bijective, thus we can rewrite the expression as
+    $$\sum_{\sigma\in S_n,\tau\in S_n}\sgn(\tau)\sgn(\sigma)\prod_{i=1}^na_{i,\sigma_L(i)}\prod_{j=1}^{n}b_{j,\tau(j)}$$ 
+    Here we have used the fact that $\epsilon$ is multiplicative and $\epsilon(\sigma_L)=\epsilon(\sigma|_{[n]}),\epsilon(\sigma_R)=\epsilon(f)$, this can be proved easily using \hyperref[prob:1.3]{Problem 1.3}. 
+    Now, factorizing this we have
+    $$\left(\sum_{\sigma\in S_n}\epsilon(\sigma)\prod_{i=1}^na_{i,\sigma(i)}\right)\cdot\left(\sum_{\tau\in S_n}\epsilon(\tau)\prod_{i=1}^nb_{i,\tau(i)}\right)=\det(A)\det(B)$$
+    Now, for our problem, first assume that $B,D$ are invertible, then
+    $$\begin{bmatrix}
+    D & 0 \\ 0 & B
+    \end{bmatrix}\cdot\begin{bmatrix}
+        A & B\\ C & D
+    \end{bmatrix}=\begin{bmatrix}
+        DA & DB\\ BC & BD
+    \end{bmatrix}$$
+    $$\implies\det\left(\begin{bmatrix}
+    D & 0 \\ 0 & B
+    \end{bmatrix}\cdot\begin{bmatrix}
+        A & B\\ C & D
+    \end{bmatrix}\right)=\det\begin{bmatrix}
+        DA & DB\\ BC & BD
+    \end{bmatrix}=\det\begin{bmatrix}
+        DA-BC & \underbrace{DB-BD}_{=0}\\ BC & BD
+    \end{bmatrix}$$
+    $$\implies\det\begin{bmatrix}
+        D& 0\\ 0& B
+    \end{bmatrix}\cdot\det\begin{bmatrix}
+        A & B \\ C & D
+    \end{bmatrix}=\det(DA-BC)\cdot\det(BD)$$
+    $$\implies\det(B)\det(D)\det(P)=\det(DA-BC)\cdot\det(B)\det(D)$$
+    $$\implies\det(P)=\det(DA-BC)$$
+    as $\det(B),\det(D)\neq 0$ due to these being invertible. 
+    Now, look at $B+xI_n$ and $D+xI_n$ for reals $x$, these are both simultaneously invertible iff $\det(B+xI_n)\det(D+xI_n)\neq 0$ and thats a polynomial in $x$ so it has only finitely many roots and we thus see that it is nonzero for all small enough nonzero $x$ as there are uncountably many real numbers and thus we can assume that to be nonzero inside a limit where $x$ tends to $0$ by the definition of the limit. 
+    Now, using the contitnuity of the determinant as we did before in \hyperref[prob:1.8]{Problem 1.8}, for arbitrary matrices $A,B,C,D$ with $BD=DB$, we see that $(D+xI_n)(B+xI_n)=DB+xD+xB+I_n=BD+xD+xB+I_n=(B+xI_n)(D+xI_n)$ using which we have,
+    $$\det(P)=\det\left(\lim_{x\to 0}\begin{bmatrix}
+        A& B+xI_n\\ C& D+xI_n
+    \end{bmatrix}\right)=\lim_{x\to 0}\det\begin{bmatrix}
+        A& B+xI_n\\ C& D+xI_n
+    \end{bmatrix}$$
+    $$=\lim_{x\to 0}\det((D+xI_n)A-(B+xI_n)C)=\det\left(\lim_{x\to 0}(DA+xA-BC-xC)\right)=\det(DA-BC)$$
+
+\end{solution}
+\end{document}

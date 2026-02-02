@@ -1,0 +1,248 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath, amssymb, amsthm, graphicx, physics}
+\usepackage{enumitem}
+\usepackage{geometry}
+\usepackage[dvipsnames]{xcolor}
+\definecolor{EvanPink}{rgb}{0.85, 0.13, 0.55}
+\usepackage[colorlinks=true,
+            linkcolor=OliveGreen,
+            urlcolor=EvanPink,
+            citecolor=OliveGreen]{hyperref}
+\usepackage{cleveref}
+\usepackage{etoolbox}
+\newenvironment{solution}{%
+  \par\noindent\textit{Solution.}\ }{\qed}
+\newtheoremstyle{problemstyle}
+  {1em}   
+  {1em}   
+  {}      
+  {}      
+  {\bfseries} 
+  {.}     
+  {0.5em} 
+  {}      
+\theoremstyle{problemstyle}
+\newtheorem{problem}{Problem}[section]
+\crefname{problem}{Problem}{Problems}
+\Crefname{problem}{Problem}{Problems}
+\def\bN{\mathbb{N}}
+\def\bR{\mathbb{R}}
+\def\bZ{\mathbb{Z}}
+\def\bQ{\mathbb{Q}}
+\def\mM{\mathcal{M}}
+\def\mR{\mathcal{R}}
+\def\mN{\mathcal{N}}
+\def\mE{\mathcal{E}}
+\def\mA{\mathcal{A}}
+%%%%%%%%%%%%%%%Setting Page Sizes %%%%%%%%%%%%
+\setlength{\parindent}{0in}
+\setlength{\parskip}{\baselineskip}
+\setlength{\textheight}{9in}
+\setlength{\textwidth}{6.3in}
+\setlength{\topmargin}{-0.6in}
+\setlength{\evensidemargin}{-.5in}
+\setlength{\oddsidemargin}{0in}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%To make R commands appear in different Color%%%%%%%%%%
+\usepackage{color}
+\usepackage{fancyvrb} % Verbatim
+%\usepackage{Sweave} % for R code
+\usepackage{color}
+\definecolor{codecolor}{RGB}{114,12,112}
+\DefineVerbatimEnvironment{Sinput}{Verbatim}{formatcom=\color{codecolor}}
+\DefineVerbatimEnvironment{Soutput}{Verbatim}{formatcom=\color{codecolor}}
+\DefineVerbatimEnvironment{Scode}{Verbatim}{formatcom=\color{codecolor}}
+\DefineVerbatimEnvironment{Sin}{Verbatim}{formatcom=\color{codecolor}}
+\DefineVerbatimEnvironment{Sout}{Verbatim}{formatcom=\color{codecolor}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+{\bf Arkaraj Mukherjee: }
+{\bf Homework 4}
+\\
+<<>>=
+library("tidyverse");
+setwd("~/isi_bmath/sem_II/intro_to_statistics_and_computation_with_data");
+@
+
+\begin{enumerate}[label=\arabic*.]
+    \item
+    \begin{enumerate}[label=(\alph*)]
+\item We assume that the pdf for a \texttt{geom}($p$) and \texttt{negativebinomial}($r,p$) are $p_{\texttt{geom}}(k)=p(1-p)^{k-1}$ for and $p_{\texttt{negativebinomial}}(k)=\binom{k-1}{r-1}p^r(1-p)^{k-r}$ for $k=1,2,\ldots$
+<<>>=
+p = 0.3
+set.seed(82407)
+geom = vector("numeric", length = 100)
+for(i in 1:100) {
+    B = 0
+    while(B == 0) {
+        U = runif(1, min = 0, max = 1)
+        B = as.numeric(U<p)
+        geom[i] = geom[i] + 1
+    }
+}
+head(geom, n = 10)
+
+
+p = 0.7
+r = 4
+    nb = vector("numeric", length = 100)
+    for(i in 1:100) {
+        B = 0
+        while(B < r) {
+            U = runif(1, min = 0, max = 1)
+            B = B + as.numeric(U<p)
+            nb[i] = nb[i] + 1
+        }
+    }
+    head(nb, n = 10)
+@
+    
+    \item We assume that the pdf for cauchy distribution is $p_{\texttt{cauchy}}(x)=\pi^{-1}(1+x^2)^{-1}$ and use the inverse CDF method discussed in class
+    <<>>=
+    cau = tan(pi * (runif(100)-1/2));
+    round(head(cau, n = 5), digits = 3)
+    @
+    \end{enumerate}
+    \item
+        <<>>=
+        U = runif(100,max=1,min=0)
+        E = rexp(100,rate=1)
+        qqnorm(U)
+        qqline(U)
+        qqnorm(E)
+        qqline(E)
+        @
+        These plots show that neither sample is normally distributed because the points do not follow the straight diagonal line. The Exponential plot curves upwards, showing the data is skewed instead of symmetrical. The Uniform plot forms an 'S' shape, showing that the data is cut off at the ends ($0$ and $1$) rather than spreading out widely like a normal distribution.
+    \item \begin{enumerate}[label=(\alph*)]
+        \item[(0)] If $X$ is a binomial random variable with parameters $N,p$ then,
+        $$\mathbb{E}[X]=Np\text{ and, }\mathbb{E}[X^2]=Np(1-p)+N^2p^2$$
+        \texttt{phat} and \texttt{Nhat} are approximations of $p$ and $N$ respectively which we get from solving for $N,p$ using the mean of our data and the square mean, its an approximation as our means may be close to the theoretical means but they needn't be equal to the theoretical mean.
+        \item 
+        <<>>=
+        n = 100
+        N = 20
+        p = 0.4
+        x = rbinom(n,N,p)
+        m1 = mean(x)
+        m2 = mean(x^2)
+        Nhat = m1^2 / (m1 - (m2 - m1^2))
+        phat = (m1 - (m2 - m1^2)) / m1
+        Nhat - N
+        phat - p
+        @
+        \item 
+        <<>>=
+        n = 1000
+        N = 20
+        p = 0.4
+        x = rbinom(n,N,p)
+        m1 = mean(x)
+        m2 = mean(x^2)
+        Nhat = m1^2 / (m1 - (m2 - m1^2))
+        phat = (m1 - (m2 - m1^2)) / m1
+        Nhat - N
+        phat - p
+        @
+        It does change, the error is much smaller now.
+        \item 
+        <<>>=
+        n = 100;
+        N = 10;
+        p = 0.9;
+        x = rbinom(n,N,p);
+        m1 = mean(x);
+        m2 = mean(x^2);
+        Nhat = m1^2 / (m1 - (m2 - m1^2));
+        phat = (m1 - (m2 - m1^2)) / m1;
+        Nhat - N
+        phat - p
+        n = 1000;
+        N = 10;
+        p = 0.9;
+        x = rbinom(n,N,p);
+        m1 = mean(x);
+        m2 = mean(x^2);
+        Nhat = m1^2 / (m1 - (m2 - m1^2));
+        phat = (m1 - (m2 - m1^2)) / m1;
+        Nhat - N
+        phat - p
+        @
+    \end{enumerate}
+    \item \begin{enumerate}[label=(\alph*)]
+        \item 
+        <<>>=
+        x = seq(-2, 2, by = 0.1)
+        plot(x,pnorm(x, mean = 0, sd = 1))
+        @
+        \item We use the fact that $P(Z\leq x)=P(Y\leq x\cdot\sqrt{mp(1-p)}+mp)$
+        <<>>=
+        m = 100
+        p = 0.4
+        ev = m*p
+        sd = sqrt(m*p*(1-p))
+        plot(x,pbinom(sd*x+ev, size = m, prob = p))
+        @
+        \item 
+        <<>>=
+        m <- 100
+        p <- 0.4
+        binom_samples <- rbinom(1000, size = m, prob = p)
+        mu_val <- m * p
+        sigma_val <- sqrt(m * p * (1 - p))
+        df <- data.frame(vals = binom_samples)
+        ggplot(df, aes(x = vals)) +
+        geom_histogram(aes(y = ..density..), binwidth = 1) +
+        stat_function(fun = dnorm, args = list(mean = mu_val, sd = sigma_val))
+        @
+    \end{enumerate}
+    \item 
+    <<>>=
+    x = c(1,2,3,4,5,6)
+    #this creates a vector with the entries above to serve as the possible samples
+    probx = c(1/6,1/6,1/6,1/6,1/6,1/6)
+    #this creates another vector but this serves as the probability of 
+    #getting some sample
+    Rolls = sample(x, size = 1500, replace = T, prob = probx)
+    #this samples from the distribution described by x and probx 1500 
+    #times with replacement and stores these in Rolls
+    Rollm = matrix(Rolls, nrow = 5)
+    #This creates a matrix out of Rolls by wrapping the vector such that 
+    #the matrix has 5 rows, it will have 1500/5=300 columns
+    Rollsums = apply(Rollm, 2, sum)
+    #This sums the entries in each column and puts them in Rollsums, if we
+    #had 1 instead of 2 there then it'd have summed the rows
+    library(ggplot2)
+    #self explanatory
+    density = function(x,a,s){(1/((2*pi)^(0.5)*s))*exp(-(x-a)^2/(2*s^2))}
+    #This creates a function named density that takes inputs x,a,s and outputs
+    #whatever is inside the curly braces, in our case its the pdf of N(a,s) at x
+    dfrolls = data.frame(Rollsums)
+    #this creates a dataframe named dfrolls with the only variable being 
+    #Rollsums, which has the values of Rollsums
+    mu = mean(dfrolls$Rollsums)
+    #this calculates the average value in Rollsums and stores it in mu
+    sigma = sd(dfrolls$Rollsums)
+    #this calculates the standard deviation of the numbers in Rollsums 
+    #and stores it in sigma
+    ggplot(data = dfrolls) + #uses dfrolls as the dataframe to plot from
+    geom_histogram(
+        mapping = aes(x = Rollsums, y = ..density..), #histogram that 
+        #plots proportion as compared to count
+        color = "#00846b", #turqouise-ish colored border of the bars
+        fill = NA, #empty interior
+        binwidth = 1) + #the data is grouped into the intervals [0,1),[1,2),...
+    xlim(5,30) +  #only x values in [5,30] are considered
+    geom_function(fun = density,
+    args = list(a = mu, s = sigma),
+    color = "black") #plots the function called density we defined earlier 
+    #and plots it with parameters a = mu and s = sigma, along x
+    @
+    We simulate a bunch of trials where $5$ die are rolled and their respective rolls summed, We then take these sums and plot them in a proportion based histogram to which we fit the appropriate normal distribution's pdf which finally shows us that these sums approximately follow a normal distribution with mean being the average sum, which by linearity of expectation is approximately $5\times(1+2+3+4+5)/5=15$ and standard deviation being the standard deviation of these sums, which being roughly independendent makes this be approximately $\sqrt{5\times\text{the standard deviation for a single roll}}$ by linearity of variance. 
+\end{enumerate}
+\end{document}
