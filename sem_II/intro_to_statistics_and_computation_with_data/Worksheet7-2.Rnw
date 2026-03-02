@@ -1,0 +1,157 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{mypreamble}
+\usepackage{myRpreamble}
+\begin{document}
+{\bf Arkaraj Mukherjee}
+{\bf Worksheet 6-2}
+\\
+library("tidyverse");
+\begin{enumerate}[label=\arabic*.]
+	\item
+		\begin{enumerate}[label=(\alph*)]
+			\item
+			
+			<<>>=
+			corners_T = matrix(c(0,0,1,0,0.5,sqrt(3)/2),ncol = 2, byrow=TRUE)
+			S1 = function( point ) {point/2 + corners_T[1,]/2}
+			S2 = function( point ) {point/2 + corners_T[2,]/2}
+			S3 = function( point ) {point/2 + corners_T[3,]/2}
+			S1_set = function(points) {t(apply(points, 1, S1))}
+			S2_set = function(points) {t(apply(points, 1, S2))}
+			S3_set = function(points) {t(apply(points, 1, S3))}
+			par(mfrow = c(1,3)) 
+			plot(corners_T, pch = 19, xlab = "x", ylab = "y", main = "under S1",type = "n",  asp = 1)
+			points(S1_set(corners_T), pch = 19)
+
+			plot(corners_T, pch = 19, xlab = "x", ylab = "y", main = "under S2", type = "n", asp = 1)
+			points(S2_set(corners_T), pch = 19)
+
+			plot(corners_T, pch = 19, xlab = "x", ylab = "y", main = "under S3", type = "n", asp = 1)
+			points(S3_set(corners_T), pch = 19)
+			@
+			\item
+			<<>>=
+						
+points_on_line <- function(a, b)
+{
+  lam <- seq(0, 1, length = 50)
+  t(sapply(lam, function(l) l*a + (1-l)*b))
+}
+l1 <- points_on_line(corners_T[1,], corners_T[2, ])
+l2 <- points_on_line(corners_T[1,], corners_T[3, ])
+l3 <- points_on_line(corners_T[2,], corners_T[3, ])
+edges_T <- rbind(l1, l2, l3)
+S1_edges <- S1_set(edges_T)
+S2_edges <- S2_set(edges_T)
+S3_edges <- S3_set(edges_T)
+par(mfrow = c(1,3))
+plot(edges_T, pch = 19, xlab = "x", ylab = "y", 
+     main = "S1(edges)", type = "n", asp = 1)
+points(S1_edges, pch = 19)
+plot(edges_T, pch = 19, xlab = "x", ylab = "y", 
+     main = "S2(edges)", type = "n", asp = 1)
+points(S2_edges, pch = 19)
+plot(edges_T, pch = 19, xlab = "x", ylab = "y",
+     main = "S3(edges)", type = "n")
+points(S3_edges, pch = 19)
+			@
+	\end{enumerate}
+			\begin{enumerate}[label=(\alph*)]
+			\item
+			<<>>=
+			iterative_func <- function(set) rbind(S1_set(set), S2_set(set), S3_set(set))
+
+T0 <- corners_T
+T1 <- iterative_func(T0)
+T2 <- iterative_func(T1)
+T3 <- iterative_func(T2)
+T4 <- iterative_func(T3)
+T5 <- iterative_func(T4)
+
+par(mfrow = c(2,3))
+plot(T0, pch = 20, cex = 0.5, main = "T0", asp = 1)
+plot(T1, col = 2, pch = 20, cex = 0.5, main = "T1", asp = 1)
+plot(T2, col = 3, pch = 20, cex = 0.5, main = "T2", asp = 1)
+plot(T3, col = 4, pch = 20, cex = 0.5, main = "T3", asp = 1)
+plot(T4, col = 5, pch = 20, cex = 0.5, main = "T4", asp = 1)
+plot(T5, col = 6, pch = 20, cex = 0.5, main = "T5", asp = 1)
+			@
+		\item Yes, they are contained in all the iterationss.
+		\item
+			<<>>=
+			T0 <- edges_T
+T1 <- iterative_func(T0)
+T2 <- iterative_func(T1)
+T3 <- iterative_func(T2)
+T4 <- iterative_func(T3)
+T5 <- iterative_func(T4)
+
+par(mfrow = c(2,3))
+plot(T0, pch = 20, cex = 0.1, main = "T0 (Edges)", asp = 1)
+plot(T1, col = 2, pch = 20, cex = 0.1, main = "T1", asp = 1)
+plot(T2, col = 3, pch = 20, cex = 0.1, main = "T2", asp = 1)
+plot(T3, col = 4, pch = 20, cex = 0.1, main = "T3", asp = 1)
+plot(T4, col = 5, pch = 20, cex = 0.1, main = "T4", asp = 1)
+plot(T5, col = 6, pch = 20, cex = 0.1, main = "T5", asp = 1)
+			@
+		\item
+			<<>>=
+filling_T <- function(a, b, c)
+{
+  points <- NULL
+  lam1 <- seq(0, 1, length = 25)
+  lam2 <- seq(0, 1, length = 25)
+  for(l1 in lam1)
+  {
+    for(l2 in lam2)
+    {
+      if(l1 + l2 < 1) points <- rbind(points, l1*a + l2*b + (1 - l1 - l2)*c)
+    }
+  }
+  points
+}
+
+points_T <- filling_T(corners_T[1,], corners_T[2, ], corners_T[3, ])
+
+T0 <- points_T
+T1 <- iterative_func(T0)
+T2 <- iterative_func(T1)
+T3 <- iterative_func(T2)
+T4 <- iterative_func(T3)
+T5 <- iterative_func(T4)
+
+par(mfrow = c(2,3))
+plot(T0, pch = 20, cex = 0.01, main = "T0 (Filled (not really, many points actually)", asp = 1)
+plot(T1, col = 2, pch = 20, cex = 0.01, main = "T1", asp = 1)
+plot(T2, col = 3, pch = 20, cex = 0.01, main = "T2", asp = 1)
+plot(T3, col = 4, pch = 20, cex = 0.01, main = "T3", asp = 1)
+plot(T4, col = 5, pch = 20, cex = 0.01, main = "T4", asp = 1)
+plot(T5, col = 6, pch = 20, cex = 0.01, main = "T5", asp = 1)
+			@
+			I can not spot any difference but there is a difference between these theoretically, the removed triangles are way too small to be seen in the window I have the pdf reader open in, its half my screen for reference.
+		\end{enumerate}
+	\item\begin{enumerate}[label=(\alph*)]
+			\item 
+			<<>>=
+			affine_map = function(x, h, centroid, theta)
+{
+  c_old = matrix(c(0.5, 1/(2*sqrt(3))), ncol = 1)
+  Rot_mat = matrix(c(cos(theta), sin(theta), -sin(theta), cos(theta)), nrow = 2, ncol = 2)
+  x_vec = matrix(x, ncol = 1)
+  c_new = matrix(centroid, ncol = 1)
+  u = c_new - h * (Rot_mat %*% c_old)
+  as.vector(h * (Rot_mat %*% x_vec) + u)
+}
+			@
+		\item
+			<<>>=
+			par(mfrow = c(1,2))
+T5_a <- t(apply(T5, 1, function(p) affine_map(p, 1, c(0,0), 0)))
+plot(T5_a, col = 2, pch = 20, cex = 0.01, asp = 1)
+
+T5_b <- t(apply(T5, 1, function(p) affine_map(p, 0.5, c(5,3), pi/6)))
+plot(T5_b, col = 2, pch = 20, cex = 0.01, asp = 1)
+@
+	\end{enumerate}
+\end{enumerate}
+\end{document}

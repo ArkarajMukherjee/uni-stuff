@@ -1,0 +1,257 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath, amssymb, amsthm, graphicx, physics, amsfonts}
+\usepackage{enumitem}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage[dvipsnames]{xcolor}
+\definecolor{EvanPink}{rgb}{0.85, 0.13, 0.55}
+\usepackage[colorlinks=true,
+            linkcolor=OliveGreen,
+            urlcolor=EvanPink,
+            citecolor=OliveGreen]{hyperref}
+\usepackage{cleveref}
+\usepackage{etoolbox}
+\newenvironment{solution}{%
+  \par\noindent\textit{Solution.}\ }{\qed}
+\newtheoremstyle{problemstyle}
+  {1em}   
+  {1em}   
+  {}      
+  {}      
+  {\bfseries} 
+  {.}     
+  {0.5em} 
+  {}      
+\theoremstyle{problemstyle}
+\newtheorem{problem}{Problem}[section]
+\apptocmd{\problem}{%
+  \addcontentsline{toc}{subsection}{Problem~\thesection.\arabic{problem}}%
+}{}{}
+\crefname{problem}{Problem}{Problems}
+\Crefname{problem}{Problem}{Problems}
+\setcounter{tocdepth}{2}
+\title{\textbf{Linear Algebra II} \\ \large Home Assignment II}
+\author{Arkaraj Mukherjee \\ B.Math., First Year, ISI Bangalore}
+\date{\today}
+\def\bN{\mathbb{N}}
+\def\bR{\mathbb{R}}
+\def\bZ{\mathbb{Z}}
+\def\bQ{\mathbb{Q}}
+\def\bC{\mathbb{C}}
+\def\w{\omega}
+\def\sgn{\epsilon}
+\newcommand{\inp}[2]{{\left\langle{#1},{#2}\right\rangle}}
+\newcommand{\ipp}[1]{{\left\langle{#1}\right\rangle}}
+\begin{document}
+\maketitle
+\newpage
+\tableofcontents
+\newpage
+\section{Home Assignment II (Due: Feb 20, 2026)}
+\noindent \textbf{Notation:} Here, for an inner product space $V$, it's inner product is denoted by $\inp{\cdot}{\cdot}_V$ if there is chance of ambiguity.
+\begin{problem}\label{prob:2-1}
+Define the $l^1$ norm on $\bC^n$ by,
+\[\norm{x}_1:=\sum_{j=1}^n|x_j|,\forall(x_1,\ldots,x_n)\in\bC^n\]
+Show that (i) $\norm{x+y}_1\leq\norm{x}_1+\norm{y}_1,\forall x,y\in\bC^n.$ (ii) $\norm{x}_1=0$ if and only if $x=0$.
+(iii) $\norm{ax}_1=|a|\norm{x}_1$ for all $a\in\bC$, $x\in\bC^n$.
+(iv) For $n\geq 2$ there is no inner product $\inp{\cdot}{\cdot}$ on $\bC^n$ such that
+\[\norm{x}_1=\sqrt{\inp{x}{x}}\]
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[label=(\roman*)]
+    \item For any $x,y\in\bC^n$, by the triangle inequality in $\bC$ we have $|x_j+y_j|\le|x_j|+|y_j|$ for all $j$.
+Summing over $j=1,\ldots,n$ gives $\norm{x+y}_1\le\norm{x}_1+\norm{y}_1$.
+    \item If $\norm{x}_1=0$ then $\sum_{j=1}^n|x_j|=0$.
+As $|x_j|\ge 0$, this implies $|x_j|=0$ for all $j$, so $x=0$. The converse is trivial.
+    \item For any $a\in\bC$ and $x\in\bC^n$, we have $\norm{ax}_1=\sum_{j=1}^n|ax_j|=\sum_{j=1}^n|a||x_j|=|a|\sum_{j=1}^n|x_j|=|a|\norm{x}_1$.
+    \item No such norm exists as if it did then the norm here would follow the parallelogram identity, i.e. for any $u,v\in\bC^n$ we would have,
+	$$\norm{u-v}_1^2+\norm{u+v}_1^2=2(\norm{u}_1^2+\norm{v}_1^2)$$
+	Which is not true in this case for $u=(1,0,\ldots),v=(0,1,0\ldots)$ as
+$$\norm{(1,-1,0,\ldots)}_1^2+\norm{(1,1,0,\ldots)}_1^2=4+4=8\neq4=2(1+1)=2(\norm{u}_1^2+\norm{v}_1^2)$$
+	and we are done.
+	\end{enumerate}
+\end{solution}
+\begin{problem}\label{prob:2-2}
+Let $V$ be a finite dimensional inner product space with inner product $\langle \cdot, \cdot \rangle$.
+Let $B:V\rightarrow V$ be an invertible linear map. Show that
+$$\langle x,y \rangle_B := \langle Bx, By \rangle, \quad \forall x, y \in V,$$
+defines an inner product on $V$.
+\end{problem}
+\begin{solution}
+	\begin{itemize}
+		\item positivity: For $x\in V$ $\ipp{x,x}_B=\ipp{Bx,Bx}\geq 0$ with equality iff $Bx=0$ which happens iff $x=0$ as $B$ is invertible.
+		\item sesquilinearity: For $x,y\in V,c\in\bC$ we have $\ipp{cx,y}_B=\ipp{Bcx,By}=\ipp{cBx,By}=\overline{c}\ipp{Bx,By}=\overline{c}\ipp{x,y}_B$ and $\ipp{x,cy}_B=\ipp{Bx,Bcy}=\ipp{Bx,cBy}=c\ipp{Bx,By}=c\ipp{x,y}_B$
+		\item conjugate symmetry: For $x,y\in V$ we have $\ipp{x,y}_B=\ipp{Bx,By}=\overline{\ipp{By,Bx}}=\overline{\ipp{x,y}_B}$
+	\end{itemize}
+\end{solution}
+\begin{problem}\label{prob:2-3}
+Let
+$$U=\begin{bmatrix}0&0&1\\ 1&0&0\\ 0&1&0\end{bmatrix} \quad \text{and} \quad A=\begin{bmatrix}a_{0}&a_{2}&a_{1}\\ a_{1}&a_{0}&a_{2}\\ a_{2}&a_{1}&a_{0}\end{bmatrix}$$
+\begin{enumerate}
+    \item[(i)] Show that $U$ is a unitary satisfying $U^{3}=I$.
+    \item[(ii)] Suppose $a_{0}$, $a_{1}$, $a_{2}$ are three real numbers. Show that $A=a_{0}I+a_{1}U+a_{2}U^{2}$.
+    \item[(iii)] Write down a formula for $A^{n}$ for $n\in\mathbb{N}$.
+\end{enumerate}
+\end{problem}
+\begin{solution}
+\begin{enumerate}[label=(\roman*)]
+\item We observe that $U^\top=\begin{bmatrix}0&1&0\\ 0&0&1\\ 1&0&0\end{bmatrix}$. Simple matrix multiplication shows $U^\top U=I$, so $U$ is unitary (as $U$ is real). Also, $U^2=U^\top=U^{-1}$, so clearly $U^3=I$.
+\item Computing the RHS explicitly,
+$$a_0I+a_1U+a_2U^2=\begin{bmatrix}a_0&0&0\\ 0&a_0&0\\ 0&0&a_0\end{bmatrix}+\begin{bmatrix}0&0&a_1\\ a_1&0&0\\ 0&a_1&0\end{bmatrix}+\begin{bmatrix}0&a_2&0\\ 0&0&a_2\\ a_2&0&0\end{bmatrix}=A$$
+\item Now, all we need to do is to diagonalise $U$. Here $\omega=\exp(2\pi i/3)$.
+$$U(1,1,1)^\top=1\cdot(1,1,1)^\top$$
+$$U(\omega^2,\omega,1)^\top=(1,\omega^2,\omega)^\top=\omega(\omega^2,\omega,1)^\top$$
+$$U(\omega,\omega^2,1)^\top=(1,\omega,\omega^2)^\top=\omega^2(\omega,\omega^2,1)^\top$$
+Let $v_1=3^{-1/2}(1,1,1)^\top, v_2=3^{-1/2}(\omega^2,\omega,1)^\top, v_3=3^{-1/2}(\omega,\omega^2,1)^\top$ then, $\{v_1,v_2,v_3\}$ is found to be an orthonormal basis. Thus, we can write, for all $v\in\bC^3$,
+$$Uv=U(v_i\ipp{v_1,v}+v_2\ipp{v_2,v}+v_3\ipp{v_3,v})=\ipp{v_1,v}U$$
+$$=v_1\ipp{v_1,v}+\omega v_2\ipp{v_2,v}+\omega^2 v_3\ipp{v_3,v}=P_1v+\omega
+P_2v+\omega^2 P_3v$$
+where $P_i$ is the projection onto $\text{Span}\{v_i\}$. Now, as $v_i$ are
+otrhonormal, we see that $P_i=v_iv_i^*$ as done in class, thus
+$$U=v_1v_1^*+\omega v_2v_2^*+\omega^2 v_3v_3^*$$
+Its clear that $P_iP_j=0$ if $i\neq j$ and $P_iP_i=P_i$. For a polynomial
+$\Gamma(x)=a_0+a_1x+\ldots+a_nx^n$ and square matrix $M$ define
+$\Gamma(M):=a_0I+a_1M+\ldots+a_nM^n$, from this, its clear that
+$\Gamma(U)=\Gamma(1)P_1+\Gamma(\omega)P_2+\Gamma(\omega^2)P_3$ and thus,
+$$A^n=Q(U)=Q(1)P_1+Q(\omega)P_2+Q(\omega^2)P_3$$
+where $Q(x)=(a_0+a_1x+a_2x^2)^n$. After some calculation we also see that
+$$P_1=\begin{bmatrix}1/3 & 1/3 & 1/3\\ 1/3 & 1/3 & 1/3\\ 1/3 & 1/3 &
+1/3\end{bmatrix},P_2=\begin{bmatrix}1/3 & \w/3 & \w^2/3\\ \w^2/3 & 1/3 &
+\w/3\\ \w/3 & \w^2/3 & 1/3\end{bmatrix}, P_3=\begin{bmatrix}1/3 & \omega^2/3 & \omega/3\\ \w/3 & 1/3 & \w^2/3\\ \w^2/3 & \w/3 & 1/3\end{bmatrix}$$
+Thus $A^n$ is
+$$
+\frac{1}{3}
+\begin{bmatrix}
+Q(1) + Q(\w) + Q(\w^2) & Q(1) + \w Q(\w) + \w^2 Q(\w^2) & Q(1) + \w^2 Q(\w) + \w Q(\w^2) \\
+Q(1) + \w^2 Q(\w) + \w Q(\w^2) & Q(1) + Q(\w) + Q(\w^2) & Q(1) + \w Q(\w) + \w^2 Q(\w^2) \\
+Q(1) + \w Q(\w) + \w^2 Q(\w^2) & Q(1) + \w^2 Q(\w) + \w Q(\w^2) & Q(1) + Q(\w) + Q(\w^2)
+\end{bmatrix}
+$$
+\end{enumerate}
+\end{solution}
+\begin{problem}\label{prob:2-4}
+Let $x_{1},x_{2},...,x_{n}$ be $n$ vectors in an inner product space. Let $G=[g_{ij}]$ be the $n\times n$ matrix where $g_{ij}=\langle x_{i},x_{j}\rangle$, $1 \le i, j \le n$. Such matrices are known as Gram matrices. If $n=1, 2$ or $3$, show that $\det(G)\ge0$. (This is actually true for all $n$.)
+\end{problem}
+\begin{solution}
+We will prove it for the general case. Suppose the inner product space here has dimension $m$ and hence, let $\{u_1,\ldots,u_m\}$ be an orthonormal basis, we can always construct one using gram schmidt. Then
+$$\ipp{x_i,x_j}=\ipp{\sum_{k=1}^m\ipp{u_k,x_i}u_k,\sum_{k=1}^m\ipp{u_k,x_j}u_k}=\sum_{k=1}^m\overline{\ipp{u_k,x_i}}\ipp{u_k,x_j}$$
+Let, $A$ be the $m\times n$ matrix whose $(k,i)$-th entry is $\ipp{u_k,x_i}$ for $1\leq k\leq m,1\leq i\leq n.$ Then, we see that $G=A^*A$. If $m<n$ then clearly $\rank (A^*A)=\rank(A)\leq m<n$ as done in class and thus as $G$ does not have full rank, it has determinant $0$. Otherwise, using the cauchy-binet formula proven in class we see that,
+$$\det(A^*A)=\sum_{1\leq i_1<\ldots<i_n\leq m}\det(A^*(1,\ldots,n|i_1,\ldots,i_n))\det(A(i_1,\ldots,i_n|1,\ldots,n))$$
+Where $A(\ldots|\ldots)$ are the submatrices of $A$ as in conventional notation. We also see that 
+$$A^*(1,\ldots,n|i_1,\ldots,i_n)=A(i_1,\ldots,i_n|1,\ldots,n)^*$$
+as the $(j,k)$-th entry on the left matrix, $(A^*)_{j,i_k}=\overline{(A)_{i_k,j}}$ is the $(j,k)$-th entry of the matrix on the right. Now, as for any square matrix $M$ we have $\det(M^*)=\overline{\det(M)}$ as proven in class, we see that,
+$$\det(A^*A)=\sum_{1\leq i_1<\ldots<i_n\leq m}\det((A(i_1,\ldots,i_n|1,\ldots,n)^*))\det(A(i_1,\ldots,i_n|1,\ldots,n))$$
+$$=\sum_{1\leq i_1<\ldots<i_n\leq m}\overline{\det(A(i_1,\ldots,i_n|1,\ldots,n))}\det(A(i_1,\ldots,i_n|1,\ldots,n))$$
+$$=\sum_{1\leq i_1<\ldots<i_n\leq m}|\det(A(i_1,\ldots,i_n|1,\ldots,n))|^2\geq 0$$
+\end{solution}
+\begin{problem}\label{prob:2-5}
+Let $e_{1}, e_{2}, e_{3}$ be the standard basis of $\mathbb{C}^{3}$. Show that $\mathcal{B}:=\{e_{1}+e_{2}+e_{3}, e_{2}+e_{3}, e_{3}\}$ is a basis for $\mathbb{C}^{3}$. Apply Gram-Schmidt process on $\mathcal{B}$ to get an ortho-normal basis of $\mathbb{C}^{3}$.
+\end{problem}
+\begin{solution}
+    Let $v_1 = e_1+e_2+e_3 = (1,1,1)^\top$, $v_2 = e_2+e_3 = (0,1,1)^\top$, and $v_3 = e_3 = (0,0,1)^\top$. 
+    First, we show that $\mathcal{B} = \{v_1, v_2, v_3\}$ is a basis for $\bC^3$. Since $\bC^3$ is 3-dimensional and $\mathcal{B}$ contains three vectors, it suffices to show that they span the space. We can easily express the standard basis vectors as linear combinations of the vectors in $\mathcal{B}$:
+    \[ e_3 = v_3, \quad e_2 = v_2 - v_3, \quad e_1 = v_1 - v_2 \]
+    Since the standard basis is in the span of $\mathcal{B}$, it follows that $\mathcal{B}$ spans $\bC^3$ and thus forms a valid basis.
+
+    Next, we apply the Gram-Schmidt process to obtain an orthonormal basis $\{w_1, w_2, w_3\}$.
+    \begin{itemize}
+        \item \textbf{Step 1:} Let $u_1 = v_1 = (1,1,1)^\top$. Normalizing this vector:
+        \[ w_1 = \frac{u_1}{\norm{u_1}} = \frac{1}{\sqrt{3}}(1,1,1)^\top \]
+        
+        \item \textbf{Step 2:} Let $u_2 = v_2 - \ipp{w_1, v_2}w_1$. 
+        We compute $\ipp{w_1, v_2} = \frac{1}{\sqrt{3}}(1\cdot 0 + 1\cdot 1 + 1\cdot 1) = \frac{2}{\sqrt{3}}$.
+        \[ u_2 = (0,1,1)^\top - \frac{2}{3}(1,1,1)^\top = (-2/3, 1/3, 1/3)^\top \]
+        The norm of $u_2$ is $\sqrt{4/9 + 1/9 + 1/9} = \sqrt{6}/3$. Normalizing gives:
+        \[ w_2 = \frac{u_2}{\norm{u_2}} = \frac{3}{\sqrt{6}} \left(-\frac{2}{3}, \frac{1}{3}, \frac{1}{3}\right)^\top = \frac{1}{\sqrt{6}}(-2, 1, 1)^\top \]
+
+        \item \textbf{Step 3:} Let $u_3 = v_3 - \ipp{w_1, v_3}w_1 - \ipp{w_2, v_3}w_2$.
+        We compute $\ipp{w_1, v_3} = \frac{1}{\sqrt{3}}$ and $\ipp{w_2, v_3} = \frac{1}{\sqrt{6}}$.
+        \begin{align*}
+            u_3 &= (0,0,1)^\top - \frac{1}{3}(1,1,1)^\top - \frac{1}{6}(-2,1,1)^\top \\
+            &= (0, -1/2, 1/2)^\top
+        \end{align*}
+        The norm of $u_3$ is $\sqrt{1/4 + 1/4} = 1/\sqrt{2}$. Normalizing gives:
+        \[ w_3 = \frac{u_3}{\norm{u_3}} = \sqrt{2}\left(0, -1/2, 1/2\right)^\top = \left(0, -\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}}\right)^\top \]
+    \end{itemize}
+    Thus, applying Gram-Schmidt yields the orthonormal basis 
+    $$\left\{ \frac{1}{\sqrt{3}}(1,1,1)^\top, \frac{1}{\sqrt{6}}(-2,1,1)^\top, \frac{1}{\sqrt{2}}(0,-1,1)^\top \right\}$$
+\end{solution}
+\begin{problem}\label{prob:2-6}
+Let $V_{0}$ be the subspace
+$$V_{0}=\left\{\begin{pmatrix}x_{1}\\ x_{2}\\ x_{3}\end{pmatrix} : x_{1}+x_{2}=0\right\}$$
+of $\mathbb{R}^{3}$. Determine $V_{0}^{\perp}$. For arbitrary vector $x$ of $\mathbb{R}^3$, find vectors $y\in V_{0}$, $z\in V_{0}^{\perp}$ such that $x=y+z$.
+\end{problem}
+\begin{solution}
+A basis for $V_0$ is $\{(1,-1,0)^\top,(0,0,1)^\top\}$ which we extend to a
+basis for $\bR^3$ by adding $(1,0,0)^\top$, applying gram schmidt on the basis
+$\{(0,0,1)^\top,(-1,1,0)^\top,(1,0,0)^\top\}$ gives the orthonormal basis
+$\{(0,0,1)^\top,(1/\sqrt{2},-1/\sqrt{2},0)^\top,(1/\sqrt{2},1/\sqrt{2},0)^\top\}$
+from which $\{(0,0,1)^\top,(1/\sqrt{2},-1/\sqrt{2},0)^\top\}$ is a basis for
+$V_0$ and $V_0^\perp$ has basis $\{(1/\sqrt{2},1/\sqrt{2},0)^\top\}$ and thus, 
+$$P_{V_0^\perp}:x\mapsto Ax\text{ with } A=\begin{pmatrix}1/\sqrt{2}\\ 1/\sqrt{2}\\ 0\end{pmatrix}\begin{pmatrix}1/\sqrt{2} & 1/\sqrt{2} & 0\end{pmatrix}=\begin{pmatrix}1/2 & 1/2 & 0\\ 1/2 & 1/2 & 0\\ 0 & 0 & 0\end{pmatrix}$$
+Now, as $\bR^3=V_0\oplus V_0^\perp$ we see that $P_{V_0}=I-P_{V_0^\perp}$ as done in class, thus, 
+$$P_{V_0}=\begin{pmatrix}1/2 & -1/2 & 0\\ -1/2 & 1/2 & 0\\ 0 & 0 & 1\end{pmatrix}$$
+Thus, the unique decomposition is given as follows,
+$$\begin{pmatrix}v_1\\ v_2\\ v_3\end{pmatrix}=\underbrace{\begin{pmatrix}\frac{v_1-v_2}{2}\\ \frac{v_2-v_1}{2}\\ v_3\end{pmatrix}}_{\in V_0}+\underbrace{\begin{pmatrix}\frac{v_1+v_2}{2}\\ \frac{v_1+v_2}{2}\\ 0\end{pmatrix}}_{\in V_0^\perp}$$
+\end{solution}
+\begin{problem}\label{prob:2-7}
+Consider the matrix $B$:
+$$B=\begin{bmatrix}2&1\\ 1&2\end{bmatrix}$$
+as a linear map on $\mathbb{R}^{2}$. Take $v_{1}=\frac{e_{1}+e_{2}}{\sqrt{2}}$, $v_{2}=\frac{e_{1}-e_{2}}{\sqrt{2}}$. Show that $\mathcal{B}=\{v_{1},v_{2}\}$ is an ortho-normal basis for $\mathbb{R}^{2}$. Obtain the matrix of the linear transformation $B$ on this basis.
+\end{problem}
+\begin{solution}
+After some calculation it can be found that the change of basis matrix to go to $\mathcal B$ from the standard orthonormal basis is 
+$$S=\begin{pmatrix}1/\sqrt{2} & 1/\sqrt{2}\\ 1/\sqrt{2} & -1/\sqrt{2}\end{pmatrix}$$
+and the matrix for going the other way around turns out to coincidentally be the same here, thus the matrix with respect to $\mathcal B$ is $SBS$ which after some calculation turns out to be
+$$\begin{pmatrix}3 & 0\\ 0 & 1\end{pmatrix}$$
+\end{solution}
+\begin{problem}\label{prob:2-8}
+Let $V, W$ be finite dimensional inner product spaces and let $A:V\rightarrow W$ be a linear map. Show that
+$$\text{ker}(A)=(\text{range}(A^{*}))^{\perp}.$$
+(Here 'ker' stands for kernel: $\text{ker}(A)=\{x\in V:Ax=0\}$ and $\text{range}(A)=\{Ax:x\in V\}$.)
+\end{problem}
+\begin{solution}
+	If $x\in\ker(A)$ then $\ipp{x,A^*w}_V=\ipp{Ax,w}_W=\ipp{0,w}_W=0$ for all $w\in W$ and thus $(\text{range}(A^*))^\perp\supseteq\ker(A)$. Now, if $v\in\text{range}(A^*)^\perp$ then for all $w\in W$ we have $\ipp{v,A^*w}_V=\ipp{Av,w}_W=0$ which implies that $\ipp{Av,Av}=0$ as $Av\in W$ which implies that $Av=0$ and hence $v\in\ker(A)$ so $\text{range}(A^*)^\perp\subseteq\ker(A)$. Having shown both direction of the set euqality we can conclude that $\ker(A)=\text{range}(A^*)^\perp$. 
+\end{solution}
+\begin{problem}\label{prob:2-9}
+Let $S$ be a non-empty subset of a finite dimensional inner product space $V$.
+\begin{enumerate}
+    \item[(i)] Show that $(S^{\perp})^{\perp}= \text{span}(S)$.
+    \item[(ii)] Show that $((S^{\perp})^{\perp})^{\perp}=S^{\perp}$.
+\end{enumerate}
+\end{problem}
+\begin{solution}
+	We first prove that $S^\perp=(\text{span}(S))^\perp$, one direction of this equality is trivial and for the other, notice that for any $\Sigma a_iv_i\in\text{span}(S)$ and $v\in S^\perp$ then $\ipp{v,\Sigma a_iv_i}=\Sigma a_i\ipp{v,v_i}=\Sigma a_i\cdot 0=0$ implying $\text{span}(S)^\perp\supseteq S^\perp$ hence provning our claim. Moreover it is clear that if $W$ is a subspace of $V$ then $(W^\perp)^\perp=W$ as $W$ is the orthogonal complement of $W^\perp$. Thus, as spans are subspaces too, we have
+\begin{enumerate}
+	\item[(i)] $(S^\perp)^\perp=(\text{span}(S)^\perp)^\perp=\text{span}(S)$
+`	\item[(ii)] $((S^\perp)^\perp)^\perp=\text{span}(S)^\perp=S^\perp$ using the previous equality.
+\end{enumerate}
+\end{solution}
+\begin{problem}\label{prob:2-10}
+Let $\mathcal{P}$ be the vector space of polynomials with real coefficients. If, 
+$$p(x)=a_{0}+a_{1}x+a_{2}x^{2}+\cdots+a_{m}x^{m}$$
+$$q(x)=b_{0}+b_{1}x+b_{2}x^{2}+\cdots+b_{n}x^{n}$$
+define
+$$\langle p,q\rangle=\sum_{j=0}^{k}a_{j}b_{j},$$
+where $k=\min\{m,n\}$. Show that $\langle\cdot,\cdot\rangle$ is an inner product on $\mathcal{P}$. Define $T: \mathcal{P}\rightarrow\mathcal{P}$ by
+$$Tp=\sum_{j=0}^{m}a_{j},$$
+for $p(x)=a_{0}+a_{1}x+a_{2}x^{2}+\cdots+a_{m}x^{m}$. Note that the range of $T$ consists of only constant polynomials. Show that $T$ is a linear map. Show that there exists no linear map $S:\mathcal{P}\rightarrow\mathcal{P}$ satisfying
+$$\langle Sp,q\rangle=\langle p,Tq\rangle, \quad p,q \in \mathcal{P}$$
+This shows that in general, in infinite dimensional inner product spaces a linear map may not admit an adjoint.
+\end{problem}
+\begin{solution}
+	If we just pad the lower degree polynomials with zero coeffecient higher degree terms then we can effectively ignore the bound of the sums so we do not consider that here on. First, we show $\ipp{\cdot,\cdot}$ is an inner product on $\mathcal{P}$.
+\begin{itemize}
+    \item positivity: $\ipp{p,p}=\sum a_j^2 \ge 0$ with equality iff all $a_j=0$, i.e., $p=0$.
+    \item symmetry: $\ipp{p,q}=\sum a_jb_j = \sum b_ja_j = \ipp{q,p}$.
+    \item linearity: For $r(x)=\sum c_jx^j$, $\ipp{p+q,r}=\sum (a_j+b_j)c_j = \sum a_jc_j + \sum b_jc_j = \ipp{p,r}+\ipp{q,r}$. Homogeneity follows similarly.
+\end{itemize}
+For $T$, let $p,q\in\mathcal{P}$ and $c\in\bR$. The coefficeints of $cp+q$ are $ca_j+b_j$. Thus,
+$$T(cp+q)=\sum (ca_j+b_j)=c\sum a_j + \sum b_j = cTp+Tq$$
+so $T$ is linear.
+\\ Assume for the sake of contradiction that such a $S$ does exist. If $S(1)\neq 0$(the degree is not defined if its $0$), then, $0=\ipp{S(1),x^{1+\deg S(1)}}=\ipp{1,T(x^{1+\deg S(1)})}=\ipp{1,1}=1$ which is false and in the other case of $S(1)=0$ we similarly see that $0=\ipp{0,x}=\ipp{S(1),x}=\ipp{1,T(x)}=\ipp{1,1}=1$ which is absurd and hence no such $S$ can exist
+\end{solution}
+\end{document}

@@ -66,19 +66,56 @@ f <- function(x,y) {
     x+y
 }
 f(2,2)
-#f is the function name and we place the arguements in the brackets beside function. The value returned is the last value calculated in the function.
-pnorm(0)
-pnorm(1)
-x = seq(-3,3,by = 0.1);
-y = pnorm(x)
-plot(x,y,type = "line")
-#this will plot the cdf of the normal dist approximately in [-3,3]
 
-#If Z is stdnormal then the a-th quantile of Z, denoted z_a where P(Z=<z_a)=a for a in (0,1).
-#Let {x_i : 1=< i =< n} be a given data set then we can order them in increasing order to get (x_(1),...,x_(n)) and do a scatter plot with (x_(k), k/(n+1)). If its a straight line then the quantiles match
+f = function(x) {dbinom(x, 0.5, 3)}
+f(0:5)
+#f is the function name and we place the arguements in the brackets beside
+#function. The value returned is the last value calculated in the function. You are advised to read ?Vectorize as its nice.
+
+library("tidyverse")
+df = data.frame(x = rnorm(1000,0,1))
+f = function(x) {dnorm(x,0,1)}
+df2 = data.frame(x=seq(-3,3,by=0.2), y=f(seq(-3,-3,by=0.2)))
+ggplot() +
+	geom_histogram(df, mapping = aes(x=df$x, y = ..density..), breaks=seq(-3,3,by=0.2), fill = "#29af7f", color = "#2e6f86") +
+	geom_line(df2, mapping=aes(x=x,y=y),color="482173")
+#this plots the (density)histogram of our normal samples and also the pmf.
+
+#If Z is stdnormal then the a-th quantile of Z, denoted z_a where P(Z=<z_a)=a for a in (0,1) i.e. CDF^{-1} (a) = z_a
+#Let {x_i : 1=< i =< n} be a given data set then we can order them in increasing order to get (x_(1),...,x_(n)) and do a scatter plot with (x_(k), z_(k)). If its a straight line then the quantiles match
 
 x = rnorm(1000)
 qqnorm(x) 
 #This takes the sample quantile and maps it against the theoretical qunatiles, if this is a straight line or near to one then the quantiles are close as well.
 qqnorm(Dice)
 #this does the plot for our dataset Dice used before. We see that the line isn't y=x but still its pretty straight and close to that line.
+
+rexp(10,3)
+#this samples the exponential distribution 10 times with parameter 3, also called rate.
+#we repeat the plot we did with the normal distribution again but with some changed parameters.
+dnorm(3,mean=4,sd=3)
+#self explanatory, gives the pdf at 3 from N(4,3)
+pnorm(3,mean=4,sd=3)
+#same but this operates with the cdf
+x = seq(-3,3,by=0.1)
+y=pnorm(x,lower_tail=FALSE)
+plot(x,y,type="l")
+#lower.tail=TRUE (the default) gives you CDF(.) whereas if its set to FALSE then we get 1-CDF(.) = P(X>x) as compared to P(X<=x) in the usual case.
+qnorm(0.68)
+pnorm(qnorm(0.12345))
+#qnorm is the quantile function i.e. CDF^{-1}, you are advised to read ?Normal, it contains everything related to the normal distribution in R.
+
+x=seq(0,1,by=0.05); y = qnorm(x); plot(x,y,type="l")
+#plots th
+x=rnorm(1000)
+#simulates N(0,1) 1000 times and places them in x.
+#Look at ?kurtosis and ?skewness after installing the package: "moments", then look these up as the man pages weren't helpful.
+normaldata = replicate(1000, rnorm(97,0,1), simplify=FALSE)
+library(moments)
+mean(sapply(normaldata, kurtosis))
+mean(sapply(normaldata,skewness))
+x=rnorm(1000)
+qqnorm(x)
+qqline(x)
+#this just add a line for reference
+

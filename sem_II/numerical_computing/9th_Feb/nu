@@ -1,0 +1,11 @@
+function A = row_swap(M,i,j)
+	if((row(M)!=columns(M)) || !(ismatrix(M)))
+		error("The matrix is not square or, it is not a matrix.");
+	elseif(1 <= i && i <= columns(M)) 
+		A = M
+		A(i,:) = M(j,:)
+		A(j.:) = A(i,:)
+	else
+		error("entries overflow");
+	endif
+endfunction

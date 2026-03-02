@@ -1,0 +1,142 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{mypreamble}
+\usepackage{myRpreamble}
+\begin{document}
+{\bf Arkaraj Mukherjee} \\
+{\bf Homework 6}
+\\
+<<>>=
+library("tidyverse");
+@
+\begin{enumerate}[label=\arabic*.]
+	\item
+	\begin{enumerate}[label=(\alph*)]
+	\item The probability mass function of this empirical distribution is
+		$$p(x) = \begin{cases}\frac{1}{10}\text{ if }x\in\{13,40,23,15,21,4,44,16,32,14\}\end{cases}$$
+	and the ECDF is
+	$$F(x) =
+	\begin{cases}
+	0\text{ if }x<4\\
+	\frac{1}{10}\text{ if }4\leq x<13\\
+	\frac{2}{10}\text{ if }13\leq x<14\\
+	\frac{3}{10}\text{ if }14\leq x<15\\
+	\frac{4}{10}\text{ if }14\leq x<16\\
+	\frac{5}{10}\text{ if }16\leq x<21\\
+	\frac{6}{10}\text{ if }21\leq x<23\\
+	\frac{7}{10}\text{ if }23\leq x<32\\
+	\frac{8}{10}\text{ if }32\leq x<40\\
+	\frac{9}{10}\text{ if }40\leq x<44\\
+	1\text{ if }x\geq 44
+	\end{cases}$$
+	\item
+	<<>>=
+	dat = c(13,40,23,15,21,4,44,16,32,14)
+	F = ecdf(dat)
+	x=-5:60;
+	ECDF=F(x);
+	EPDF=F(x)-F(x-1);
+	plot(x,ECDF,type="s",col="blue",ylim=c(-0.01,1.01),lwd=2)
+	lines(x,EPDF,type="p",pch=16,col="red")
+	legend("topleft",legend=c("ECDF","EPDF"),col=c("blue","red"),
+	pch=c(NA,16),lty=c(1,NA))
+	@
+	\end{enumerate}
+	\item NA
+
+	\item 
+	Its known that if $X\sim\text{Unif}(a,b)$ then $\mathbf{E}[X]=(a+b)/2$
+	and $\mathbf{E}[X^2]=(a^2+ab+b^2)/3$. Using method of moments, we find
+	$\hat{a},\hat{b}$ as usual,
+	$$\frac{1}{n}\sum_{i=1}^nX_i=\frac{\hat{a}+\hat{b}}{2}\text{ and
+	}\frac{1}{n}\sum_{i=1}^nX_i^2=\frac{\hat{a}^2+\hat{a}\hat{b}+\hat{b}^2}{3}$$
+	We write $a,b$ and omit the hats for ease of typesetting. Here,
+	$a^2+ab+b^2=(a+b)^2-ab$ and $a+b=2\mathbf{E}[X]$, which gives us
+	$ab=(2\mathbf{E}[X])^2-3\mathbf{E}[X^2]$ which implies that $a,b$ are
+	roots of the quadratic
+	$f(y)=y^2-2\mathbf{E}[X]y+(4\mathbf{E}[X]^2-3\mathbf{E}[X^2])$. Thus,
+	them being equal is equivalent to this quadratic having discriminant
+	$0$, i.e.
+	$4\mathbf{E}[X]^2-4\cdot(4\mathbf{E}[X]^2-3\mathbf{E}[X^2])=0$,
+	rearranging which we arrive at $\mathbf{E}[X^2]=\mathbf{E}[X]^2$ which
+	is again equivalent to the sampl variance being $0$ which happens if
+	and only if all the data points in the empirical realisation having the
+	exact same value so we are done.
+	\item 
+	\begin{enumerate}[label=(\alph*)]
+        \item 
+        <<>>=
+        n = 100
+        N = 20
+        p = 0.4
+        x = rbinom(n,N,p)
+        m1 = mean(x)
+        m2 = mean(x^2)
+        Nhat = m1^2 / (m1 - (m2 - m1^2))
+        phat = (m1 - (m2 - m1^2)) / m1
+        Nhat - N
+        phat - p
+        @
+        \item 
+        <<>>=
+        n = 1000
+        N = 20
+        p = 0.4
+        x = rbinom(n,N,p)
+        m1 = mean(x)
+        m2 = mean(x^2)
+        Nhat = m1^2 / (m1 - (m2 - m1^2))
+        phat = (m1 - (m2 - m1^2)) / m1
+        Nhat - N
+        phat - p
+        @
+        It does change, the error is much smaller now.
+        \item 
+        <<>>=
+        n = 100;
+        N = 10;
+        p = 0.9;
+        x = rbinom(n,N,p);
+        m1 = mean(x);
+        m2 = mean(x^2);
+        Nhat = m1^2 / (m1 - (m2 - m1^2));
+        phat = (m1 - (m2 - m1^2)) / m1;
+        Nhat - N
+        phat - p
+        n = 1000;
+        N = 10;
+        p = 0.9;
+        x = rbinom(n,N,p);
+        m1 = mean(x);
+        m2 = mean(x^2);
+        Nhat = m1^2 / (m1 - (m2 - m1^2));
+        phat = (m1 - (m2 - m1^2)) / m1;
+        Nhat - N
+        phat - p
+        @
+	\end{enumerate}
+	\item
+	\begin{enumerate}[label=(\alph*)]
+	\item There is a possibility that the sample mean is $1$, which causes
+		divison by zero below if left unattended. This occurs if and
+		only if all the samples are $1$, in which case $\mL(=p,\text{
+		which follows from the expression deduced below})$ is not
+		maximised by any $p\in (0,1)$ so we assume henceforth that the
+		sample mean is not $1$. The likelihood function is,
+	$$\mL(p;X_1,\ldots,X_n)=\prod_{i=1}^np(1-p)^{X_i-1}=p^n(1-p)^{n\overline{X}-n}$$
+	where $\overline{X}$ is the sample mean. 
+	\item $$l(p;X_1,\ldots,X_n)=n\log(p)+(n\overline{X}-n)\log(1-p)$$
+	This is a continuous function in $p$, on $(0,1)$ and we will find the
+	point where it attains the maximum value using the double derivative
+	test.
+	$$\frac{d
+	l}{dp}=\frac{n}{p}-\frac{n\overline{X}-n}{1-p}=0\implies\frac{1}{p}=\frac{\overline{X}-1}{1-p}\implies\overline{X}-1=\frac{1}{p}-1\implies
+	p=\frac{1}{\overline{X}}$$
+	$$\frac{d^2l}{dp^2}\bigg|_{p=1/\overline{X}}=-\frac{n}{p^2}-\frac{n\overline{X}-n}{(1-p)^2}\bigg|_{p=1/\overline{X}}=-n\overline{X}^2-\frac{n\overline{X}^2}{\overline{X}-1}<0$$thus,
+	we have shown that $l$ is maximised at $p=1/\overline{X}$.
+\item As $\log$ is a strictly increasing function on its domain, we see that,
+	$$\argmax_{p\in(0,1)}\mL(p;X_1,\ldots,X_n)=\argmax_{p\in(0,1)}\log\mL(p;X_1,\ldots,X_n)=\frac{1}{\overline{X}}$$
+	and thus, the maximum likelihood estimate for $p$ is $1/\overline{X}$
+	
+	\end{enumerate}
+\end{enumerate}
+\end{document}

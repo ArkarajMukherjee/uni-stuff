@@ -1,0 +1,66 @@
+\documentclass[12pt,english]{article}
+\usepackage{mypreamble}
+\usepackage{myRpreamble}
+\begin{document}
+{\bf Arkaraj Mukherjee}
+{\bf Worksheet 7}
+\\
+<<>>=
+library("tidyverse");
+library("data.table");
+@
+\begin{enumerate}[label=\arabic*.]
+\item
+\begin{enumerate}[label=(\alph*)]
+\item As $X_1,\ldots,X_n$ are all i.i.d, so are $f(X_1),\ldots,f(X_n)$ and these have mean,
+$$\bE[X_i]=\int_{-\infty}^{\infty}x\cdot
+P(f(X_i)=x)dx=\int_{-\infty}^{\infty}f(x)\cdot
+P(X_i=x)dx$$
+$$=\int_a^bf(x)P(X=x)dx=\int_a^bf(x)\cdot\frac{1}{b-a}dx=\frac{1}{b-a}\int_a^bf(x)dx$$
+Using LOTUS and the fact that $X_i\sim\text{Unif}(a,b)$, now we can use the weak law of large numbers to say that for all $\epsilon/2>0$
+$$P\qty(\left|\frac{1}{n}\sum_{i=1}^nf(X_i)-\frac{1}{b-a}\int_a^bf(x)dx\right|<\epsilon/2)\xrightarrow{n\to\infty}1$$
+This implies that,
+$$P\qty(\left|\frac{1}{n}\sum_{i=1}^nf(X_i)-\frac{1}{b-a}\int_a^bf(x)dx\right|
+>\epsilon)=1-P\qty(\left|\overline{f(X)}-\frac{1}{b-a}\int_a^bf(x)dx\right|\leq\epsilon)$$
+$$\leq
+1-P\qty(\qty|\overline{f(X)}-\frac{1}{b-a}\int_a^bf(x)dx|\geq\epsilon/2)$$
+$$=1-P\qty(\qty|\overline{f(X)}-\frac{1}{b-a}\int_a^bf(x)dx|<\epsilon/2)\xrightarrow{n\to\infty}1-1=0$$
+\item
+<<>>=
+f = function(x) {(16+sin(x))/(x^2+4)};
+f = Vectorize(f);
+Intapx = function(n) {(7-0)*mean(f(runif(n,min=0,max=7)))};
+I_hat = mean(replicate(100,{Intapx(50)}))
+I_hat
+@
+\item
+<<>>=
+integrate(f,0,7)$value
+abs(I_hat - integrate(f,0,7)$value)
+@
+\end{enumerate}
+\begin{enumerate}[label=(\alph*)]
+\item As $X$ is the number of marked fish in a sample of size $20$ from  a population of $N$ fish where $50$ are marked and thus $N-50$ unmarked, it must follow $\text{Hypergeom}(50,N-50,20)$.
+\item 
+<<>>=
+N = 50;
+X = rhyper(100,50,N-50,20);
+head(X,n=10)
+@
+\item The biologist would write  $X/20=50/\hat{N}$ and thus $\hat{N}=1000/X$
+\item
+<<>>=
+Sim = function(N) {rhyper(1000,50,N-50,20)}
+dat = data.table( id = 1:7, N = c(50,seq(100,500,by=100),1000))
+dat$X = lapply(dat$N,Sim)
+dat$N = lapply(dat$X,function(x){1000/x[x>0]})
+dat$E = sapply(dat$N,mean)
+dat$Var = sapply(dat$N,var)
+ggplot(dat, aes(x = id)) +
+geom_point(aes(y = dat$E))
+ggplot(dat, aes(x = id)) +
+geom_point(aes(y = Var))
+@
+\end{enumerate}
+\end{enumerate}
+\end{document}
