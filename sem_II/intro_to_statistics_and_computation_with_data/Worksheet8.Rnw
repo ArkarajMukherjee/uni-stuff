@@ -1,0 +1,70 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{mypreamble}
+\usepackage{myRpreamble}
+\begin{document}
+{\bf Arkaraj Mukherjee}
+\\
+{\bf Worksheet 8}
+\\
+<<>>=
+library("tidyverse");
+@
+\begin{enumerate}[label=\arabic*.]
+	\item
+		\begin{enumerate}[label=(\alph*)]
+			\item
+			Let $P(X=-1) = p, P(X=1) = p$, and $P(X=0) = 1-2p$ to keep $\mu=0$.
+			
+			Then $\sigma^2 = E[X^2] = 2p \implies \sigma = \sqrt{2p}$.
+			
+			We need $P(|X - \mu| \ge 2\sigma) = 1/4$.
+			
+			This gives $P(|X| \ge 2\sqrt{2p}) = 1/4$. The threshold $2\sqrt{2p}$ must be $\le 1$, giving $2p = 1/4 \implies p = 1/8$.
+			
+			Distribution of $X$: $P(X=-1) = 1/8$, $P(X=0) = 3/4$, $P(X=1) = 1/8$.
+			
+			\item
+			Let $\text{Range}(Y) = \{-2, 0, 2\}$ with $P(Y=-2) = 1/4$, $P(Y=2) = 1/4$, and $P(Y=0) = 1/2$.
+			
+			$\mu = 0$. We need $P(|Y - 0| > 2(1/2)) > 1/4 \implies P(|Y| > 1) > 1/4$.
+			
+			Here $P(|Y| > 1) = P(Y=-2) + P(Y=2) = 1/2 > 1/4$.
+			
+			Tschebychev Inequality is not violated. The inequality applies to the standard deviation of $Y$ ($\sigma_Y = \sqrt{2}$), not $X$. $P(|Y| \ge 2\sqrt{2}) = 0 \le 1/4$.
+			
+			\item
+			<<>>=
+			simulate_chebyshev = function(k)
+			{
+			  p_x = 1/(2*k^2)
+			  x_vals = c(-1, 0, 1)
+			  x_probs = c(p_x, 1 - 2*p_x, p_x)
+			  
+			  mu = 0
+			  sigma = sqrt(2*p_x)
+			  
+			  y_vals = c(-2, 0, 2)
+			  y_probs = c(0.5, 0.0, 0.5)
+			  
+			  n_reps = 100000
+			  x_sim = sample(x_vals, size = n_reps, replace = TRUE, prob = x_probs)
+			  y_sim = sample(y_vals, size = n_reps, replace = TRUE, prob = y_probs)
+			  
+			  prob_x = mean(abs(x_sim - mu) >= k*sigma)
+			  prob_y = mean(abs(y_sim - mu) > k*sigma)
+			  
+			  res = data.frame(
+			    Variable = c("X", "Y"),
+			    Target = c(1/k^2, 1/k^2),
+			    Empirical = c(prob_x, prob_y)
+			  )
+			  
+			  write.csv(res, file = "chebyshev.csv", row.names = FALSE)
+			  res
+			}
+
+			simulate_chebyshev(2)
+			@
+		\end{enumerate}
+\end{enumerate}
+\end{document}

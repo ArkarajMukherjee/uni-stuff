@@ -1,0 +1,134 @@
+\documentclass[12pt,a4paper]{article}\usepackage[]{graphicx}\usepackage[]{xcolor}
+% maxwidth is the original width if it is less than linewidth
+% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlsng}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hldef}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+\let\hlipl\hlkwb
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+\usepackage{mypreamble}
+\usepackage{myRpreamble}
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+{\bf Arkaraj Mukherjee}
+\\
+{\bf Worksheet 8}
+\\
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{library}\hldef{(}\hlsng{"tidyverse"}\hldef{);}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+\begin{enumerate}[label=\arabic*.]
+	\item
+		\begin{enumerate}[label=(\alph*)]
+			\item
+			Let $P(X=-1) = p, P(X=1) = p$, and $P(X=0) = 1-2p$ to keep $\mu=0$.
+			
+			Then $\sigma^2 = E[X^2] = 2p \implies \sigma = \sqrt{2p}$.
+			
+			We need $P(|X - \mu| \ge 2\sigma) = 1/4$.
+			
+			This gives $P(|X| \ge 2\sqrt{2p}) = 1/4$. The threshold $2\sqrt{2p}$ must be $\le 1$, giving $2p = 1/4 \implies p = 1/8$.
+			
+			Distribution of $X$: $P(X=-1) = 1/8$, $P(X=0) = 3/4$, $P(X=1) = 1/8$.
+			
+			\item
+			Let $\text{Range}(Y) = \{-2, 0, 2\}$ with $P(Y=-2) = 1/4$, $P(Y=2) = 1/4$, and $P(Y=0) = 1/2$.
+			
+			$\mu = 0$. We need $P(|Y - 0| > 2(1/2)) > 1/4 \implies P(|Y| > 1) > 1/4$.
+			
+			Here $P(|Y| > 1) = P(Y=-2) + P(Y=2) = 1/2 > 1/4$.
+			
+			Tschebychev Inequality is not violated. The inequality applies to the standard deviation of $Y$ ($\sigma_Y = \sqrt{2}$), not $X$. $P(|Y| \ge 2\sqrt{2}) = 0 \le 1/4$.
+			
+			\item
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hldef{simulate_chebyshev} \hlkwb{=} \hlkwa{function}\hldef{(}\hlkwc{k}\hldef{)}
+\hldef{\{}
+  \hldef{p_x} \hlkwb{=} \hlnum{1}\hlopt{/}\hldef{(}\hlnum{2}\hlopt{*}\hldef{k}\hlopt{^}\hlnum{2}\hldef{)}
+  \hldef{x_vals} \hlkwb{=} \hlkwd{c}\hldef{(}\hlopt{-}\hlnum{1}\hldef{,} \hlnum{0}\hldef{,} \hlnum{1}\hldef{)}
+  \hldef{x_probs} \hlkwb{=} \hlkwd{c}\hldef{(p_x,} \hlnum{1} \hlopt{-} \hlnum{2}\hlopt{*}\hldef{p_x, p_x)}
+
+  \hldef{mu} \hlkwb{=} \hlnum{0}
+  \hldef{sigma} \hlkwb{=} \hlkwd{sqrt}\hldef{(}\hlnum{2}\hlopt{*}\hldef{p_x)}
+
+  \hldef{y_vals} \hlkwb{=} \hlkwd{c}\hldef{(}\hlopt{-}\hlnum{2}\hldef{,} \hlnum{0}\hldef{,} \hlnum{2}\hldef{)}
+  \hldef{y_probs} \hlkwb{=} \hlkwd{c}\hldef{(}\hlnum{0.5}\hldef{,} \hlnum{0.0}\hldef{,} \hlnum{0.5}\hldef{)}
+
+  \hldef{n_reps} \hlkwb{=} \hlnum{100000}
+  \hldef{x_sim} \hlkwb{=} \hlkwd{sample}\hldef{(x_vals,} \hlkwc{size} \hldef{= n_reps,} \hlkwc{replace} \hldef{=} \hlnum{TRUE}\hldef{,} \hlkwc{prob} \hldef{= x_probs)}
+  \hldef{y_sim} \hlkwb{=} \hlkwd{sample}\hldef{(y_vals,} \hlkwc{size} \hldef{= n_reps,} \hlkwc{replace} \hldef{=} \hlnum{TRUE}\hldef{,} \hlkwc{prob} \hldef{= y_probs)}
+
+  \hldef{prob_x} \hlkwb{=} \hlkwd{mean}\hldef{(}\hlkwd{abs}\hldef{(x_sim} \hlopt{-} \hldef{mu)} \hlopt{>=} \hldef{k}\hlopt{*}\hldef{sigma)}
+  \hldef{prob_y} \hlkwb{=} \hlkwd{mean}\hldef{(}\hlkwd{abs}\hldef{(y_sim} \hlopt{-} \hldef{mu)} \hlopt{>} \hldef{k}\hlopt{*}\hldef{sigma)}
+
+  \hldef{res} \hlkwb{=} \hlkwd{data.frame}\hldef{(}
+    \hlkwc{Variable} \hldef{=} \hlkwd{c}\hldef{(}\hlsng{"X"}\hldef{,} \hlsng{"Y"}\hldef{),}
+    \hlkwc{Target} \hldef{=} \hlkwd{c}\hldef{(}\hlnum{1}\hlopt{/}\hldef{k}\hlopt{^}\hlnum{2}\hldef{,} \hlnum{1}\hlopt{/}\hldef{k}\hlopt{^}\hlnum{2}\hldef{),}
+    \hlkwc{Empirical} \hldef{=} \hlkwd{c}\hldef{(prob_x, prob_y)}
+  \hldef{)}
+
+  \hlkwd{write.csv}\hldef{(res,} \hlkwc{file} \hldef{=} \hlsng{"chebyshev.csv"}\hldef{,} \hlkwc{row.names} \hldef{=} \hlnum{FALSE}\hldef{)}
+  \hldef{res}
+\hldef{\}}
+
+\hlkwd{simulate_chebyshev}\hldef{(}\hlnum{2}\hldef{)}
+\end{alltt}
+\begin{verbatim}
+##   Variable Target Empirical
+## 1        X   0.25   0.24825
+## 2        Y   0.25   1.00000
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+		\end{enumerate}
+\end{enumerate}
+\end{document}

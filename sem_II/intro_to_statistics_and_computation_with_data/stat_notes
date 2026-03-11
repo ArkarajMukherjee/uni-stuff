@@ -1,0 +1,14 @@
+[4/3/26]
+-> Discussing how to find a pivotal qty. in the case of iid X_1,...,X_n ~ N(mu,sigma) when both mu, sigma are unknown.
+-> We let T(X_1,...,X_n) = sqrt{n}(Xbar - mu)/S where Xbar is the sample mean and S^2 the sample variance [sum (X_i - Xbar)^2]/(n-1) = [sum X_i^2]/(n-1) - n*Xbar/(n-1).
+-> n-1 is used instead of n as we have n-1 degrees of freedom in the sum, knowing the mean and any other n-1 samples gives us the remaining one.
+-> N(0,1)^2 ~ Gamma(1/2,1/2).
+-> T = [sqrt{n}(Xbar - mu)/sigma]/sqrt[{(n-1)S^2/sigma^2}/(n-1)]
+-> The numerator is ~ N(0,1) and denominator ~ sqrt[Chi^2(n-1)/(n-1)]. It can be proved that in this case, the two are independent.
+-> When Z = N(0,1)/sqrt[Chi^2(n)/n] with the two distributions being equal, we say Z ~ t(n), this is the t distribution with n degrees of freedom.
+-> We see that f_Z(z) = { Gamma((n+1)/2)/sqrt(n)Gamma(n/2) } * (1 + z^2/n)^{-(n+1)/2} for reals z.
+-> Thus T ~ t(n-1).
+-> The alpha-confidence interval for the the mean mu would be [Xbar - t_alpha * S/sqrt(n), Xbar + t_alpha * S/sqrt(n)] where P(t(n-1) <= t_alpha) = alpha/2 (we can use R command: qt to derive t_alpha).
+-> CLT allows us to find approximate confidence intervals for any samples from RVs with finite mean and variance as Xbar - mu / sigma ->  N(0,1)
+-> spearman and pearson correlation coeffecients.
+

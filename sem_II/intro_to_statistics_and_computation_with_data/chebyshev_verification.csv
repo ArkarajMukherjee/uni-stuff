@@ -1,0 +1,3 @@
+"Variable","Mean_Used","Threshold_Used","Chebyshev_Target","Empirical_Probability"
+"X",0,1,0.25,0.24867
+"Y",0,1,0.25,1

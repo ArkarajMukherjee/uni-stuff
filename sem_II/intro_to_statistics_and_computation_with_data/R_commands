@@ -1,0 +1,177 @@
+### BASE R: MATH, STATS & PROBABILITY ###
+abs()
+cos()
+dbinom()
+dexp()
+dnorm()
+dpois()      # Mentioned as a hint in hw5.pdf
+ecdf()
+exp()
+integrate()
+kurtosis()   # From the moments package in week4.R
+log()
+max()
+mean()
+median()
+min()
+pbinom()
+pnorm()
+prop.table() # Mentioned as a hint in hw5.pdf
+qnorm()
+rbinom()
+rexp()
+rhyper()
+rnorm()
+round()
+rpois()      # Mentioned as a hint in hw5.pdf
+runif()
+sd()
+set.seed()
+sin()
+skewness()   # From the moments package in week4.R
+sqrt()
+sum()
+tan()
+var()
+
+### BASE R: DATA STRUCTURES & TYPE CONVERSION ###
+as.Date()
+as.factor()
+as.numeric()
+as.POSIXlt()
+as.vector()
+c()
+data.frame()
+data.table() # From data.table package
+diag()
+factor()
+format()
+matrix()
+strptime()
+vector()
+
+### BASE R: UTILITIES, APPLY FAMILY & MANIPULATION ###
+aggregate()
+apply()
+diff()
+head()
+lapply()
+length()
+na.omit()
+names()
+ncol()
+nrow()
+print()
+rbind()
+replicate()
+sample()
+sapply()
+seq()
+subset()
+summary()
+t()            # Transpose
+Vectorize()
+
+### BASE R: CONTROL FLOW & KEYWORDS ###
+else
+for
+function()
+if
+while
+return()
+
+### BASE R: ENVIRONMENT & I/O ###
+getwd()
+library()
+read.csv()
+setwd()
+
+### BASE R: PLOTTING ###
+hist()
+legend()
+lines()
+par()          # Graphical parameters, used for mfrow
+plot()
+points()
+qqline()
+qqnorm()
+
+### STRUCTURAL & OPERATORS (Often overlooked) ###
+%>%            # Tidyverse pipe
+%*%            # Matrix multiplication
+$              # List/dataframe subsetting
+~              # Formula operator
+:              # Sequence operator
+
+### TIDYVERSE (DPLYR / WRANGLING) ###
+add_row()
+arrange()
+filter()
+group_by()
+mutate()
+summarise()
+ungroup()
+
+### GGPLOT2 & SCALES (VISUALIZATION) ###
+aes()
+coord_fixed()
+coord_map()
+coord_polar()
+coord_quickmap()
+date_format()
+element_text()
+facet_grid()
+facet_wrap()
+geom_abline()
+geom_area()
+geom_bar()
+geom_boxplot()
+geom_col()
+geom_density()
+geom_function()
+geom_histogram()
+geom_line()
+geom_point()
+geom_pointrange()
+geom_rect()
+geom_smooth()
+geom_text()
+ggplot()
+labs()
+scale_color_viridis_c()
+scale_color_viridis_d()
+scale_fill_viridis_d()
+scale_x_date()
+scale_x_log10()
+scale_y_continuous()
+stat_bin()
+stat_bin2d()
+stat_boxplot()
+stat_count()
+stat_density()
+stat_function()
+stat_quantile()
+stat_smooth()
+stat_summary()
+theme()
+vars()
+xlim()
+
+### IGRAPH (NETWORK ANALYSIS) ###
+degree()
+graph_from_adjacency_matrix()
+gsize()
+
+
+
+
+### CURRENTLY PENDING ###
+polar shit
+lists
+levels and factors of a data fram
+how the fuck do boxplots actually work
+how would i have like multiple lines form geom_smooth, say we plot the mpg dataset with x = displ and y = hwy but want different coloured lines for different classes
+what the fuck are linetype
+geom_abline syntax
+in the same mpg setting say i want to do a pointrange plot where the ymin and ymax arent just that of hwy, but something that changes accordingly, whats a menaningful thing to do here?
+
