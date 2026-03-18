@@ -1,0 +1,261 @@
+\documentclass[12pt,a4paper]{article}\usepackage[]{graphicx}\usepackage[]{xcolor}
+% maxwidth is the original width if it is less than linewidth
+% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlsng}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hldef}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+\let\hlipl\hlkwb
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+\usepackage{mypreamble}
+\usepackage{myRpreamble}
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+{\bf Arkaraj Mukherjee: } \\
+{\bf Homework 7}
+\\
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{library}\hldef{(}\hlsng{"tidyverse"}\hldef{)}
+\hlkwd{getwd}\hldef{()}
+\end{alltt}
+\begin{verbatim}
+## [1] "/home/anon1/work/uni-stuff/sem_II/intro_to_statistics_and_computation_with_data"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\begin{enumerate}[label=\arabic*.]
+    \item The likelihood function here is,
+        $$\mathcal L(X_1,\ldots,X_k;p_1,\ldots,p_k)=\binom{n}{X_1,\ldots,X_k}p_1^{X_1}\cdots p_k^{X_k}$$
+    with parameter space $\{(p_1,\ldots,p_k)\in\mathbb{R}^k:\forall i, p_i\geq 0\text{ and }\sum_{i=1}^k p_i=1\}$.
+    The log likelihood $l$ in this case will be
+    $$l(X_1,\ldots,X_k;p_1,\ldots,p_k)=\log(n!)-\sum_{i=1}^k\log(X_i!) + \sum_{i=1}^k X_i\log(p_i)$$
+    It suffices to maximize $\sum_{i=1}^k X_i\log(p_i)$ instead.
+    It will suffice to show that this evaluated at $p_i=X_i/n$ is an upper bound, so we do that:
+    $$\sum_{i=1}^k X_i\log(p_i)-\sum_{i=1}^k X_i\log(X_i/n)=\sum_{i=1}^k X_i\log(n p_i/X_i)$$
+    $$\leq\sum_{i=1}^k X_i(n p_i/X_i-1)=\sum_{i=1}^k (n p_i-X_i)=n\sum_{i=1}^k p_i-\sum_{i=1}^k X_i=n-n=0$$
+    Here we have used the inequality $\log(t)\leq t-1$ which is valid for all positive $t$, this stems from the fact that $e^{t-1}\geq(t-1)+1=t$.
+    We have thus shown that,
+    $$\sum_{i=1}^k X_i\log(p_i)\leq\sum_{i=1}^k X_i\log(X_i/n)$$
+    so we are done.
+
+    \item 
+    \begin{enumerate}[label=(\alph*)]
+        \item To show that $\mathbb{E}[S^2] = \sigma^2$, we use the standard unbiased estimator for sample variance, $S^2 = \frac{1}{n-1}\sum_{i=1}^n(X_i-\bar{X})^2$.
+        First, we expand the sum of squares:
+        $$ \sum_{i=1}^n (X_i - \bar{X})^2 = \sum_{i=1}^n (X_i^2 - 2X_i\bar{X} + \bar{X}^2) = \sum_{i=1}^n X_i^2 - 2\bar{X}\sum_{i=1}^n X_i + n\bar{X}^2 $$
+        Since $\sum_{i=1}^n X_i = n\bar{X}$, this simplifies to:
+        $$ \sum_{i=1}^n X_i^2 - 2n\bar{X}^2 + n\bar{X}^2 = \sum_{i=1}^n X_i^2 - n\bar{X}^2 $$
+        Now we take the expectation. Recall that $\mathbb{E}[X^2] = \text{Var}(X) + (\mathbb{E}[X])^2$. Thus, $\mathbb{E}[X_i^2] = \sigma^2 + \mu^2$. 
+        For the sample mean, $\text{Var}(\bar{X}) = \sigma^2/n$, so $\mathbb{E}[\bar{X}^2] = \frac{\sigma^2}{n} + \mu^2$.
+        $$ \mathbb{E}\left[\sum_{i=1}^n (X_i - \bar{X})^2\right] = \sum_{i=1}^n \mathbb{E}[X_i^2] - n\mathbb{E}[\bar{X}^2] $$
+        $$ = n(\sigma^2 + \mu^2) - n\left(\frac{\sigma^2}{n} + \mu^2\right) = n\sigma^2 + n\mu^2 - \sigma^2 - n\mu^2 = (n-1)\sigma^2 $$
+        Finally, multiplying by $\frac{1}{n-1}$ yields:
+        $$ \mathbb{E}[S^2] = \frac{1}{n-1} \mathbb{E}\left[\sum_{i=1}^n (X_i - \bar{X})^2\right] = \frac{1}{n-1}(n-1)\sigma^2 = \sigma^2 $$
+
+        \item Let $Z$ be a random variable with finite mean and variance. By definition, the variance of $Z$ is $\text{Var}(Z) = \mathbb{E}\left[(Z - \mathbb{E}[Z])^2\right] = \mathbb{E}[Z^2] - (\mathbb{E}[Z])^2$.
+        Since the expected value of a non-negative random variable (a squared real value) must be non-negative, we have $\text{Var}(Z) \geq 0$.
+        Therefore, $\mathbb{E}[Z^2] - (\mathbb{E}[Z])^2 \geq 0 \implies \mathbb{E}[Z^2] \geq (\mathbb{E}[Z])^2$.
+        
+        Equality fails when $\text{Var}(Z) > 0$, meaning $Z$ is not a constant almost surely. For example, let $Z$ be the outcome of a fair 6-sided die. $\mathbb{E}[Z] = 3.5$, so $(\mathbb{E}[Z])^2 = 12.25$. However, $\mathbb{E}[Z^2] = (1^2 + 2^2 + \dots + 6^2)/6 \approx 15.17$. Clearly, $15.17 > 12.25$.
+        
+        We apply this inequality by setting $Z = S$, the sample standard deviation. This gives $\mathbb{E}[S^2] \geq (\mathbb{E}[S])^2$.
+        From part (a), we established that $\mathbb{E}[S^2] = \sigma^2$. Substituting this in yields $\sigma^2 \geq (\mathbb{E}[S])^2$.
+        Since the standard deviation $S$ is strictly non-negative by definition ($S = \sqrt{S^2}$), its expectation $\mathbb{E}[S]$ must also be non-negative. Taking the square root of both sides gives $\sigma \geq \mathbb{E}[S]$.
+        
+        Equality fails when $\text{Var}(S) > 0$. If we draw random samples from a Normal distribution, $S^2$ follows a scaled Chi-square distribution, meaning $S$ will vary from sample to sample. Hence $\text{Var}(S) > 0$ and $\mathbb{E}[S] < \sigma$, proving $S$ is a biased estimator.
+
+        \item To compute $\text{Var}(S^2)$, we can assume without loss of generality that $\mu = 0$ (since variance is shift-invariant, substituting $X_i' = X_i - \mu$ doesn't change $S^2$). Thus, $\mathbb{E}[X_i] = 0$, $\mathbb{E}[X_i^2] = \sigma^2$, and $\mathbb{E}[X_i^4] = \gamma$.
+        By definition, $\text{Var}(S^2) = \mathbb{E}[S^4] - (\mathbb{E}[S^2])^2 = \mathbb{E}[S^4] - \sigma^4$.
+        
+        We expand $S^2 = \frac{1}{n-1} \sum_{i=1}^n (X_i - \bar{X})^2 = \frac{1}{n-1}\left(\sum_{i=1}^n X_i^2 - n\bar{X}^2\right)$.
+        Squaring this gives:
+        $$ (n-1)^2 S^4 = \left(\sum_{i=1}^n X_i^2\right)^2 - 2n\bar{X}^2 \sum_{i=1}^n X_i^2 + n^2\bar{X}^4 $$
+        Now we take the expectation of each term. Because the $X_i$ are i.i.d. with mean 0, cross-terms with odd powers vanish.
+        
+        First, $\mathbb{E}\left[\left(\sum_{i=1}^n X_i^2\right)^2\right] = \mathbb{E}\left[\sum_{i=1}^n X_i^4 + \sum_{i \neq j} X_i^2 X_j^2\right] = n\gamma + n(n-1)\sigma^4$.
+        
+        Second, for $2n\bar{X}^2 \sum_{i=1}^n X_i^2$, we write $\bar{X}^2 = \frac{1}{n^2}\left(\sum_{j=1}^n X_j\right)^2$. The expectation simplifies to:
+        $$ \mathbb{E}\left[2n \cdot \frac{1}{n^2} \left(\sum_{j=1}^n X_j\right)^2 \sum_{i=1}^n X_i^2\right] = \frac{2}{n} \mathbb{E}\left[\left(\sum_{j=1}^n X_j^2 + \sum_{j \neq k} X_j X_k\right) \sum_{i=1}^n X_i^2\right] $$
+        $$ = \frac{2}{n} \mathbb{E}\left[\left(\sum_{i=1}^n X_i^2\right)^2\right] = \frac{2}{n} (n\gamma + n(n-1)\sigma^4) = 2\gamma + 2(n-1)\sigma^4 $$
+        
+        Third, for $n^2\bar{X}^4 = n^2 \cdot \frac{1}{n^4} \left(\sum_{i=1}^n X_i\right)^4 = \frac{1}{n^2}\left(\sum_{i=1}^n X_i\right)^4$. Expanding the fourth power and taking expectations (only $X_i^4$ and $X_i^2X_j^2$ terms survive):
+        $$ \frac{1}{n^2}\mathbb{E}\left[\sum_{i=1}^n X_i^4 + 3\sum_{i \neq j} X_i^2 X_j^2\right] = \frac{1}{n^2}(n\gamma + 3n(n-1)\sigma^4) = \frac{\gamma}{n} + \frac{3(n-1)}{n}\sigma^4 $$
+        
+        Combining these expected values:
+        $$ (n-1)^2 \mathbb{E}[S^4] = (n\gamma + n(n-1)\sigma^4) - (2\gamma + 2(n-1)\sigma^4) + \left(\frac{\gamma}{n} + \frac{3(n-1)}{n}\sigma^4\right) $$
+        Grouping terms with $\gamma$ and $\sigma^4$:
+        $$ (n-1)^2 \mathbb{E}[S^4] = \gamma\left(n - 2 + \frac{1}{n}\right) + \sigma^4\left(n^2 - n - 2n + 2 + 3 - \frac{3}{n}\right) $$
+        $$ = \gamma\frac{(n-1)^2}{n} + \sigma^4\frac{(n-1)(n^2 - 2n + 3)}{n} $$
+        Dividing by $(n-1)^2$, we get:
+        $$ \mathbb{E}[S^4] = \frac{\gamma}{n} + \frac{n^2 - 2n + 3}{n(n-1)}\sigma^4 $$
+        Finally, subtracting $\sigma^4$ gives the variance:
+        $$ \text{Var}(S^2) = \mathbb{E}[S^4] - \sigma^4 = \frac{\gamma}{n} + \left(\frac{n^2 - 2n + 3}{n^2 - n} - 1\right)\sigma^4 = \frac{\gamma}{n} - \frac{n-3}{n(n-1)}\sigma^4 $$
+        
+        Taking the limit as $n \to \infty$:
+        $$ \lim_{n \to \infty} \text{Var}(S^2) = \lim_{n \to \infty} \left(\frac{\gamma}{n} - \frac{n-3}{n(n-1)}\sigma^4\right) = 0 - 0 = 0 $$
+        This demonstrates that $\text{Var}(S^2) \to 0$ as $n \to \infty$.
+    \end{enumerate}
+
+    \item To find the exact distribution of $Z = \frac{X_1}{\sqrt{X_2/n}}$, we can use the known formula for the pdf of the ratio of two continuous random variables. Let $Y = \sqrt{X_2/n}$. First, we find the pdf of $Y$. Since $X_2 \sim \chi^2_n$, its pdf is:
+    $$f_{X_2}(v) = \frac{1}{2^{n/2}\Gamma(n/2)} v^{n/2 - 1} e^{-v/2}, \quad v > 0$$
+    The transformation is $y = \sqrt{v/n}$, which implies $v = ny^2$ and the derivative $dv/dy = 2ny$. Thus,
+    $$f_Y(y) = f_{X_2}(ny^2) \left| \frac{dv}{dy} \right| = \frac{1}{2^{n/2}\Gamma(n/2)} (ny^2)^{n/2 - 1} e^{-ny^2/2} (2ny)$$
+    $$f_Y(y) = \frac{2(n/2)^{n/2}}{\Gamma(n/2)} y^{n-1} e^{-ny^2/2}, \quad y > 0$$
+    Now, we have $Z = X_1 / Y$. Because $X_1$ and $X_2$ are independent, $X_1$ and $Y$ are independent. For $Y > 0$, the standard formula for the pdf of a ratio is:
+    $$f_Z(z) = \int_0^\infty y f_{X_1}(zy) f_Y(y) dy$$
+    Substitute $f_{X_1}(x) = \frac{1}{\sqrt{2\pi}} e^{-x^2/2}$ and our derived $f_Y(y)$ into the integral:
+    $$f_Z(z) = \int_0^\infty y \left( \frac{1}{\sqrt{2\pi}} e^{-(zy)^2/2} \right) \left( \frac{2(n/2)^{n/2}}{\Gamma(n/2)} y^{n-1} e^{-ny^2/2} \right) dy$$
+    $$f_Z(z) = \frac{2(n/2)^{n/2}}{\sqrt{2\pi}\Gamma(n/2)} \int_0^\infty y^n e^{-\frac{1}{2}y^2(z^2 + n)} dy$$
+    To evaluate this integral, we can luckily use the substitution $u = \frac{1}{2}y^2(z^2 + n)$. 
+    This means $du = y(z^2 + n) dy$, so $y dy = \frac{du}{z^2 + n}$. 
+    We also have $y^2 = \frac{2u}{z^2 + n}$, which implies $y^{n-1} = \left(\frac{2u}{z^2 + n}\right)^{(n-1)/2}$.
+    $$f_Z(z) = \frac{2(n/2)^{n/2}}{\sqrt{2\pi}\Gamma(n/2)} \int_0^\infty \left(\frac{2u}{z^2 + n}\right)^{(n-1)/2} e^{-u} \frac{du}{z^2 + n}$$
+    $$f_Z(z) = \frac{2(n/2)^{n/2}}{\sqrt{2\pi}\Gamma(n/2)} \frac{2^{(n-1)/2}}{(z^2 + n)^{(n+1)/2}} \int_0^\infty u^{(n-1)/2} e^{-u} du$$
+    The remaining integral is exactly the definition of the Gamma function, evaluated at $\frac{n+1}{2}$. We substitute $\int_0^\infty u^{(n-1)/2} e^{-u} du = \Gamma\left(\frac{n+1}{2}\right)$ and simplify the constants:
+    $$f_Z(z) = \frac{2 \cdot n^{n/2} 2^{-n/2} \cdot 2^{(n-1)/2}}{\sqrt{2}\sqrt{\pi}\Gamma(n/2)} \frac{\Gamma\left(\frac{n+1}{2}\right)}{(z^2 + n)^{(n+1)/2}}$$
+    $$f_Z(z) = \frac{\sqrt{2} n^{n/2}}{\sqrt{2}\sqrt{\pi}\Gamma(n/2)} \frac{\Gamma\left(\frac{n+1}{2}\right)}{n^{(n+1)/2} (1 + z^2/n)^{(n+1)/2}}$$
+    $$f_Z(z) = \frac{\Gamma\left(\frac{n+1}{2}\right)}{\sqrt{n\pi}\Gamma(n/2)} \left(1 + \frac{z^2}{n}\right)^{-\frac{n+1}{2}}$$
+    This is exactly the pdf of the $t$-distribution with $n$ degrees of freedom, proving that $Z \sim t_n$.
+
+    \item 
+    \begin{enumerate}[label=(\alph*)]
+        \item 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hldef{n} \hlkwb{=} \hlnum{100}
+\hldef{x_bar} \hlkwb{=} \hlnum{125}
+\hldef{s} \hlkwb{=} \hlnum{10}
+\hldef{alpha} \hlkwb{=} \hlnum{0.01}
+\hldef{t_star} \hlkwb{=} \hlkwd{qt}\hldef{(}\hlnum{1} \hlopt{-} \hldef{alpha}\hlopt{/}\hlnum{2}\hldef{,} \hlkwc{df} \hldef{= n} \hlopt{-} \hlnum{1}\hldef{)}
+\hldef{margin_error} \hlkwb{=} \hldef{t_star} \hlopt{*} \hldef{(s} \hlopt{/} \hlkwd{sqrt}\hldef{(n))}
+\hldef{ci_99} \hlkwb{=} \hlkwd{c}\hldef{(x_bar} \hlopt{-} \hldef{margin_error, x_bar} \hlopt{+} \hldef{margin_error)}
+\hldef{ci_99}
+\end{alltt}
+\begin{verbatim}
+## [1] 122.3736 127.6264
+\end{verbatim}
+\begin{alltt}
+        \hlkwd{diff}\hldef{(ci_99)}
+\end{alltt}
+\begin{verbatim}
+## [1] 5.252811
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+        The 99\% confidence interval is roughly $[122.37, 127.63]$.
+        \item 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hldef{alpha} \hlkwb{=} \hlnum{0.05}
+\hldef{t_star} \hlkwb{=} \hlkwd{qt}\hldef{(}\hlnum{1} \hlopt{-} \hldef{alpha}\hlopt{/}\hlnum{2}\hldef{,} \hlkwc{df} \hldef{= n} \hlopt{-} \hlnum{1}\hldef{)}
+\hldef{margin_error} \hlkwb{=} \hldef{t_star} \hlopt{*} \hldef{(s} \hlopt{/} \hlkwd{sqrt}\hldef{(n))}
+\hldef{ci_95} \hlkwb{=} \hlkwd{c}\hldef{(x_bar} \hlopt{-} \hldef{margin_error, x_bar} \hlopt{+} \hldef{margin_error)}
+\hldef{ci_95}
+\end{alltt}
+\begin{verbatim}
+## [1] 123.0158 126.9842
+\end{verbatim}
+\begin{alltt}
+        \hlkwd{diff}\hldef{(ci_95)}
+\end{alltt}
+\begin{verbatim}
+## [1] 3.968434
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+        The 95\% confidence interval is roughly $[123.02, 126.98]$.
+        
+        Comparing the intervals from part (a) and (b), the 99\% confidence interval is strictly wider than the 95\% confidence interval. This occurs because achieving a higher level of confidence requires a larger critical $t$-value, which correspondingly increases the margin of error when the sample size and sample standard deviation are held constant.
+    \end{enumerate}
+
+    \item 
+    \begin{enumerate}[label=(\alph*)]
+        \item 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hldef{data} \hlkwb{=} \hlkwd{read_csv}\hldef{(}\hlsng{"wristneck.csv"}\hldef{)}
+\end{alltt}
+
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Rows: 51 Columns: 2\\\#\# -- Column specification ------------------------------------------------------------------------\\\#\# Delimiter: "{},"{}\\\#\# dbl (2): Wrist, Neck\\\#\# \\\#\# i Use `spec()` to retrieve the full column specification for this data.\\\#\# i Specify the column types or set `show\_col\_types = FALSE` to quiet this message.}}\begin{alltt}
+\hldef{cor_coeff} \hlkwb{=} \hlkwd{cor}\hldef{(data}\hlopt{$}\hldef{Wrist, data}\hlopt{$}\hldef{Neck)}
+\hldef{cor_coeff}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.6501159
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+        The computed correlation coefficient between the wrist and neck measurements is shown in the R output above.
+        \item 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hldef{model} \hlkwb{=} \hlkwd{lm}\hldef{(Wrist} \hlopt{~} \hldef{Neck,} \hlkwc{data} \hldef{= data)}
+\hlkwd{coef}\hldef{(model)}
+\end{alltt}
+\begin{verbatim}
+## (Intercept)        Neck 
+##   2.3595004   0.2911116
+\end{verbatim}
+\begin{alltt}
+        \hlnum{1}\hlopt{/}\hlkwd{coef}\hldef{(model)[}\hlnum{2}\hldef{]}
+\end{alltt}
+\begin{verbatim}
+##     Neck 
+## 3.435108
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+        Using ordinary least squares regression, the best fit estimates for the coefficients are $\beta_0$ (the intercept) and $\beta_1$ (the slope for the neck measurement), which can be read directly from the output and we see that the waist is almost $3.5$ times in circumference as the wrist for our class.
+    \end{enumerate}
+\end{enumerate}
+\end{document}
