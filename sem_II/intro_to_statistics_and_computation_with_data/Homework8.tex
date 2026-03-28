@@ -1,0 +1,118 @@
+\documentclass[12pt,english]{article}\usepackage[]{graphicx}\usepackage[]{xcolor}
+% maxwidth is the original width if it is less than linewidth
+% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlsng}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hldef}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+\let\hlipl\hlkwb
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+\usepackage{mypreamble}
+\usepackage{myRpreamble}
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+{\bf Arkaraj Mukherjee} \\
+{\bf Homework 8}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{library}\hldef{(}\hlsng{"tidyverse"}\hldef{);}
+\end{alltt}
+
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# -- Attaching core tidyverse packages ---------------------------------------- tidyverse 2.0.0 --\\\#\# v dplyr \ \ \ \ 1.2.0 \ \ \ \ v readr \ \ \ \ 2.1.6\\\#\# v forcats \ \ 1.0.1 \ \ \ \ v stringr \ \ 1.6.0\\\#\# v ggplot2 \ \ 4.0.2 \ \ \ \ v tibble \ \ \ 3.3.1\\\#\# v lubridate 1.9.5 \ \ \ \ v tidyr \ \ \ \ 1.3.2\\\#\# v purrr \ \ \ \ 1.2.1 \ \ \ \ \\\#\# -- Conflicts ---------------------------------------------------------- tidyverse\_conflicts() --\\\#\# x dplyr::filter() masks stats::filter()\\\#\# x dplyr::lag() \ \ \ masks stats::lag()\\\#\# i Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors}}\end{kframe}
+\end{knitrout}
+\begin{enumerate}[label=\arabic*.]
+	\item
+	\begin{enumerate}[label=(\alph*)]
+		\item Let $\mu$ be the mean household income in India. \textit{Null Hypothesis}: $\mu=\texttt{Rs }50000$ and \textit{Alternative Hypothesis}: $\mu\neq\texttt{Rs }50000$
+		\item Let $\mu$ be the Siva's mean commute time to ISI. \textit{Null Hypothesis}: $\mu\geq 90\texttt{ min}$ and \textit{Alternative Hypothesis}: $\mu<90\texttt{ min}$
+		\item Let $\mu$ be the ISCD class members mean delay arrival time for 10am class. \textit{Null Hypothesis}: $\mu\leq 15 \texttt{ min}$ and \textit{Alternative Hypothesis}: $\mu>15 \texttt{ min}$
+		\item Let $p$ be the chance that superstudent will submit homework late. \textit{Null Hypothesis}: $p\geq 0.15$ and \textit{Alternative Hypothesis}: $p<0.15$
+	\end{enumerate}
+	\item
+	\begin{enumerate}[label=(\alph*)]
+		\item Its the same with the only exception being that we find $P(Z\leq T_a(X_1,\ldots,X_n)).$
+		\item This time we find $P(Z\geq T_a(X_1,\ldots,X_n)).$
+	\end{enumerate}
+	\item Here we always have $Z\sim\mN(0,1)$.
+	\begin{enumerate}[label=(\alph*)]
+		\item Let $\mu=8.5$ be the null hypothesis and $\mu\neq 8.5$ be the alternative hypothesis. We will use the procedure discussed in the process discussed in class shown in the previous problem. We calculate
+		\[
+			P\qty(Z\geq\qty|\sqrt{100}\cdot\frac{10.2-8.5}{\sqrt{3}}|)<P(Z\geq 9.81)<0.0002<0.005
+		\]
+		Thus, we reject the null hypothesis and conclude that the conjecture is highly likely to be false.
+		\item We use the procedure described in part (a) of the previous problem in the exact same setting and calculate
+		\[
+			P\qty(Z\leq\sqrt{100}\cdot\frac{10.2-7.5}{\sqrt{3}})>P(Z\leq 15.58)>0.9998
+		\]
+		Thus, we accept the null hypothesis and conclude that the conjecture is highly likely to be true.
+		\item We use the procedure described in part (b) of the previous problem in the exact same setting and calculate
+		\[
+			P(Z\geq\sqrt{100}\cdot\frac{10.2-10.5}{\sqrt{3}})>P(Z\geq-1.73)=P(Z\leq 1.73)\approx 0.9582
+		\]
+		Thus, we accept the null hypothesis and conclude that the conjecture is highly likely to be true.
+	\end{enumerate}
+	
+	\item Let $\mu$ be the mean run time of the hot-plates in minutes. 
+	\textit{Null Hypothesis}: $\mu\leq 480$ and \textit{Alternative Hypothesis}: $\mu>480$.
+	We use the procedure for a right-tailed test as discussed in problem 2(b). We calculate
+	\[
+		P\qty(Z\geq\sqrt{50}\cdot\frac{485-480}{30}) = P\qty(Z\geq\frac{\sqrt{50}}{6})>P(Z\geq 1.18)
+	\]
+	Using the provided table, $P(Z\leq 1.18) = 0.8810$, so $P(Z\geq 1.18) = 1 - 0.8810 = 0.1190$. 
+	Since $0.1190 > 0.05$ (our level of significance), we accept the null hypothesis and conclude that there is not enough evidence to support the claim that the mean run time is more than 480 minutes.
+	
+	\item Let $p$ be the proportion of people in the class who listen to Siva.
+	\textit{Null Hypothesis}: $p\geq 0.15$ and \textit{Alternative Hypothesis}: $p<0.15$ (Siva's conjecture).
+	We use the procedure for a left-tailed test as discussed in problem 2(a). Given the sample mean $\overline{X} = \frac{380}{960}$, sample size $n = 960$, and known variance $\sigma^2 = 2$, we calculate
+	\[
+		P\qty(Z\leq\sqrt{960}\cdot\frac{\frac{380}{960}-0.15}{\sqrt{2}}) = P\qty(Z\leq\frac{59\sqrt{30}}{60}) > P(Z\leq 5.38)
+	\]
+	Since $P(Z\leq 5.38) > 0.9998$, the $p$-value is effectively 1. Because the $p$-value is so massive, we would need a significance level $\alpha \approx 1$ to reject it, meaning our confidence level ($1-\alpha$) would be effectively $0\%$.
+	Thus, we will not be able to reject the null hypothesis by any reasonable means at all, and we conclude that Siva's conjecture is highly likely to be false.
+\end{enumerate}
+
+\end{document}

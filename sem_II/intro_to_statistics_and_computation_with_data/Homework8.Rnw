@@ -1,0 +1,61 @@
+\documentclass[12pt,english]{article}
+\usepackage{mypreamble}
+\usepackage{myRpreamble}
+\begin{document}
+{\bf Arkaraj Mukherjee} \\
+{\bf Homework 8}
+<<>>=
+library("tidyverse");
+@
+\begin{enumerate}[label=\arabic*.]
+	\item
+	\begin{enumerate}[label=(\alph*)]
+		\item Let $\mu$ be the mean household income in India. \textit{Null Hypothesis}: $\mu=\texttt{Rs }50000$ and \textit{Alternative Hypothesis}: $\mu\neq\texttt{Rs }50000$
+		\item Let $\mu$ be the Siva's mean commute time to ISI. \textit{Null Hypothesis}: $\mu\geq 90\texttt{ min}$ and \textit{Alternative Hypothesis}: $\mu<90\texttt{ min}$
+		\item Let $\mu$ be the ISCD class members mean delay arrival time for 10am class. \textit{Null Hypothesis}: $\mu\leq 15 \texttt{ min}$ and \textit{Alternative Hypothesis}: $\mu>15 \texttt{ min}$
+		\item Let $p$ be the chance that superstudent will submit homework late. \textit{Null Hypothesis}: $p\geq 0.15$ and \textit{Alternative Hypothesis}: $p<0.15$
+	\end{enumerate}
+	\item
+	\begin{enumerate}[label=(\alph*)]
+		\item Its the same with the only exception being that we find $P(Z\leq T_a(X_1,\ldots,X_n)).$
+		\item This time we find $P(Z\geq T_a(X_1,\ldots,X_n)).$
+	\end{enumerate}
+	\item Here we always have $Z\sim\mN(0,1)$.
+	\begin{enumerate}[label=(\alph*)]
+		\item Let $\mu=8.5$ be the null hypothesis and $\mu\neq 8.5$ be the alternative hypothesis. We will use the procedure discussed in the process discussed in class shown in the previous problem. We calculate
+		\[
+			P\qty(Z\geq\qty|\sqrt{100}\cdot\frac{10.2-8.5}{\sqrt{3}}|)<P(Z\geq 9.81)<0.0002<0.005
+		\]
+		Thus, we reject the null hypothesis and conclude that the conjecture is highly likely to be false.
+		\item We use the procedure described in part (a) of the previous problem in the exact same setting and calculate
+		\[
+			P\qty(Z\leq\sqrt{100}\cdot\frac{10.2-7.5}{\sqrt{3}})>P(Z\leq 15.58)>0.9998
+		\]
+		Thus, we accept the null hypothesis and conclude that the conjecture is highly likely to be true.
+		\item We use the procedure described in part (b) of the previous problem in the exact same setting and calculate
+		\[
+			P(Z\geq\sqrt{100}\cdot\frac{10.2-10.5}{\sqrt{3}})>P(Z\geq-1.73)=P(Z\leq 1.73)\approx 0.9582
+		\]
+		Thus, we accept the null hypothesis and conclude that the conjecture is highly likely to be true.
+	\end{enumerate}
+	
+	\item Let $\mu$ be the mean run time of the hot-plates in minutes. 
+	\textit{Null Hypothesis}: $\mu\leq 480$ and \textit{Alternative Hypothesis}: $\mu>480$.
+	We use the procedure for a right-tailed test as discussed in problem 2(b). We calculate
+	\[
+		P\qty(Z\geq\sqrt{50}\cdot\frac{485-480}{30}) = P\qty(Z\geq\frac{\sqrt{50}}{6})>P(Z\geq 1.18)
+	\]
+	Using the provided table, $P(Z\leq 1.18) = 0.8810$, so $P(Z\geq 1.18) = 1 - 0.8810 = 0.1190$. 
+	Since $0.1190 > 0.05$ (our level of significance), we accept the null hypothesis and conclude that there is not enough evidence to support the claim that the mean run time is more than 480 minutes.
+	
+	\item Let $p$ be the proportion of people in the class who listen to Siva.
+	\textit{Null Hypothesis}: $p\geq 0.15$ and \textit{Alternative Hypothesis}: $p<0.15$ (Siva's conjecture).
+	We use the procedure for a left-tailed test as discussed in problem 2(a). Given the sample mean $\overline{X} = \frac{380}{960}$, sample size $n = 960$, and known variance $\sigma^2 = 2$, we calculate
+	\[
+		P\qty(Z\leq\sqrt{960}\cdot\frac{\frac{380}{960}-0.15}{\sqrt{2}}) = P\qty(Z\leq\frac{59\sqrt{30}}{60}) > P(Z\leq 5.38)
+	\]
+	Since $P(Z\leq 5.38) > 0.9998$, the $p$-value is effectively 1. Because the $p$-value is so massive, we would need a significance level $\alpha \approx 1$ to reject it, meaning our confidence level ($1-\alpha$) would be effectively $0\%$.
+	Thus, we will not be able to reject the null hypothesis by any reasonable means at all, and we conclude that Siva's conjecture is highly likely to be false.
+\end{enumerate}
+
+\end{document}

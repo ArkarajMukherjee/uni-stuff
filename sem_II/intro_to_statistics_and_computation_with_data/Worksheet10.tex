@@ -1,0 +1,152 @@
+\documentclass[12pt,english]{article}\usepackage[]{graphicx}\usepackage[]{xcolor}
+% maxwidth is the original width if it is less than linewidth
+% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlsng}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hldef}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+\let\hlipl\hlkwb
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+\usepackage{mypreamble}
+\usepackage{myRpreamble}
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+{\bf Arkaraj Mukherjee} \\
+{\bf Worksheet 10}
+
+\begin{enumerate}[label=\arabic*.]
+
+\item Let $\mu$ be the mean systolic blood pressure of ISI BC people.
+\textit{Null Hypothesis}: $\mu = 120$ mm Hg and \textit{Alternative Hypothesis}: $\mu \neq 120$ mm Hg.
+
+We use the $t$-test with $n-1 = 99$ degrees of freedom. The test statistic is
+\[
+    T = \sqrt{n} \cdot \frac{\overline{X} - 120}{S} = \sqrt{100} \cdot \frac{130.1 - 120}{21.21}
+\]
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hldef{n} \hlkwb{<-} \hlnum{100}\hldef{; xbar} \hlkwb{<-} \hlnum{130.1}\hldef{; mu0} \hlkwb{<-} \hlnum{120}\hldef{; S} \hlkwb{<-} \hlnum{21.21}
+\hldef{t_stat} \hlkwb{<-} \hlkwd{sqrt}\hldef{(n)} \hlopt{*} \hldef{(xbar} \hlopt{-} \hldef{mu0)} \hlopt{/} \hldef{S}
+\hldef{t_stat}
+\end{alltt}
+\begin{verbatim}
+## [1] 4.761905
+\end{verbatim}
+\begin{alltt}
+\hldef{p_val} \hlkwb{<-} \hlnum{2} \hlopt{*} \hlkwd{pt}\hldef{(}\hlopt{-}\hlkwd{abs}\hldef{(t_stat),} \hlkwc{df} \hldef{= n} \hlopt{-} \hlnum{1}\hldef{)}
+\hldef{p_val}
+\end{alltt}
+\begin{verbatim}
+## [1] 6.562702e-06
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+The $p$-value is much smaller than $0.05$, so we reject the null hypothesis and conclude that the ISI BC group is significantly different from the Bengaluru population in systolic blood pressure.	
+
+	\item Let $m$ be the median rental rate of a 1-room PG in Bengaluru.
+	\textit{Null Hypothesis}: $m = 700$ and \textit{Alternative Hypothesis}: $m \neq 700$.
+	
+	We use a two-sided sign test at $\alpha = 0.10$. Observations equal to 700 are removed as ties, and we count the number of values above and below 700.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hldef{rentals} \hlkwb{<-} \hlkwd{c}\hldef{(}\hlnum{700}\hldef{,}\hlnum{650}\hldef{,}\hlnum{800}\hldef{,}\hlnum{975}\hldef{,}\hlnum{855}\hldef{,}\hlnum{785}\hldef{,}\hlnum{759}\hldef{,}\hlnum{640}\hldef{,}\hlnum{950}\hldef{,}\hlnum{715}\hldef{,}
+             \hlnum{825}\hldef{,}\hlnum{980}\hldef{,}\hlnum{895}\hldef{,}\hlnum{1025}\hldef{,}\hlnum{850}\hldef{,}\hlnum{915}\hldef{,}\hlnum{740}\hldef{,}\hlnum{985}\hldef{,}\hlnum{770}\hldef{,}\hlnum{785}\hldef{,}\hlnum{700}\hldef{,}\hlnum{925}\hldef{)}
+\hldef{m0} \hlkwb{<-} \hlnum{700}
+\hldef{signs} \hlkwb{<-} \hldef{rentals[rentals} \hlopt{!=} \hldef{m0]}
+\hldef{n_eff} \hlkwb{<-} \hlkwd{length}\hldef{(signs)}
+\hldef{n_pos} \hlkwb{<-} \hlkwd{sum}\hldef{(signs} \hlopt{>} \hldef{m0)}
+\hldef{n_neg} \hlkwb{<-} \hlkwd{sum}\hldef{(signs} \hlopt{<} \hldef{m0)}
+\hldef{n_eff; n_pos; n_neg}
+\end{alltt}
+\begin{verbatim}
+## [1] 20
+## [1] 18
+## [1] 2
+\end{verbatim}
+\begin{alltt}
+\hldef{S} \hlkwb{<-} \hlkwd{min}\hldef{(n_pos, n_neg)}
+\hldef{p_val2} \hlkwb{<-} \hlnum{2} \hlopt{*} \hlkwd{pbinom}\hldef{(S, n_eff,} \hlnum{0.5}\hldef{)}
+\hldef{p_val2}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.0004024506
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+	After removing the two ties, $n = 20$, with 18 values above and 2 below 700. The $p$-value $\approx 0.0004 < 0.10$, so we reject the null hypothesis. The parents should not believe Bella as the median rental is significantly higher than $ \texttt{Rs.}700$.
+
+	\item Let $m$ be the median project score for students using Claude AI.
+	\textit{Null Hypothesis}: $m \leq 75$ and \textit{Alternative Hypothesis}: $m > 75$.
+	
+	We use a right-tailed sign test. The score equal to 75 is removed as a tie, and we count the number of scores strictly above 75.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hldef{scores} \hlkwb{<-} \hlkwd{c}\hldef{(}\hlnum{78}\hldef{,}\hlnum{100}\hldef{,}\hlnum{75}\hldef{,}\hlnum{64}\hldef{,}\hlnum{87}\hldef{,}\hlnum{80}\hldef{,}\hlnum{72}\hldef{,}\hlnum{91}\hldef{,}\hlnum{89}\hldef{,}\hlnum{70}\hldef{,}\hlnum{82}\hldef{,}\hlnum{76}\hldef{)}
+\hldef{m0} \hlkwb{<-} \hlnum{75}
+\hldef{signs2} \hlkwb{<-} \hldef{scores[scores} \hlopt{!=} \hldef{m0]}
+\hldef{n_eff2} \hlkwb{<-} \hlkwd{length}\hldef{(signs2)}
+\hldef{n_pos2} \hlkwb{<-} \hlkwd{sum}\hldef{(signs2} \hlopt{>} \hldef{m0)}
+\hldef{n_pos2; n_eff2}
+\end{alltt}
+\begin{verbatim}
+## [1] 8
+## [1] 11
+\end{verbatim}
+\begin{alltt}
+\hldef{p_val3} \hlkwb{<-} \hlnum{1} \hlopt{-} \hlkwd{pbinom}\hldef{(n_pos2} \hlopt{-} \hlnum{1}\hldef{, n_eff2,} \hlnum{0.5}\hldef{)}
+\hldef{p_val3}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.1132812
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+	After removing the tie, $n = 11$, with 8 scores above 75 and 3 below. The $p$-value $\approx 0.1133 > 0.05$, so at the standard significance level we fail to reject the null hypothesis. There is not sufficient evidence to conclude that Claude AI significantly increases the median project score.
+
+\end{enumerate}
+\end{document}

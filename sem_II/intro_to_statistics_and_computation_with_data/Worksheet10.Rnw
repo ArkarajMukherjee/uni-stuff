@@ -1,0 +1,62 @@
+\documentclass[12pt,english]{article}
+\usepackage{mypreamble}
+\usepackage{myRpreamble}
+\begin{document}
+{\bf Arkaraj Mukherjee} \\
+{\bf Worksheet 10}
+
+\begin{enumerate}[label=\arabic*.]
+
+\item Let $\mu$ be the mean systolic blood pressure of ISI BC people.
+\textit{Null Hypothesis}: $\mu = 120$ mm Hg and \textit{Alternative Hypothesis}: $\mu \neq 120$ mm Hg.
+
+We use the $t$-test with $n-1 = 99$ degrees of freedom. The test statistic is
+\[
+    T = \sqrt{n} \cdot \frac{\overline{X} - 120}{S} = \sqrt{100} \cdot \frac{130.1 - 120}{21.21}
+\]
+<<>>=
+n <- 100; xbar <- 130.1; mu0 <- 120; S <- 21.21
+t_stat <- sqrt(n) * (xbar - mu0) / S
+t_stat
+p_val <- 2 * pt(-abs(t_stat), df = n - 1)
+p_val
+@
+The $p$-value is much smaller than $0.05$, so we reject the null hypothesis and conclude that the ISI BC group is significantly different from the Bengaluru population in systolic blood pressure.	
+
+	\item Let $m$ be the median rental rate of a 1-room PG in Bengaluru.
+	\textit{Null Hypothesis}: $m = 700$ and \textit{Alternative Hypothesis}: $m \neq 700$.
+	
+	We use a two-sided sign test at $\alpha = 0.10$. Observations equal to 700 are removed as ties, and we count the number of values above and below 700.
+<<>>=
+rentals <- c(700,650,800,975,855,785,759,640,950,715,
+             825,980,895,1025,850,915,740,985,770,785,700,925)
+m0 <- 700
+signs <- rentals[rentals != m0]
+n_eff <- length(signs)
+n_pos <- sum(signs > m0)
+n_neg <- sum(signs < m0)
+n_eff; n_pos; n_neg
+S <- min(n_pos, n_neg)
+p_val2 <- 2 * pbinom(S, n_eff, 0.5)
+p_val2
+@
+	After removing the two ties, $n = 20$, with 18 values above and 2 below 700. The $p$-value $\approx 0.0004 < 0.10$, so we reject the null hypothesis. The parents should not believe Bella as the median rental is significantly higher than $ \texttt{Rs.}700$.
+
+	\item Let $m$ be the median project score for students using Claude AI.
+	\textit{Null Hypothesis}: $m \leq 75$ and \textit{Alternative Hypothesis}: $m > 75$.
+	
+	We use a right-tailed sign test. The score equal to 75 is removed as a tie, and we count the number of scores strictly above 75.
+<<>>=
+scores <- c(78,100,75,64,87,80,72,91,89,70,82,76)
+m0 <- 75
+signs2 <- scores[scores != m0]
+n_eff2 <- length(signs2)
+n_pos2 <- sum(signs2 > m0)
+n_pos2; n_eff2
+p_val3 <- 1 - pbinom(n_pos2 - 1, n_eff2, 0.5)
+p_val3
+@
+	After removing the tie, $n = 11$, with 8 scores above 75 and 3 below. The $p$-value $\approx 0.1133 > 0.05$, so at the standard significance level we fail to reject the null hypothesis. There is not sufficient evidence to conclude that Claude AI significantly increases the median project score.
+
+\end{enumerate}
+\end{document}
