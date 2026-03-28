@@ -1,0 +1,245 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath, amssymb, amsthm, graphicx, physics, amsfonts}
+\usepackage{enumitem}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage[dvipsnames]{xcolor}
+\definecolor{EvanPink}{rgb}{0.85, 0.13, 0.55}
+\usepackage[colorlinks=true,
+            linkcolor=OliveGreen,
+            urlcolor=EvanPink,
+            citecolor=OliveGreen]{hyperref}
+\usepackage{cleveref}
+\usepackage{etoolbox}
+\newenvironment{solution}{%
+  \par\noindent\textit{Solution.}\ }{\qed}
+\newtheoremstyle{problemstyle}
+  {1em}   
+  {1em}   
+  {}      
+  {}      
+  {\bfseries} 
+  {.}     
+  {0.5em} 
+  {}      
+\theoremstyle{problemstyle}
+\newtheorem{problem}{Problem}[section]
+\apptocmd{\problem}{%
+  \addcontentsline{toc}{subsection}{Problem~\thesection.\arabic{problem}}%
+}{}{}
+\crefname{problem}{Problem}{Problems}
+\Crefname{problem}{Problem}{Problems}
+\setcounter{tocdepth}{2}
+\title{\textbf{Linear Algebra II} \\ \large Home Assignment III}
+\author{Arkaraj Mukherjee \\ B.Math., First Year, ISI Bangalore}
+\date{\today}
+\def\bN{\mathbb{N}}
+\def\bR{\mathbb{R}}
+\def\bZ{\mathbb{Z}}
+\def\bQ{\mathbb{Q}}
+\def\bC{\mathbb{C}}
+\def\w{\omega}
+\def\sgn{\epsilon}
+\newcommand{\inp}[2]{{\left\langle{#1},{#2}\right\rangle}}
+\newcommand{\ipp}[1]{{\left\langle{#1}\right\rangle}}
+\begin{document}
+\maketitle
+\newpage
+\tableofcontents
+\newpage
+\section{Home Assignment III (Due: March 30, 2026)}
+\textit{Note: Just as in the problem set, we also always mean orthogonal projection when we write projection here.}
+\begin{problem}\label{prob:3-1}
+Let $P, Q$ be projections on a finite dimensional inner product space $(V, \langle \cdot, \cdot \rangle)$.
+\begin{enumerate}[label=(\roman*)]
+    \item Show that $PQ$ is a projection if and only if $PQ = QP$.
+    \item Show that $P + Q$ is a projection if and only if $PQ = 0$.
+\end{enumerate}
+\end{problem}
+\begin{solution}
+\begin{enumerate}[label=(\roman*)]
+	\item We know that $T$ is a projection iff $T=T^*=T^2$, we use this fact to prove this. For the if part we see that $(PQ)^*=Q^*P^*=QP=PQ$ as $P,Q$ are projections and similarly $(PQ)^2=PQPQ=P(QP)Q=P(PQ)Q=PPQQ=P^2Q^2=PQ$ so $PQ$ is a projection For the only if part, if $PQ$ is a projection, then $PQ=(PQ)^*=Q^*P^*=QP$ so we are done. 
+	\item For the if part, we see that $(P+Q)^*=P^*+Q^*=P+Q$ and $(P+Q)^2=P^2+PQ+QP+Q^2=P^2+Q^2+QP=P+Q+QP$. Now, as $PQ=0$ we see that $(PQ)^*=Q^*P^*=QP=0$ as well, thus $(P+Q)^2=P+Q$ making $P+Q$ a projection. For the only if part, if $P+Q$ is a projection then $P+Q=(P+Q)^2=P+Q+PQ+QP$ as seen previously and thus $PQ+QP=0$. We multiply $P$ on both sides to get $PPQ+PQP=0$ and thus $PQ+PQP=0\implies PQ(I+P)=0$. Now, notice that $(I+P)v=0\implies Pv=-v$ and as $Pv$ can only be $v$ or $0$ so either $-v=v$ or $-v=0$, in either case we have $v=0$ so $I+P$ is invertible as $\ker(I+P)\subseteq\{0\}$. As this is invertible we can multiply both sides by its inverse from the right to get $PQ=0$ so we are done.
+\end{enumerate}
+\end{solution}
+\begin{problem}\label{prob:3-2}
+A matrix $A$ is said to be \textit{nilpotent} if $A^k = 0$ for some $k \in \mathbb{N}$. Show that if a normal matrix $A$ is nilpotent then $A = 0$.
+\end{problem}
+\begin{solution}
+	If $\lambda$ is an eigenvalue of $A$ with $v\neq 0$ being an eigenvector then $A^kv=A^{k-1}(Av)=A^{k-1}(\lambda v)=\lambda A^{k-1}v=\ldots=\lambda^kv$ and as $A^k=0$ we must have that $\lambda^kv=A^kv=0$ which implies that $\lambda=0$. Now, using the spectral theorem we can write $A$ as a linear combination of projections, over its eigenvalues, all of which being $0$ makes $A$ be $0$ too,
+\[
+	A = \sum_{\lambda\in\sigma(A)}\lambda\cdot P_\lambda=0\cdot P_0=0
+\]
+
+\end{solution}
+\begin{problem}\label{prob:3-3}
+A matrix $S$ is said to be \textit{skew-hermitian} if $S^* = -S$. Show that $S$ is skew-hermitian if and only if $iS$ is self-adjoint. Show that $S$ is skew-hermitian if and only if $S$ is normal and all its eigenvalues are purely imaginary, that is, they are of the form $it$ where $t \in \mathbb{R}$.
+\end{problem}
+\begin{solution}
+	For the first part, we see that $S^*=-S\iff -i\cdot S^*=iS\iff (iS)^*=iS$ so we are done. For the second part, we can prove the if direction by using the spectral theorem to first write $S=\Sigma_{i\lambda\in\sigma(S)}i\lambda\cdot P_{i\lambda}$ with all the $\lambda$ being real by assumption and then using properties of the adjoint as follows
+\[
+	S^*=\qty(\sum_{i\lambda\in\sigma(S)}i\lambda\cdot P_{i\lambda})^*=\sum_{i\lambda\in\sigma(S)}\underbrace{(i\lambda\cdot P)^*}_{-i\lambda P_{i\lambda}^*\text{ as }\lambda\in\bR}=-\sum_{i\lambda\in\sigma(S)}i\lambda\cdot P_{i\lambda}=-S
+\]
+In only if direction, normalcy is trivially checked as $SS^*=S(-S)=(-S)S=S^*S$. Then, using the spectral theorem we can write $S=A^*DA$ for a diagonal matrix $D$ with the eigenvalues of $S$ on the diagonal and unitary $A$. Now, as $S$ is \textit{skew-hermitian} we have that $S^*=(A^*DA)^*=A^*D^*(A^*)^*=A^*D^*A=-S=-A^*DA=A^*(-D)A$ which, after some cancellations furnishes the equality $D^*=-D$ which implies that for all the diagonal entries of form $x+iy$ with $x,y\in\bR$ we must have $\overline{x+iy}=-(x+iy)\implies x-iy=-x-iy\implies x=-x\implies x=0$ so all the diagonal entries, which are the eigenvalues of $S$ must be of form $iy$ for $y\in\bR$ and we are done.
+\end{solution}
+\begin{problem}\label{prob:3-4}
+Show that the sum of two normal matrices need not be normal. Show that the product of two normal matrices need not be normal.
+\end{problem}
+\begin{solution}
+    \textit{Sum of normal matrices:} Let
+\[ A = \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix}, \quad B = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}. \]
+Both $A$ (skew-symmetric) and $B$ (symmetric) are normal matrices. Their sum is
+\[ A+B = \begin{pmatrix} 0 & 2 \\ 0 & 0 \end{pmatrix}. \]
+Since $(A+B)(A+B)^T = \begin{pmatrix} 4 & 0 \\ 0 & 0 \end{pmatrix}$ and $(A+B)^T(A+B) = \begin{pmatrix} 0 & 0 \\ 0 & 4 \end{pmatrix}$, they are not equal, proving $A+B$ is not normal.
+\\ \textit{Product of normal matrices:} Let
+\[ C = \begin{pmatrix} 1 & 0 \\ 0 & 2 \end{pmatrix}, \quad D = \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix}. \]
+Both $C$ and $D$ are normal. Their product is
+\[ CD = \begin{pmatrix} 0 & 1 \\ -2 & 0 \end{pmatrix}. \]
+Since $(CD)(CD)^T = \begin{pmatrix} 1 & 0 \\ 0 & 4 \end{pmatrix}$ and $(CD)^T(CD) = \begin{pmatrix} 4 & 0 \\ 0 & 1 \end{pmatrix}$, they are not equal, proving $CD$ is not normal.
+\end{solution}
+\begin{problem}\label{prob:3-5}
+Write down the spectral decomposition of the following matrices:
+\[
+A = \begin{pmatrix} 5 & 2 \\ 2 & 5 \end{pmatrix}, \qquad
+B = \begin{pmatrix} 5 & 2 & 0 \\ 2 & 5 & 0 \\ 0 & 0 & 4 \end{pmatrix}.
+\]
+\end{problem}
+\begin{solution}
+    \[
+     	\begin{bmatrix}
+			5 & 2\\ 2 & 5
+     	\end{bmatrix}
+     	\begin{bmatrix}
+			1\\ 1
+     	\end{bmatrix}
+		= \begin{bmatrix}
+		    7\\ 7
+		\end{bmatrix}
+		\text{ and }
+		\begin{bmatrix}
+			5 & 2\\ 2 & 5
+     	\end{bmatrix}
+     	\begin{bmatrix}
+			1\\ -1
+     	\end{bmatrix}
+		= \begin{bmatrix}
+		    3\\ -3
+		\end{bmatrix}
+    \]
+	Thus $\sigma(A)=\{7,3\}$ with normalised eigenvectors $u=(1/\sqrt{2},1/\sqrt{2})^\top$ and $v=(1/\sqrt{2},-1/\sqrt{2})^\top$ respectively. Thus, the spectral decomposition is
+	\[
+	    A=7\cdot uu^*+3\cdot vv^*=7\cdot \begin{bmatrix}
+			1/2 & 1/2\\
+			1/2 & 1/2
+	    \end{bmatrix}+3\cdot\begin{bmatrix}
+			1/2 & -1/2\\
+			-1/2 & 1/2
+	    \end{bmatrix}
+	\]
+	As $B$ is block diagonal with $A$ as the first block and $[4]$ as the other we can easily check that $\sigma(B)=\sigma(A)\cup\{4\}=\{7,3,4\}$ with normalised eigenvectors $(u,0)^\top,(v,0)^\top,(0,0,1)^\top$ and thus the spectral decomposition is
+	\[
+	    B=7\cdot \begin{bmatrix}
+			1/2 & 1/2 & 0\\ 1/2 & 1/2 & 0\\ 0 & 0 & 0
+	    \end{bmatrix} + 3\cdot \begin{bmatrix}
+			1/2 & -1/2 & 0\\ -1/2 & 1/2 & 0\\ 0 & 0 & 0
+	    \end{bmatrix} + 4\cdot \begin{bmatrix}
+			0 & 0 & 0\\
+			0 & 0 & 0\\
+			0 & 0 & 1
+	    \end{bmatrix} 
+	\]
+	
+\end{solution}
+
+\begin{problem}\label{prob:3-6}
+Let $A$ be a self-adjoint matrix. Show that there exist two positive matrices $A_+$, $A_-$ such that
+\[
+A = A_+ - A_-, \qquad A_+ A_- = A_- A_+ = 0.
+\]
+(\textit{Hint}: Use the spectral theorem.)
+\end{problem}
+\begin{solution}
+    If $A$ is self adjoint then $\sigma(A)\subseteq\bR$. Using the spectral theorem we can write
+	\[
+	A = \sum_{\lambda\in\sigma(A)}\lambda\cdot P_{\lambda}=\underbrace{\sum_{\substack{\lambda\in\sigma(A)\\ \lambda\geq 0}}\lambda\cdot P_{\lambda}}_{A_+}+\underbrace{\sum_{\substack{\lambda\in\sigma(A)\\ \lambda<0}}\lambda\cdot P_{\lambda}}_{-A_-}
+	\]
+As $P_{\lambda}P_{\gamma}=0$ for $\lambda\neq\gamma$ we see, from the spectral decomposition (they are defined through it anyways) $A_+$ and $-A_-$ we see that all the eigenvalues of $A_+$ are nonnegative making it positive and those of $-A_-$ are nonpositive making those of $A_-$ nonnegative and thus we have a decompositon $A=A_+-A_-$. Also, as $P_\lambda P_\gamma=0$ for nonequal $\lambda,\gamma$ we see that $A_+A_-=0$ as all the terms we get after expanding this product are $0$ due to the reasoning above. 
+\end{solution}
+
+\begin{problem}\label{prob:3-7}
+Suppose $d_1, d_2, \ldots, d_n$ are $n$ complex numbers and $\sigma : \{1, 2, \ldots, n\} \to \{1, 2, \ldots, n\}$ is a permutation. Show that the diagonal matrices $D$ and $E$ with diagonal entries
+\[
+d_{ii} = d_i, \qquad e_{ii} = d_{\sigma(i)}, \qquad 1 \leq i \leq n,
+\]
+are unitarily equivalent. Show that if two normal matrices $A$, $B$ are similar then they are unitarily equivalent.
+\end{problem}
+\begin{solution}
+    Let $P$ be the permutation matrix associated with $\sigma$, defined by its action on the standard basis vectors: $P e_i = e_{\sigma(i)}$. Permutation matrices are real orthogonal, meaning $P$ is unitary ($P^* = P^{-1}$). Evaluating $P^* D P$ on a basis vector yields:
+\[ (P^* D P) e_i = P^* D e_{\sigma(i)} = P^* (d_{\sigma(i)} e_{\sigma(i)}) = d_{\sigma(i)} P^* e_{\sigma(i)} = d_{\sigma(i)} e_i = E e_i. \]
+Thus, $E = P^* D P$, proving $D$ and $E$ are unitarily equivalent. Now, Let $A$ and $B$ be similar normal matrices. By the spectral theorem, they are unitarily diagonalizable: $A = U_A D_A U_A^*$ and $B = U_B D_B U_B^*$, where $D_A$ and $D_B$ are diagonal matrices containing their eigenvalues. Because $A$ and $B$ are similar, they share the same eigenvalues with the same algebraic multiplicities. Thus, the diagonal of $D_B$ is simply a permutation of the diagonal of $D_A$. From the first part, there exists a unitary permutation matrix $P$ such that $D_B = P^* D_A P$. Substituting this into the decomposition of $B$:
+\[ B = U_B (P^* D_A P) U_B^* = U_B P^* (U_A^* A U_A) P U_B^* = (U_A P U_B^*)^* A (U_A P U_B^*). \]
+Let $U = U_A P U_B^*$. Since the product of unitary matrices is unitary, $U$ is unitary, and we have $B = U^* A U$. Therefore, $A$ and $B$ are unitarily equivalent.
+\end{solution}
+
+\begin{problem}\label{prob:3-8}
+If $A$ is an $m \times m$ matrix and $B$ is an $n \times n$ matrix, their \textit{direct sum} is defined as the block matrix
+\[
+A \oplus B = \begin{pmatrix} A & 0 \\ 0 & B \end{pmatrix}.
+\]
+Show that $A \oplus B$ is normal (respectively unitary, self-adjoint, projection, positive) if and only if both $A$ and $B$ are normal (respectively unitary, self-adjoint, projection, positive).
+\end{problem}
+\begin{solution}
+    Let $M = A \oplus B = \begin{pmatrix} A & 0 \\ 0 & B \end{pmatrix}$. Block matrices multiply and take adjoints block-wise, so $M^* = \begin{pmatrix} A^* & 0 \\ 0 & B^* \end{pmatrix}$. We evaluate each property:
+
+\begin{itemize}
+    \item \textbf{Normal:} $M M^* = \begin{pmatrix} AA^* & 0 \\ 0 & BB^* \end{pmatrix}$ and $M^* M = \begin{pmatrix} A^*A & 0 \\ 0 & B^*B \end{pmatrix}$. \\
+    Equating them shows $M M^* = M^* M \iff AA^* = A^*A$ and $BB^* = B^*B$.
+    
+    \item \textbf{Unitary:} $M M^* = M^* M = I \iff AA^* = A^*A = I_m$ and $BB^* = B^*B = I_n$.
+    
+    \item \textbf{Self-adjoint:} $M = M^* \iff A = A^*$ and $B = B^*$.
+    
+    \item \textbf{Projection:} A matrix is an orthogonal projection iff it is self-adjoint ($M=M^*$) and idempotent ($M^2=M$). \\
+    $M^2 = \begin{pmatrix} A^2 & 0 \\ 0 & B^2 \end{pmatrix} = \begin{pmatrix} A & 0 \\ 0 & B \end{pmatrix} \iff A^2 = A$ and $B^2 = B$. \\
+    Combined with self-adjointness, $M$ is a projection iff $A$ and $B$ are projections.
+    
+    \item \textbf{Positive:} $M$ is positive iff it is self-adjoint and for any vector $z = \begin{pmatrix} x \\ y \end{pmatrix}$, $\langle Mz, z \rangle \ge 0$. \\
+    $\langle Mz, z \rangle = \left\langle \begin{pmatrix} Ax \\ By \end{pmatrix}, \begin{pmatrix} x \\ y \end{pmatrix} \right\rangle = \langle Ax, x \rangle + \langle By, y \rangle$. \\
+    This sum is non-negative for all $x, y$ if and only if $\langle Ax, x \rangle \ge 0$ for all $x$ and $\langle By, y \rangle \ge 0$ for all $y$. Thus, $M$ is positive iff $A$ and $B$ are positive.
+\end{itemize}
+\end{solution}
+
+\begin{problem}\label{prob:3-9}
+If $A$ is a normal matrix, show that the rank of $A$ is the same as the number of non-zero eigenvalues of $A$. Show that this need not be true for non-normal matrices.
+\end{problem}
+\begin{solution}
+	By the spectral theorem we can write $A=U^*DU\implies UA=DU$ as $UU^*=I$ for some invertible $U$ and diagonal $D$ which has the eigenvalues of $A$ as the diagonal entries with the same multiplicity. Now, as $U$ is invertible we have that $\rank(A)=\rank(UA)=\rank(DU)=\rank(D)$ as seen in the previous linear algebra course. Now, clearly the rank of a diagonal matrix is the number of nonzero entries on its diagonal which gives us the result we need as the $D$ has the eigenvalues of $A$ on its diagonal. Any non zero nilpotent matrix serves as a counterexample, for example consider
+\[
+    A = \begin{bmatrix}
+		0 & 1\\ 0 & 0
+    \end{bmatrix}
+\]
+For this matrix, the only eigenvalue is $0$ (meaning there are $0$ non-zero eigenvalues), but clearly $\rank(A)=1$. Since $1\neq 0$, the rank does not equal the number of non-zero eigenvalues for non-normal matrices.
+\end{solution}
+\begin{problem}\label{prob:3-10}
+Suppose $N$ is a normal matrix. Show that
+\[
+|\operatorname{trace}(N)|^2 \leq \operatorname{rank}(N) \cdot \operatorname{trace}(N^*N).
+\]
+(\textit{Hint}: Use the spectral theorem and the Cauchy--Schwarz inequality.)
+\end{problem}
+\begin{solution}
+	Using the spectral theorem we write $N=U^*DU$ with $U$ being unitary and $D$ diagonal. As $\trace(AB)=\trace(BA)$ we see that $\trace(N)=\trace(U^*DU)=\trace((U^*D)U)=\trace(UU^*D)=\trace(ID)=\trace(D)$ and as $D$ has the eigenvalues of $N$ on its diagonal, we find that $\trace(N)$ is the sum of eigenvalues of $N$. Also we see that $N^*N=(U^*DU)^*U^*DU=U^*D^*UU^*DU=U^*D^*IDU=U^*(D^*D)U$ and similarly $\trace(N^*N)=\trace(D^*D)$ which is the sum of squared norms of the eigenvalues of $N$ as, if $z\in\sigma(N)$ was the $i$-th entry on the diagonal in $D$ then the $i$-th entry on the diagonal in $D^*D$ is $\overline{z}z=|z|^2$. Thus, this inequality actually states (By abuse of notation, here $\sigma(N)$ is viewed as a multiset such as to keep the multiplicities of these eigenvalues in consideration)
+	\[
+		\qty|\sum_{\lambda\in\sigma(N)}\lambda|^2\leq\rank(N)\sum_{\lambda\in\sigma(N)}|\lambda|^2
+	\]
+	which, by \hyperref[prob:3-9]{Problem 3.9} is just
+	\[
+		\Bigg|\sum_{\substack{\lambda\in\sigma(N)\\ \lambda\neq 0}}\lambda\Bigg|^2\leq|\{\lambda\in\sigma(N):\lambda\neq 0\}|\sum_{\substack{\lambda\in\sigma(N)\\ \lambda\neq 0}}|\lambda|^2
+	\]
+	which is just a consequence of the cauchy schwarz inequality on $\bC^{\rank(N)}$ with the standard inner product, considering the vector formed of the nonzero eigenvalues in this context (with multiplicity) in any order and the vector of all $1$'s i.e. $(1,\ldots,1)^{\top}$
+\end{solution}
+\end{document}
