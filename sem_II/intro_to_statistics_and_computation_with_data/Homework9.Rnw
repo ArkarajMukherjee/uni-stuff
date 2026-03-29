@@ -1,0 +1,114 @@
+\documentclass[12pt,english]{article}
+\usepackage{mypreamble}
+\usepackage{myRpreamble}
+\begin{document}
+{\bf Arkaraj Mukherjee}\\
+{\bf Homework 9}
+<<>>=
+library("tidyverse");
+@
+
+\begin{enumerate}[label=\arabic*.]
+	\item
+	\begin{enumerate}[label=(\alph*)]
+		\item We are given a sample size $n = 300,000$, sample mean $\bar{x} = 8.515$, and sample standard deviation $s = 4.5$. We are testing $H_{0}:\mu\le8.5$ versus $H_{A}:\mu>8.5$.
+		<<>>=
+		n <- 300000
+		x_bar <- 8.515
+		s <- 4.5
+		mu_0 <- 8.5
+		#Calculating the T-statistic
+		t_stat <- (x_bar - mu_0) / (s / sqrt(n))
+		t_stat
+		@
+		\item Since this is an upper-tailed test ($H_A: \mu > 8.5$), we calculate the area to the right of the test statistic.
+		<<>>=
+		#Calculating the p-value using the t-distribution
+		p_value_1 <- pt(t_stat, df = n - 1, lower.tail = FALSE)
+		p_value_1
+		@
+		\item The p-value (approximately $0.0339$) represents the probability of observing a sample mean of $8.515$ or higher, assuming that the true population mean is exactly $8.5$. Because our calculated p-value of $0.0339$ is strictly greater than the significance level of $\alpha = 0.005$, we fail to reject the null hypothesis. There is not enough statistical evidence at the $0.005$ level to conclude that the mean years of schooling for people $18$ or above is greater than $8.5$ years.  
+	\end{enumerate}
+	\item The null hypothesis states that the sample of $50$ students was drawn proportionally from the given population percentages. We will use a Chi-Square Goodness of Fit test.
+
+	<<>>=
+	#counts in the sample
+	obs <- c(13, 16, 10, 11)
+	#Given population proportions
+	probs <- c(0.20, 0.24, 0.26, 0.30)
+	#total sample size
+	N <- 50
+	#Expected counts
+	expected <- N * probs
+	expected
+	#Perform the Chi-Square Goodness of Fit Test
+	chisq_result <- chisq.test(x = obs, p = probs)
+	chisq_result
+	@
+	The test sh=hows us a p-value of approximately $0.2625$. Since the p-value is greater than standard significance levels (like $0.05$), we fail to reject the null hypothesis. The researchers claim is indeed plausible as the observed sample does not significantly deviate from what we would expect under random, proportional sampling.	
+	\item We are asked to test if two populations, $X$ and $Y$, are equal in distribution versus the alternative that they are not equal (a two-sided test). We will compute the Mann-Whitney U (Wilcoxon rank-sum) test statistic as follows,
+
+	<<>>=
+	X <- c(53, 38, 69, 57, 46, 39, 73, 48, 73, 74, 60, 78)
+	Y <- c(44, 40, 61, 52, 32, 44, 70, 41, 67, 72, 53, 72)
+	n_x <- length(X)
+	n_y <- length(Y)
+	comb <- c(X, Y)
+	ranks <- rank(comb)
+	#Sum of ranks for X
+	R_x <- sum(ranks[1:n_x])
+#Calculate Mann-Whitney U statistic for X
+	U_x <- R_x - (n_x * (n_x + 1)) / 2
+	U_x
+	@
+	Now, we verify this using the built-in \texttt{wilcox.test} function in R.
+	<<>>=
+	wilcox_result <- wilcox.test(X, Y, alternative = "two.sided", exact = FALSE)
+	wilcox_result
+	@
+	The computed test statistic $W$ (which matches our calculated $U_X$) is 92. The p-value is approximately $0.2452$. Because the p-value is greater than 0.05, we fail to reject the null hypothesis. We do not have sufficient statistical evidence to conclude that the two populations are not equal in distribution.
+	\item We have changed anything corresoponding to a head to $1$ and tail to $0$ in the csv using a text editor. We also work with a significance level of $0.005$
+	\begin{enumerate}[label=(\alph*)]
+		\item 
+		<<>>=
+		chisquarefituniform = function(x) {
+		#frequency table of the observed data
+		observed_counts = table(x)
+		#number of unique categories
+		k = length(observed_counts)
+		#For a uniform distribution, expected probabilities are all 1/k
+		expected_probs = rep(1/k, k)
+		#this is a vector of form (1/k,...,1/k)
+		result = chisq.test(x = observed_counts, p = expected_probs)
+		return(result)
+		}
+		@
+		We flatten all the data about which student was picked into a single vector and feed it into our function. Let the null hypothesis be that the numbers were chosen randomly and the alternative hypothesis be that they were not.
+		<<>>=
+		dat = read.csv("rnt.csv", check.names = FALSE);
+		#the second arg makes it so that R doesnt insert dots for white spaces...
+		#it just works.
+		vec = c(dat$"Student 1",dat$"Student 2",dat$"Student 3",
+		dat$"Student 4",dat$"Student 5")
+		chisquarefituniform(vec);
+		@
+		The p-value is much larger than $0.005$ we fail to reject the null hypothesis of thenumbers being chosen randomly and hence conclude that there is not enough statistical evidence to say that the numbers might not have been chosen randomly.
+		\item
+		We do the same for the tosses as was done for the previous part with the null hypothesis being that the coin was fair and alternative hypothesis being that it was not. Note: A classmate, varadhan pointed out that some rows might be corresponding to dice rolls completely, omitting which results in a different p-value than ours, which counted the $1$s there as heads. As we can not be sure about whether these were really dice rolls or an unholy amount of typos, we choose to run with it. However the p-value is large enough in both cases to comfortably not be able to reject the null hypothesis.
+		<<>>=
+		chisquarefitcoin <- function(x) {
+		observed_counts <- table(x)
+		expected_probs <- c(0.5, 0.5)
+		result <- chisq.test(x = observed_counts, p = expected_probs)
+		return(result)
+		}
+		lot_of_cols = paste("Toss", 1:25)
+		tosses = unlist(dat[,lot_of_cols])
+		tosses_clean = tosses[tosses %in% c("0", "1")]
+		table(tosses_clean)
+		chisquarefitcoin(tosses_clean)
+		@
+		The p-value is much larger than $0.005$ we fail to reject the null hypothesis of the coins being fair and hence conclude that there is not enough statistical evidence to say that the coins might have not been fair.
+	\end{enumerate}
+\end{enumerate}
+\end{document}
