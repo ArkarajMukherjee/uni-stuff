@@ -1,0 +1,195 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath, amssymb, amsthm, graphicx,physics}
+\usepackage{enumerate}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage[dvipsnames]{xcolor}
+\definecolor{EvanPink}{rgb}{0.85, 0.13, 0.55}
+\usepackage[colorlinks=true,
+            linkcolor=OliveGreen,
+            urlcolor=EvanPink,
+            citecolor=OliveGreen]{hyperref}
+\usepackage{cleveref}
+\usepackage{etoolbox}
+\newenvironment{solution}{%
+  \par\noindent\textit{Solution.}\ }{\qed}
+\newtheoremstyle{problemstyle}
+  {1em}   
+  {1em}   
+  {}      
+  {}      
+  {\bfseries} 
+  {.}     
+  {0.5em} 
+  {}      
+\theoremstyle{problemstyle}
+\newtheorem{problem}{Problem}[section]
+\apptocmd{\problem}{%
+  \addcontentsline{toc}{subsection}{Problem~\thesection.\arabic{problem}}%
+}{}{}
+\crefname{problem}{Problem}{Problems}
+\Crefname{problem}{Problem}{Problems}
+\setcounter{tocdepth}{2}
+\title{\textbf{Linear Algebra II} \\ \large Home Assignment IV}
+\author{Arkaraj Mukherjee \\ B.Math., First Year, ISI Bangalore}
+\date{\today}
+\def\bN{\mathbb{N}}
+\def\bR{\mathbb{R}}
+\def\bZ{\mathbb{Z}}
+\def\bQ{\mathbb{Q}}
+\def\bC{\mathbb{C}}
+\def\sgn{\epsilon}
+\newcommand{\ipp}[1]{\left\langle#1\right\rangle}
+\begin{document}
+\maketitle
+\newpage
+\tableofcontents
+\newpage
+\section{Home Assignment IV (Due: April 11, 2026)}
+\begin{problem}\label{prob:4-1}
+Suppose $\{a_1, a_2, \ldots, a_n\}$ are eigenvalues of a matrix $A$. Suppose $\{b_1, \ldots, b_n\}$ are eigenvalues of a matrix $B$. Show that in general eigenvalues of $A + B$ are not given by $\{a_1 + b_1, \ldots, a_n + b_n\}$. However, this is the case if $B = bI$ for some $b \in \mathbb{C}$.
+\end{problem}
+\begin{solution}
+    Let $A$ be an orthogonal projection and $B=I-A$ then we know that $B$ is the orthogonal projection on the orthogonal complement of the range of $A$. 
+	Both of these have $1$ as an eigenvalue but $A+B=I$ does not have $1+1=2$ as an eigenvalue. 
+	However if $B=bI$ for some $b\in\bC$ then given any eigenvalues $\lambda\in\sigma(A)$ with eigenvector $v$ we see that $(A+B)v=\lambda v+v=(\lambda+1)v$ and thus $\sigma(A+B)=\{\lambda+\gamma:\lambda\in\sigma(A),\gamma\in\sigma(B)\}$ as $\sigma(B)=\{b\}$. 
+\end{solution}
+\begin{problem}\label{prob:4-2}
+(Hadamard's inequality). Suppose $A$ is a positive matrix then
+\[
+\det(A) \leq \prod_{i=1}^{n} a_{ii}.
+\]
+(Hint: First consider the case $a_{ii} = 1$ for every $i$. Use AM-GM inequality on eigenvalues. The general case should follow by considering $A$ as a Gram matrix and suitably re-scaling the vectors.)
+\end{problem}
+\begin{solution}
+    From the characteristic polynomial it is clear that the trace is the sum of eigenvalues. In the case where $a_{ii}=1$, we see that $\lambda_1+\ldots+\lambda_n=n$, where $\lambda_i\geq 0$ are the eigenvalues of $A$. 
+    If $A$ has $0$ as an eigenvalue, then this inequality is trivially true as the left-hand side is $0$ and the right-hand side is non-negative. 
+    When it has all strictly positive eigenvalues, we can apply the AM-GM inequality to get that $\det(A)=\prod \lambda_i \leq (n^{-1}\sum\lambda_i)^n=1$, proving the claim for matrices with $1$s on the diagonal. 
+    In the general case, from the representation of a positive matrix over an inner product space, we see that $A=(\ipp{e_i,Te_j})_{i,j}$ and as it is positive, $a_{ii}=\ipp{e_i,Te_i}\geq 0$. 
+    Notice that the function $f(A)=\det(A)-\prod_{i=1}^na_{ii}$ is continuous. Using the same logic we used in previous assignments, we know that if $f(A_n)\leq 0$ and $A_n\to A$, then $f(A)\leq 0$ as well. 
+    Consider $A_n = A + n^{-1}I$. These are strictly positive matrices as they have the same eigenvalues as $A$ does, just shifted to the right by $1/n$ (by a previous problem). Thus, $(A_n)_{ii} = a_{ii} + 1/n > 0$.
+    Let $D$ be the diagonal matrix whose $i$-th diagonal entry is $(A_n)_{ii}^{-1/2} = (a_{ii}+1/n)^{-1/2} > 0$. We claim that the new matrix $DA_nD$ is also positive. For any $x\in\bC^n$, we see that,
+    \[
+        \ipp{x, DA_nDx} = \ipp{D^*x, A_n(Dx)} = \ipp{Dx, A_n(Dx)} \geq 0
+    \]
+    as $D=D^*$ (all the entries are real and it is diagonal). Thus, $DA_nD$ is positive. By construction, the diagonal entries of $DA_nD$ are all exactly $1$. 
+    Now, we can apply the previous case to this new matrix. Using the multiplicative property of the determinant,
+    \[
+        \det(DA_nD) = \det(D)^2\det(A_n) = \det(A_n)\prod_{i=1}^n(A_n)_{ii}^{-1}.
+    \]
+    Since $DA_nD$ has $1$s on the diagonal, $\det(DA_nD) \leq 1$. Therefore,
+    \[
+        \det(A_n)\prod_{i=1}^n(A_n)_{ii}^{-1} \leq 1 \implies \det(A_n)-\prod_{i=1}^n(A_n)_{ii} = f(A_n) \leq 0.
+    \]
+    As $A_n\to A$ (which is clear from the fact that $n^{-1}I\to 0$ as $n\to\infty$), we conclude that $f(A)\leq 0$. Rearranging yields,
+    \[
+        \det(A)\leq\prod_{i=1}^na_{ii}.
+    \]
+\end{solution}	
+\begin{problem}\label{prob:4-3}
+Suppose $B = [b_{ij}]$ is an $n \times n$ positive rank one matrix. Show that there exist complex numbers $b_1, \ldots, b_n$ such that $b_{ij} = b_i \overline{b_j}$.
+\end{problem}
+\begin{solution}
+   As it is self adjoint, from a problem on the previous assignment we can say that it has as many non zero eigenvalues as its rank which in this case is $1$ so it has exactly one nonzero eigenvalue, call it $\lambda$. 
+   By the spectral theorem we have $A=\lambda P$ where $P$ is an orthogonal projection onto the range of $B$ which has dimension $1$ and is thus spanned by a single vector. 
+   Let $v$ be one such vector, then after normalizing it to $u=v/\norm{v}$ we find that, $P=uu^*$ finally implying $B=\lambda uu^*$ and as $B$ was positive we must have that $\lambda\geq 0$ so we can write, $B=bb^*$ where $b=\sqrt{\lambda}u$ and expanding we see that $B_{ij}=b_i\overline{b_j}$
+\end{solution}
+\begin{problem}\label{prob:4-4}
+Suppose $A$ is a positive matrix. Show that $A$ is a sum of positive rank one matrices. (Hint: Use spectral theorem).
+\end{problem}
+\begin{solution}
+	By the spectral theorem we can choose an orthonormal basis of eigenvectors $\{u_1,\ldots,u_n\}$ and then $Av=A(\sum_i\ipp{u_i,v}u_i)=\sum_i\ipp{u_i,v}Au_i=\sum_i\lambda_i\ipp{u_i,v}u_i$ where $\lambda_i$ is the eigenvalue corresponding to $u_i$. 
+	Now, we know that $\ipp{u_i,v}u_i=u_iu_i^*v$ and thus we see that $A=\sum_i\lambda_iu_iu_i^*$. 
+	Each $u_iu_i^*$ is an orthogonal projection onto the span of $u_i$ and thus it has rank $1$ and as its an orthogonal projection $\sigma(u_iu_i^*)\subseteq\{0,1\}$ and clearly the eigenvalues of $\lambda_iu_uu_i^*$ lie in the set $\{0,\lambda_i\}$ all of whose elements are nonnegative as $\lambda_i$ is nonnegtaive stemming from $A$ being positive, we see that $\lambda_iu_iu_i^*$ is a rank one positive matrix so we are done.
+\end{solution}
+\begin{problem}\label{prob:4-5}
+(Schur product) Given two square matrices $A = [a_{ij}]$, $B = [b_{ij}]$, their Schur product $A \circ B$ is defined as the matrix $C = [c_{ij}]$, where
+\[
+c_{ij} = a_{ij} \cdot b_{ij}.
+\]
+(It is the entrywise product of matrices.) Show that if $A$, $B$ are positive then $C = A \circ B$ is positive. (Hint: First prove it for rank one matrices and then use previous exercises.)
+\end{problem}
+\begin{solution}
+	It is trivial to prove that schur product is distributive, commutative and associative which we use below without mention. 
+	If $A,B$ had rank one, then by \hyperref[prob:4-3]{Problem 1.3} we can write $A_{ij}=a_i\overline{a_j}$ and $B_{ij}=b_i\overline{b_j}$ for some complex numbers $a_1,b_1,\ldots,a_n,b_n$. 
+	Then, by definition we find that $(A\circ B)_{ij}=a_i\overline{a_j}b_i\overline{b_j}=(a_ib_i)\overline{(a_jb_j)}$ so we can write $(A\circ B)=(a\circ b)(a\circ b)^*$ where $a=(a_i)$ and $b=(b_i)$ and it is clearly positive being the orthogonal projection along the span of $a\circ b$. 
+	In the general case, by the previous problem we can write $A=\sum_iS_i$ and $B=\sum_iT_i$ where $S_i,T_i$ are rank one positive matrices, then we see that
+	\[
+		A\circ B=\qty(\sum_i S_i)\circ\qty(\sum_j T_j)=\sum_{i,j}S_i\circ T_j
+	\]
+thus, $A\circ B$ can be written as a sum of positive matrices and as sums of positive matrices are positive (this is true as $\ipp{x,(X+Y)x}=\ipp{x,Xx}+\ipp{x,Yx}\geq 0$ when $X,Y$ are positive, as $\ipp{x,Xx},\ipp{x,Yx}$ are always nonnegative for positive $X,Y$) we are done. 
+\end{solution}
+\begin{problem}\label{prob:4-6}
+Let $P$ be a projection on a finite dimensional inner product space $(V, \langle \cdot, \cdot \rangle)$ onto a subspace $M$.
+\begin{enumerate}[(i)]
+    \item Show that
+    \[
+    \|Px\| \leq \|x\|, \quad \forall\, x \in V.
+    \]
+    \item Show that $\|Px\| = \|x\|$ if and only if $x \in M$.
+\end{enumerate}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(i)]
+		\item Following the convention of projections meaning orthogonal projections, we see that $\norm{x}^2=\norm{Px+(I-P)x}^2=\norm{Px}^2+\norm{(I-P)x}^2\geq\norm{Px}^2\implies\norm{x}\geq\norm{Px}$ as $I-P$ is the projection onto the orthogonal complement of the range of $P$ and thus, $Px$ is orthogonal to $(I-P)x$ allowing us to use the pythagorean theorem.
+		\item From the previous part we clearly see that this holds iff $\norm{(I-P)x}=0$, equivalently $(I-P)x=0\iff x=Px+(I-P)x=Px+0=Px$ which is true iff $x\in M$ as $P$ is a projection.
+	\end{enumerate}
+\end{solution}
+\begin{problem}\label{prob:4-7}
+Let $P_1, \ldots, P_k$ be projections on a finite dimensional inner product space $(V, \langle \cdot, \cdot \rangle)$.
+\begin{enumerate}[(i)]
+    \item Show that for $i \neq j$, $P_i P_j = 0$ if and only if the ranges of $P_i$ and $P_j$ are mutually orthogonal.
+    \item Suppose $P_1 + P_2 + \cdots + P_k = I$. Show that the ranges of $P_1, P_2, \ldots, P_k$ are mutually orthogonal.
+\end{enumerate}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(i)]
+		\item For the if part, given any $x\in V$ we see that $P_jx$ is in the range of $P_i$ which is orthogonal to the range of $P_j$ we see that $P_jx\in P_i(V)^\perp=\ker(P_i^*)=\ker(P_i)$ by results proved in class, thus $P_iP_jx=0$.  
+		For the only if direction, if we have $x=P_ix$ in the range of $P_i$ and $y=P_jy$ in the range of $P_j$ then, $\ipp{x,y}=\ipp{P_ix,P_jy}=\ipp{x,P_i^*P_jy}=\ipp{x,P_iP_jy}=\ipp{x,0}=0$ as $P_i=P_i^*$ by the virtue of it being an orthogonal projection, proving these ranges to be mutually orthogonal. 
+	\item Say $x$ is in the range of $P_1$, then we see that, $P_1x=x$ and thus, $x=Ix=P_1x+\sum_{i>1}P_ix=x+\sum_{i>1}P_ix\implies\sum_iP_ix=0$ and thus, $\ipp{x,\sum_{i>1}P_ix}=\sum_{i>1}\ipp{x,P_ix}=0$ and as $\ipp{x,P_ix}=\ipp{x,P_iP_ix}=\ipp{x,P_i^*P_ix}=\ipp{P_ix,P_ix}=\norm{P_ix}^2$ due to the fact that $P_i=P_i^*=P_i^2$ we see that, $\sum_{i>1}\norm{P_ix}^2=0$ which is possible iff $\norm{P_ix}=0$ for all $i>1$ implying $x\in\ker(P_i)=P_i(V)^\perp$ for all $i>1$ hence proving that $P_1(V)\perp P_i(V)$ for all $i\neq 1$ and we can similarly do the same for any $P_i$ in place of $P_1$ proving $P_i(V)\perp P_j(V)$ for $i\neq j$. 
+	\end{enumerate}
+\end{solution}
+\begin{problem}\label{prob:4-8}
+Let $A \in M_n(\mathbb{C})$. Suppose
+\[
+A = \sum_{j=1}^{k} a_j P_j
+\]
+for some distinct scalars $a_1, a_2, \ldots, a_k$ and non-zero projections $P_1, P_2, \ldots, P_k$ satisfying $P_1 + P_2 + \cdots + P_k = I$. Show that $a_1, a_2, \ldots, a_k$ are eigenvalues of $A$ and the ranges of $P_1, P_2, \ldots, P_k$ are corresponding eigenspaces of $A$.
+\end{problem}
+\begin{solution}
+	For any nonzero $x\in V$ we have $(A-\lambda I)x=0$ iff $\sum_ia_jP_ix-\lambda\sum_iP_ix=0$ or, equivalently $\sum_i(a_i-\lambda)P_ix=0$. 
+	Let, $S:=\{i:P_ix\neq 0\}$(this is nonempty as otherwise we would have $x=Ix=\sum_iP_ix=0$ which contradicts our assumption that $x$ is nonzero), then $\sum_i(a_i-\lambda)P_ix=\sum_{i\in S}(a_i-\lambda)P_ix$ and as the vectors $\{P_ix\}_{i\in S}$ are mutually orthogonal and nonzero, they are mutually independent as well so we must have $a_i-\lambda=0$ for all $i\in S$, but as $a_i$ are distinct there exists an unique $j\in S$ with $a_j-\lambda=0$ and hence we must have $S=\{j\}$ as otherwise we would have a nontrivial linear combination of linearly independent vectors being $0$ which is not possible. 
+	We have thus proved that, $\lambda$ is an eigenvalue of $A$ with eigenvector $x$ iff there is an unique $P_j$ such that $P_jx\neq 0$, in which case $a_j=\lambda$ proving that $\sigma(A)\subseteq\{a_1,\ldots,a_k\}$ (inclusion in the other direction is easily shown by considering vectors in each of the ranges of these projections as these are nonzero projections with mutually orthogonal ranges so we have set equality here.) and $\ker(A-a_kI)\subseteq P_k(V)$ with set inclusion in the other direction being true as $v\in P_k(V)\implies Av=\sum_ia_iP_iv=a_kP_kv=a_kv$ as $P_iv=0$ for all $i\neq k$ due to the ranges of these projections being mutually orthogonal (this implies that $v\in P_i(V)^\perp=\ker(P_i^*)=\ker(P_i)$ as $P_i=P_i^*$ for $i\neq k)$. 
+	We have thus proved that $\sigma(A)=\{a_1,\ldots,a_k\}$ and $E_{a_k}=\ker(A-a_kI)=\text{Range}(P_k)$ so we are done.
+\end{solution}
+\begin{problem}\label{prob:4-9}
+Let $A = [a_{ij}]_{1 \leq i,j \leq n} \in M_n(\mathbb{C})$ be positive. Suppose the $i$-th diagonal entry $a_{ii} = 0$. Show that every entry in the $i$-th row and $i$-th column is zero, that is,
+\[
+a_{ij} = 0, \quad a_{ji} = 0, \quad \forall\, 1 \leq j \leq n.
+\]
+\end{problem}
+\begin{solution}
+	By \hyperref[prob:4-4]{Problem 1.4} and \hyperref[prob:4-3]{Problem 1.3} we can write $A=\sum_i u_iu_i^*$ for some vectors $u_i=(u_{i,1},\ldots,u_{i,n}))$. 
+	Then, if $a_{ii}=(A)_{ii}=\sum_ju_{i,j}\overline{u_{i,j}}=\sum_i|u_{i,j}|^2=0\implies\forall j,\,u_{i,j}=0$ and thus, we see that $a_{ij}=(A)_{ij}=\sum_ku_{i,k}\overline{u_{j,k}}=\sum_k0\cdot\overline{u_{j,k}}=0$ and $a_{ji}=0$ as well by self adjoincy.
+\end{solution}
+\begin{problem}\label{prob:4-10}
+Let $A \in M_n(\mathbb{C})$. Then $A$ is said to be \emph{strictly positive} if $A$ is self-adjoint and all its eigenvalues are strictly positive. Show that $A$ is strictly positive if and only if
+\[
+\langle x, Ax \rangle > 0,
+\]
+for all $0 \neq x \in \mathbb{C}^n$.
+\end{problem}
+\begin{solution}
+	For the if direction, we see that as $\ipp{x,Ax}>0$ for all $x$, $A$ is positive and hence self-adjoint. 
+	Now, if $\lambda$ is an eigenvalue with eigenvector $v\neq 0$ then $\ipp{v,Av}=\ipp{v,\lambda v}=\lambda\ipp{v,v}>0$ as $\lambda\in\bR$ and as $\ipp{v,v}>0$ (we had $v\neq 0$), this is only possible when $\lambda>0$ so $A$ is strictly positive. 
+	To prove the if direction, we can use the spectral theorem to first find an orthonormal basis of eigenvectors $\{u_1,\ldots,u_n\}$ corresponding to eigenvalues $\lambda_1,\ldots,\lambda_n>0$ respectively. 
+	Then by orthonormality and the fact that $\lambda_i$ are real we have 
+	\[
+		\ipp{x,Ax}=\ipp{\sum_i\ipp{u_i,x}u_i,\sum_i\ipp{u_i,x}\lambda_iu_i}=\sum_{i,j}\overline{\ipp{u_i,x}\lambda_j}\ipp{u_j,x}\ipp{u_i,u_j}=\sum_i\lambda_i|\ipp{u_i,x}|^2
+	\]
+	Again, as $u_i$ are orthonormal, for $x\neq 0$ we have that $0<\norm{x}^2=\norm{\sum_i\ipp{u_i,x}u_i}^2=\sum\norm{\ipp{u_i,x}u_i}^2=\sum_i|\ipp{u_i,x}|^2$ so there exists some $j$ with $|\ipp{u_j,x}|>0$ so we must have $\ipp{x,Ax}\geq\lambda_j|\ipp{u_j,x}^2|>0$ proving the claim.
+\end{solution}
+\end{document}
