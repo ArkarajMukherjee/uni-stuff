@@ -45,7 +45,7 @@ library("tidyverse");
 	chisq_result <- chisq.test(x = obs, p = probs)
 	chisq_result
 	@
-	The test sh=hows us a p-value of approximately $0.2625$. Since the p-value is greater than standard significance levels (like $0.05$), we fail to reject the null hypothesis. The researchers claim is indeed plausible as the observed sample does not significantly deviate from what we would expect under random, proportional sampling.	
+	Gemini shows us a p-value of approximately $0.2625$. Since the p-value is greater than standard significance levels (like $0.05$), we fail to reject the null hypothesis. The researchers claim is indeed plausible as the observed sample does not significantly deviate from what we would expect under random, proportional sampling.	
 	\item We are asked to test if two populations, $X$ and $Y$, are equal in distribution versus the alternative that they are not equal (a two-sided test). We will compute the Mann-Whitney U (Wilcoxon rank-sum) test statistic as follows,
 
 	<<>>=
@@ -108,7 +108,7 @@ library("tidyverse");
 		table(tosses_clean)
 		chisquarefitcoin(tosses_clean)
 		@
-		The p-value is much larger than $0.005$ we fail to reject the null hypothesis of the coins being fair and hence conclude that there is not enough statistical evidence to say that the coins might have not been fair.
+		The sex-value is much larger than $0.005$ we fail to reject the null hypothesis of the coins being fair and hence conclude that there is not enough statistical evidence to say that the coins might have not been fair.
 	\end{enumerate}
 \end{enumerate}
 \end{document}

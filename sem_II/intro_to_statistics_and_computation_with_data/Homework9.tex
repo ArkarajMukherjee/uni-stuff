@@ -70,12 +70,12 @@
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hldef{n} \hlkwb{<-} \hlnum{300000}
-\hldef{x_bar} \hlkwb{<-} \hlnum{8.515}
-\hldef{s} \hlkwb{<-} \hlnum{4.5}
-\hldef{mu_0} \hlkwb{<-} \hlnum{8.5}
+\hldef{n} \hlkwb{=} \hlnum{300000}
+\hldef{x_bar} \hlkwb{=} \hlnum{8.515}
+\hldef{s} \hlkwb{=} \hlnum{4.5}
+\hldef{mu_0} \hlkwb{=} \hlnum{8.5}
 \hlcom{#Calculating the T-statistic}
-\hldef{t_stat} \hlkwb{<-} \hldef{(x_bar} \hlopt{-} \hldef{mu_0)} \hlopt{/} \hldef{(s} \hlopt{/} \hlkwd{sqrt}\hldef{(n))}
+\hldef{t_stat} \hlkwb{=} \hldef{(x_bar} \hlopt{-} \hldef{mu_0)} \hlopt{/} \hldef{(s} \hlopt{/} \hlkwd{sqrt}\hldef{(n))}
 \hldef{t_stat}
 \end{alltt}
 \begin{verbatim}
@@ -88,7 +88,7 @@
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
 \hlcom{#Calculating the p-value using the t-distribution}
-\hldef{p_value_1} \hlkwb{<-} \hlkwd{pt}\hldef{(t_stat,} \hlkwc{df} \hldef{= n} \hlopt{-} \hlnum{1}\hldef{,} \hlkwc{lower.tail} \hldef{=} \hlnum{FALSE}\hldef{)}
+\hldef{p_value_1} \hlkwb{=} \hlkwd{pt}\hldef{(t_stat,} \hlkwc{df} \hldef{= n} \hlopt{-} \hlnum{1}\hldef{,} \hlkwc{lower.tail} \hldef{=} \hlnum{FALSE}\hldef{)}
 \hldef{p_value_1}
 \end{alltt}
 \begin{verbatim}
@@ -104,13 +104,13 @@
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
 \hlcom{#counts in the sample}
-\hldef{obs} \hlkwb{<-} \hlkwd{c}\hldef{(}\hlnum{13}\hldef{,} \hlnum{16}\hldef{,} \hlnum{10}\hldef{,} \hlnum{11}\hldef{)}
+\hldef{obs} \hlkwb{=} \hlkwd{c}\hldef{(}\hlnum{13}\hldef{,} \hlnum{16}\hldef{,} \hlnum{10}\hldef{,} \hlnum{11}\hldef{)}
 \hlcom{#Given population proportions}
-\hldef{probs} \hlkwb{<-} \hlkwd{c}\hldef{(}\hlnum{0.20}\hldef{,} \hlnum{0.24}\hldef{,} \hlnum{0.26}\hldef{,} \hlnum{0.30}\hldef{)}
+\hldef{probs} \hlkwb{=} \hlkwd{c}\hldef{(}\hlnum{0.20}\hldef{,} \hlnum{0.24}\hldef{,} \hlnum{0.26}\hldef{,} \hlnum{0.30}\hldef{)}
 \hlcom{#total sample size}
-\hldef{N} \hlkwb{<-} \hlnum{50}
+\hldef{N} \hlkwb{=} \hlnum{50}
 \hlcom{#Expected counts}
-\hldef{expected} \hlkwb{<-} \hldef{N} \hlopt{*} \hldef{probs}
+\hldef{expected} \hlkwb{=} \hldef{N} \hlopt{*} \hldef{probs}
 \hldef{expected}
 \end{alltt}
 \begin{verbatim}
@@ -118,7 +118,7 @@
 \end{verbatim}
 \begin{alltt}
 \hlcom{#Perform the Chi-Square Goodness of Fit Test}
-\hldef{chisq_result} \hlkwb{<-} \hlkwd{chisq.test}\hldef{(}\hlkwc{x} \hldef{= obs,} \hlkwc{p} \hldef{= probs)}
+\hldef{chisq_result} \hlkwb{=} \hlkwd{chisq.test}\hldef{(}\hlkwc{x} \hldef{= obs,} \hlkwc{p} \hldef{= probs)}
 \hldef{chisq_result}
 \end{alltt}
 \begin{verbatim}
@@ -130,22 +130,21 @@
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
-	The test sh=hows us a p-value of approximately $0.2625$. Since the p-value is greater than standard significance levels (like $0.05$), we fail to reject the null hypothesis. The researchers claim is indeed plausible as the observed sample does not significantly deviate from what we would expect under random, proportional sampling.	
+	The test sh=hows us a p-value of approximately $0.2623$. Since the p-value is greater than standard significance levels (like $0.05$), we fail to reject the null hypothesis. The researchers claim is indeed plausible as the observed sample does not significantly deviate from what we would expect under random, proportional sampling.	
 	\item We are asked to test if two populations, $X$ and $Y$, are equal in distribution versus the alternative that they are not equal (a two-sided test). We will compute the Mann-Whitney U (Wilcoxon rank-sum) test statistic as follows,
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hldef{X} \hlkwb{<-} \hlkwd{c}\hldef{(}\hlnum{53}\hldef{,} \hlnum{38}\hldef{,} \hlnum{69}\hldef{,} \hlnum{57}\hldef{,} \hlnum{46}\hldef{,} \hlnum{39}\hldef{,} \hlnum{73}\hldef{,} \hlnum{48}\hldef{,} \hlnum{73}\hldef{,} \hlnum{74}\hldef{,} \hlnum{60}\hldef{,} \hlnum{78}\hldef{)}
-\hldef{Y} \hlkwb{<-} \hlkwd{c}\hldef{(}\hlnum{44}\hldef{,} \hlnum{40}\hldef{,} \hlnum{61}\hldef{,} \hlnum{52}\hldef{,} \hlnum{32}\hldef{,} \hlnum{44}\hldef{,} \hlnum{70}\hldef{,} \hlnum{41}\hldef{,} \hlnum{67}\hldef{,} \hlnum{72}\hldef{,} \hlnum{53}\hldef{,} \hlnum{72}\hldef{)}
-\hldef{n_x} \hlkwb{<-} \hlkwd{length}\hldef{(X)}
-\hldef{n_y} \hlkwb{<-} \hlkwd{length}\hldef{(Y)}
-\hldef{comb} \hlkwb{<-} \hlkwd{c}\hldef{(X, Y)}
-\hldef{ranks} \hlkwb{<-} \hlkwd{rank}\hldef{(comb)}
+\hldef{X} \hlkwb{=} \hlkwd{c}\hldef{(}\hlnum{53}\hldef{,} \hlnum{38}\hldef{,} \hlnum{69}\hldef{,} \hlnum{57}\hldef{,} \hlnum{46}\hldef{,} \hlnum{39}\hldef{,} \hlnum{73}\hldef{,} \hlnum{48}\hldef{,} \hlnum{73}\hldef{,} \hlnum{74}\hldef{,} \hlnum{60}\hldef{,} \hlnum{78}\hldef{)}
+\hldef{Y} \hlkwb{=} \hlkwd{c}\hldef{(}\hlnum{44}\hldef{,} \hlnum{40}\hldef{,} \hlnum{61}\hldef{,} \hlnum{52}\hldef{,} \hlnum{32}\hldef{,} \hlnum{44}\hldef{,} \hlnum{70}\hldef{,} \hlnum{41}\hldef{,} \hlnum{67}\hldef{,} \hlnum{72}\hldef{,} \hlnum{53}\hldef{,} \hlnum{72}\hldef{)}
+\hldef{n_x} \hlkwb{=} \hlkwd{length}\hldef{(X)}
+\hldef{comb} \hlkwb{=} \hlkwd{c}\hldef{(X, Y)}
+\hldef{ranks} \hlkwb{=} \hlkwd{rank}\hldef{(comb)}
 \hlcom{#Sum of ranks for X}
-\hldef{R_x} \hlkwb{<-} \hlkwd{sum}\hldef{(ranks[}\hlnum{1}\hlopt{:}\hldef{n_x])}
+\hldef{R_x} \hlkwb{=} \hlkwd{sum}\hldef{(ranks[}\hlnum{1}\hlopt{:}\hldef{n_x])}
 \hlcom{#Calculate Mann-Whitney U statistic for X}
-\hldef{U_x} \hlkwb{<-} \hldef{R_x} \hlopt{-} \hldef{(n_x} \hlopt{*} \hldef{(n_x} \hlopt{+} \hlnum{1}\hldef{))} \hlopt{/} \hlnum{2}
+\hldef{U_x} \hlkwb{=} \hldef{R_x} \hlopt{-} \hldef{(n_x} \hlopt{*} \hldef{(n_x} \hlopt{+} \hlnum{1}\hldef{))} \hlopt{/} \hlnum{2}
 \hldef{U_x}
 \end{alltt}
 \begin{verbatim}
@@ -157,7 +156,7 @@
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hldef{wilcox_result} \hlkwb{<-} \hlkwd{wilcox.test}\hldef{(X, Y,} \hlkwc{alternative} \hldef{=} \hlsng{"two.sided"}\hldef{,} \hlkwc{exact} \hldef{=} \hlnum{FALSE}\hldef{)}
+\hldef{wilcox_result} \hlkwb{=} \hlkwd{wilcox.test}\hldef{(X, Y,} \hlkwc{alternative} \hldef{=} \hlsng{"two.sided"}\hldef{,} \hlkwc{exact} \hldef{=} \hlnum{FALSE}\hldef{)}
 \hldef{wilcox_result}
 \end{alltt}
 \begin{verbatim}
@@ -170,7 +169,7 @@
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
-	The computed test statistic $W$ (which matches our calculated $U_X$) is 92. The p-value is approximately $0.2452$. Because the p-value is greater than 0.05, we fail to reject the null hypothesis. We do not have sufficient statistical evidence to conclude that the two populations are not equal in distribution.
+	The computed test statistic $W$ (which matches our calculated $U_X$) is $89.5$. The p-value is approximately $0.3259$. Because the p-value is greater than 0.05, we fail to reject the null hypothesis. We do not have sufficient statistical evidence to conclude that the two populations are not equal in distribution.
 	\item We have changed anything corresoponding to a head to $1$ and tail to $0$ in the csv using a text editor. We also work with a significance level of $0.005$
 	\begin{enumerate}[label=(\alph*)]
 		\item 
@@ -217,10 +216,10 @@
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hldef{chisquarefitcoin} \hlkwb{<-} \hlkwa{function}\hldef{(}\hlkwc{x}\hldef{) \{}
-\hldef{observed_counts} \hlkwb{<-} \hlkwd{table}\hldef{(x)}
-\hldef{expected_probs} \hlkwb{<-} \hlkwd{c}\hldef{(}\hlnum{0.5}\hldef{,} \hlnum{0.5}\hldef{)}
-\hldef{result} \hlkwb{<-} \hlkwd{chisq.test}\hldef{(}\hlkwc{x} \hldef{= observed_counts,} \hlkwc{p} \hldef{= expected_probs)}
+\hldef{chisquarefitcoin} \hlkwb{=} \hlkwa{function}\hldef{(}\hlkwc{x}\hldef{) \{}
+\hldef{observed_counts} \hlkwb{=} \hlkwd{table}\hldef{(x)}
+\hldef{expected_probs} \hlkwb{=} \hlkwd{c}\hldef{(}\hlnum{0.5}\hldef{,} \hlnum{0.5}\hldef{)}
+\hldef{result} \hlkwb{=} \hlkwd{chisq.test}\hldef{(}\hlkwc{x} \hldef{= observed_counts,} \hlkwc{p} \hldef{= expected_probs)}
 \hlkwd{return}\hldef{(result)}
 \hldef{\}}
 \hldef{lot_of_cols} \hlkwb{=} \hlkwd{paste}\hldef{(}\hlsng{"Toss"}\hldef{,} \hlnum{1}\hlopt{:}\hlnum{25}\hldef{)}

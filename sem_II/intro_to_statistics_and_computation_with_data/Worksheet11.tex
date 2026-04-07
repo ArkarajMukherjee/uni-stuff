@@ -1,0 +1,282 @@
+\documentclass[12pt,english]{article}\usepackage[]{graphicx}\usepackage[]{xcolor}
+% maxwidth is the original width if it is less than linewidth
+% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlsng}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hldef}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+\let\hlipl\hlkwb
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+\usepackage{mypreamble}
+\usepackage{myRpreamble}
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+\textbf{Arkaraj Mukherjee} \\ \textbf{Worksheet 11}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{library}\hldef{(}\hlsng{"tidyverse"}\hldef{);}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+\begin{enumerate}[label=\arabic*.]
+	\item \begin{enumerate}[label=(\alph*)]
+			\item \begin{enumerate}[label=(\alph*)]
+					\item 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hldef{bootmean} \hlkwb{=} \hlkwa{function}\hldef{(}\hlkwc{x}\hldef{,}\hlkwc{B}\hldef{)}
+        \hlkwd{return}\hldef{(}\hlkwd{replicate}\hldef{(B,}\hlkwd{mean}\hldef{(}\hlkwd{sample}\hldef{(x,}\hlkwd{length}\hldef{(x),}\hlkwc{replace}\hldef{=}\hlnum{TRUE}\hldef{))))}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+					\item
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hldef{bootmedian} \hlkwb{=} \hlkwa{function}\hldef{(}\hlkwc{x}\hldef{,}\hlkwc{B}\hldef{)}
+        \hlkwd{return}\hldef{(}\hlkwd{replicate}\hldef{(B,}\hlkwd{median}\hldef{(}\hlkwd{sample}\hldef{(x,}\hlkwd{length}\hldef{(x),}\hlkwc{replace}\hldef{=}\hlnum{TRUE}\hldef{))))}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+			\end{enumerate}
+			\item \begin{enumerate}[label=(\alph*)]
+			    	\item
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hldef{jackknife} \hlkwb{=} \hlkwa{function}\hldef{(}\hlkwc{x}\hldef{,}\hlkwc{f}\hldef{) \{}
+        \hldef{n} \hlkwb{=} \hlkwd{length}\hldef{(x);}
+        \hldef{jk_est} \hlkwb{=} \hlkwd{vector}\hldef{(n,}\hlkwc{mode}\hldef{=}\hlsng{"numeric"}\hldef{);}
+        \hldef{thing} \hlkwb{=} \hlkwd{f}\hldef{(x);}
+        \hlkwa{for}\hldef{(i} \hlkwa{in} \hlnum{1}\hlopt{:}\hldef{n) jk_est[i]} \hlkwb{=} \hlkwd{f}\hldef{(x[}\hlopt{-}\hldef{i]);}
+        \hldef{thing_2} \hlkwb{=} \hlkwd{mean}\hldef{(jk_est);}
+        \hldef{jk_bias} \hlkwb{=} \hldef{(n}\hlopt{-}\hlnum{1}\hldef{)}\hlopt{*}\hldef{(thing_2} \hlopt{-} \hldef{thing);}
+        \hldef{jk_se} \hlkwb{=} \hlkwd{sqrt}\hldef{(((n} \hlopt{-} \hlnum{1}\hldef{)}\hlopt{/}\hldef{n)}\hlopt{*}\hlkwd{sum}\hldef{((jk_est} \hlopt{-} \hldef{thing_2)}\hlopt{^}\hlnum{2}\hldef{));}
+        \hlkwd{return}\hldef{(}\hlkwd{list}\hldef{(}\hlkwc{bias}\hldef{=jk_bias,}\hlkwc{se}\hldef{=jk_se))}
+\hldef{\}}
+
+\hldef{jack_mean_bias} \hlkwb{=} \hlkwa{function}\hldef{(}\hlkwc{x}\hldef{) \{}\hlkwd{jackknife}\hldef{(x,mean)}\hlopt{$}\hldef{bias\}}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+					\item
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hldef{jack_mean_se} \hlkwb{=} \hlkwa{function}\hldef{(}\hlkwc{x}\hldef{) \{}\hlkwd{jackknife}\hldef{(x,mean)}\hlopt{$}\hldef{se\}}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+			\end{enumerate}	
+	\end{enumerate}
+	\item
+		\begin{enumerate}[label=(\alph*)]
+			\item 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{set.seed}\hldef{(}\hlnum{123}\hldef{)}
+\hldef{F_pois} \hlkwb{=} \hlkwd{rpois}\hldef{(}\hlnum{50}\hldef{,}\hlkwc{lambda}\hldef{=}\hlnum{4}\hldef{);}
+\hldef{F_norm} \hlkwb{=} \hlkwd{rnorm}\hldef{(}\hlnum{50}\hldef{,}\hlkwc{mean}\hldef{=}\hlnum{0}\hldef{,}\hlkwc{sd}\hldef{=}\hlnum{1}\hldef{);}
+\hldef{B}\hlkwb{=}\hlnum{1000}\hldef{;}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+			\item
+				\begin{enumerate}[label=(\alph*)]
+					\item 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{#poisson}
+\hldef{pois_boot_mean} \hlkwb{=} \hlkwd{bootmean}\hldef{(F_pois,B)}
+\hlkwd{mean}\hldef{(pois_boot_mean)}
+\end{alltt}
+\begin{verbatim}
+## [1] 4.2589
+\end{verbatim}
+\begin{alltt}
+\hldef{pois_boot_median} \hlkwb{=} \hlkwd{bootmedian}\hldef{(F_pois,B)}
+\hlkwd{mean}\hldef{(pois_boot_median)}
+\end{alltt}
+\begin{verbatim}
+## [1] 3.968
+\end{verbatim}
+\begin{alltt}
+\hlcom{#normal}
+\hldef{norm_boot_mean} \hlkwb{=} \hlkwd{bootmean}\hldef{(F_norm,B)}
+\hlkwd{mean}\hldef{(norm_boot_mean)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.0586859
+\end{verbatim}
+\begin{alltt}
+\hldef{norm_boot_median} \hlkwb{=} \hlkwd{bootmedian}\hldef{(F_norm,B)}
+\hlkwd{mean}\hldef{(norm_boot_median)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.03506994
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+					\item
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{#poisson}
+\hldef{pois_boot_mean_se} \hlkwb{=} \hlkwd{sd}\hldef{(pois_boot_mean)}
+\hldef{pois_boot_mean_se}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.2997349
+\end{verbatim}
+\begin{alltt}
+\hldef{pois_boot_median_se} \hlkwb{=} \hlkwd{sd}\hldef{(pois_boot_median)}
+\hldef{pois_boot_median_se}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.4308847
+\end{verbatim}
+\begin{alltt}
+\hlcom{#normal}
+\hldef{norm_boot_mean_se} \hlkwb{=} \hlkwd{sd}\hldef{(norm_boot_mean)}
+\hldef{norm_boot_mean_se}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.1283791
+\end{verbatim}
+\begin{alltt}
+\hldef{norm_boot_median_se} \hlkwb{=} \hlkwd{sd}\hldef{(norm_boot_median)}
+\hldef{norm_boot_median_se}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.165529
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+					\item
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hldef{n} \hlkwb{=} \hlnum{50}
+\hlcom{# Theoretical SE for Mean}
+\hldef{theo_pois_mean_se} \hlkwb{=} \hlkwd{sqrt}\hldef{(}\hlnum{4}\hldef{)}\hlopt{/}\hlkwd{sqrt}\hldef{(n)}
+\hldef{theo_norm_mean_se} \hlkwb{=} \hlnum{1}\hlopt{/}\hlkwd{sqrt}\hldef{(n)}
+
+\hlcom{# Theoretical SE for Median (Normal)}
+\hldef{theo_norm_median_se} \hlkwb{=} \hlnum{1} \hlopt{/} \hldef{(}\hlnum{2} \hlopt{*} \hlkwd{sqrt}\hldef{(n)} \hlopt{*} \hlkwd{dnorm}\hldef{(}\hlnum{0}\hldef{))}
+\hldef{theo_pois_median_se} \hlkwb{=} \hlnum{NA} \hlcom{#as poisson RVs are not continuous}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+                
+                		The theoretical SE for the Poisson mean is $\sqrt{4/50} \approx 0.2828$, which compares to the bootstrap estimate of $0.2997$. 
+                
+                		The theoretical SE for the Normal mean is $1/\sqrt{50} \approx 0.1414$, comparing to the bootstrap estimate of $0.1284$.
+                
+                		The theoretical SE for the Normal median is $\frac{1}{2\sqrt{50}f(0)} \approx 0.1772$, compared to the bootstrap estimate of $0.1655$.
+				\end{enumerate}
+			\item \begin{enumerate}[label=(\alph*)]
+					\item(\text{and (b)})
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{# Calculate Jackknife estimates for Poisson}
+\hldef{pois_jack_mean} \hlkwb{=} \hlkwd{jackknife}\hldef{(F_pois, mean)}
+\hldef{pois_jack_median} \hlkwb{=} \hlkwd{jackknife}\hldef{(F_pois, median)}
+\hlcom{# Calculate Jackknife estimates for Normal}
+\hldef{norm_jack_mean} \hlkwb{=} \hlkwd{jackknife}\hldef{(F_norm, mean)}
+\hldef{norm_jack_median} \hlkwb{=} \hlkwd{jackknife}\hldef{(F_norm, median)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+						refer to the defintion of the function \texttt{jackknife} to notice that all of these variables are lists containing the bias and standard errors.		
+			\end{enumerate}
+			\item 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{#means}
+\hlkwd{cat}\hldef{(}\hlsng{"Poisson: The bootstrap SE is"}\hldef{, pois_boot_mean_se,}
+\hlsng{"\textbackslash{}n and the jackknife SE is"}\hldef{, pois_jack_mean}\hlopt{$}\hldef{se,} \hlsng{"\textbackslash{}n"}\hldef{)}
+\end{alltt}
+\begin{verbatim}
+## Poisson: The bootstrap SE is 0.2997349 
+##  and the jackknife SE is 0.2980344
+\end{verbatim}
+\begin{alltt}
+\hlkwd{cat}\hldef{(}\hlsng{"Normal:  The bootstrap SE is"}\hldef{, norm_boot_mean_se,}
+\hlsng{"\textbackslash{}n and the jackknife SE is"}\hldef{,norm_jack_mean}\hlopt{$}\hldef{se,} \hlsng{"\textbackslash{}n\textbackslash{}n"}\hldef{)}
+\end{alltt}
+\begin{verbatim}
+## Normal:  The bootstrap SE is 0.1283791 
+##  and the jackknife SE is 0.1325787
+\end{verbatim}
+\begin{alltt}
+\hlcom{#medians}
+\hlkwd{cat}\hldef{(}\hlsng{"Poisson: The bootstrap SE is"}\hldef{, pois_boot_median_se,}
+\hlsng{"\textbackslash{}n compared to the jackknife SE of"}\hldef{, pois_jack_median}\hlopt{$}\hldef{se,} \hlsng{"\textbackslash{}n"}\hldef{)}
+\end{alltt}
+\begin{verbatim}
+## Poisson: The bootstrap SE is 0.4308847 
+##  compared to the jackknife SE of 0
+\end{verbatim}
+\begin{alltt}
+\hlkwd{cat}\hldef{(}\hlsng{"Normal:  The bootstrap SE is"}\hldef{, norm_boot_median_se,}
+\hlsng{"\textbackslash{}n compared to the jackknife SE of"}\hldef{, norm_jack_median}\hlopt{$}\hldef{se,} \hlsng{"\textbackslash{}n"}\hldef{)}
+\end{alltt}
+\begin{verbatim}
+## Normal:  The bootstrap SE is 0.165529 
+##  compared to the jackknife SE of 0.2854284
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+				
+			\end{enumerate}
+		\end{enumerate}
+\end{enumerate}
+\end{document}

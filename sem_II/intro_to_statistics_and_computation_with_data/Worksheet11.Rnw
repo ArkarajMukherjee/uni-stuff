@@ -1,0 +1,129 @@
+\documentclass[12pt,english]{article}
+\usepackage{mypreamble}
+\usepackage{myRpreamble}
+\begin{document}
+\textbf{Arkaraj Mukherjee} \\ \textbf{Worksheet 11}
+<<>>=
+library("tidyverse");
+@
+\begin{enumerate}[label=\arabic*.]
+	\item \begin{enumerate}[label=(\alph*)]
+			\item \begin{enumerate}[label=(\alph*)]
+					\item 
+						<<>>=
+						bootmean = function(x,B) 
+							return(replicate(B,mean(sample(x,length(x),replace=TRUE))))
+						@
+					\item
+						<<>>=
+						bootmedian = function(x,B) 
+							return(replicate(B,median(sample(x,length(x),replace=TRUE))))
+						@
+			\end{enumerate}
+			\item \begin{enumerate}[label=(\alph*)]
+			    	\item
+						<<>>=
+						jackknife = function(x,f) {
+							n = length(x);
+							jk_est = vector(n,mode="numeric");
+							thing = f(x);
+							for(i in 1:n) jk_est[i] = f(x[-i]);
+							thing_2 = mean(jk_est);
+							jk_bias = (n-1)*(thing_2 - thing);
+							jk_se = sqrt(((n - 1)/n)*sum((jk_est - thing_2)^2));
+							return(list(bias=jk_bias,se=jk_se))
+						}
+								
+						jack_mean_bias = function(x) {jackknife(x,mean)$bias}
+						@
+					\item
+						<<>>=
+						jack_mean_se = function(x) {jackknife(x,mean)$se}
+						@
+			\end{enumerate}	
+	\end{enumerate}
+	\item
+		\begin{enumerate}[label=(\alph*)]
+			\item 
+				<<>>=
+				set.seed(123)
+				F_pois = rpois(50,lambda=4);
+				F_norm = rnorm(50,mean=0,sd=1);
+				B=1000;
+				@
+			\item
+				\begin{enumerate}[label=(\alph*)]
+					\item 
+						<<>>=
+						#poisson
+						pois_boot_mean = bootmean(F_pois,B)
+						mean(pois_boot_mean)
+						pois_boot_median = bootmedian(F_pois,B)
+						mean(pois_boot_median)
+						#normal
+						norm_boot_mean = bootmean(F_norm,B)
+						mean(norm_boot_mean)
+						norm_boot_median = bootmedian(F_norm,B)
+						mean(norm_boot_median)
+						@
+					\item
+						<<>>=
+						#poisson
+						pois_boot_mean_se = sd(pois_boot_mean)
+						pois_boot_mean_se
+						pois_boot_median_se = sd(pois_boot_median)
+						pois_boot_median_se
+						#normal
+						norm_boot_mean_se = sd(norm_boot_mean)
+						norm_boot_mean_se
+						norm_boot_median_se = sd(norm_boot_median)
+						norm_boot_median_se
+						@
+					\item
+						<<>>=
+						n = 50
+						# Theoretical SE for Mean
+						theo_pois_mean_se = sqrt(4)/sqrt(n)
+						theo_norm_mean_se = 1/sqrt(n)
+	
+						# Theoretical SE for Median (Normal)
+						theo_norm_median_se = 1 / (2 * sqrt(n) * dnorm(0))
+						theo_pois_median_se = NA #as poisson RVs are not continuous
+                		@
+                
+                		The theoretical SE for the Poisson mean is $\sqrt{4/50} \approx \Sexpr{round(theo_pois_mean_se, 4)}$, which compares to the bootstrap estimate of $\Sexpr{round(pois_boot_mean_se, 4)}$. 
+                
+                		The theoretical SE for the Normal mean is $1/\sqrt{50} \approx \Sexpr{round(theo_norm_mean_se, 4)}$, comparing to the bootstrap estimate of $\Sexpr{round(norm_boot_mean_se, 4)}$.
+                
+                		The theoretical SE for the Normal median is $\frac{1}{2\sqrt{50}f(0)} \approx \Sexpr{round(theo_norm_median_se, 4)}$, compared to the bootstrap estimate of $\Sexpr{round(norm_boot_median_se, 4)}$.
+				\end{enumerate}
+			\item \begin{enumerate}[label=(\alph*)]
+					\item(\text{and (b)})
+						<<>>=
+						# Calculate Jackknife estimates for Poisson
+						pois_jack_mean = jackknife(F_pois, mean)
+						pois_jack_median = jackknife(F_pois, median)
+						# Calculate Jackknife estimates for Normal
+						norm_jack_mean = jackknife(F_norm, mean)
+						norm_jack_median = jackknife(F_norm, median)
+						@
+						refer to the defintion of the function \texttt{jackknife} to notice that all of these variables are lists containing the bias and standard errors.		
+			\end{enumerate}
+			\item 
+				<<>>=
+				#means
+cat("Poisson: The bootstrap SE is", pois_boot_mean_se,
+"\n and the jackknife SE is", pois_jack_mean$se, "\n")
+cat("Normal:  The bootstrap SE is", norm_boot_mean_se,
+"\n and the jackknife SE is",norm_jack_mean$se, "\n\n")
+				#medians
+cat("Poisson: The bootstrap SE is", pois_boot_median_se,
+"\n compared to the jackknife SE of", pois_jack_median$se, "\n")
+cat("Normal:  The bootstrap SE is", norm_boot_median_se,
+"\n compared to the jackknife SE of", norm_jack_median$se, "\n")
+				@
+				
+			\end{enumerate}
+		\end{enumerate}
+\end{enumerate}
+\end{document}
