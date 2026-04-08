@@ -1,0 +1,151 @@
+\documentclass[12pt,english]{article}
+\usepackage{mypreamble,myRpreamble,enumitem}
+\begin{document}
+{\bf Arkaraj Mukherjee \\ Worksheet 12}
+<<>>=
+library("tidyverse");
+@
+
+\begin{enumerate}[label=\arabic*.]
+\item \begin{enumerate}[label=(\alph*)]
+		\item We have that 
+			\[
+				L(\beta_1)=\prod_{i=1}^{15}\prod_{j=1}^{15} \frac{e^{\beta_1(x_i-x_j)^2}}{1+e^{\beta_1(x_i-x_j)^2}}
+			\]
+		\item 
+			<<>>=
+			x = c(11,9,12,9,10,11,7,9,10,9,10,10,9,11,8)
+			# we make the adjacency matrix first
+			G = matrix(data=0,nrow=15,ncol=15)
+			G[1,c(6,9)]=1
+			G[2,c(8,12)]=1
+			G[4,10]=1
+			G[5,9]=1
+			G[6,14]=1
+			G[7,15]=1
+			G[8,c(10,11,15)]=1
+			G[9,11]=1
+			G[13,15]=1
+			G = G + t(G)
+			Prob = function(x,i,j,beta) {
+			exp(beta*(x[i]-x[j])^2)/(1+exp(beta*(x[i]-x[j])^2))
+			}
+			init_L = function(x,G,beta) {
+				P = 1
+				for(i in 1:nrow(G)) {
+					for(j in 1:ncol(G)) {
+						if( G[i,j] == 1 ) {P = P * Prob(x,i,j,beta)}
+						if( G[i,j] == 0 ) {P = P * (1 - Prob(x,i,j,beta))}
+					}
+				}
+				P
+			}
+			L_1 = function(beta) { init_L(x,G,beta) }
+			ggplot() +
+			geom_function(fun = L_1, xlim = c(-20,20))
+			#clearly L is C_c(R) and we see that it spikes near 0, in (-10,10)
+			beta_1 = optimise(L_1, c(-10,10),maximum=TRUE)$maximum
+			beta_1
+			@
+			This is a good guess by MLE theory
+\end{enumerate}
+\item
+	\begin{enumerate}[label=(\alph*)]
+	\item
+		<<>>=
+			#clearly the function to plot is p(1-p)
+			f_1 = function(x) x*(1-x)
+			ggplot()+
+			geom_function(fun = f_1, xlim = c(-10,10))
+			#the maximum is
+			optimise(f_1, c(-10,10),maximum=TRUE)$maximum
+		@
+	\item This probability is $p^{\sum_{i=1}^ny_i}(1-p)^{n-\sum_{i=1}^ny_i}$ as $Y_1,\ldots,Y_n\sim$ i.i.d. $\text{Bin}(1,p)$
+	\item Here we clearly see that $L(p)=p^3(1-p)^2$
+		<<>>=
+		f_2 = function(x) x^3 * (1-x)^2
+		plot(x=(0:40)/40, y = f_2((0:40)/40))
+		plot(x=(0:40)/40, y = log(f_2((0:40)/40)))
+		@
+	\item
+		<<>>=
+		optimise(f_2, c(0,1), maximum=TRUE)$maximum
+		@
+	\item $\hat{p}$ is a good guess for the actual value of $p$ that might result in such a result by MLE theory.
+	\item
+		\[
+			\log\tilde{L}(\beta_0)=\log L(p)=\log\qty(p^{\sum y_i}(1-p)^{n-\sum y_i})=\log\qty(\qty( \frac{e^{\beta_0}}{1+e^{\beta_0}})^{\sum y_i}\qty( \frac{1}{1+e^{\beta_0}})^{n-\sum y_i})
+		\]
+		\[
+			=\log\qty(e^{\beta_0\sum y_i}(1+e^{\beta_0})^{-n})=n\log\qty( \frac{1}{1+e^{\beta_0}})+\sum_{i=1}^n\beta_0y_i=\sum_{i=1}^n\qty(y_i\beta_0+\log\qty( \frac{1}{1+e^{\beta_0}}))
+		\]
+		We will proceed finding the \texttt{argmax} by maximising the log variant instead as $\log$ is a strictly increasing function on its domain. We will use the double derivative test
+		\[
+			\frac{d}{d\beta_0}\log\tilde{L}(\beta_0) = \sum_{i=1}^{n}y_i+n\frac{e^{\beta_0}}{(1+e^{\beta_0})}=0\implies \frac{e^{\beta_0}}{(1+e^{\beta_0})} = \frac{1}{n}\sum_{i=1}^ny_i
+		\]
+		\[
+			\frac{d^2}{d\beta_0^2}\log\tilde{L}(\beta_0) = -n\qty( \frac{e^{\beta_0}}{(1+e^{\beta_0})^2})<0
+		\]
+		so by the double derivative rule there is unique maxima, achieved when the first derivative is $0$, solving that linear equation in $e^{\beta_0}$ and taking log gives,
+		\[
+			\hat{\beta_0}=\log\qty(\frac{\bar{y}}{1-\bar{y}})
+		\]
+		after some manipulation, where $\bar{y}=n^{-1}\sum_{i=1}^ny_i$
+		\item It is $\log((3/5)/(1-(3/5)))=\log((3/5)/(2/5))=\log(3)-\log(2)$
+			<<>>=
+			log(1.5)
+			@
+			
+		\item From the previous part,a good guess for $p$ here would be $\bar{y}=3/5$ so the probability for them to to win their next match would be (as the outcomes are independent), $p=3/5$
+	\end{enumerate}
+\item \begin{enumerate}[label=(\alph*)]
+		\item by the previous problem we see that,
+			<<>>=
+			beta_0_hat = log((724/2224)/(1-(724/2224)))
+			beta_0_hat
+			@
+		\item The probability of survival for any passenger is $724/2224$ which is
+			<<>>=
+			724/2224
+			@
+		\item The probability of death approximately $1-0.674=0.326<0.5$ so we can predict that this person likely died.
+\end{enumerate}
+\item \begin{enumerate}[label=(\alph*)]
+		\item The lower levels (more depth) should correspond to lower fairs so we consider functions that map fare to depth and these have to be decreasing. Five examples of functions $f: \mathbb{R} \to [0,1]$ are:
+		\begin{itemize}
+			\item $f_1(x) = \frac{e^x}{1+e^x}$ 
+			\item $f_2(x) = \Phi(x) \text{standard normal cdf}$ 
+			\item $f_3(x) = \frac{1}{\pi}\arctan(x) + \frac{1}{2}$
+			\item $f_4(x) = \frac{1}{2}\qty(1 + \text{erf}(x))$
+			\item $f_5(x) = e^{-x^2}$
+		\end{itemize}
+		\item \begin{enumerate}[label=\roman*.]
+			\item 
+			<<>>=
+			p_i = function(x, beta_1) { exp(beta_1*x)/(1+exp(beta_1*x)) }
+			ggplot() +
+			geom_function(fun = function(x) p_i(x, -1), aes(color = "-1"),
+			xlim=c(-10,10)) +
+			geom_function(fun = function(x) p_i(x, 0.5), aes(color = "0.5"),
+			xlim=c(-10,10)) +
+			geom_function(fun = function(x) p_i(x, 1), aes(color = "1"),
+			xlim=c(-10,10)) +
+			geom_function(fun = function(x) p_i(x, 10), aes(color = "10"),
+			xlim=c(-10,10)) +
+			labs(color = "beta_1", x = "x_i", y = "p_i")
+			@
+			\item The function $p_i(x_i)$ is an increasing function of $x_i$ when $\beta_1 > 0$. An increasing function implies that as the fare ($x_i$) increases, the probability of survival ($p_i$) also increases. Conversely, a decreasing function (when $\beta_1 < 0$) implies that paying a higher fare corresponds to a lower probability of survival.
+			\item When $x_i = 0$, $p_i = \frac{e^0}{1+e^0} = \frac{1}{2} = 0.5$. This seems too high for the Titanic data. Since the overall baseline survival rate was much lower (approximately $32.55\%$), a fare of $0$ (representing the poorest passengers or crew members) should correspond to a survival probability significantly lower than the average.
+			\item We can modify the function by adding an intercept term $\beta_0$ to the exponent:
+			\[
+				p_i(x_i) = \frac{e^{\beta_0 + \beta_1 x_i}}{1 + e^{\beta_0 + \beta_1 x_i}}
+			\]
+		\end{enumerate}
+		\item Using the modified function from part (b)iv, the likelihood function is the product of the probabilities of the observed independent outcomes:
+		\[
+			L(\beta_0, \beta_1) = \prod_{i=1}^n p_i(x_i)^{y_i} (1-p_i(x_i))^{1-y_i} = \prod_{i=1}^n \qty( \frac{e^{\beta_0 + \beta_1 x_i}}{1 + e^{\beta_0 + \beta_1 x_i}} )^{y_i} \qty( \frac{1}{1 + e^{\beta_0 + \beta_1 x_i}} )^{1-y_i}
+		\]
+		\item We can use Maximum Likelihood Estimation (MLE). By taking the natural logarithm of the likelihood function to obtain the log-likelihood $\log L(\beta_0, \beta_1)$, we can compute its partial derivatives with respect to $\beta_0$ and $\beta_1$. Setting these partial derivatives to $0$ gives a system of equations. Solving this system (typically using numerical optimization algorithms like \texttt{optimise} in R) will yield the estimates $(\hat{\beta}_0, \hat{\beta}_1)$ that maximize the likelihood of observing our data.
+\end{enumerate}
+\end{enumerate}
+\end{document}
