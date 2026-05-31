@@ -1,0 +1,1108 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath, amssymb, amsthm, graphicx,physics}
+\usepackage{enumerate}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage[dvipsnames]{xcolor}
+\definecolor{EvanPink}{rgb}{0.85, 0.13, 0.55}
+\usepackage[colorlinks=true,
+            linkcolor=OliveGreen,
+            urlcolor=EvanPink,
+            citecolor=OliveGreen]{hyperref}
+\usepackage{cleveref}
+\usepackage{etoolbox}
+\newenvironment{solution}{%
+  \par\noindent\textit{Solution.}\ }{\qed}
+\newtheoremstyle{problemstyle}
+  {1em}   
+  {1em}   
+  {}      
+  {}      
+  {\bfseries} 
+  {.}     
+  {0.5em} 
+  {}      
+\theoremstyle{problemstyle}
+\newtheorem{problem}{Problem}[section]
+\apptocmd{\problem}{%
+  \addcontentsline{toc}{subsection}{Problem~\thesection.\arabic{problem}}%
+}{}{}
+\crefname{problem}{Problem}{Problems}
+\Crefname{problem}{Problem}{Problems}
+\setcounter{tocdepth}{2}
+\title{\textbf{Linear Algebra II} \\ \large Home Assignments}
+\author{Arkaraj Mukherjee \\ B.Math., First Year, ISI Bangalore}
+\date{\today}
+\def\bN{\mathbb{N}}
+\def\bR{\mathbb{R}}
+\def\bZ{\mathbb{Z}}
+\def\bQ{\mathbb{Q}}
+\def\bC{\mathbb{C}}
+\def\sgn{\epsilon}
+\def\w{\omega}
+\def\sgn{\epsilon}
+\newcommand{\inp}[2]{{\left\langle{#1},{#2}\right\rangle}}
+\newcommand{\ipp}[1]{{\left\langle{#1}\right\rangle}}
+\begin{document}
+\maketitle
+\newpage
+\tableofcontents
+\newpage
+\section{Home Assignment I (Due: Feb 1, 2026)}
+\noindent \textbf{Notation:} In the following, for any permutation $\tau$, let $\epsilon(\tau)$ denote the signature of $\tau$.
+\begin{problem}\label{prob:1.1}
+    Consider the permutation $\sigma := (2,5)(1,4,3)$ of the set $\{1, 2, 3, 4, 5, 6\}$.
+    \begin{enumerate}
+        \item Write down the matrices $P^{\sigma}$ and $P^{\sigma^{-1}}$.
+        \item Verify that $\det(P^{\sigma}) = \epsilon(\sigma)$ for this permutation $\sigma$.
+    \end{enumerate}
+\end{problem}
+\begin{solution}
+    It is clear that $\sigma^{-1} = (2,5)(1,3,4)(6)$ which gives,
+$$P^{\sigma}=\begin{bmatrix}
+0 & 0 & 1 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 1 & 0\\
+0 & 0 & 0 & 1 & 0 & 0\\
+1 & 0 & 0 & 0 & 0 & 0\\
+0 & 1 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0 & 1
+\end{bmatrix}\hspace{5pt},
+P^{\sigma^{-1}}=\begin{bmatrix}
+0 & 0 & 0 & 1 & 0 & 0\\
+0 & 0 & 0 & 0 & 1 & 0\\
+1 & 0 & 0 & 0 & 0 & 0\\
+0 & 0 & 1 & 0 & 0 & 0\\
+0 & 1 & 0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0 & 0 & 1
+\end{bmatrix}$$
+For the second question, its clear that the only nonzero term in the determinant is the term that corresponds to $\sigma^{-1}$ which is: 
+$$\epsilon(\sigma^{-1})a_{1,\sigma^{-1}(1)}\cdots a_{n,\sigma^{-1}(6)}=\epsilon(\sigma^{-1})\cdot 1\cdots 1$$ 
+$$=\epsilon(\sigma^{-1})=\epsilon(\sigma^{-1})\cdot\underbrace{\epsilon(\sigma)^2}_{=1}=(\epsilon(\sigma^{-1})\cdot\epsilon(\sigma))\cdot\epsilon(\sigma)=\epsilon(\sigma^{-1}\sigma)\cdot\epsilon(\sigma)=\epsilon(\textbf{Id})\cdot\epsilon(\sigma)=1\cdot\epsilon(\sigma)=\epsilon(\sigma)$$
+\end{solution}
+\begin{problem}\label{prob:1.2}
+    Let $A$ be a real matrix of order $3 \times 3$ and let $r_1, r_2$ and $r_3$ be the rows of $A$. Let $P$ be the parallelepiped in $\mathbb{R}^3$ whose vertices are:
+    \[
+        0, \quad r_1, \quad r_2, \quad r_3, \quad r_1+r_2, \quad r_2+r_3, \quad r_1+r_3 \quad \text{and} \quad r_1+r_2+r_3
+    \]
+    Prove that the volume of $P$ is the absolute value of $\det(A)$. \\
+    \textit{(Hint: Compare the effect of an elementary row operation on the volume and on $\det(A)$.)}
+\end{problem}
+\begin{solution}
+    If $r_1,r_2,r_3$ are not linearly independant then one of them lies in the plane spanned by the other two in which case the parallelepiped formed with them as mentioned in the problem has volume $0$ and the determinant in question is also $0$ so we have proved one case. 
+    Now assume that these vectors are linearly independant. 
+    As they are linearly independant, the matrix with them as rows has full rank and we can reah it starting from $I_3$ using elementary row operations, let these be left multiplication by $E_1,\ldots,E_n$ as done in the previous linear algebra course. 
+    Label the rows $R_1,R_2,R_3$, then we see that $R_i\to\alpha\cdot R_i$ dilates the parallelepiped by $\alpha$ which results in the volume changing by $|\alpha|$ multiplicatively while the absolute value of our matrix also changes by $|\alpha|$. 
+    Under the operation $R_i\to R_i+\alpha R_j$ for distinct $i,j$ we find that the volume does not change and neither does the determinant (thus its absolute value doesn't either). 
+    We know that $|\det(I_3)|=\text{Vol}(P_I)$ where we define $P_M$ to be the parallelepiped which uses the rows of matrix $M$ instead of $r_i$ in the same manner. 
+    $$I_3\xrightarrow{E_1}E_1\xrightarrow{E_2}E_2E_1\longrightarrow\cdots\longrightarrow E_n\cdots E_1=A$$
+    $$\text{Vol}(P_I)\xrightarrow{E_1}\text{Vol}(P_{E_1})\xrightarrow{E_2}\text{Vol}(P_{E_2E_1})\longrightarrow\cdots\text{Vol}(P_{E_n\cdots E_1}=P)$$
+    $$|\det(I)|\xrightarrow{E_1}|\det(E_1)|\xrightarrow{E_2}|\det(E_2E_1)|\longrightarrow\cdots\longrightarrow|\det(E_n\cdots E_1=A)|$$
+    Now, as the absolute value of the determinant and volume are changed in the same manner by the row operations, we find that they are equal at each intermediate step stemming from $|\det(I_3)|$ being equal to the unit square $P_{i}'s$ volume. 
+    Thus they must be equal at the final step by induction and we have $\text{Vol}(P)=|\det(A)|$.
+\end{solution}
+\begin{problem}\label{prob:1.3}
+    Let $\sigma$ be a permutation in $S_n$. Let $s(\sigma)$ denote the number of inversions, that is, the number of pairs $\{i, j\}$ such that $\sigma(i) > \sigma(j)$ when $1 \le i < j \le n$.
+    \begin{enumerate}
+        \item Show that $\epsilon(\sigma) = (-1)^{s(\sigma)}$.
+        \item Verify the identity:
+        \[
+            \prod_{1 \le i < j \le n} (x_{\sigma(j)} - x_{\sigma(i)}) = \epsilon(\sigma) \prod_{1 \le i < j \le n} (x_j - x_i)
+        \]
+        for any complex numbers $x_1, x_2, \dots, x_n$.
+    \end{enumerate}
+\end{problem}
+\begin{solution}
+    \begin{enumerate}[\label=\arabic*.]
+    \item
+    We first write $f(\sigma):=(-1)^{s(\sigma)}$ in a more tangible form as follows
+    $$f(\sigma)=\prod_{1\leq i<j\leq n}(-1\text{ if }\sigma(i)>\sigma(j)\text{ and }1\text{ otherwise})=f(\sigma)=\prod_{1\leq i<j\leq n}\text{sgn}(\sigma(j)-\sigma(i))$$
+    We claim that this is multiplicative, i.e. $f(\sigma\tau)=f(\sigma)f(\tau).$ 
+    For a proof we write the product out and simplify
+    $$f(\sigma\tau)=\prod_{i<j}\text{sgn}(\sigma(\tau(j))-\sigma(\tau(i)))=\prod_{i<j}\frac{\text{sgn}(\sigma(\tau(j))-\sigma(\tau(i)))}{\text{sgn}(\tau(j)-\tau(i))}\cdot\prod_{i<j}\text{sgn}(\tau(j)-\tau(i))$$
+    In $f$'s original definition we go over all the pairs $(i,j)$ with $i<j$ but when theres a $\tau$ involved, we go over the pairs $(\tau(i),\tau(j))$ and it is not neccesary that $\tau(i)<\tau(j)$ even when $i<j$ but if we look at the set $\{(\tau(i),\tau(j)):i<j\}$, as $\tau$ is a bijection its clear that given any $i<j$ exactly one of $(i,j)$ or $(j,i)$ appears in this set. 
+    Now, in the first product, the $\text{sgn}(\tau(j)-\tau(i))$ is there to combat this change as, if $\tau(j)>\tau(i)$ then that term is $1$ and does not change anything while the numerator contributes what it is supposed to, to $\sgn(\sigma)$ but if thats not the case then it contributes $-1$ times whatever it was supposed to contribute as we just flipped the term that was supposed to appear. 
+    This leads to the conclusion that 
+    $$\prod_{i<j}\frac{\text{sgn}(\sigma(\tau(j))-\sigma(\tau(i)))}{\text{sgn}(\tau(j)-\tau(i))}=f(\sigma)$$
+    combining these deductions we get that $f(\tau\sigma)=f(\tau)f(\sigma).$ 
+    Now, we calculate $f(\sigma=(a,b))$ for some $a<_{\text{WLOG}}b$. 
+    For the pair $(i,j)$ (with $i<j$) to potentially be such that $\sigma(i)>\sigma(j)$ we must have that $\{i,j\}\cap\{a,b\}\neq\emptyset$ as $\sigma$ is identity outside $\{a,b\}$. 
+    We look at these pairs now: pairs of form $(i,a)$ do not result in inversions as $\sigma(i)=i<a<=\sigma(a)$, pairs of form $(i,b)$ only result in inversions for $a\leq i<b$ and there are $b-a$ such $i$ so these result in $(b-a)$ inversions, the pairs of form $(a,i)$ only result in inversions for $a<i\leq b$ resulting in $b-a+1$ inversions again and the pairs of form $(b,i)$ do not result in any inversions. 
+    Thus the total number of inversions is $2(b-a)+1$ and thus $f((a,b)=(-1)^{2(b-a)+1})=-1$ and this is all we need to prove that $f\equiv\epsilon.$ 
+    We have shown that $\epsilon$ and $f$ agree on transpositons($\epsilon((a,b))$ is also $-1$ for $a\neq b$ as shown in class.) and as both of these are multiplicative we see that for any $\sigma$, by first writing it as a product of transpositons $\sigma=\tau_1\cdots\tau_n$ and then using the multiplicativity as follows
+    $$f(\sigma)=f(\tau_1\cdots\tau_n)=f(\tau_1)\cdots f(\tau_n)=(-1)^n=\epsilon(\tau_1)\cdots\epsilon(\tau_n)=\epsilon(\tau_1\cdots\tau_n)=\epsilon(\sigma)$$
+    \item
+    We examine the product on the left hand side. Since $\sigma$ is a bijection, the set of pairs $\{\{\sigma(i), \sigma(j)\} : 1 \le i < j \le n\}$ is identical to the set $\{\{i, j\} : 1 \le i < j \le n\}$. Thus, the factors in the LHS product are the same as those in the RHS product, up to a possible sign change. 
+    Consider a specific factor $(x_{\sigma(j)} - x_{\sigma(i)})$ where $i < j$. 
+    If $\sigma(i) < \sigma(j)$, this term appears exactly as $(x_{\sigma(j)} - x_{\sigma(i)})$ in the RHS product (contributing $+1$). 
+    If $\sigma(i) > \sigma(j)$, this constitutes an inversion. The corresponding term in the RHS product is $(x_{\sigma(i)} - x_{\sigma(j)})$, so our term can be written as
+    $$(x_{\sigma(j)} - x_{\sigma(i)}) = -1 \cdot (x_{\sigma(i)} - x_{\sigma(j)})$$ 
+    This contributes a factor of $-1$. The number of such sign changes is exactly the number of pairs $(i, j)$ such that $i < j$ but $\sigma(i) > \sigma(j)$, which is $s(\sigma)$ by definition. 
+    Collecting these signs, we get
+    $$ \prod_{1 \le i < j \le n} (x_{\sigma(j)} - x_{\sigma(i)}) = (-1)^{s(\sigma)} \prod_{1 \le i < j \le n} (x_j - x_i) $$
+    Using the result from Part 1 where we proved $\epsilon(\sigma) = (-1)^{s(\sigma)}$, we substitute to verify the identity 
+    $$\prod_{1 \le i < j \le n} (x_{\sigma(j)} - x_{\sigma(i)}) = \epsilon(\sigma) \prod_{1 \le i < j \le n} (x_j - x_i)$$ 
+    \end{enumerate}
+\end{solution}
+\begin{problem}\label{prob:1.4}
+    Show that for $n \ge 3$, every even permutation in $S_n$ is a product of 3-cycles of the form $(i, i+1, i+2)$.
+\end{problem}
+\begin{solution}
+    Let $G$ be the set of permutations generated by the consecutive 3-cycles $C = \{ (i, i+1, i+2) : 1 \le i \le n-2 \}$. We aim to show that $G$ contains all 3-cycles, and consequently, all even permutations.
+    
+    \begin{enumerate}[\label=\Roman*.]
+    \item \textit{Generating cycles of form $(1, 2, k)$}
+    
+    We proceed by induction on $k$.
+    For the base case $k=3$, the cycle $(1, 2, 3)$ is directly in $C$ (with $i=1$), so it is in $G$.
+    
+    Now, assume that for some $k \ge 3$, we have $(1, 2, k) \in G$. We want to show $(1, 2, k+1) \in G$.
+    First, we notice that the structure of our generators is translation-invariant. If we can form $(1, 2, k)$ using generators involving indices $\{1, \dots, k\}$, we can form the cycle $(2, 3, k+1)$ by simply shifting every index up by one, i.e., using generators involving $\{2, \dots, k+1\}$. Since these shifted generators are still in $C$, we have that $(2, 3, k+1) \in G$.
+    
+    We now look at the conjugation of $(2, 3, k+1)$ by $(1, 2, 3)$. We calculate the product
+    $$ (1, 2, 3)^{-1} (2, 3, k+1) (1, 2, 3) = (1, 3, 2)(2, 3, k+1)(1, 2, 3) $$
+    We calculate the mapping for $(1,3,2)(2,3,k+1)(1,2,3)$:
+    Input $1$: $(1,2,3)$ sends $1 \to 2$. Then $(2,3,k+1)$ sends $2 \to 3$. Then $(1,3,2)$ sends $3 \to 2$. So $1 \to 2$.
+    Input $2$: $(1,2,3)$ sends $2 \to 3$. Then $(2,3,k+1)$ sends $3 \to k+1$. Then $(1,3,2)$ fixes $k+1$. So $2 \to k+1$.
+    Input $k+1$: $(1,2,3)$ fixes $k+1$. Then $(2,3,k+1)$ sends $k+1 \to 2$. Then $(1,3,2)$ sends $2 \to 1$. So $k+1 \to 1$.
+    
+    Thus the product is $(1, 2, k+1)$. Since $(1, 2, 3) \in G$ and $(2, 3, k+1) \in G$, their product is in $G$. By induction, $G$ contains all $(1, 2, k)$.
+    
+    \item \textit{Generating all 3-cycles}
+    
+    We calculate the product $(1, 2, b)(1, 2, a)^{-1}$ for distinct $a, b > 2$.
+    $$(1, 2, b)(1, 2, a)^{-1} = (1, 2, b)(1, a, 2) = (1, a, b)$$
+    We check the mapping: $1 \to a \to a$ (so $1 \to a$), $a \to 2 \to b$ (so $a \to b$), $b \to b \to 1$ (so $b \to 1$).
+    Now for any arbitrary $a, b, c$ all distinct from 1, we write
+    $$(1, a, c)(1, a, b) = (a, b, c)$$
+    see that $a \to b \to b$ (so $a \to b$), $b \to 1 \to c$ (so $b \to c$), $c \to c \to 1 \to a$ (so $c \to a$).
+    Thus any 3-cycle is in $G$.
+    
+    \item \textit{Generating all even permutations}
+    
+    An even permutation is a product of an even number of transpositions. We group them into pairs. It suffices to show any pair of transpositions is a product of 3-cycles.
+    We look at the possible cases for a pair $\tau_1\tau_2$:
+    Case 1: Disjoint, e.g., $(a, b)(c, d)$. We use the trick of inserting identity $(b, c)(b, c)$:
+    $$(a, b)(c, d) = (a, b)(b, c)(b, c)(c, d) = [(a, b)(b, c)][(b, c)(c, d)]$$
+    Case 2: Share one element, e.g., $(a, b)(b, c)$.
+    We check the product: $a \to b \to c$, $c \to c \to b \to a$, $b \to a \to a$. This is just $(a, c, b)$.
+    
+    Combining these deductions, any pair of disjoint transpositions is a product of two overlapping pairs, and any overlapping pair is a 3-cycle. Thus, every even permutation is a product of 3-cycles, and since we can generate all 3-cycles from our consecutive set $C$, we are done.
+    \end{enumerate}
+\end{solution}
+\begin{problem}\label{prob:1.5}
+    Let $A$ be a complex $n\times n$ square matrix for some $n\in\bN$. A vector $v$ is called an eigenvector of $A$ if $Av = dv$ for some $d \in \mathbb{C}$. Show that for an invertible matrix $S$, the matrix $S^{-1}AS$ is a diagonal matrix if and only if columns of $S$ are eigenvectors of $A$.
+\end{problem}
+\begin{solution}
+    For the only if direction, we assume that $S^{-1}AS$ is diagonal and equal to $D=\text{diag}(\lambda_1,\ldots,\lambda_n)$. 
+    If $S^{-1}AS=D$ then we have $AS=SD\implies AS_{*,j}=(AS)_{*,j}=(SD)_{*,j}=SD_{*,j}=\lambda_jS_{*,j}$ by the definition of matrix multiplication and we have proved this direction. 
+    For the other direction assume that the columns are indeed eigenvectors and $AS_{*,j}=\lambda_jS_{*,j}$ then we see that $(AS)_{*,j}=AS_{*,j}=\lambda_jS_{*,j}=SD_{*,j}=(SD)_{*,j}$ where $D=\text{diag}(\lambda_1,\ldots,\lambda_n)$ implying $AS=SD$ where $D$ is diagonal as all the corresponding columns of these two matrices are the same as we showed above. 
+    As $S$ is invertible we have that $S^{-1}AS=D$ and we are done.
+\end{solution}
+\begin{problem}\label{prob:1.6}
+    If $A$ is an $n \times n$ matrix over $\mathbb{C}$, show that:
+    \[
+        |\det(A)| \le \prod_{i=1}^{n} \left( \sum_{j=1}^{n} |a_{ij}| \right)
+    \]
+\end{problem}
+\begin{solution}
+    Let, $[n]:=\{1,\ldots,n\}.$
+    Using the definition of scalar multiplication and distributive property we can clearly see that
+    $$\prod_{i=1}^n\left(\sum_{j=1}^n|a_{ij}|\right)=\sum_{f\in[n]^{[n]}}\prod_{i=1}^n|a_{i,f(i)}|$$
+    Now, $S_n\subseteq[n]^{[n]}$ and thus,
+    $$|\det(A)|=\left|\sum_{\sigma\in S_n}\epsilon(\sigma)\prod_{i=1}^na_{i,\sigma(i)}\right|\leq\sum_{\sigma\in S_n}|\epsilon(\sigma)a_{1,\sigma(1)}\cdots a_{n,\sigma(n)}|=\sum_{f\in S_n}\prod_{i=1}^n|a_{i,f(i)}|\leq\sum_{f\in[n]^{[n]}}\prod_{i=1}^n|a_{i,f(i)}|$$
+    which is less than $\prod(\sum|a_{i,j}|)$ as we sum over a subset of the terms, all of which are nonnegative.
+\end{solution}
+\begin{problem}\label{prob:1.7}
+    Let $f(x) = (\lambda_1 - x)(\lambda_2 - x)\dots(\lambda_n - x)$ and let $A$ be defined as:
+    \[
+    A := \begin{pmatrix}
+    \lambda_1 & a & a & \dots & a \\
+    b & \lambda_2 & a & \dots & a \\
+    b & b & \lambda_3 & \dots & a \\
+    \vdots & \vdots & \vdots & \ddots & \vdots \\
+    b & b & b & \dots & \lambda_n
+    \end{pmatrix}
+    \]
+    Show that $\det(A) = \frac{bf(a) - af(b)}{b-a}$ when $a \ne b$. Also find $\det(A)$ when $a=b$.
+\end{problem}
+\begin{solution}
+    If $a$ or $b$ are $0$ then the statement is easily proved as the matrix is upper triangular or lower triangular, in either case the determinant is the product of entries on the diagonal as seen in class so we omit this case and proceed with the assumption $a,b\neq 0$. 
+    Denote the rows of the matrix by $R_1,\ldots,R_n.$ 
+    Then, by the multilinearity of the determinant along its rows we see that 
+    \begin{flalign}
+    &\det([R_1,R_2-R_1,R_3-R_2,\ldots,R_n-R_{n-1}]^\top)\\
+    &=\det([R_1,R_2,\ldots]^\top)+\underbrace{\det([R_1,-R_1,\ldots])}_{=0}\\
+    &\vdots\\
+    &=\det([R_1,R_2,R_3,\ldots,R_n]^\top)
+    \end{flalign}
+    So it suffices to calculate determinant of this matrix. 
+    We find that 
+    $$\begin{bmatrix}
+        R_1 \\ R_2-R_1 \\  R_3-R_2 \\ \vdots \\ R_n-R_{n-1}
+    \end{bmatrix}= \begin{pmatrix}
+\lambda_1 & a & a & \dots & a & a \\
+b-\lambda_1 & \lambda_2-a & 0 & \dots & 0 & 0 \\
+0 & b-\lambda_2 & \lambda_3-a & \dots & 0 & 0 \\
+\vdots & \vdots & \ddots & \ddots & \vdots & \vdots \\
+0 & 0 & 0 & \dots & \lambda_{n-1}-a & 0 \\
+0 & 0 & 0 & \dots & b-\lambda_{n-1} & \lambda_n-a
+\end{pmatrix}$$ 
+We will calcuate the determinant directly by looking at the nonzero terms in its determinant. 
+For a permutation $\sigma\in S_n$, its clear from looking at the matrix that unless $\sigma(n)\in\{n,n-1\},\sigma(n-1)\in\{n-1,n-2\},\ldots,\sigma(2)\in\{2,1\}$ the term corresponding to this will be zero. 
+This implies that the $\sigma\neq\textbf{Identity}$ which might result in a nonzero term to be of form : $\sigma_k(n)=n,\ldots,\sigma(k)=k-1,\sigma(k-1)=k-2,\ldots,\sigma(2)=1,\sigma(1)=k$ for some $k=n,n-1,\ldots,2$. 
+We can also see that these $\sigma_k=(k,k-1,k-2,\ldots,2,1)$ and thus have sign $(-1)^{k-1}$ as defined in class. 
+Thus, the determinant is (we define products ($\Pi$) to be equal to $1$ if the conditions are never valid for the productants (like in the case of $k=n$ below))
+$$\lambda_1\prod_{i=2}^{n}(\lambda_i-a)+\sum_{k=2}^na\cdot(-1)^{k-1}\left(\prod_{i=k+1}^n(\lambda_i-a)\right)\cdot\left(\prod_{j=2}^k(b-\lambda_{j-1})\right)$$
+$$=f(a)+a(\lambda_2-a)\cdots(\lambda_n-a)+a\sum_{k=2}^n\prod_{k<i\leq n}(\lambda_i-a)\prod_{1\leq j<k}(\lambda_j-b)$$
+We simplify the secondsum (let it be $S$) now. 
+$$S = \sum_{k=1}^n \left( \prod_{j=1}^{k-1} (\lambda_j - b) \right) \left( \prod_{i=k+1}^n (\lambda_i - a) \right)$$
+To evaluate this, we multiply $S$ by $(b-a)$. As $b-a = (\lambda_k - a) - (\lambda_k - b)$ we have,
+\begin{align*}
+(b-a)S &= \sum_{k=1}^n \left( \prod_{j=1}^{k-1} (\lambda_j - b) \right) \Big[ (\lambda_k - a) - (\lambda_k - b) \Big] \left( \prod_{i=k+1}^n (\lambda_i - a) \right) \\
+&= \sum_{k=1}^n \left[ \underbrace{\left( \prod_{j=1}^{k-1} (\lambda_j - b) \right) (\lambda_k - a) \left( \prod_{i=k+1}^n (\lambda_i - a) \right)}_{\text{Term } A_k} \right] \\
+&\quad - \sum_{k=1}^n \left[ \underbrace{\left( \prod_{j=1}^{k-1} (\lambda_j - b) \right) (\lambda_k - b) \left( \prod_{i=k+1}^n (\lambda_i - a) \right)}_{\text{Term } B_k} \right]
+\end{align*}
+We see that the terms $(\lambda_k - a)$ and $(\lambda_k - b)$ can be included in two products. 
+Let, $P_k = \left( \prod_{j=1}^{k} (\lambda_j - b) \right) \left( \prod_{i=k+1}^n (\lambda_i - a) \right)$, then $A_k=P_{k-1},B_k=P_k$
+Thus, $(b-a)S = \sum_{k=1}^n (P_{k-1} - P_k) = P_0 - P_n$ and extreme terms (as per our assumption above) are 
+$$P_0 = \prod_{i=1}^n (\lambda_i - a) = f(a), \quad P_n = \prod_{j=1}^n (\lambda_j - b) = f(b)$$
+This implies that $S = \frac{f(a) - f(b)}{b-a}$ and substituting $S$ back in we get, 
+$$\det(A) = f(a) + a \left( \frac{f(a) - f(b)}{b-a} \right) = \frac{(b-a)f(a) + af(a) - af(b)}{b-a} = \frac{bf(a) - af(b)}{b-a}$$
+Now, in the case of $a=b$ we can use the continuity (this is due to the determinant being a polynomial in the entries) of the determinant over the matrices (over the metric $d(A,B):=\Sigma_{i,j}|A_{ij}-B_{ij}|$, although this is not the only metric of this kind) and limits to evaluate it. 
+Thus,
+$$\det\begin{pmatrix}
+    \lambda_1 & a & a & \dots & a \\
+    a & \lambda_2 & a & \dots & a \\
+    a & a & \lambda_3 & \dots & a \\
+    \vdots & \vdots & \vdots & \ddots & \vdots \\
+    a & a & a & \dots & \lambda_n
+    \end{pmatrix}=\det\left(\lim_{b\to a}\begin{pmatrix}
+    \lambda_1 & a & a & \dots & a \\
+    b & \lambda_2 & a & \dots & a \\
+    b & b & \lambda_3 & \dots & a \\
+    \vdots & \vdots & \vdots & \ddots & \vdots \\
+    b & b & b & \dots & \lambda_n
+    \end{pmatrix}\right)$$
+    $$=\lim_{b\to a}\det\begin{pmatrix}
+    \lambda_1 & a & a & \dots & a \\
+    b & \lambda_2 & a & \dots & a \\
+    b & b & \lambda_3 & \dots & a \\
+    \vdots & \vdots & \vdots & \ddots & \vdots \\
+    b & b & b & \dots & \lambda_n
+    \end{pmatrix}=\lim_{b\to a}\frac{bf(a)-af(b)}{b-a}$$
+    $$=\lim_{b\to a}\left(f(a)-a\cdot\frac{f(b)-f(a)}{b-a}\right)=f(a)-a\cdot f'(a)$$
+\end{solution}
+\begin{problem}\label{prob:1.8}
+    \textbf{Prove or disprove:} Let $A$ be a square matrix of size $n \times n$ such that all entries are either 1 or -1. Then $\det(A)$ is divisible by $2^{n-1}$.
+\end{problem}
+\begin{solution}
+    Using row operations, which the determinant is invariant under we can subtract the first row from every other row which will result in the other $n-1$ rows having entries in $\{0,2,-2\}$. 
+    Now, when we take the determinant every term in it will be either $0$ or have $n-1$ entries which are $\pm 2$. 
+    Thus each term in the sum is of form $2^{n-1}K$ for some $K\in\bZ$ or its $0$, summing which always results in a number divisible by $2^{n-1}$, proving the claim.
+\end{solution}
+\begin{problem}\label{prob:1.9}
+    The resultant is a determinant used to determine whether two polynomials have a common root or not. Consider polynomials $p(x) = a_2x^2 + a_1x + a_0$ and $q(x) = b_1x + b_0$. The Sylvester matrix of these two polynomials is defined as:
+    \[
+    A := \begin{pmatrix}
+    a_2 & a_1 & a_0 \\
+    b_1 & b_0 & 0 \\
+    0 & b_1 & b_0
+    \end{pmatrix}
+    \]
+    Show that $\det(A) = 0$ if and only if $p$ and $q$ have a common root.
+\end{problem}
+\begin{solution}
+    NOTE: If $b_1=0$ and $b_0\neq 0$ then $q$ does not have any roots and hence can't have any roots in common with $p$ but the determinant can still be zero (like in the case where $p$ is equivalently zero) so we omit it. \\
+    Suppose they do have a common root $x$, then we see that
+    $$A(x^2,x,1)^\top=(a_2x^2+a_1x+a_0,\underbrace{b_1x^2+b_0x}_{=x(b_1x+b_0)=x\cdot 0=0},b_1x+b_0)^{\top}=(0,0,0)^{\top}$$
+    and as $A$ sends a nonzero vector to the zero vector, it is singular and has $0$ determinant. For the other direction of the iff statement, we make cases depending on $q$ as follows while assuming the determinant to be $0$. 
+    If $b_0,b_1=0$ then they share common roots as $q\equiv 0$ has every number as a root. 
+    If $b_0=0,b_1\neq 0$ then the determinant is $a_0b_1^2$ being $0$ implies that $a_0=0$ so they share the common root $0$.
+    If $b_0,b_1\neq 0$ then $q$ has $-b_1^{-1}b_0$ as a root and the determinant is $a_2b_0^2-b_1a_1b_0+b_1^2a_0=b_1^2(a_2(-b_1^{-1}b_0)^2+a_1(-b_1^{-1}b_0)+a_0)$ which is just $b_1^2 p(-b_1^{-1}b_0)$ and this being zero implies that they two polynomials share a root and we are done. 
+\end{solution}
+\begin{problem}\label{prob:1.10}
+    Let $A, B, C$ and $D$ be square matrices of the same size and let
+    \[
+    P := \begin{pmatrix} A & B \\ C & D \end{pmatrix}
+    \]
+    \textbf{Prove or disprove:} If $BD = DB$, then $\det(P) = \det(DA - BC)$.
+\end{problem}
+\begin{solution}
+    We prove this statement for complex matrices.
+    \\ \textit{Lemma: } If $A,B,C$ are $n\times n$ square matrices then,
+    $$\det\begin{bmatrix}
+    A & 0 \\ C & B
+    \end{bmatrix}=\det(A)\det(B)$$ 
+    \\ \textit{proof: } All the potentially nonzero terms in the determinant of this block matrix must be those where the permutation $\sigma(i)\leq n$ for $i\leq n$, as this is a bijection we clearly see that $\sigma$ maps $1,2,\ldots,n$ to $[n]$ and thus its also a permutation when restricted to $\sigma$ i.e. $\sigma|_{[n]}\in S_n$. 
+    Similarly we see that as all of $[n]$ is expended already, for $k>n$ we must have $\sigma(k)>n$ which again shows us that $\sigma|_{[2n]\setminus[n]}$ is a bijection on $[2n]\setminus[n]$. 
+    Define $\sigma_{L}$ to be an extension of $\sigma|_{[n]}$ to $[2n]$ by setting it to be identity outside $[n]$ and define $\sigma_R$ similarly using $\sigma_{[2n]\setminus[n]}$. 
+    Then we have $\sigma=\sigma_L\sigma_R$. 
+    We can also see that the set $\{(\sigma_L,\sigma_R)\}$ over the $\sigma$ we described above is $S_n\times S([2n]\setminus[n])$ (here, $S(X)$ is the set of permutations over $X$, a finite nonempty set.) 
+    Thus, the determinant is
+    $$\sum_{\sigma\text{ under consideration}}\sgn(\sigma_L\sigma_R)\prod_{i=1}^na_{i,\sigma_L(i)}\prod_{j=n+1}^{2n}b_{j-n,\sigma_R(j)-n}
+    $$
+    We can also clearly see that $f(j)=\sigma_R(j)-n$ is a permutation in $S_n$ and this correspondence is bijective, thus we can rewrite the expression as
+    $$\sum_{\sigma\in S_n,\tau\in S_n}\sgn(\tau)\sgn(\sigma)\prod_{i=1}^na_{i,\sigma_L(i)}\prod_{j=1}^{n}b_{j,\tau(j)}$$ 
+    Here we have used the fact that $\epsilon$ is multiplicative and $\epsilon(\sigma_L)=\epsilon(\sigma|_{[n]}),\epsilon(\sigma_R)=\epsilon(f)$, this can be proved easily using \hyperref[prob:1.3]{Problem 1.3}. 
+    Now, factorizing this we have
+    $$\left(\sum_{\sigma\in S_n}\epsilon(\sigma)\prod_{i=1}^na_{i,\sigma(i)}\right)\cdot\left(\sum_{\tau\in S_n}\epsilon(\tau)\prod_{i=1}^nb_{i,\tau(i)}\right)=\det(A)\det(B)$$
+    Now, for our problem, first assume that $B,D$ are invertible, then
+    $$\begin{bmatrix}
+    D & 0 \\ 0 & B
+    \end{bmatrix}\cdot\begin{bmatrix}
+        A & B\\ C & D
+    \end{bmatrix}=\begin{bmatrix}
+        DA & DB\\ BC & BD
+    \end{bmatrix}$$
+    $$\implies\det\left(\begin{bmatrix}
+    D & 0 \\ 0 & B
+    \end{bmatrix}\cdot\begin{bmatrix}
+        A & B\\ C & D
+    \end{bmatrix}\right)=\det\begin{bmatrix}
+        DA & DB\\ BC & BD
+    \end{bmatrix}=\det\begin{bmatrix}
+        DA-BC & \underbrace{DB-BD}_{=0}\\ BC & BD
+    \end{bmatrix}$$
+    $$\implies\det\begin{bmatrix}
+        D& 0\\ 0& B
+    \end{bmatrix}\cdot\det\begin{bmatrix}
+        A & B \\ C & D
+    \end{bmatrix}=\det(DA-BC)\cdot\det(BD)$$
+    $$\implies\det(B)\det(D)\det(P)=\det(DA-BC)\cdot\det(B)\det(D)$$
+    $$\implies\det(P)=\det(DA-BC)$$
+    as $\det(B),\det(D)\neq 0$ due to these being invertible. 
+    Now, look at $B+xI_n$ and $D+xI_n$ for reals $x$, these are both simultaneously invertible iff $\det(B+xI_n)\det(D+xI_n)\neq 0$ and thats a polynomial in $x$ so it has only finitely many roots and we thus see that it is nonzero for all small enough nonzero $x$ as there are uncountably many real numbers and thus we can assume that to be nonzero inside a limit where $x$ tends to $0$ by the definition of the limit. 
+    Now, using the contitnuity of the determinant as we did before in \hyperref[prob:1.8]{Problem 1.8}, for arbitrary matrices $A,B,C,D$ with $BD=DB$, we see that $(D+xI_n)(B+xI_n)=DB+xD+xB+I_n=BD+xD+xB+I_n=(B+xI_n)(D+xI_n)$ using which we have,
+    $$\det(P)=\det\left(\lim_{x\to 0}\begin{bmatrix}
+        A& B+xI_n\\ C& D+xI_n
+    \end{bmatrix}\right)=\lim_{x\to 0}\det\begin{bmatrix}
+        A& B+xI_n\\ C& D+xI_n
+    \end{bmatrix}$$
+    $$=\lim_{x\to 0}\det((D+xI_n)A-(B+xI_n)C)=\det\left(\lim_{x\to 0}(DA+xA-BC-xC)\right)=\det(DA-BC)$$
+
+\end{solution}
+\section{Home Assignment II (Due: Feb 20, 2026)}
+\noindent \textbf{Notation:} Here, for an inner product space $V$, it's inner product is denoted by $\inp{\cdot}{\cdot}_V$ if there is chance of ambiguity.
+\begin{problem}\label{prob:2-1}
+Define the $l^1$ norm on $\bC^n$ by,
+\[\norm{x}_1:=\sum_{j=1}^n|x_j|,\forall(x_1,\ldots,x_n)\in\bC^n\]
+Show that (i) $\norm{x+y}_1\leq\norm{x}_1+\norm{y}_1,\forall x,y\in\bC^n.$ (ii) $\norm{x}_1=0$ if and only if $x=0$.
+(iii) $\norm{ax}_1=|a|\norm{x}_1$ for all $a\in\bC$, $x\in\bC^n$.
+(iv) For $n\geq 2$ there is no inner product $\inp{\cdot}{\cdot}$ on $\bC^n$ such that
+\[\norm{x}_1=\sqrt{\inp{x}{x}}\]
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[\label=(\roman*)]
+    \item For any $x,y\in\bC^n$, by the triangle inequality in $\bC$ we have $|x_j+y_j|\le|x_j|+|y_j|$ for all $j$.
+Summing over $j=1,\ldots,n$ gives $\norm{x+y}_1\le\norm{x}_1+\norm{y}_1$.
+    \item If $\norm{x}_1=0$ then $\sum_{j=1}^n|x_j|=0$.
+As $|x_j|\ge 0$, this implies $|x_j|=0$ for all $j$, so $x=0$. The converse is trivial.
+    \item For any $a\in\bC$ and $x\in\bC^n$, we have $\norm{ax}_1=\sum_{j=1}^n|ax_j|=\sum_{j=1}^n|a||x_j|=|a|\sum_{j=1}^n|x_j|=|a|\norm{x}_1$.
+    \item No such norm exists as if it did then the norm here would follow the parallelogram identity, i.e. for any $u,v\in\bC^n$ we would have,
+	$$\norm{u-v}_1^2+\norm{u+v}_1^2=2(\norm{u}_1^2+\norm{v}_1^2)$$
+	Which is not true in this case for $u=(1,0,\ldots),v=(0,1,0\ldots)$ as
+$$\norm{(1,-1,0,\ldots)}_1^2+\norm{(1,1,0,\ldots)}_1^2=4+4=8\neq4=2(1+1)=2(\norm{u}_1^2+\norm{v}_1^2)$$
+	and we are done.
+	\end{enumerate}
+\end{solution}
+\begin{problem}\label{prob:2-2}
+Let $V$ be a finite dimensional inner product space with inner product $\langle \cdot, \cdot \rangle$.
+Let $B:V\rightarrow V$ be an invertible linear map. Show that
+$$\langle x,y \rangle_B := \langle Bx, By \rangle, \quad \forall x, y \in V,$$
+defines an inner product on $V$.
+\end{problem}
+\begin{solution}
+	\begin{itemize}
+		\item positivity: For $x\in V$ $\ipp{x,x}_B=\ipp{Bx,Bx}\geq 0$ with equality iff $Bx=0$ which happens iff $x=0$ as $B$ is invertible.
+		\item sesquilinearity: For $x,y\in V,c\in\bC$ we have $\ipp{cx,y}_B=\ipp{Bcx,By}=\ipp{cBx,By}=\overline{c}\ipp{Bx,By}=\overline{c}\ipp{x,y}_B$ and $\ipp{x,cy}_B=\ipp{Bx,Bcy}=\ipp{Bx,cBy}=c\ipp{Bx,By}=c\ipp{x,y}_B$
+		\item conjugate symmetry: For $x,y\in V$ we have $\ipp{x,y}_B=\ipp{Bx,By}=\overline{\ipp{By,Bx}}=\overline{\ipp{x,y}_B}$
+	\end{itemize}
+\end{solution}
+\begin{problem}\label{prob:2-3}
+Let
+$$U=\begin{bmatrix}0&0&1\\ 1&0&0\\ 0&1&0\end{bmatrix} \quad \text{and} \quad A=\begin{bmatrix}a_{0}&a_{2}&a_{1}\\ a_{1}&a_{0}&a_{2}\\ a_{2}&a_{1}&a_{0}\end{bmatrix}$$
+\begin{enumerate}
+    \item[(i)] Show that $U$ is a unitary satisfying $U^{3}=I$.
+    \item[(ii)] Suppose $a_{0}$, $a_{1}$, $a_{2}$ are three real numbers. Show that $A=a_{0}I+a_{1}U+a_{2}U^{2}$.
+    \item[(iii)] Write down a formula for $A^{n}$ for $n\in\mathbb{N}$.
+\end{enumerate}
+\end{problem}
+\begin{solution}
+\begin{enumerate}[\label=(\roman*)]
+\item We observe that $U^\top=\begin{bmatrix}0&1&0\\ 0&0&1\\ 1&0&0\end{bmatrix}$. Simple matrix multiplication shows $U^\top U=I$, so $U$ is unitary (as $U$ is real). Also, $U^2=U^\top=U^{-1}$, so clearly $U^3=I$.
+\item Computing the RHS explicitly,
+$$a_0I+a_1U+a_2U^2=\begin{bmatrix}a_0&0&0\\ 0&a_0&0\\ 0&0&a_0\end{bmatrix}+\begin{bmatrix}0&0&a_1\\ a_1&0&0\\ 0&a_1&0\end{bmatrix}+\begin{bmatrix}0&a_2&0\\ 0&0&a_2\\ a_2&0&0\end{bmatrix}=A$$
+\item Now, all we need to do is to diagonalise $U$. Here $\omega=\exp(2\pi i/3)$.
+$$U(1,1,1)^\top=1\cdot(1,1,1)^\top$$
+$$U(\omega^2,\omega,1)^\top=(1,\omega^2,\omega)^\top=\omega(\omega^2,\omega,1)^\top$$
+$$U(\omega,\omega^2,1)^\top=(1,\omega,\omega^2)^\top=\omega^2(\omega,\omega^2,1)^\top$$
+Let $v_1=3^{-1/2}(1,1,1)^\top, v_2=3^{-1/2}(\omega^2,\omega,1)^\top, v_3=3^{-1/2}(\omega,\omega^2,1)^\top$ then, $\{v_1,v_2,v_3\}$ is found to be an orthonormal basis. Thus, we can write, for all $v\in\bC^3$,
+$$Uv=U(v_i\ipp{v_1,v}+v_2\ipp{v_2,v}+v_3\ipp{v_3,v})=\ipp{v_1,v}U$$
+$$=v_1\ipp{v_1,v}+\omega v_2\ipp{v_2,v}+\omega^2 v_3\ipp{v_3,v}=P_1v+\omega
+P_2v+\omega^2 P_3v$$
+where $P_i$ is the projection onto $\text{Span}\{v_i\}$. Now, as $v_i$ are
+otrhonormal, we see that $P_i=v_iv_i^*$ as done in class, thus
+$$U=v_1v_1^*+\omega v_2v_2^*+\omega^2 v_3v_3^*$$
+Its clear that $P_iP_j=0$ if $i\neq j$ and $P_iP_i=P_i$. For a polynomial
+$\Gamma(x)=a_0+a_1x+\ldots+a_nx^n$ and square matrix $M$ define
+$\Gamma(M):=a_0I+a_1M+\ldots+a_nM^n$, from this, its clear that
+$\Gamma(U)=\Gamma(1)P_1+\Gamma(\omega)P_2+\Gamma(\omega^2)P_3$ and thus,
+$$A^n=Q(U)=Q(1)P_1+Q(\omega)P_2+Q(\omega^2)P_3$$
+where $Q(x)=(a_0+a_1x+a_2x^2)^n$. After some calculation we also see that
+$$P_1=\begin{bmatrix}1/3 & 1/3 & 1/3\\ 1/3 & 1/3 & 1/3\\ 1/3 & 1/3 &
+1/3\end{bmatrix},P_2=\begin{bmatrix}1/3 & \w/3 & \w^2/3\\ \w^2/3 & 1/3 &
+\w/3\\ \w/3 & \w^2/3 & 1/3\end{bmatrix}, P_3=\begin{bmatrix}1/3 & \omega^2/3 & \omega/3\\ \w/3 & 1/3 & \w^2/3\\ \w^2/3 & \w/3 & 1/3\end{bmatrix}$$
+Thus $A^n$ is
+$$
+\frac{1}{3}
+\begin{bmatrix}
+Q(1) + Q(\w) + Q(\w^2) & Q(1) + \w Q(\w) + \w^2 Q(\w^2) & Q(1) + \w^2 Q(\w) + \w Q(\w^2) \\
+Q(1) + \w^2 Q(\w) + \w Q(\w^2) & Q(1) + Q(\w) + Q(\w^2) & Q(1) + \w Q(\w) + \w^2 Q(\w^2) \\
+Q(1) + \w Q(\w) + \w^2 Q(\w^2) & Q(1) + \w^2 Q(\w) + \w Q(\w^2) & Q(1) + Q(\w) + Q(\w^2)
+\end{bmatrix}
+$$
+\end{enumerate}
+\end{solution}
+\begin{problem}\label{prob:2-4}
+Let $x_{1},x_{2},...,x_{n}$ be $n$ vectors in an inner product space. Let $G=[g_{ij}]$ be the $n\times n$ matrix where $g_{ij}=\langle x_{i},x_{j}\rangle$, $1 \le i, j \le n$. Such matrices are known as Gram matrices. If $n=1, 2$ or $3$, show that $\det(G)\ge0$. (This is actually true for all $n$.)
+\end{problem}
+\begin{solution}
+We will prove it for the general case. Suppose the inner product space here has dimension $m$ and hence, let $\{u_1,\ldots,u_m\}$ be an orthonormal basis, we can always construct one using gram schmidt. Then
+$$\ipp{x_i,x_j}=\ipp{\sum_{k=1}^m\ipp{u_k,x_i}u_k,\sum_{k=1}^m\ipp{u_k,x_j}u_k}=\sum_{k=1}^m\overline{\ipp{u_k,x_i}}\ipp{u_k,x_j}$$
+Let, $A$ be the $m\times n$ matrix whose $(k,i)$-th entry is $\ipp{u_k,x_i}$ for $1\leq k\leq m,1\leq i\leq n.$ Then, we see that $G=A^*A$. If $m<n$ then clearly $\rank (A^*A)=\rank(A)\leq m<n$ as done in class and thus as $G$ does not have full rank, it has determinant $0$. Otherwise, using the cauchy-binet formula proven in class we see that,
+$$\det(A^*A)=\sum_{1\leq i_1<\ldots<i_n\leq m}\det(A^*(1,\ldots,n|i_1,\ldots,i_n))\det(A(i_1,\ldots,i_n|1,\ldots,n))$$
+Where $A(\ldots|\ldots)$ are the submatrices of $A$ as in conventional notation. We also see that 
+$$A^*(1,\ldots,n|i_1,\ldots,i_n)=A(i_1,\ldots,i_n|1,\ldots,n)^*$$
+as the $(j,k)$-th entry on the left matrix, $(A^*)_{j,i_k}=\overline{(A)_{i_k,j}}$ is the $(j,k)$-th entry of the matrix on the right. Now, as for any square matrix $M$ we have $\det(M^*)=\overline{\det(M)}$ as proven in class, we see that,
+$$\det(A^*A)=\sum_{1\leq i_1<\ldots<i_n\leq m}\det((A(i_1,\ldots,i_n|1,\ldots,n)^*))\det(A(i_1,\ldots,i_n|1,\ldots,n))$$
+$$=\sum_{1\leq i_1<\ldots<i_n\leq m}\overline{\det(A(i_1,\ldots,i_n|1,\ldots,n))}\det(A(i_1,\ldots,i_n|1,\ldots,n))$$
+$$=\sum_{1\leq i_1<\ldots<i_n\leq m}|\det(A(i_1,\ldots,i_n|1,\ldots,n))|^2\geq 0$$
+\end{solution}
+\begin{problem}\label{prob:2-5}
+Let $e_{1}, e_{2}, e_{3}$ be the standard basis of $\mathbb{C}^{3}$. Show that $\mathcal{B}:=\{e_{1}+e_{2}+e_{3}, e_{2}+e_{3}, e_{3}\}$ is a basis for $\mathbb{C}^{3}$. Apply Gram-Schmidt process on $\mathcal{B}$ to get an ortho-normal basis of $\mathbb{C}^{3}$.
+\end{problem}
+\begin{solution}
+    Let $v_1 = e_1+e_2+e_3 = (1,1,1)^\top$, $v_2 = e_2+e_3 = (0,1,1)^\top$, and $v_3 = e_3 = (0,0,1)^\top$. 
+    First, we show that $\mathcal{B} = \{v_1, v_2, v_3\}$ is a basis for $\bC^3$. Since $\bC^3$ is 3-dimensional and $\mathcal{B}$ contains three vectors, it suffices to show that they span the space. We can easily express the standard basis vectors as linear combinations of the vectors in $\mathcal{B}$:
+    \[ e_3 = v_3, \quad e_2 = v_2 - v_3, \quad e_1 = v_1 - v_2 \]
+    Since the standard basis is in the span of $\mathcal{B}$, it follows that $\mathcal{B}$ spans $\bC^3$ and thus forms a valid basis.
+
+    Next, we apply the Gram-Schmidt process to obtain an orthonormal basis $\{w_1, w_2, w_3\}$.
+    \begin{itemize}
+        \item \textbf{Step 1:} Let $u_1 = v_1 = (1,1,1)^\top$. Normalizing this vector:
+        \[ w_1 = \frac{u_1}{\norm{u_1}} = \frac{1}{\sqrt{3}}(1,1,1)^\top \]
+        
+        \item \textbf{Step 2:} Let $u_2 = v_2 - \ipp{w_1, v_2}w_1$. 
+        We compute $\ipp{w_1, v_2} = \frac{1}{\sqrt{3}}(1\cdot 0 + 1\cdot 1 + 1\cdot 1) = \frac{2}{\sqrt{3}}$.
+        \[ u_2 = (0,1,1)^\top - \frac{2}{3}(1,1,1)^\top = (-2/3, 1/3, 1/3)^\top \]
+        The norm of $u_2$ is $\sqrt{4/9 + 1/9 + 1/9} = \sqrt{6}/3$. Normalizing gives:
+        \[ w_2 = \frac{u_2}{\norm{u_2}} = \frac{3}{\sqrt{6}} \left(-\frac{2}{3}, \frac{1}{3}, \frac{1}{3}\right)^\top = \frac{1}{\sqrt{6}}(-2, 1, 1)^\top \]
+
+        \item \textbf{Step 3:} Let $u_3 = v_3 - \ipp{w_1, v_3}w_1 - \ipp{w_2, v_3}w_2$.
+        We compute $\ipp{w_1, v_3} = \frac{1}{\sqrt{3}}$ and $\ipp{w_2, v_3} = \frac{1}{\sqrt{6}}$.
+        \begin{align*}
+            u_3 &= (0,0,1)^\top - \frac{1}{3}(1,1,1)^\top - \frac{1}{6}(-2,1,1)^\top \\
+            &= (0, -1/2, 1/2)^\top
+        \end{align*}
+        The norm of $u_3$ is $\sqrt{1/4 + 1/4} = 1/\sqrt{2}$. Normalizing gives:
+        \[ w_3 = \frac{u_3}{\norm{u_3}} = \sqrt{2}\left(0, -1/2, 1/2\right)^\top = \left(0, -\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}}\right)^\top \]
+    \end{itemize}
+    Thus, applying Gram-Schmidt yields the orthonormal basis 
+    $$\left\{ \frac{1}{\sqrt{3}}(1,1,1)^\top, \frac{1}{\sqrt{6}}(-2,1,1)^\top, \frac{1}{\sqrt{2}}(0,-1,1)^\top \right\}$$
+\end{solution}
+\begin{problem}\label{prob:2-6}
+Let $V_{0}$ be the subspace
+$$V_{0}=\left\{\begin{pmatrix}x_{1}\\ x_{2}\\ x_{3}\end{pmatrix} : x_{1}+x_{2}=0\right\}$$
+of $\mathbb{R}^{3}$. Determine $V_{0}^{\perp}$. For arbitrary vector $x$ of $\mathbb{R}^3$, find vectors $y\in V_{0}$, $z\in V_{0}^{\perp}$ such that $x=y+z$.
+\end{problem}
+\begin{solution}
+A basis for $V_0$ is $\{(1,-1,0)^\top,(0,0,1)^\top\}$ which we extend to a
+basis for $\bR^3$ by adding $(1,0,0)^\top$, applying gram schmidt on the basis
+$\{(0,0,1)^\top,(-1,1,0)^\top,(1,0,0)^\top\}$ gives the orthonormal basis
+$\{(0,0,1)^\top,(1/\sqrt{2},-1/\sqrt{2},0)^\top,(1/\sqrt{2},1/\sqrt{2},0)^\top\}$
+from which $\{(0,0,1)^\top,(1/\sqrt{2},-1/\sqrt{2},0)^\top\}$ is a basis for
+$V_0$ and $V_0^\perp$ has basis $\{(1/\sqrt{2},1/\sqrt{2},0)^\top\}$ and thus, 
+$$P_{V_0^\perp}:x\mapsto Ax\text{ with } A=\begin{pmatrix}1/\sqrt{2}\\ 1/\sqrt{2}\\ 0\end{pmatrix}\begin{pmatrix}1/\sqrt{2} & 1/\sqrt{2} & 0\end{pmatrix}=\begin{pmatrix}1/2 & 1/2 & 0\\ 1/2 & 1/2 & 0\\ 0 & 0 & 0\end{pmatrix}$$
+Now, as $\bR^3=V_0\oplus V_0^\perp$ we see that $P_{V_0}=I-P_{V_0^\perp}$ as done in class, thus, 
+$$P_{V_0}=\begin{pmatrix}1/2 & -1/2 & 0\\ -1/2 & 1/2 & 0\\ 0 & 0 & 1\end{pmatrix}$$
+Thus, the unique decomposition is given as follows,
+$$\begin{pmatrix}v_1\\ v_2\\ v_3\end{pmatrix}=\underbrace{\begin{pmatrix}\frac{v_1-v_2}{2}\\ \frac{v_2-v_1}{2}\\ v_3\end{pmatrix}}_{\in V_0}+\underbrace{\begin{pmatrix}\frac{v_1+v_2}{2}\\ \frac{v_1+v_2}{2}\\ 0\end{pmatrix}}_{\in V_0^\perp}$$
+\end{solution}
+\begin{problem}\label{prob:2-7}
+Consider the matrix $B$:
+$$B=\begin{bmatrix}2&1\\ 1&2\end{bmatrix}$$
+as a linear map on $\mathbb{R}^{2}$. Take $v_{1}=\frac{e_{1}+e_{2}}{\sqrt{2}}$, $v_{2}=\frac{e_{1}-e_{2}}{\sqrt{2}}$. Show that $\mathcal{B}=\{v_{1},v_{2}\}$ is an ortho-normal basis for $\mathbb{R}^{2}$. Obtain the matrix of the linear transformation $B$ on this basis.
+\end{problem}
+\begin{solution}
+After some calculation it can be found that the change of basis matrix to go to $\mathcal B$ from the standard orthonormal basis is 
+$$S=\begin{pmatrix}1/\sqrt{2} & 1/\sqrt{2}\\ 1/\sqrt{2} & -1/\sqrt{2}\end{pmatrix}$$
+and the matrix for going the other way around turns out to coincidentally be the same here, thus the matrix with respect to $\mathcal B$ is $SBS$ which after some calculation turns out to be
+$$\begin{pmatrix}3 & 0\\ 0 & 1\end{pmatrix}$$
+\end{solution}
+\begin{problem}\label{prob:2-8}
+Let $V, W$ be finite dimensional inner product spaces and let $A:V\rightarrow W$ be a linear map. Show that
+$$\text{ker}(A)=(\text{range}(A^{*}))^{\perp}.$$
+(Here 'ker' stands for kernel: $\text{ker}(A)=\{x\in V:Ax=0\}$ and $\text{range}(A)=\{Ax:x\in V\}$.)
+\end{problem}
+\begin{solution}
+	If $x\in\ker(A)$ then $\ipp{x,A^*w}_V=\ipp{Ax,w}_W=\ipp{0,w}_W=0$ for all $w\in W$ and thus $(\text{range}(A^*))^\perp\supseteq\ker(A)$. Now, if $v\in\text{range}(A^*)^\perp$ then for all $w\in W$ we have $\ipp{v,A^*w}_V=\ipp{Av,w}_W=0$ which implies that $\ipp{Av,Av}=0$ as $Av\in W$ which implies that $Av=0$ and hence $v\in\ker(A)$ so $\text{range}(A^*)^\perp\subseteq\ker(A)$. Having shown both direction of the set euqality we can conclude that $\ker(A)=\text{range}(A^*)^\perp$. 
+\end{solution}
+\begin{problem}\label{prob:2-9}
+Let $S$ be a non-empty subset of a finite dimensional inner product space $V$.
+\begin{enumerate}
+    \item[(i)] Show that $(S^{\perp})^{\perp}= \text{span}(S)$.
+    \item[(ii)] Show that $((S^{\perp})^{\perp})^{\perp}=S^{\perp}$.
+\end{enumerate}
+\end{problem}
+\begin{solution}
+	We first prove that $S^\perp=(\text{span}(S))^\perp$, one direction of this equality is trivial and for the other, notice that for any $\Sigma a_iv_i\in\text{span}(S)$ and $v\in S^\perp$ then $\ipp{v,\Sigma a_iv_i}=\Sigma a_i\ipp{v,v_i}=\Sigma a_i\cdot 0=0$ implying $\text{span}(S)^\perp\supseteq S^\perp$ hence provning our claim. Moreover it is clear that if $W$ is a subspace of $V$ then $(W^\perp)^\perp=W$ as $W$ is the orthogonal complement of $W^\perp$. Thus, as spans are subspaces too, we have
+\begin{enumerate}
+	\item[(i)] $(S^\perp)^\perp=(\text{span}(S)^\perp)^\perp=\text{span}(S)$
+`	\item[(ii)] $((S^\perp)^\perp)^\perp=\text{span}(S)^\perp=S^\perp$ using the previous equality.
+\end{enumerate}
+\end{solution}
+\begin{problem}\label{prob:2-10}
+Let $\mathcal{P}$ be the vector space of polynomials with real coefficients. If, 
+$$p(x)=a_{0}+a_{1}x+a_{2}x^{2}+\cdots+a_{m}x^{m}$$
+$$q(x)=b_{0}+b_{1}x+b_{2}x^{2}+\cdots+b_{n}x^{n}$$
+define
+$$\langle p,q\rangle=\sum_{j=0}^{k}a_{j}b_{j},$$
+where $k=\min\{m,n\}$. Show that $\langle\cdot,\cdot\rangle$ is an inner product on $\mathcal{P}$. Define $T: \mathcal{P}\rightarrow\mathcal{P}$ by
+$$Tp=\sum_{j=0}^{m}a_{j},$$
+for $p(x)=a_{0}+a_{1}x+a_{2}x^{2}+\cdots+a_{m}x^{m}$. Note that the range of $T$ consists of only constant polynomials. Show that $T$ is a linear map. Show that there exists no linear map $S:\mathcal{P}\rightarrow\mathcal{P}$ satisfying
+$$\langle Sp,q\rangle=\langle p,Tq\rangle, \quad p,q \in \mathcal{P}$$
+This shows that in general, in infinite dimensional inner product spaces a linear map may not admit an adjoint.
+\end{problem}
+\begin{solution}
+	If we just pad the lower degree polynomials with zero coeffecient higher degree terms then we can effectively ignore the bound of the sums so we do not consider that here on. First, we show $\ipp{\cdot,\cdot}$ is an inner product on $\mathcal{P}$.
+\begin{itemize}
+    \item positivity: $\ipp{p,p}=\sum a_j^2 \ge 0$ with equality iff all $a_j=0$, i.e., $p=0$.
+    \item symmetry: $\ipp{p,q}=\sum a_jb_j = \sum b_ja_j = \ipp{q,p}$.
+    \item linearity: For $r(x)=\sum c_jx^j$, $\ipp{p+q,r}=\sum (a_j+b_j)c_j = \sum a_jc_j + \sum b_jc_j = \ipp{p,r}+\ipp{q,r}$. Homogeneity follows similarly.
+\end{itemize}
+For $T$, let $p,q\in\mathcal{P}$ and $c\in\bR$. The coefficeints of $cp+q$ are $ca_j+b_j$. Thus,
+$$T(cp+q)=\sum (ca_j+b_j)=c\sum a_j + \sum b_j = cTp+Tq$$
+so $T$ is linear.
+\\ Assume for the sake of contradiction that such a $S$ does exist. If $S(1)\neq 0$(the degree is not defined if its $0$), then, $0=\ipp{S(1),x^{1+\deg S(1)}}=\ipp{1,T(x^{1+\deg S(1)})}=\ipp{1,1}=1$ which is false and in the other case of $S(1)=0$ we similarly see that $0=\ipp{0,x}=\ipp{S(1),x}=\ipp{1,T(x)}=\ipp{1,1}=1$ which is absurd and hence no such $S$ can exist
+\end{solution}
+\section{Home Assignment III (Due: March 30, 2026)}
+\textit{Note: Just as in the problem set, we also always mean orthogonal projection when we write projection here.}
+\begin{problem}\label{prob:3-1}
+Let $P, Q$ be projections on a finite dimensional inner product space $(V, \langle \cdot, \cdot \rangle)$.
+\begin{enumerate}[\label=(\roman*)]
+    \item Show that $PQ$ is a projection if and only if $PQ = QP$.
+    \item Show that $P + Q$ is a projection if and only if $PQ = 0$.
+\end{enumerate}
+\end{problem}
+\begin{solution}
+\begin{enumerate}[\label=(\roman*)]
+	\item We know that $T$ is a projection iff $T=T^*=T^2$, we use this fact to prove this. For the if part we see that $(PQ)^*=Q^*P^*=QP=PQ$ as $P,Q$ are projections and similarly $(PQ)^2=PQPQ=P(QP)Q=P(PQ)Q=PPQQ=P^2Q^2=PQ$ so $PQ$ is a projection For the only if part, if $PQ$ is a projection, then $PQ=(PQ)^*=Q^*P^*=QP$ so we are done. 
+	\item For the if part, we see that $(P+Q)^*=P^*+Q^*=P+Q$ and $(P+Q)^2=P^2+PQ+QP+Q^2=P^2+Q^2+QP=P+Q+QP$. Now, as $PQ=0$ we see that $(PQ)^*=Q^*P^*=QP=0$ as well, thus $(P+Q)^2=P+Q$ making $P+Q$ a projection. For the only if part, if $P+Q$ is a projection then $P+Q=(P+Q)^2=P+Q+PQ+QP$ as seen previously and thus $PQ+QP=0$. We multiply $P$ on both sides to get $PPQ+PQP=0$ and thus $PQ+PQP=0\implies PQ(I+P)=0$. Now, notice that $(I+P)v=0\implies Pv=-v$ and as $Pv$ can only be $v$ or $0$ so either $-v=v$ or $-v=0$, in either case we have $v=0$ so $I+P$ is invertible as $\ker(I+P)\subseteq\{0\}$. As this is invertible we can multiply both sides by its inverse from the right to get $PQ=0$ so we are done.
+\end{enumerate}
+\end{solution}
+\begin{problem}\label{prob:3-2}
+A matrix $A$ is said to be \textit{nilpotent} if $A^k = 0$ for some $k \in \mathbb{N}$. Show that if a normal matrix $A$ is nilpotent then $A = 0$.
+\end{problem}
+\begin{solution}
+	If $\lambda$ is an eigenvalue of $A$ with $v\neq 0$ being an eigenvector then $A^kv=A^{k-1}(Av)=A^{k-1}(\lambda v)=\lambda A^{k-1}v=\ldots=\lambda^kv$ and as $A^k=0$ we must have that $\lambda^kv=A^kv=0$ which implies that $\lambda=0$. Now, using the spectral theorem we can write $A$ as a linear combination of projections, over its eigenvalues, all of which being $0$ makes $A$ be $0$ too,
+\[
+	A = \sum_{\lambda\in\sigma(A)}\lambda\cdot P_\lambda=0\cdot P_0=0
+\]
+
+\end{solution}
+\begin{problem}\label{prob:3-3}
+A matrix $S$ is said to be \textit{skew-hermitian} if $S^* = -S$. Show that $S$ is skew-hermitian if and only if $iS$ is self-adjoint. Show that $S$ is skew-hermitian if and only if $S$ is normal and all its eigenvalues are purely imaginary, that is, they are of the form $it$ where $t \in \mathbb{R}$.
+\end{problem}
+\begin{solution}
+	For the first part, we see that $S^*=-S\iff -i\cdot S^*=iS\iff (iS)^*=iS$ so we are done. For the second part, we can prove the if direction by using the spectral theorem to first write $S=\Sigma_{i\lambda\in\sigma(S)}i\lambda\cdot P_{i\lambda}$ with all the $\lambda$ being real by assumption and then using properties of the adjoint as follows
+\[
+	S^*=\qty(\sum_{i\lambda\in\sigma(S)}i\lambda\cdot P_{i\lambda})^*=\sum_{i\lambda\in\sigma(S)}\underbrace{(i\lambda\cdot P)^*}_{-i\lambda P_{i\lambda}^*\text{ as }\lambda\in\bR}=-\sum_{i\lambda\in\sigma(S)}i\lambda\cdot P_{i\lambda}=-S
+\]
+In only if direction, normalcy is trivially checked as $SS^*=S(-S)=(-S)S=S^*S$. Then, using the spectral theorem we can write $S=A^*DA$ for a diagonal matrix $D$ with the eigenvalues of $S$ on the diagonal and unitary $A$. Now, as $S$ is \textit{skew-hermitian} we have that $S^*=(A^*DA)^*=A^*D^*(A^*)^*=A^*D^*A=-S=-A^*DA=A^*(-D)A$ which, after some cancellations furnishes the equality $D^*=-D$ which implies that for all the diagonal entries of form $x+iy$ with $x,y\in\bR$ we must have $\overline{x+iy}=-(x+iy)\implies x-iy=-x-iy\implies x=-x\implies x=0$ so all the diagonal entries, which are the eigenvalues of $S$ must be of form $iy$ for $y\in\bR$ and we are done.
+\end{solution}
+\begin{problem}\label{prob:3-4}
+Show that the sum of two normal matrices need not be normal. Show that the product of two normal matrices need not be normal.
+\end{problem}
+\begin{solution}
+    \textit{Sum of normal matrices:} Let
+\[ A = \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix}, \quad B = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}. \]
+Both $A$ (skew-symmetric) and $B$ (symmetric) are normal matrices. Their sum is
+\[ A+B = \begin{pmatrix} 0 & 2 \\ 0 & 0 \end{pmatrix}. \]
+Since $(A+B)(A+B)^T = \begin{pmatrix} 4 & 0 \\ 0 & 0 \end{pmatrix}$ and $(A+B)^T(A+B) = \begin{pmatrix} 0 & 0 \\ 0 & 4 \end{pmatrix}$, they are not equal, proving $A+B$ is not normal.
+\\ \textit{Product of normal matrices:} Let
+\[ C = \begin{pmatrix} 1 & 0 \\ 0 & 2 \end{pmatrix}, \quad D = \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix}. \]
+Both $C$ and $D$ are normal. Their product is
+\[ CD = \begin{pmatrix} 0 & 1 \\ -2 & 0 \end{pmatrix}. \]
+Since $(CD)(CD)^T = \begin{pmatrix} 1 & 0 \\ 0 & 4 \end{pmatrix}$ and $(CD)^T(CD) = \begin{pmatrix} 4 & 0 \\ 0 & 1 \end{pmatrix}$, they are not equal, proving $CD$ is not normal.
+\end{solution}
+\begin{problem}\label{prob:3-5}
+Write down the spectral decomposition of the following matrices:
+\[
+A = \begin{pmatrix} 5 & 2 \\ 2 & 5 \end{pmatrix}, \qquad
+B = \begin{pmatrix} 5 & 2 & 0 \\ 2 & 5 & 0 \\ 0 & 0 & 4 \end{pmatrix}.
+\]
+\end{problem}
+\begin{solution}
+    \[
+     	\begin{bmatrix}
+			5 & 2\\ 2 & 5
+     	\end{bmatrix}
+     	\begin{bmatrix}
+			1\\ 1
+     	\end{bmatrix}
+		= \begin{bmatrix}
+		    7\\ 7
+		\end{bmatrix}
+		\text{ and }
+		\begin{bmatrix}
+			5 & 2\\ 2 & 5
+     	\end{bmatrix}
+     	\begin{bmatrix}
+			1\\ -1
+     	\end{bmatrix}
+		= \begin{bmatrix}
+		    3\\ -3
+		\end{bmatrix}
+    \]
+	Thus $\sigma(A)=\{7,3\}$ with normalised eigenvectors $u=(1/\sqrt{2},1/\sqrt{2})^\top$ and $v=(1/\sqrt{2},-1/\sqrt{2})^\top$ respectively. Thus, the spectral decomposition is
+	\[
+	    A=7\cdot uu^*+3\cdot vv^*=7\cdot \begin{bmatrix}
+			1/2 & 1/2\\
+			1/2 & 1/2
+	    \end{bmatrix}+3\cdot\begin{bmatrix}
+			1/2 & -1/2\\
+			-1/2 & 1/2
+	    \end{bmatrix}
+	\]
+	As $B$ is block diagonal with $A$ as the first block and $[4]$ as the other we can easily check that $\sigma(B)=\sigma(A)\cup\{4\}=\{7,3,4\}$ with normalised eigenvectors $(u,0)^\top,(v,0)^\top,(0,0,1)^\top$ and thus the spectral decomposition is
+	\[
+	    B=7\cdot \begin{bmatrix}
+			1/2 & 1/2 & 0\\ 1/2 & 1/2 & 0\\ 0 & 0 & 0
+	    \end{bmatrix} + 3\cdot \begin{bmatrix}
+			1/2 & -1/2 & 0\\ -1/2 & 1/2 & 0\\ 0 & 0 & 0
+	    \end{bmatrix} + 4\cdot \begin{bmatrix}
+			0 & 0 & 0\\
+			0 & 0 & 0\\
+			0 & 0 & 1
+	    \end{bmatrix} 
+	\]
+	
+\end{solution}
+
+\begin{problem}\label{prob:3-6}
+Let $A$ be a self-adjoint matrix. Show that there exist two positive matrices $A_+$, $A_-$ such that
+\[
+A = A_+ - A_-, \qquad A_+ A_- = A_- A_+ = 0.
+\]
+(\textit{Hint}: Use the spectral theorem.)
+\end{problem}
+\begin{solution}
+    If $A$ is self adjoint then $\sigma(A)\subseteq\bR$. Using the spectral theorem we can write
+	\[
+	A = \sum_{\lambda\in\sigma(A)}\lambda\cdot P_{\lambda}=\underbrace{\sum_{\substack{\lambda\in\sigma(A)\\ \lambda\geq 0}}\lambda\cdot P_{\lambda}}_{A_+}+\underbrace{\sum_{\substack{\lambda\in\sigma(A)\\ \lambda<0}}\lambda\cdot P_{\lambda}}_{-A_-}
+	\]
+As $P_{\lambda}P_{\gamma}=0$ for $\lambda\neq\gamma$ we see, from the spectral decomposition (they are defined through it anyways) $A_+$ and $-A_-$ we see that all the eigenvalues of $A_+$ are nonnegative making it positive and those of $-A_-$ are nonpositive making those of $A_-$ nonnegative and thus we have a decompositon $A=A_+-A_-$. Also, as $P_\lambda P_\gamma=0$ for nonequal $\lambda,\gamma$ we see that $A_+A_-=0$ as all the terms we get after expanding this product are $0$ due to the reasoning above. 
+\end{solution}
+
+\begin{problem}\label{prob:3-7}
+Suppose $d_1, d_2, \ldots, d_n$ are $n$ complex numbers and $\sigma : \{1, 2, \ldots, n\} \to \{1, 2, \ldots, n\}$ is a permutation. Show that the diagonal matrices $D$ and $E$ with diagonal entries
+\[
+d_{ii} = d_i, \qquad e_{ii} = d_{\sigma(i)}, \qquad 1 \leq i \leq n,
+\]
+are unitarily equivalent. Show that if two normal matrices $A$, $B$ are similar then they are unitarily equivalent.
+\end{problem}
+\begin{solution}
+    Let $P$ be the permutation matrix associated with $\sigma$, defined by its action on the standard basis vectors: $P e_i = e_{\sigma(i)}$. Permutation matrices are real orthogonal, meaning $P$ is unitary ($P^* = P^{-1}$). Evaluating $P^* D P$ on a basis vector yields:
+\[ (P^* D P) e_i = P^* D e_{\sigma(i)} = P^* (d_{\sigma(i)} e_{\sigma(i)}) = d_{\sigma(i)} P^* e_{\sigma(i)} = d_{\sigma(i)} e_i = E e_i. \]
+Thus, $E = P^* D P$, proving $D$ and $E$ are unitarily equivalent. Now, Let $A$ and $B$ be similar normal matrices. By the spectral theorem, they are unitarily diagonalizable: $A = U_A D_A U_A^*$ and $B = U_B D_B U_B^*$, where $D_A$ and $D_B$ are diagonal matrices containing their eigenvalues. Because $A$ and $B$ are similar, they share the same eigenvalues with the same algebraic multiplicities. Thus, the diagonal of $D_B$ is simply a permutation of the diagonal of $D_A$. From the first part, there exists a unitary permutation matrix $P$ such that $D_B = P^* D_A P$. Substituting this into the decomposition of $B$:
+\[ B = U_B (P^* D_A P) U_B^* = U_B P^* (U_A^* A U_A) P U_B^* = (U_A P U_B^*)^* A (U_A P U_B^*). \]
+Let $U = U_A P U_B^*$. Since the product of unitary matrices is unitary, $U$ is unitary, and we have $B = U^* A U$. Therefore, $A$ and $B$ are unitarily equivalent.
+\end{solution}
+
+\begin{problem}\label{prob:3-8}
+If $A$ is an $m \times m$ matrix and $B$ is an $n \times n$ matrix, their \textit{direct sum} is defined as the block matrix
+\[
+A \oplus B = \begin{pmatrix} A & 0 \\ 0 & B \end{pmatrix}.
+\]
+Show that $A \oplus B$ is normal (respectively unitary, self-adjoint, projection, positive) if and only if both $A$ and $B$ are normal (respectively unitary, self-adjoint, projection, positive).
+\end{problem}
+\begin{solution}
+    Let $M = A \oplus B = \begin{pmatrix} A & 0 \\ 0 & B \end{pmatrix}$. Block matrices multiply and take adjoints block-wise, so $M^* = \begin{pmatrix} A^* & 0 \\ 0 & B^* \end{pmatrix}$. We evaluate each property:
+
+\begin{itemize}
+    \item \textbf{Normal:} $M M^* = \begin{pmatrix} AA^* & 0 \\ 0 & BB^* \end{pmatrix}$ and $M^* M = \begin{pmatrix} A^*A & 0 \\ 0 & B^*B \end{pmatrix}$. \\
+    Equating them shows $M M^* = M^* M \iff AA^* = A^*A$ and $BB^* = B^*B$.
+    
+    \item \textbf{Unitary:} $M M^* = M^* M = I \iff AA^* = A^*A = I_m$ and $BB^* = B^*B = I_n$.
+    
+    \item \textbf{Self-adjoint:} $M = M^* \iff A = A^*$ and $B = B^*$.
+    
+    \item \textbf{Projection:} A matrix is an orthogonal projection iff it is self-adjoint ($M=M^*$) and idempotent ($M^2=M$). \\
+    $M^2 = \begin{pmatrix} A^2 & 0 \\ 0 & B^2 \end{pmatrix} = \begin{pmatrix} A & 0 \\ 0 & B \end{pmatrix} \iff A^2 = A$ and $B^2 = B$. \\
+    Combined with self-adjointness, $M$ is a projection iff $A$ and $B$ are projections.
+    
+    \item \textbf{Positive:} $M$ is positive iff it is self-adjoint and for any vector $z = \begin{pmatrix} x \\ y \end{pmatrix}$, $\langle Mz, z \rangle \ge 0$. \\
+    $\langle Mz, z \rangle = \left\langle \begin{pmatrix} Ax \\ By \end{pmatrix}, \begin{pmatrix} x \\ y \end{pmatrix} \right\rangle = \langle Ax, x \rangle + \langle By, y \rangle$. \\
+    This sum is non-negative for all $x, y$ if and only if $\langle Ax, x \rangle \ge 0$ for all $x$ and $\langle By, y \rangle \ge 0$ for all $y$. Thus, $M$ is positive iff $A$ and $B$ are positive.
+\end{itemize}
+\end{solution}
+
+\begin{problem}\label{prob:3-9}
+If $A$ is a normal matrix, show that the rank of $A$ is the same as the number of non-zero eigenvalues of $A$. Show that this need not be true for non-normal matrices.
+\end{problem}
+\begin{solution}
+	By the spectral theorem we can write $A=U^*DU\implies UA=DU$ as $UU^*=I$ for some invertible $U$ and diagonal $D$ which has the eigenvalues of $A$ as the diagonal entries with the same multiplicity. Now, as $U$ is invertible we have that $\rank(A)=\rank(UA)=\rank(DU)=\rank(D)$ as seen in the previous linear algebra course. Now, clearly the rank of a diagonal matrix is the number of nonzero entries on its diagonal which gives us the result we need as the $D$ has the eigenvalues of $A$ on its diagonal. Any non zero nilpotent matrix serves as a counterexample, for example consider
+\[
+    A = \begin{bmatrix}
+		0 & 1\\ 0 & 0
+    \end{bmatrix}
+\]
+For this matrix, the only eigenvalue is $0$ (meaning there are $0$ non-zero eigenvalues), but clearly $\rank(A)=1$. Since $1\neq 0$, the rank does not equal the number of non-zero eigenvalues for non-normal matrices.
+\end{solution}
+\begin{problem}\label{prob:3-10}
+Suppose $N$ is a normal matrix. Show that
+\[
+|\operatorname{trace}(N)|^2 \leq \operatorname{rank}(N) \cdot \operatorname{trace}(N^*N).
+\]
+(\textit{Hint}: Use the spectral theorem and the Cauchy--Schwarz inequality.)
+\end{problem}
+\begin{solution}
+	Using the spectral theorem we write $N=U^*DU$ with $U$ being unitary and $D$ diagonal. As $\trace(AB)=\trace(BA)$ we see that $\trace(N)=\trace(U^*DU)=\trace((U^*D)U)=\trace(UU^*D)=\trace(ID)=\trace(D)$ and as $D$ has the eigenvalues of $N$ on its diagonal, we find that $\trace(N)$ is the sum of eigenvalues of $N$. Also we see that $N^*N=(U^*DU)^*U^*DU=U^*D^*UU^*DU=U^*D^*IDU=U^*(D^*D)U$ and similarly $\trace(N^*N)=\trace(D^*D)$ which is the sum of squared norms of the eigenvalues of $N$ as, if $z\in\sigma(N)$ was the $i$-th entry on the diagonal in $D$ then the $i$-th entry on the diagonal in $D^*D$ is $\overline{z}z=|z|^2$. Thus, this inequality actually states (By abuse of notation, here $\sigma(N)$ is viewed as a multiset such as to keep the multiplicities of these eigenvalues in consideration)
+	\[
+		\qty|\sum_{\lambda\in\sigma(N)}\lambda|^2\leq\rank(N)\sum_{\lambda\in\sigma(N)}|\lambda|^2
+	\]
+	which, by \hyperref[prob:3-9]{Problem 3.9} is just
+	\[
+		\Bigg|\sum_{\substack{\lambda\in\sigma(N)\\ \lambda\neq 0}}\lambda\Bigg|^2\leq|\{\lambda\in\sigma(N):\lambda\neq 0\}|\sum_{\substack{\lambda\in\sigma(N)\\ \lambda\neq 0}}|\lambda|^2
+	\]
+	which is just a consequence of the cauchy schwarz inequality on $\bC^{\rank(N)}$ with the standard inner product, considering the vector formed of the nonzero eigenvalues in this context (with multiplicity) in any order and the vector of all $1$'s i.e. $(1,\ldots,1)^{\top}$
+\end{solution}
+\section{Home Assignment IV (Due: April 11, 2026)}
+\begin{problem}\label{prob:4-1}
+Suppose $\{a_1, a_2, \ldots, a_n\}$ are eigenvalues of a matrix $A$. Suppose $\{b_1, \ldots, b_n\}$ are eigenvalues of a matrix $B$. Show that in general eigenvalues of $A + B$ are not given by $\{a_1 + b_1, \ldots, a_n + b_n\}$. However, this is the case if $B = bI$ for some $b \in \mathbb{C}$.
+\end{problem}
+\begin{solution}
+    Let $A$ be an orthogonal projection and $B=I-A$ then we know that $B$ is the orthogonal projection on the orthogonal complement of the range of $A$. 
+	Both of these have $1$ as an eigenvalue but $A+B=I$ does not have $1+1=2$ as an eigenvalue. 
+	However if $B=bI$ for some $b\in\bC$ then given any eigenvalues $\lambda\in\sigma(A)$ with eigenvector $v$ we see that $(A+B)v=\lambda v+v=(\lambda+1)v$ and thus $\sigma(A+B)=\{\lambda+\gamma:\lambda\in\sigma(A),\gamma\in\sigma(B)\}$ as $\sigma(B)=\{b\}$. 
+\end{solution}
+\begin{problem}\label{prob:4-2}
+(Hadamard's inequality). Suppose $A$ is a positive matrix then
+\[
+\det(A) \leq \prod_{i=1}^{n} a_{ii}.
+\]
+(Hint: First consider the case $a_{ii} = 1$ for every $i$. Use AM-GM inequality on eigenvalues. The general case should follow by considering $A$ as a Gram matrix and suitably re-scaling the vectors.)
+\end{problem}
+\begin{solution}
+    From the characteristic polynomial it is clear that the trace is the sum of eigenvalues. In the case where $a_{ii}=1$, we see that $\lambda_1+\ldots+\lambda_n=n$, where $\lambda_i\geq 0$ are the eigenvalues of $A$. 
+    If $A$ has $0$ as an eigenvalue, then this inequality is trivially true as the left-hand side is $0$ and the right-hand side is non-negative. 
+    When it has all strictly positive eigenvalues, we can apply the AM-GM inequality to get that $\det(A)=\prod \lambda_i \leq (n^{-1}\sum\lambda_i)^n=1$, proving the claim for matrices with $1$s on the diagonal. 
+    In the general case, from the representation of a positive matrix over an inner product space, we see that $A=(\ipp{e_i,Te_j})_{i,j}$ and as it is positive, $a_{ii}=\ipp{e_i,Te_i}\geq 0$. 
+    Notice that the function $f(A)=\det(A)-\prod_{i=1}^na_{ii}$ is continuous. Using the same logic we used in previous assignments, we know that if $f(A_n)\leq 0$ and $A_n\to A$, then $f(A)\leq 0$ as well. 
+    Consider $A_n = A + n^{-1}I$. These are strictly positive matrices as they have the same eigenvalues as $A$ does, just shifted to the right by $1/n$ (by a previous problem). Thus, $(A_n)_{ii} = a_{ii} + 1/n > 0$.
+    Let $D$ be the diagonal matrix whose $i$-th diagonal entry is $(A_n)_{ii}^{-1/2} = (a_{ii}+1/n)^{-1/2} > 0$. We claim that the new matrix $DA_nD$ is also positive. For any $x\in\bC^n$, we see that,
+    \[
+        \ipp{x, DA_nDx} = \ipp{D^*x, A_n(Dx)} = \ipp{Dx, A_n(Dx)} \geq 0
+    \]
+    as $D=D^*$ (all the entries are real and it is diagonal). Thus, $DA_nD$ is positive. By construction, the diagonal entries of $DA_nD$ are all exactly $1$. 
+    Now, we can apply the previous case to this new matrix. Using the multiplicative property of the determinant,
+    \[
+        \det(DA_nD) = \det(D)^2\det(A_n) = \det(A_n)\prod_{i=1}^n(A_n)_{ii}^{-1}.
+    \]
+    Since $DA_nD$ has $1$s on the diagonal, $\det(DA_nD) \leq 1$. Therefore,
+    \[
+        \det(A_n)\prod_{i=1}^n(A_n)_{ii}^{-1} \leq 1 \implies \det(A_n)-\prod_{i=1}^n(A_n)_{ii} = f(A_n) \leq 0.
+    \]
+    As $A_n\to A$ (which is clear from the fact that $n^{-1}I\to 0$ as $n\to\infty$), we conclude that $f(A)\leq 0$. Rearranging yields,
+    \[
+        \det(A)\leq\prod_{i=1}^na_{ii}.
+    \]
+\end{solution}	
+\begin{problem}\label{prob:4-3}
+Suppose $B = [b_{ij}]$ is an $n \times n$ positive rank one matrix. Show that there exist complex numbers $b_1, \ldots, b_n$ such that $b_{ij} = b_i \overline{b_j}$.
+\end{problem}
+\begin{solution}
+   As it is self adjoint, from a problem on the previous assignment we can say that it has as many non zero eigenvalues as its rank which in this case is $1$ so it has exactly one nonzero eigenvalue, call it $\lambda$. 
+   By the spectral theorem we have $A=\lambda P$ where $P$ is an orthogonal projection onto the range of $B$ which has dimension $1$ and is thus spanned by a single vector. 
+   Let $v$ be one such vector, then after normalizing it to $u=v/\norm{v}$ we find that, $P=uu^*$ finally implying $B=\lambda uu^*$ and as $B$ was positive we must have that $\lambda\geq 0$ so we can write, $B=bb^*$ where $b=\sqrt{\lambda}u$ and expanding we see that $B_{ij}=b_i\overline{b_j}$
+\end{solution}
+\begin{problem}\label{prob:4-4}
+Suppose $A$ is a positive matrix. Show that $A$ is a sum of positive rank one matrices. (Hint: Use spectral theorem).
+\end{problem}
+\begin{solution}
+	By the spectral theorem we can choose an orthonormal basis of eigenvectors $\{u_1,\ldots,u_n\}$ and then $Av=A(\sum_i\ipp{u_i,v}u_i)=\sum_i\ipp{u_i,v}Au_i=\sum_i\lambda_i\ipp{u_i,v}u_i$ where $\lambda_i$ is the eigenvalue corresponding to $u_i$. 
+	Now, we know that $\ipp{u_i,v}u_i=u_iu_i^*v$ and thus we see that $A=\sum_i\lambda_iu_iu_i^*$. 
+	Each $u_iu_i^*$ is an orthogonal projection onto the span of $u_i$ and thus it has rank $1$ and as its an orthogonal projection $\sigma(u_iu_i^*)\subseteq\{0,1\}$ and clearly the eigenvalues of $\lambda_iu_uu_i^*$ lie in the set $\{0,\lambda_i\}$ all of whose elements are nonnegative as $\lambda_i$ is nonnegtaive stemming from $A$ being positive, we see that $\lambda_iu_iu_i^*$ is a rank one positive matrix so we are done.
+\end{solution}
+\begin{problem}\label{prob:4-5}
+(Schur product) Given two square matrices $A = [a_{ij}]$, $B = [b_{ij}]$, their Schur product $A \circ B$ is defined as the matrix $C = [c_{ij}]$, where
+\[
+c_{ij} = a_{ij} \cdot b_{ij}.
+\]
+(It is the entrywise product of matrices.) Show that if $A$, $B$ are positive then $C = A \circ B$ is positive. (Hint: First prove it for rank one matrices and then use previous exercises.)
+\end{problem}
+\begin{solution}
+	It is trivial to prove that schur product is distributive, commutative and associative which we use below without mention. 
+	If $A,B$ had rank one, then by \hyperref[prob:4-3]{Problem 1.3} we can write $A_{ij}=a_i\overline{a_j}$ and $B_{ij}=b_i\overline{b_j}$ for some complex numbers $a_1,b_1,\ldots,a_n,b_n$. 
+	Then, by definition we find that $(A\circ B)_{ij}=a_i\overline{a_j}b_i\overline{b_j}=(a_ib_i)\overline{(a_jb_j)}$ so we can write $(A\circ B)=(a\circ b)(a\circ b)^*$ where $a=(a_i)$ and $b=(b_i)$ and it is clearly positive being the orthogonal projection along the span of $a\circ b$. 
+	In the general case, by the previous problem we can write $A=\sum_iS_i$ and $B=\sum_iT_i$ where $S_i,T_i$ are rank one positive matrices, then we see that
+	\[
+		A\circ B=\qty(\sum_i S_i)\circ\qty(\sum_j T_j)=\sum_{i,j}S_i\circ T_j
+	\]
+thus, $A\circ B$ can be written as a sum of positive matrices and as sums of positive matrices are positive (this is true as $\ipp{x,(X+Y)x}=\ipp{x,Xx}+\ipp{x,Yx}\geq 0$ when $X,Y$ are positive, as $\ipp{x,Xx},\ipp{x,Yx}$ are always nonnegative for positive $X,Y$) we are done. 
+\end{solution}
+\begin{problem}\label{prob:4-6}
+Let $P$ be a projection on a finite dimensional inner product space $(V, \langle \cdot, \cdot \rangle)$ onto a subspace $M$.
+\begin{enumerate}[(i)]
+    \item Show that
+    \[
+    \|Px\| \leq \|x\|, \quad \forall\, x \in V.
+    \]
+    \item Show that $\|Px\| = \|x\|$ if and only if $x \in M$.
+\end{enumerate}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(i)]
+		\item Following the convention of projections meaning orthogonal projections, we see that $\norm{x}^2=\norm{Px+(I-P)x}^2=\norm{Px}^2+\norm{(I-P)x}^2\geq\norm{Px}^2\implies\norm{x}\geq\norm{Px}$ as $I-P$ is the projection onto the orthogonal complement of the range of $P$ and thus, $Px$ is orthogonal to $(I-P)x$ allowing us to use the pythagorean theorem.
+		\item From the previous part we clearly see that this holds iff $\norm{(I-P)x}=0$, equivalently $(I-P)x=0\iff x=Px+(I-P)x=Px+0=Px$ which is true iff $x\in M$ as $P$ is a projection.
+	\end{enumerate}
+\end{solution}
+\begin{problem}\label{prob:4-7}
+Let $P_1, \ldots, P_k$ be projections on a finite dimensional inner product space $(V, \langle \cdot, \cdot \rangle)$.
+\begin{enumerate}[(i)]
+    \item Show that for $i \neq j$, $P_i P_j = 0$ if and only if the ranges of $P_i$ and $P_j$ are mutually orthogonal.
+    \item Suppose $P_1 + P_2 + \cdots + P_k = I$. Show that the ranges of $P_1, P_2, \ldots, P_k$ are mutually orthogonal.
+\end{enumerate}
+\end{problem}
+\begin{solution}
+	\begin{enumerate}[(i)]
+		\item For the if part, given any $x\in V$ we see that $P_jx$ is in the range of $P_i$ which is orthogonal to the range of $P_j$ we see that $P_jx\in P_i(V)^\perp=\ker(P_i^*)=\ker(P_i)$ by results proved in class, thus $P_iP_jx=0$.  
+		For the only if direction, if we have $x=P_ix$ in the range of $P_i$ and $y=P_jy$ in the range of $P_j$ then, $\ipp{x,y}=\ipp{P_ix,P_jy}=\ipp{x,P_i^*P_jy}=\ipp{x,P_iP_jy}=\ipp{x,0}=0$ as $P_i=P_i^*$ by the virtue of it being an orthogonal projection, proving these ranges to be mutually orthogonal. 
+	\item Say $x$ is in the range of $P_1$, then we see that, $P_1x=x$ and thus, $x=Ix=P_1x+\sum_{i>1}P_ix=x+\sum_{i>1}P_ix\implies\sum_iP_ix=0$ and thus, $\ipp{x,\sum_{i>1}P_ix}=\sum_{i>1}\ipp{x,P_ix}=0$ and as $\ipp{x,P_ix}=\ipp{x,P_iP_ix}=\ipp{x,P_i^*P_ix}=\ipp{P_ix,P_ix}=\norm{P_ix}^2$ due to the fact that $P_i=P_i^*=P_i^2$ we see that, $\sum_{i>1}\norm{P_ix}^2=0$ which is possible iff $\norm{P_ix}=0$ for all $i>1$ implying $x\in\ker(P_i)=P_i(V)^\perp$ for all $i>1$ hence proving that $P_1(V)\perp P_i(V)$ for all $i\neq 1$ and we can similarly do the same for any $P_i$ in place of $P_1$ proving $P_i(V)\perp P_j(V)$ for $i\neq j$. 
+	\end{enumerate}
+\end{solution}
+\begin{problem}\label{prob:4-8}
+Let $A \in M_n(\mathbb{C})$. Suppose
+\[
+A = \sum_{j=1}^{k} a_j P_j
+\]
+for some distinct scalars $a_1, a_2, \ldots, a_k$ and non-zero projections $P_1, P_2, \ldots, P_k$ satisfying $P_1 + P_2 + \cdots + P_k = I$. Show that $a_1, a_2, \ldots, a_k$ are eigenvalues of $A$ and the ranges of $P_1, P_2, \ldots, P_k$ are corresponding eigenspaces of $A$.
+\end{problem}
+\begin{solution}
+	For any nonzero $x\in V$ we have $(A-\lambda I)x=0$ iff $\sum_ia_jP_ix-\lambda\sum_iP_ix=0$ or, equivalently $\sum_i(a_i-\lambda)P_ix=0$. 
+	Let, $S:=\{i:P_ix\neq 0\}$(this is nonempty as otherwise we would have $x=Ix=\sum_iP_ix=0$ which contradicts our assumption that $x$ is nonzero), then $\sum_i(a_i-\lambda)P_ix=\sum_{i\in S}(a_i-\lambda)P_ix$ and as the vectors $\{P_ix\}_{i\in S}$ are mutually orthogonal and nonzero, they are mutually independent as well so we must have $a_i-\lambda=0$ for all $i\in S$, but as $a_i$ are distinct there exists an unique $j\in S$ with $a_j-\lambda=0$ and hence we must have $S=\{j\}$ as otherwise we would have a nontrivial linear combination of linearly independent vectors being $0$ which is not possible. 
+	We have thus proved that, $\lambda$ is an eigenvalue of $A$ with eigenvector $x$ iff there is an unique $P_j$ such that $P_jx\neq 0$, in which case $a_j=\lambda$ proving that $\sigma(A)\subseteq\{a_1,\ldots,a_k\}$ (inclusion in the other direction is easily shown by considering vectors in each of the ranges of these projections as these are nonzero projections with mutually orthogonal ranges so we have set equality here.) and $\ker(A-a_kI)\subseteq P_k(V)$ with set inclusion in the other direction being true as $v\in P_k(V)\implies Av=\sum_ia_iP_iv=a_kP_kv=a_kv$ as $P_iv=0$ for all $i\neq k$ due to the ranges of these projections being mutually orthogonal (this implies that $v\in P_i(V)^\perp=\ker(P_i^*)=\ker(P_i)$ as $P_i=P_i^*$ for $i\neq k)$. 
+	We have thus proved that $\sigma(A)=\{a_1,\ldots,a_k\}$ and $E_{a_k}=\ker(A-a_kI)=\text{Range}(P_k)$ so we are done.
+\end{solution}
+\begin{problem}\label{prob:4-9}
+Let $A = [a_{ij}]_{1 \leq i,j \leq n} \in M_n(\mathbb{C})$ be positive. Suppose the $i$-th diagonal entry $a_{ii} = 0$. Show that every entry in the $i$-th row and $i$-th column is zero, that is,
+\[
+a_{ij} = 0, \quad a_{ji} = 0, \quad \forall\, 1 \leq j \leq n.
+\]
+\end{problem}
+\begin{solution}
+	By \hyperref[prob:4-4]{Problem 1.4} and \hyperref[prob:4-3]{Problem 1.3} we can write $A=\sum_i u_iu_i^*$ for some vectors $u_i=(u_{i,1},\ldots,u_{i,n}))$. 
+	Then, if $a_{ii}=(A)_{ii}=\sum_ju_{i,j}\overline{u_{i,j}}=\sum_i|u_{i,j}|^2=0\implies\forall j,\,u_{i,j}=0$ and thus, we see that $a_{ij}=(A)_{ij}=\sum_ku_{i,k}\overline{u_{j,k}}=\sum_k0\cdot\overline{u_{j,k}}=0$ and $a_{ji}=0$ as well by self adjoincy.
+\end{solution}
+\begin{problem}\label{prob:4-10}
+Let $A \in M_n(\mathbb{C})$. Then $A$ is said to be \emph{strictly positive} if $A$ is self-adjoint and all its eigenvalues are strictly positive. Show that $A$ is strictly positive if and only if
+\[
+\langle x, Ax \rangle > 0,
+\]
+for all $0 \neq x \in \mathbb{C}^n$.
+\end{problem}
+\begin{solution}
+	For the if direction, we see that as $\ipp{x,Ax}>0$ for all $x$, $A$ is positive and hence self-adjoint. 
+	Now, if $\lambda$ is an eigenvalue with eigenvector $v\neq 0$ then $\ipp{v,Av}=\ipp{v,\lambda v}=\lambda\ipp{v,v}>0$ as $\lambda\in\bR$ and as $\ipp{v,v}>0$ (we had $v\neq 0$), this is only possible when $\lambda>0$ so $A$ is strictly positive. 
+	To prove the if direction, we can use the spectral theorem to first find an orthonormal basis of eigenvectors $\{u_1,\ldots,u_n\}$ corresponding to eigenvalues $\lambda_1,\ldots,\lambda_n>0$ respectively. 
+	Then by orthonormality and the fact that $\lambda_i$ are real we have 
+	\[
+		\ipp{x,Ax}=\ipp{\sum_i\ipp{u_i,x}u_i,\sum_i\ipp{u_i,x}\lambda_iu_i}=\sum_{i,j}\overline{\ipp{u_i,x}\lambda_j}\ipp{u_j,x}\ipp{u_i,u_j}=\sum_i\lambda_i|\ipp{u_i,x}|^2
+	\]
+	Again, as $u_i$ are orthonormal, for $x\neq 0$ we have that $0<\norm{x}^2=\norm{\sum_i\ipp{u_i,x}u_i}^2=\sum\norm{\ipp{u_i,x}u_i}^2=\sum_i|\ipp{u_i,x}|^2$ so there exists some $j$ with $|\ipp{u_j,x}|>0$ so we must have $\ipp{x,Ax}\geq\lambda_j|\ipp{u_j,x}^2|>0$ proving the claim.
+\end{solution}
+\section{Home Assignment V (Due: April 19, 2026)}
+\begin{problem}\label{prob:5-1}
+  (i) Let $\{a_1, a_2, \ldots, a_k\}$ be the set of all distinct eigenvalues of a matrix $A$. Consider the polynomial $q(x) = (x - a_1)(x - a_2)\cdots(x - a_k)$. Show that $A$ is diagonalizable if and only if $q(A) = 0$.
+  (ii) Suppose $B$ is a square matrix and $B^2 = B$. Show that $B$ is diagonalizable.
+\end{problem}
+\begin{solution}
+We prove the if direction first.
+Consider a jordan decomposition of $A$ as $J=SAS^{-1}$ having jordan blocks $\{J_{a_i}(n_{i,j})\}_{\substack{1\leq i\leq k\\ 1\leq j\leq g_i}}$.
+With $J$ written in block diagonal form using these jordan blocks, we see that $q(J)$ has $q(J_{a_i}(n_{i,j}))$ as the diagonal blocks.
+As $q(J)=q(S^{-1}AS)=S^{-1}q(A)S=S^{-1}0S=0$ we must have that $q(J)=0$ and thus, $q(J_{a_i}(n_{i,j}))=0$. 
+It is known that the minimal polynomial of $J_\lambda(m)$ is $(X-\lambda)^{m}$, so here we must have $(X-a_i)^{n_{i,j}}$ divide $q(X)$ in which the irreducible factor $(X-a_i)$ has multiplicity exactly one forcing $n_{i,j}=1$. 
+This shows that all the blocks are just $J_{a_i}(1)=[a_i]_{1\times 1}$ so $J$ is a diagonal matrix and thus $A$ is diagonalisable.
+The other direction can be shown by first diagonalising $A$ into $D=SAS^{-1}$ with the eigenvalues $\lambda_i$ on the diagonal and evaluating $q(A)=S^{-1}q(D)S=S^{-1}\text{diag}(q(\lambda_1),\ldots,q(\lambda_n))S=S^{-1}0S=0$ as all the eigenvalues are equal to some $a_i$ hereimplying $q(\lambda_i)=0$.
+\end{solution}
+\begin{problem}\label{prob:5-2}
+Let $q$ be the minimal polynomial of a complex matrix $A$. Determine the minimal polynomial of $A^*$.
+\end{problem}
+\begin{solution}
+	For a polynomial $P(x)=\sum a_nx^n$ define its conjugate as $\overline{P}(x)=\sum\overline{a_n}x^n$. 
+	We can easily observe that for a complex matrix $A$ we have $P(A)^*=\overline{P}(A^*)$ (this follows from the common properties of the transpose: skew-linearity, commutativity with powers). 
+	Thus, if $Q$ is the minimal polynomial for $A$ and let the one for $A^*$ be $P$ then we find that $\overline{Q}(A^*)=Q(A)^*=0$ and hence $\overline{Q}|P$ and similarly we see that, $\overline{P}|Q$ so $P$ and $Q$ have the same degree. 
+	Now, as $\overline{Q}$ annihilates $A^*$ and has the same degree as $P$ we must have that $P=\overline{Q}$.
+\end{solution}
+\begin{problem}\label{prob:5-3}
+Show that the matrix
+\[
+  M = \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}
+\]
+has no square root, that is, there is no matrix $N$ such that $N^2 = M$. (Hint: $M^2 = 0$.)
+\end{problem}
+\begin{solution}
+Suppose such $N$ did exist, then we clearly find that $N^4=0$ so the minimal polynomial of $N$ divided $X^4$ and as $A$ is $2\times 2$, has degree atmost $2$ and thus its either of $X,X^2$ and in both cases $N^2=0$ which is a contradiction as $M\neq 0$
+\end{solution}
+\begin{problem}\label{prob:5-4}
+Let $P$ be the space of real polynomials of degree at most three. Let $D : P \to P$ be the linear map defined by $Df = f'$, where $f'$ denotes the derivative of $f$. Find the spectrum, minimal polynomial, characteristic polynomial of $D$. Is $D$ diagonalizable?
+\end{problem}
+\begin{solution}
+Consider a basis $ \qty{1,x,x^2,x^3}$, then we see that the matrix of $D$ with respect to this basis is,
+\[
+    \begin{bmatrix}
+		0 & 1 & 0 & 0\\
+		0 & 0 & 2 & 0\\
+		0 & 0 & 0 & 3\\
+		0 & 0 & 0 & 0
+    \end{bmatrix}
+\]
+From basic calculus its clear that $D^4=0$ and thus, the spectrum is $ \qty{0}$. 
+This implies that the characteristic and minimal polynomials are powers of $X$; this make the char poly $X^4$ as the degree of the characteristic polynomial is always equal to the size of the matrix and the minimal polynomial has to be $X^4$ too as lower powers don't work: $D^3(x^3)=6\neq 0$. 
+By \hyperref[prob:5-1]{Problem 1.1}, for it to be diagonalizable we must have that $q(D)=0$ where $q(X)=X-0$ but this is clearly not the case so we are done.
+\end{solution}
+\begin{problem}\label{prob:5-5}
+Write down the spectral decomposition in the form $\sum_j a_j P_j$, where the $P_j$'s are mutually orthogonal projections, for the following matrices:
+\[
+  A = \begin{pmatrix} 3+i & 1 \\ -i & 3 \end{pmatrix}, \qquad
+  B = \begin{pmatrix} 3 & 2 & 0 \\ 2 & 3 & 0 \\ 0 & 0 & 5 \end{pmatrix}.
+\]
+\end{problem}
+\begin{solution}
+To compute the spectral projections via the outer products of orthonormal eigenvectors \( P_{\lambda} = \sum u_i u_i^* \):
+
+For \( A \), the eigenvalues are \( \lambda = 4 \) and \( \lambda = 2 \).
+For \( \lambda = 4 \), solving \( (A - 4I)x = 0 \) gives the normalized eigenvector \( u_1 = \frac{1}{\sqrt{2}}\begin{pmatrix} i \\ 1 \end{pmatrix} \). The projection is:
+\[ P_4 = u_1 u_1^* = \frac{1}{\sqrt{2}}\begin{pmatrix} i \\ 1 \end{pmatrix} \frac{1}{\sqrt{2}}\begin{pmatrix} -i & 1 \end{pmatrix} = \frac{1}{2} \begin{pmatrix} 1 & i \\ -i & 1 \end{pmatrix} \]
+
+For \( \lambda = 2 \), solving \( (A - 2I)x = 0 \) gives the normalized eigenvector \( u_2 = \frac{1}{\sqrt{2}}\begin{pmatrix} -i \\ 1 \end{pmatrix} \). The projection is:
+\[ P_2 = u_2 u_2^* = \frac{1}{\sqrt{2}}\begin{pmatrix} -i \\ 1 \end{pmatrix} \frac{1}{\sqrt{2}}\begin{pmatrix} i & 1 \end{pmatrix} = \frac{1}{2} \begin{pmatrix} 1 & -i \\ i & 1 \end{pmatrix} \]
+The spectral decomposition is \( A = 4P_4 + 2P_2 \).
+
+For \( B \), the eigenvalues are \( \lambda = 1 \) and \( \lambda = 5 \) (multiplicity 2).
+For \( \lambda = 1 \), solving \( (B - I)x = 0 \) gives the normalized eigenvector \( v_1 = \frac{1}{\sqrt{2}}\begin{pmatrix} 1 \\ -1 \\ 0 \end{pmatrix} \). The projection is:
+\[ P_1 = v_1 v_1^* = \frac{1}{\sqrt{2}}\begin{pmatrix} 1 \\ -1 \\ 0 \end{pmatrix} \frac{1}{\sqrt{2}}\begin{pmatrix} 1 & -1 & 0 \end{pmatrix} = \frac{1}{2} \begin{pmatrix} 1 & -1 & 0 \\ -1 & 1 & 0 \\ 0 & 0 & 0 \end{pmatrix} \]
+
+For \( \lambda = 5 \), an orthonormal basis for the eigenspace is \( v_2 = \frac{1}{\sqrt{2}}\begin{pmatrix} 1 \\ 1 \\ 0 \end{pmatrix} \) and \( v_3 = \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix} \). The projection is the sum of their outer products:
+\[ P_5 = v_2 v_2^* + v_3 v_3^* = \frac{1}{2} \begin{pmatrix} 1 & 1 & 0 \\ 1 & 1 & 0 \\ 0 & 0 & 0 \end{pmatrix} + \begin{pmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 1 \end{pmatrix} = \frac{1}{2} \begin{pmatrix} 1 & 1 & 0 \\ 1 & 1 & 0 \\ 0 & 0 & 2 \end{pmatrix} \]
+The spectral decomposition is \( B = 5P_5 + P_1 \).
+\end{solution}
+\begin{problem}\label{prob:5-6}
+Let $N$ be a normal matrix. Show that a matrix $M$ commutes with $N$ if and only if it commutes with $N^*$.
+\end{problem}
+\begin{solution}
+It was shown in class that for normal $N$, $N^*$ is a polynomial in $N$ and thus commutativity with $N$ implies that with $N^*$ and we can also go the other way around as $(N^*)^*=N$ to say that commutativity with $N^*$ implies the same with $N$ so we are done.
+\end{solution}
+\begin{problem}\label{prob:5-7}
+Write down a matrix whose minimal polynomial is $q(x) = (x-2)(x-3)(x+4)$ and the characteristic polynomial is $p(x) = (x-2)(x-3)(x+4)^2$.
+\end{problem}
+\begin{solution}
+\[
+    \begin{bmatrix}
+		2 & 0 & 0 & 0\\
+		0 & 3 & 0 & 0\\
+		0 & 0 & -4 & 0\\
+		0 & 0 & 0 & -4\\
+    \end{bmatrix} 
+\]
+works.
+\end{solution}
+\begin{problem}\label{prob:5-8}
+Write down polar and singular value decompositions for the following matrix:
+\[
+  C = \begin{pmatrix} -2 & 0 & 0 \\ 0 & 3 & 0 \\ 0 & 4 & 0 \end{pmatrix}.
+\]
+\end{problem}
+\begin{solution}
+First, compute \( C^T C \) to find the positive semi-definite matrix \( P = \sqrt{C^T C} \):
+\[ C^T C = \begin{pmatrix} -2 & 0 & 0 \\ 0 & 3 & 4 \\ 0 & 0 & 0 \end{pmatrix} \begin{pmatrix} -2 & 0 & 0 \\ 0 & 3 & 0 \\ 0 & 4 & 0 \end{pmatrix} = \begin{pmatrix} 4 & 0 & 0 \\ 0 & 25 & 0 \\ 0 & 0 & 0 \end{pmatrix} \]
+\[ P = \begin{pmatrix} 2 & 0 & 0 \\ 0 & 5 & 0 \\ 0 & 0 & 0 \end{pmatrix} \]
+
+Next, find the orthogonal matrix \( U = [u_1 \ u_2 \ u_3] \) from \( C = UP \). Using the non-zero columns of \( P \):
+\[ 2u_1 = \begin{pmatrix} -2 \\ 0 \\ 0 \end{pmatrix} \implies u_1 = \begin{pmatrix} -1 \\ 0 \\ 0 \end{pmatrix} \]
+\[ 5u_2 = \begin{pmatrix} 0 \\ 3 \\ 4 \end{pmatrix} \implies u_2 = \begin{pmatrix} 0 \\ \frac{3}{5} \\ \frac{4}{5} \end{pmatrix} \]
+Choose \( u_3 \) to complete the orthonormal basis for \( \mathbb{R}^3 \):
+\[ u_3 = \begin{pmatrix} 0 \\ -\frac{4}{5} \\ \frac{3}{5} \end{pmatrix} \implies U = \begin{pmatrix} -1 & 0 & 0 \\ 0 & \frac{3}{5} & -\frac{4}{5} \\ 0 & \frac{4}{5} & \frac{3}{5} \end{pmatrix} \]
+This gives the polar decomposition \( C = UP \).
+
+To find the SVD, we orthogonally diagonalize \( P \). Since \( P \) is already diagonal, use a permutation matrix \( V \) to sort the eigenvalues in descending order for \( \Sigma \):
+\[ P = V \Sigma V^T = \begin{pmatrix} 0 & 1 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 1 \end{pmatrix} \begin{pmatrix} 5 & 0 & 0 \\ 0 & 2 & 0 \\ 0 & 0 & 0 \end{pmatrix} \begin{pmatrix} 0 & 1 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 1 \end{pmatrix} \]
+
+Substitute \( P \) into the polar decomposition to get \( C = U(V \Sigma V^T) = W \Sigma V^T \). Compute the left singular matrix \( W = UV \):
+\[ W = \begin{pmatrix} -1 & 0 & 0 \\ 0 & \frac{3}{5} & -\frac{4}{5} \\ 0 & \frac{4}{5} & \frac{3}{5} \end{pmatrix} \begin{pmatrix} 0 & 1 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 1 \end{pmatrix} = \begin{pmatrix} 0 & -1 & 0 \\ \frac{3}{5} & 0 & -\frac{4}{5} \\ \frac{4}{5} & 0 & \frac{3}{5} \end{pmatrix} \]
+
+The final singular value decomposition \( C = W \Sigma V^T \) is:
+\[ C = \begin{pmatrix} 0 & -1 & 0 \\ \frac{3}{5} & 0 & -\frac{4}{5} \\ \frac{4}{5} & 0 & \frac{3}{5} \end{pmatrix} \begin{pmatrix} 5 & 0 & 0 \\ 0 & 2 & 0 \\ 0 & 0 & 0 \end{pmatrix} \begin{pmatrix} 0 & 1 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 1 \end{pmatrix} \]
+\end{solution}
+
+\begin{problem}\label{prob:5-9}
+Obtain simultaneous diagonalization for the following commuting matrices:
+\[
+  E = \begin{pmatrix} 5 & 2 & 0 \\ 2 & 5 & 0 \\ 0 & 0 & 3 \end{pmatrix}, \qquad
+  F = \begin{pmatrix} 1 & 1 & 0 \\ 1 & 1 & 0 \\ 0 & 0 & 4 \end{pmatrix}.
+\]
+\end{problem}
+\begin{solution}
+To construct the orthogonal projections onto the eigenspaces, we find an orthonormal basis \( \{x_i\} \) for each eigenspace and compute the sum of their outer products: \( P_{\lambda} = \sum x_i x_i^* \).
+
+For \( E \), the eigenvalues are \( \lambda = 7 \) and \( \lambda = 3 \) (multiplicity 2).
+The normalized eigenvector for \( \lambda = 7 \) is \( x_1 = (\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}}, 0)^T \). Its projection is:
+\[ P_7 = x_1 x_1^* = \begin{pmatrix} \frac{1}{\sqrt{2}} \\ \frac{1}{\sqrt{2}} \\ 0 \end{pmatrix} \begin{pmatrix} \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} & 0 \end{pmatrix} = \frac{1}{2}\begin{pmatrix} 1 & 1 & 0 \\ 1 & 1 & 0 \\ 0 & 0 & 0 \end{pmatrix} \]
+
+For \( \lambda = 3 \), an orthonormal basis for the eigenspace is \( x_2 = (\frac{1}{\sqrt{2}}, -\frac{1}{\sqrt{2}}, 0)^T \) and \( x_3 = (0, 0, 1)^T \). The projection is the sum of their outer products:
+\[ P_3 = x_2 x_2^* + x_3 x_3^* = \frac{1}{2}\begin{pmatrix} 1 & -1 & 0 \\ -1 & 1 & 0 \\ 0 & 0 & 0 \end{pmatrix} + \begin{pmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 1 \end{pmatrix} = \frac{1}{2}\begin{pmatrix} 1 & -1 & 0 \\ -1 & 1 & 0 \\ 0 & 0 & 2 \end{pmatrix} \]
+
+Similarly for \( F \), the eigenvalues are \( \mu = 2, 0, 4 \). Finding their respective normalized eigenvectors \( y_1, y_2, y_3 \) and computing \( y_i y_i^* \) yields its spectral projections:
+\[ Q_2 = \frac{1}{2}\begin{pmatrix} 1 & 1 & 0 \\ 1 & 1 & 0 \\ 0 & 0 & 0 \end{pmatrix}, \quad Q_0 = \frac{1}{2}\begin{pmatrix} 1 & -1 & 0 \\ -1 & 1 & 0 \\ 0 & 0 & 0 \end{pmatrix}, \quad Q_4 = \begin{pmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 1 \end{pmatrix} \]
+
+Since \( E \) and \( F \) commute, we find the 1D projections onto their joint eigenspaces by multiplying the commuting projections \( R_k = P_{\lambda} Q_{\mu} \). This isolates the rank-1 outer products \( u_k u_k^* \), directly giving us the common orthonormal eigenvectors \( u_k \):
+\[ R_1 = P_7 Q_2 = \frac{1}{2}\begin{pmatrix} 1 & 1 & 0 \\ 1 & 1 & 0 \\ 0 & 0 & 0 \end{pmatrix} \implies u_1 = \begin{pmatrix} \frac{1}{\sqrt{2}} \\ \frac{1}{\sqrt{2}} \\ 0 \end{pmatrix} \]
+\[ R_2 = P_3 Q_0 = \frac{1}{2}\begin{pmatrix} 1 & -1 & 0 \\ -1 & 1 & 0 \\ 0 & 0 & 0 \end{pmatrix} \implies u_2 = \begin{pmatrix} \frac{1}{\sqrt{2}} \\ -\frac{1}{\sqrt{2}} \\ 0 \end{pmatrix} \]
+\[ R_3 = P_3 Q_4 = \begin{pmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 1 \end{pmatrix} \implies u_3 = \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix} \]
+
+Concatenating these basis vectors yields the orthogonal matrix \( P = [u_1 \ u_2 \ u_3] \):
+\[ P = \begin{pmatrix} \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} & 0 \\ \frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{2}} & 0 \\ 0 & 0 & 1 \end{pmatrix} \]
+
+Applying \( P \) simultaneously diagonalizes \( E \) and \( F \):
+\[ P^\top EP = \begin{pmatrix} 7 & 0 & 0 \\ 0 & 3 & 0 \\ 0 & 0 & 3 \end{pmatrix}, \quad P^\top FP = \begin{pmatrix} 2 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 4 \end{pmatrix} \]
+\end{solution}
+
+\begin{problem}\label{prob:5-10}
+Write $E$, $F$ of the previous exercise as polynomials of a single matrix $G$.
+\end{problem}
+\begin{solution}
+	We use the $P$ from the previous problem. Let \( A = P D_A P^\top \) where \( D_A = \text{diag}(1, 2, 3) \), we will use this as the seed. 
+	Notice that for polynomials $H$ we have $H(A)=P H(D_A)P^\top=P\text{ diag}(H(1),H(2),H(3))P^\top$. Thus,
+\[ A = \begin{pmatrix} \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} & 0 \\ \frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{2}} & 0 \\ 0 & 0 & 1 \end{pmatrix} \begin{pmatrix} 1 & 0 & 0 \\ 0 & 2 & 0 \\ 0 & 0 & 3 \end{pmatrix} \begin{pmatrix} \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} & 0 \\ \frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{2}} & 0 \\ 0 & 0 & 1 \end{pmatrix} = \begin{pmatrix} \frac{3}{2} & -\frac{1}{2} & 0 \\ -\frac{1}{2} & \frac{3}{2} & 0 \\ 0 & 0 & 3 \end{pmatrix} \]
+
+We use Lagrange interpolation to map the eigenvalues of \( A \) to those of \( E \) and \( F \). The nodes are \( x_1=1, x_2=2, x_3=3 \).
+
+For \( E \), the targets are \( y_1=7, y_2=3, y_3=3 \). The interpolating polynomial is:
+\[ p_E(x) = 7\frac{(x-2)(x-3)}{(1-2)(1-3)} + 3\frac{(x-1)(x-3)}{(2-1)(2-3)} + 3\frac{(x-1)(x-2)}{(3-1)(3-2)} = 2x^2 - 10x + 15 \]
+Thus, \( E = 2A^2 - 10A + 15I \).
+
+For \( F \), the targets are \( y_1=2, y_2=0, y_3=4 \). The interpolating polynomial is:
+\[ p_F(x) = 2\frac{(x-2)(x-3)}{(1-2)(1-3)} + 0 + 4\frac{(x-1)(x-2)}{(3-1)(3-2)} = 3x^2 - 11x + 10 \]
+Thus, \( F = 3A^2 - 11A + 10I \).
+\end{solution}
+
+\begin{problem}\label{prob:5-11}
+(Optional question) State and present a proof of Sylvester's law of inertia. (Hint: See Wikipedia and other sources.)
+\end{problem}
+\begin{solution}
+
+\end{solution}
+\end{document}

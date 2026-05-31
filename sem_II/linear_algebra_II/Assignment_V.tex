@@ -1,0 +1,233 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath, amssymb, amsthm, graphicx,physics}
+\usepackage{enumerate}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage[dvipsnames]{xcolor}
+\definecolor{EvanPink}{rgb}{0.85, 0.13, 0.55}
+\usepackage[colorlinks=true,
+            linkcolor=OliveGreen,
+            urlcolor=EvanPink,
+            citecolor=OliveGreen]{hyperref}
+\usepackage{cleveref}
+\usepackage{etoolbox}
+\newenvironment{solution}{%
+  \par\noindent\textit{Solution.}\ }{\qed}
+\newtheoremstyle{problemstyle}
+  {1em}   
+  {1em}   
+  {}      
+  {}      
+  {\bfseries} 
+  {.}     
+  {0.5em} 
+  {}      
+\theoremstyle{problemstyle}
+\newtheorem{problem}{Problem}[section]
+\apptocmd{\problem}{%
+  \addcontentsline{toc}{subsection}{Problem~\thesection.\arabic{problem}}%
+}{}{}
+\crefname{problem}{Problem}{Problems}
+\Crefname{problem}{Problem}{Problems}
+\setcounter{tocdepth}{2}
+\title{\textbf{Linear Algebra II} \\ \large Home Assignment V}
+\author{Arkaraj Mukherjee \\ B.Math., First Year, ISI Bangalore}
+\date{\today}
+\def\bN{\mathbb{N}}
+\def\bR{\mathbb{R}}
+\def\bZ{\mathbb{Z}}
+\def\bQ{\mathbb{Q}}
+\def\bC{\mathbb{C}}
+\def\sgn{\epsilon}
+\newcommand{\ipp}[1]{\left\langle#1\right\rangle}
+\begin{document}
+\maketitle
+\newpage
+\tableofcontents
+\newpage
+\section{Home Assignment V (Due: April 19, 2026)}
+\begin{problem}\label{prob:5-1}
+  (i) Let $\{a_1, a_2, \ldots, a_k\}$ be the set of all distinct eigenvalues of a matrix $A$. Consider the polynomial $q(x) = (x - a_1)(x - a_2)\cdots(x - a_k)$. Show that $A$ is diagonalizable if and only if $q(A) = 0$.
+  (ii) Suppose $B$ is a square matrix and $B^2 = B$. Show that $B$ is diagonalizable.
+\end{problem}
+\begin{solution}
+We prove the if direction first.
+Consider a jordan decomposition of $A$ as $J=SAS^{-1}$ having jordan blocks $\{J_{a_i}(n_{i,j})\}_{\substack{1\leq i\leq k\\ 1\leq j\leq g_i}}$.
+With $J$ written in block diagonal form using these jordan blocks, we see that $q(J)$ has $q(J_{a_i}(n_{i,j}))$ as the diagonal blocks.
+As $q(J)=q(S^{-1}AS)=S^{-1}q(A)S=S^{-1}0S=0$ we must have that $q(J)=0$ and thus, $q(J_{a_i}(n_{i,j}))=0$. 
+It is known that the minimal polynomial of $J_\lambda(m)$ is $(X-\lambda)^{m}$, so here we must have $(X-a_i)^{n_{i,j}}$ divide $q(X)$ in which the irreducible factor $(X-a_i)$ has multiplicity exactly one forcing $n_{i,j}=1$. 
+This shows that all the blocks are just $J_{a_i}(1)=[a_i]_{1\times 1}$ so $J$ is a diagonal matrix and thus $A$ is diagonalisable.
+The other direction can be shown by first diagonalising $A$ into $D=SAS^{-1}$ with the eigenvalues $\lambda_i$ on the diagonal and evaluating $q(A)=S^{-1}q(D)S=S^{-1}\text{diag}(q(\lambda_1),\ldots,q(\lambda_n))S=S^{-1}0S=0$ as all the eigenvalues are equal to some $a_i$ hereimplying $q(\lambda_i)=0$.
+\end{solution}
+\begin{problem}\label{prob:5-2}
+Let $q$ be the minimal polynomial of a complex matrix $A$. Determine the minimal polynomial of $A^*$.
+\end{problem}
+\begin{solution}
+	For a polynomial $P(x)=\sum a_nx^n$ define its conjugate as $\overline{P}(x)=\sum\overline{a_n}x^n$. 
+	We can easily observe that for a complex matrix $A$ we have $P(A)^*=\overline{P}(A^*)$ (this follows from the common properties of the transpose: skew-linearity, commutativity with powers). 
+	Thus, if $Q$ is the minimal polynomial for $A$ and let the one for $A^*$ be $P$ then we find that $\overline{Q}(A^*)=Q(A)^*=0$ and hence $\overline{Q}|P$ and similarly we see that, $\overline{P}|Q$ so $P$ and $Q$ have the same degree. 
+	Now, as $\overline{Q}$ annihilates $A^*$ and has the same degree as $P$ we must have that $P=\overline{Q}$.
+\end{solution}
+\begin{problem}\label{prob:5-3}
+Show that the matrix
+\[
+  M = \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}
+\]
+has no square root, that is, there is no matrix $N$ such that $N^2 = M$. (Hint: $M^2 = 0$.)
+\end{problem}
+\begin{solution}
+Suppose such $N$ did exist, then we clearly find that $N^4=0$ so the minimal polynomial of $N$ divided $X^4$ and as $A$ is $2\times 2$, has degree atmost $2$ and thus its either of $X,X^2$ and in both cases $N^2=0$ which is a contradiction as $M\neq 0$
+\end{solution}
+\begin{problem}\label{prob:5-4}
+Let $P$ be the space of real polynomials of degree at most three. Let $D : P \to P$ be the linear map defined by $Df = f'$, where $f'$ denotes the derivative of $f$. Find the spectrum, minimal polynomial, characteristic polynomial of $D$. Is $D$ diagonalizable?
+\end{problem}
+\begin{solution}
+Consider a basis $ \qty{1,x,x^2,x^3}$, then we see that the matrix of $D$ with respect to this basis is,
+\[
+    \begin{bmatrix}
+		0 & 1 & 0 & 0\\
+		0 & 0 & 2 & 0\\
+		0 & 0 & 0 & 3\\
+		0 & 0 & 0 & 0
+    \end{bmatrix}
+\]
+From basic calculus its clear that $D^4=0$ and thus, the spectrum is $ \qty{0}$. 
+This implies that the characteristic and minimal polynomials are powers of $X$; this make the char poly $X^4$ as the degree of the characteristic polynomial is always equal to the size of the matrix and the minimal polynomial has to be $X^4$ too as lower powers don't work: $D^3(x^3)=6\neq 0$. 
+By \hyperref[prob:5-1]{Problem 1.1}, for it to be diagonalizable we must have that $q(D)=0$ where $q(X)=X-0$ but this is clearly not the case so we are done.
+\end{solution}
+\begin{problem}\label{prob:5-5}
+Write down the spectral decomposition in the form $\sum_j a_j P_j$, where the $P_j$'s are mutually orthogonal projections, for the following matrices:
+\[
+  A = \begin{pmatrix} 3+i & 1 \\ -i & 3 \end{pmatrix}, \qquad
+  B = \begin{pmatrix} 3 & 2 & 0 \\ 2 & 3 & 0 \\ 0 & 0 & 5 \end{pmatrix}.
+\]
+\end{problem}
+\begin{solution}
+To compute the spectral projections via the outer products of orthonormal eigenvectors \( P_{\lambda} = \sum u_i u_i^* \):
+
+For \( A \), the eigenvalues are \( \lambda = 4 \) and \( \lambda = 2 \).
+For \( \lambda = 4 \), solving \( (A - 4I)x = 0 \) gives the normalized eigenvector \( u_1 = \frac{1}{\sqrt{2}}\begin{pmatrix} i \\ 1 \end{pmatrix} \). The projection is:
+\[ P_4 = u_1 u_1^* = \frac{1}{\sqrt{2}}\begin{pmatrix} i \\ 1 \end{pmatrix} \frac{1}{\sqrt{2}}\begin{pmatrix} -i & 1 \end{pmatrix} = \frac{1}{2} \begin{pmatrix} 1 & i \\ -i & 1 \end{pmatrix} \]
+
+For \( \lambda = 2 \), solving \( (A - 2I)x = 0 \) gives the normalized eigenvector \( u_2 = \frac{1}{\sqrt{2}}\begin{pmatrix} -i \\ 1 \end{pmatrix} \). The projection is:
+\[ P_2 = u_2 u_2^* = \frac{1}{\sqrt{2}}\begin{pmatrix} -i \\ 1 \end{pmatrix} \frac{1}{\sqrt{2}}\begin{pmatrix} i & 1 \end{pmatrix} = \frac{1}{2} \begin{pmatrix} 1 & -i \\ i & 1 \end{pmatrix} \]
+The spectral decomposition is \( A = 4P_4 + 2P_2 \).
+
+For \( B \), the eigenvalues are \( \lambda = 1 \) and \( \lambda = 5 \) (multiplicity 2).
+For \( \lambda = 1 \), solving \( (B - I)x = 0 \) gives the normalized eigenvector \( v_1 = \frac{1}{\sqrt{2}}\begin{pmatrix} 1 \\ -1 \\ 0 \end{pmatrix} \). The projection is:
+\[ P_1 = v_1 v_1^* = \frac{1}{\sqrt{2}}\begin{pmatrix} 1 \\ -1 \\ 0 \end{pmatrix} \frac{1}{\sqrt{2}}\begin{pmatrix} 1 & -1 & 0 \end{pmatrix} = \frac{1}{2} \begin{pmatrix} 1 & -1 & 0 \\ -1 & 1 & 0 \\ 0 & 0 & 0 \end{pmatrix} \]
+
+For \( \lambda = 5 \), an orthonormal basis for the eigenspace is \( v_2 = \frac{1}{\sqrt{2}}\begin{pmatrix} 1 \\ 1 \\ 0 \end{pmatrix} \) and \( v_3 = \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix} \). The projection is the sum of their outer products:
+\[ P_5 = v_2 v_2^* + v_3 v_3^* = \frac{1}{2} \begin{pmatrix} 1 & 1 & 0 \\ 1 & 1 & 0 \\ 0 & 0 & 0 \end{pmatrix} + \begin{pmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 1 \end{pmatrix} = \frac{1}{2} \begin{pmatrix} 1 & 1 & 0 \\ 1 & 1 & 0 \\ 0 & 0 & 2 \end{pmatrix} \]
+The spectral decomposition is \( B = 5P_5 + P_1 \).
+\end{solution}
+\begin{problem}\label{prob:5-6}
+Let $N$ be a normal matrix. Show that a matrix $M$ commutes with $N$ if and only if it commutes with $N^*$.
+\end{problem}
+\begin{solution}
+It was shown in class that for normal $N$, $N^*$ is a polynomial in $N$ and thus commutativity with $N$ implies that with $N^*$ and we can also go the other way around as $(N^*)^*=N$ to say that commutativity with $N^*$ implies the same with $N$ so we are done.
+\end{solution}
+\begin{problem}\label{prob:5-7}
+Write down a matrix whose minimal polynomial is $q(x) = (x-2)(x-3)(x+4)$ and the characteristic polynomial is $p(x) = (x-2)(x-3)(x+4)^2$.
+\end{problem}
+\begin{solution}
+\[
+    \begin{bmatrix}
+		2 & 0 & 0 & 0\\
+		0 & 3 & 0 & 0\\
+		0 & 0 & -4 & 0\\
+		0 & 0 & 0 & -4\\
+    \end{bmatrix} 
+\]
+works.
+\end{solution}
+\begin{problem}\label{prob:5-8}
+Write down polar and singular value decompositions for the following matrix:
+\[
+  C = \begin{pmatrix} -2 & 0 & 0 \\ 0 & 3 & 0 \\ 0 & 4 & 0 \end{pmatrix}.
+\]
+\end{problem}
+\begin{solution}
+First, compute \( C^T C \) to find the positive semi-definite matrix \( P = \sqrt{C^T C} \):
+\[ C^T C = \begin{pmatrix} -2 & 0 & 0 \\ 0 & 3 & 4 \\ 0 & 0 & 0 \end{pmatrix} \begin{pmatrix} -2 & 0 & 0 \\ 0 & 3 & 0 \\ 0 & 4 & 0 \end{pmatrix} = \begin{pmatrix} 4 & 0 & 0 \\ 0 & 25 & 0 \\ 0 & 0 & 0 \end{pmatrix} \]
+\[ P = \begin{pmatrix} 2 & 0 & 0 \\ 0 & 5 & 0 \\ 0 & 0 & 0 \end{pmatrix} \]
+
+Next, find the orthogonal matrix \( U = [u_1 \ u_2 \ u_3] \) from \( C = UP \). Using the non-zero columns of \( P \):
+\[ 2u_1 = \begin{pmatrix} -2 \\ 0 \\ 0 \end{pmatrix} \implies u_1 = \begin{pmatrix} -1 \\ 0 \\ 0 \end{pmatrix} \]
+\[ 5u_2 = \begin{pmatrix} 0 \\ 3 \\ 4 \end{pmatrix} \implies u_2 = \begin{pmatrix} 0 \\ \frac{3}{5} \\ \frac{4}{5} \end{pmatrix} \]
+Choose \( u_3 \) to complete the orthonormal basis for \( \mathbb{R}^3 \):
+\[ u_3 = \begin{pmatrix} 0 \\ -\frac{4}{5} \\ \frac{3}{5} \end{pmatrix} \implies U = \begin{pmatrix} -1 & 0 & 0 \\ 0 & \frac{3}{5} & -\frac{4}{5} \\ 0 & \frac{4}{5} & \frac{3}{5} \end{pmatrix} \]
+This gives the polar decomposition \( C = UP \).
+
+To find the SVD, we orthogonally diagonalize \( P \). Since \( P \) is already diagonal, use a permutation matrix \( V \) to sort the eigenvalues in descending order for \( \Sigma \):
+\[ P = V \Sigma V^T = \begin{pmatrix} 0 & 1 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 1 \end{pmatrix} \begin{pmatrix} 5 & 0 & 0 \\ 0 & 2 & 0 \\ 0 & 0 & 0 \end{pmatrix} \begin{pmatrix} 0 & 1 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 1 \end{pmatrix} \]
+
+Substitute \( P \) into the polar decomposition to get \( C = U(V \Sigma V^T) = W \Sigma V^T \). Compute the left singular matrix \( W = UV \):
+\[ W = \begin{pmatrix} -1 & 0 & 0 \\ 0 & \frac{3}{5} & -\frac{4}{5} \\ 0 & \frac{4}{5} & \frac{3}{5} \end{pmatrix} \begin{pmatrix} 0 & 1 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 1 \end{pmatrix} = \begin{pmatrix} 0 & -1 & 0 \\ \frac{3}{5} & 0 & -\frac{4}{5} \\ \frac{4}{5} & 0 & \frac{3}{5} \end{pmatrix} \]
+
+The final singular value decomposition \( C = W \Sigma V^T \) is:
+\[ C = \begin{pmatrix} 0 & -1 & 0 \\ \frac{3}{5} & 0 & -\frac{4}{5} \\ \frac{4}{5} & 0 & \frac{3}{5} \end{pmatrix} \begin{pmatrix} 5 & 0 & 0 \\ 0 & 2 & 0 \\ 0 & 0 & 0 \end{pmatrix} \begin{pmatrix} 0 & 1 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 1 \end{pmatrix} \]
+\end{solution}
+
+\begin{problem}\label{prob:5-9}
+Obtain simultaneous diagonalization for the following commuting matrices:
+\[
+  E = \begin{pmatrix} 5 & 2 & 0 \\ 2 & 5 & 0 \\ 0 & 0 & 3 \end{pmatrix}, \qquad
+  F = \begin{pmatrix} 1 & 1 & 0 \\ 1 & 1 & 0 \\ 0 & 0 & 4 \end{pmatrix}.
+\]
+\end{problem}
+\begin{solution}
+To construct the orthogonal projections onto the eigenspaces, we find an orthonormal basis \( \{x_i\} \) for each eigenspace and compute the sum of their outer products: \( P_{\lambda} = \sum x_i x_i^* \).
+
+For \( E \), the eigenvalues are \( \lambda = 7 \) and \( \lambda = 3 \) (multiplicity 2).
+The normalized eigenvector for \( \lambda = 7 \) is \( x_1 = (\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}}, 0)^T \). Its projection is:
+\[ P_7 = x_1 x_1^* = \begin{pmatrix} \frac{1}{\sqrt{2}} \\ \frac{1}{\sqrt{2}} \\ 0 \end{pmatrix} \begin{pmatrix} \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} & 0 \end{pmatrix} = \frac{1}{2}\begin{pmatrix} 1 & 1 & 0 \\ 1 & 1 & 0 \\ 0 & 0 & 0 \end{pmatrix} \]
+
+For \( \lambda = 3 \), an orthonormal basis for the eigenspace is \( x_2 = (\frac{1}{\sqrt{2}}, -\frac{1}{\sqrt{2}}, 0)^T \) and \( x_3 = (0, 0, 1)^T \). The projection is the sum of their outer products:
+\[ P_3 = x_2 x_2^* + x_3 x_3^* = \frac{1}{2}\begin{pmatrix} 1 & -1 & 0 \\ -1 & 1 & 0 \\ 0 & 0 & 0 \end{pmatrix} + \begin{pmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 1 \end{pmatrix} = \frac{1}{2}\begin{pmatrix} 1 & -1 & 0 \\ -1 & 1 & 0 \\ 0 & 0 & 2 \end{pmatrix} \]
+
+Similarly for \( F \), the eigenvalues are \( \mu = 2, 0, 4 \). Finding their respective normalized eigenvectors \( y_1, y_2, y_3 \) and computing \( y_i y_i^* \) yields its spectral projections:
+\[ Q_2 = \frac{1}{2}\begin{pmatrix} 1 & 1 & 0 \\ 1 & 1 & 0 \\ 0 & 0 & 0 \end{pmatrix}, \quad Q_0 = \frac{1}{2}\begin{pmatrix} 1 & -1 & 0 \\ -1 & 1 & 0 \\ 0 & 0 & 0 \end{pmatrix}, \quad Q_4 = \begin{pmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 1 \end{pmatrix} \]
+
+Since \( E \) and \( F \) commute, we find the 1D projections onto their joint eigenspaces by multiplying the commuting projections \( R_k = P_{\lambda} Q_{\mu} \). This isolates the rank-1 outer products \( u_k u_k^* \), directly giving us the common orthonormal eigenvectors \( u_k \):
+\[ R_1 = P_7 Q_2 = \frac{1}{2}\begin{pmatrix} 1 & 1 & 0 \\ 1 & 1 & 0 \\ 0 & 0 & 0 \end{pmatrix} \implies u_1 = \begin{pmatrix} \frac{1}{\sqrt{2}} \\ \frac{1}{\sqrt{2}} \\ 0 \end{pmatrix} \]
+\[ R_2 = P_3 Q_0 = \frac{1}{2}\begin{pmatrix} 1 & -1 & 0 \\ -1 & 1 & 0 \\ 0 & 0 & 0 \end{pmatrix} \implies u_2 = \begin{pmatrix} \frac{1}{\sqrt{2}} \\ -\frac{1}{\sqrt{2}} \\ 0 \end{pmatrix} \]
+\[ R_3 = P_3 Q_4 = \begin{pmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 1 \end{pmatrix} \implies u_3 = \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix} \]
+
+Concatenating these basis vectors yields the orthogonal matrix \( P = [u_1 \ u_2 \ u_3] \):
+\[ P = \begin{pmatrix} \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} & 0 \\ \frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{2}} & 0 \\ 0 & 0 & 1 \end{pmatrix} \]
+
+Applying \( P \) simultaneously diagonalizes \( E \) and \( F \):
+\[ P^\top EP = \begin{pmatrix} 7 & 0 & 0 \\ 0 & 3 & 0 \\ 0 & 0 & 3 \end{pmatrix}, \quad P^\top FP = \begin{pmatrix} 2 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 4 \end{pmatrix} \]
+\end{solution}
+
+\begin{problem}\label{prob:5-10}
+Write $E$, $F$ of the previous exercise as polynomials of a single matrix $G$.
+\end{problem}
+\begin{solution}
+	We use the $P$ from the previous problem. Let \( A = P D_A P^\top \) where \( D_A = \text{diag}(1, 2, 3) \), we will use this as the seed. 
+	Notice that for polynomials $H$ we have $H(A)=P H(D_A)P^\top=P\text{ diag}(H(1),H(2),H(3))P^\top$. Thus,
+\[ A = \begin{pmatrix} \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} & 0 \\ \frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{2}} & 0 \\ 0 & 0 & 1 \end{pmatrix} \begin{pmatrix} 1 & 0 & 0 \\ 0 & 2 & 0 \\ 0 & 0 & 3 \end{pmatrix} \begin{pmatrix} \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} & 0 \\ \frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{2}} & 0 \\ 0 & 0 & 1 \end{pmatrix} = \begin{pmatrix} \frac{3}{2} & -\frac{1}{2} & 0 \\ -\frac{1}{2} & \frac{3}{2} & 0 \\ 0 & 0 & 3 \end{pmatrix} \]
+
+We use Lagrange interpolation to map the eigenvalues of \( A \) to those of \( E \) and \( F \). The nodes are \( x_1=1, x_2=2, x_3=3 \).
+
+For \( E \), the targets are \( y_1=7, y_2=3, y_3=3 \). The interpolating polynomial is:
+\[ p_E(x) = 7\frac{(x-2)(x-3)}{(1-2)(1-3)} + 3\frac{(x-1)(x-3)}{(2-1)(2-3)} + 3\frac{(x-1)(x-2)}{(3-1)(3-2)} = 2x^2 - 10x + 15 \]
+Thus, \( E = 2A^2 - 10A + 15I \).
+
+For \( F \), the targets are \( y_1=2, y_2=0, y_3=4 \). The interpolating polynomial is:
+\[ p_F(x) = 2\frac{(x-2)(x-3)}{(1-2)(1-3)} + 0 + 4\frac{(x-1)(x-2)}{(3-1)(3-2)} = 3x^2 - 11x + 10 \]
+Thus, \( F = 3A^2 - 11A + 10I \).
+\end{solution}
+
+\begin{problem}\label{prob:5-11}
+(Optional question) State and present a proof of Sylvester's law of inertia. (Hint: See Wikipedia and other sources.)
+\end{problem}
+\begin{solution}
+
+\end{solution}
+\end{document}
+
